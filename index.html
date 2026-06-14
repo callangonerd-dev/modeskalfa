@@ -59,16 +59,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;background:var(--bg);color:var(--t1);transition:background var(--ease),color var(--ease);min-height:100vh}
 
-/* ── LOGIN ── */
-#login-screen{display:flex;position:fixed;inset:0;background:linear-gradient(135deg,#00112c 0%,#003875 60%,#0a1f3a 100%);align-items:center;justify-content:center;z-index:2000;transition:opacity .5s}
-#login-screen.hidden{opacity:0;pointer-events:none}
-.login-card{background:white;padding:44px 40px;border-radius:20px;width:100%;max-width:400px;box-shadow:0 32px 64px rgba(0,0,0,.4)}
-.login-logo{font-family:'Space Grotesk';font-weight:800;font-size:24px;color:var(--blue);margin-bottom:4px;letter-spacing:-.5px}
-.login-sub{color:var(--t3);font-size:13px;margin-bottom:28px}
-.login-card label{display:block;font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
-.login-card input{padding:12px 16px;border:1.5px solid var(--bdr);border-radius:10px;background:#f8fafc;color:#0f172a;width:100%;outline:none;transition:var(--ease);margin-bottom:16px;font-size:14px}
-.login-card input:focus{border-color:var(--blue-vivid);background:white;box-shadow:0 0 0 4px rgba(26,107,204,.12)}
-
 /* ── TOPBAR ── */
 .topbar{position:sticky;top:0;height:var(--top-h);background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200;border-bottom:1px solid var(--bdr)}
 [data-theme="dark"] .topbar{background:rgba(13,18,30,.88)}
@@ -227,22 +217,8 @@ tbody tr:last-child{border-bottom:none}
 </head>
 <body data-theme="light">
 
-<!-- LOGIN -->
-<div id="login-screen">
-  <div style="position:absolute;width:500px;height:500px;background:#1a6bcc;top:-150px;left:-100px;border-radius:50%;filter:blur(120px);opacity:.15"></div>
-  <div style="position:absolute;width:400px;height:400px;background:#f97316;bottom:-100px;right:-80px;border-radius:50%;filter:blur(100px);opacity:.1"></div>
-  <div class="login-card">
-    <div class="login-logo">MODESK ALFA v7</div>
-    <div class="login-sub">Plataforma de Gestão Avançada — Senac</div>
-    <div class="fg"><label>Usuário ou E-mail</label><input id="login-email" type="text" placeholder="usuário ou e-mail" value="marciooliveira"></div>
-    <div class="fg" style="margin-bottom:22px"><label>Senha</label><input id="login-password" type="password" placeholder="••••••••" value="Deadpool365*"></div>
-    <button class="btn btn-primary" style="width:100%;justify-content:center;padding:13px" onclick="handleLogin()"><i class="ti ti-lock-open"></i> Entrar na Plataforma</button>
-    <p style="font-size:11px;color:var(--t3);text-align:center;margin-top:14px">Gestor: marciooliveira / Deadpool365*</p>
-  </div>
-</div>
-
 <!-- APP -->
-<div id="app" style="display:none">
+<div id="app">
   <!-- TOPBAR -->
   <header class="topbar">
     <div style="display:flex;align-items:center;gap:14px">
@@ -251,9 +227,8 @@ tbody tr:last-child{border-bottom:none}
     </div>
     <div class="topbar-right">
       <button class="btn btn-ghost btn-sm" onclick="toggleTheme()" title="Alternar tema"><i class="ti ti-sun-moon" style="font-size:17px"></i></button>
-      <span id="user-badge" class="badge badge-success">Gestor</span>
-      <span id="user-name" style="font-weight:600;font-size:13px">Administrador</span>
-      <button class="btn btn-danger btn-sm" onclick="handleLogout()"><i class="ti ti-logout"></i> Sair</button>
+      <span id="user-badge" class="badge badge-purple">Gestor</span>
+      <span id="user-name" style="font-weight:600;font-size:13px">Marcio</span>
     </div>
   </header>
 
@@ -270,7 +245,7 @@ tbody tr:last-child{border-bottom:none}
       <div class="nav-item" data-page="cardapios" onclick="switchPage('cardapios')"><i class="ti ti-cookie"></i>Cardápios</div>
 
       <div class="sidebar-section">Gestão</div>
-      <div class="nav-item" data-page="usuarios" onclick="switchPage('usuarios')" id="menu-usuarios" style="display:none"><i class="ti ti-users-group"></i>Permissões</div>
+      <div class="nav-item" data-page="usuarios" onclick="switchPage('usuarios')"><i class="ti ti-users-group"></i>Permissões</div>
       <div class="nav-item" data-page="bi" onclick="switchPage('bi')"><i class="ti ti-chart-bar"></i>Business Intelligence</div>
     </aside>
 
@@ -366,7 +341,7 @@ tbody tr:last-child{border-bottom:none}
       <div class="page" id="page-locacoes">
         <div class="page-header">
           <div><div class="page-title">Locação de Espaços</div><div class="page-sub">Ambientes disponíveis para eventos</div></div>
-          <button class="btn btn-primary perm-add" id="add-locacao-btn" style="display:none" onclick="openItemModal('locacoes')"><i class="ti ti-plus"></i> Novo Espaço</button>
+          <button class="btn btn-primary" id="add-locacao-btn" onclick="openItemModal('locacoes')"><i class="ti ti-plus"></i> Novo Espaço</button>
         </div>
         <div class="view-controls">
           <input placeholder="Buscar espaço..." style="width:220px;padding:8px 12px" oninput="filterItems('locacoes', this.value)">
@@ -382,7 +357,7 @@ tbody tr:last-child{border-bottom:none}
       <div class="page" id="page-equipamentos">
         <div class="page-header">
           <div><div class="page-title">Equipamentos TI & AV</div><div class="page-sub">Inventário de equipamentos disponíveis</div></div>
-          <button class="btn btn-primary perm-add" id="add-equip-btn" style="display:none" onclick="openItemModal('equipamentos')"><i class="ti ti-plus"></i> Novo Equipamento</button>
+          <button class="btn btn-primary" id="add-equip-btn" onclick="openItemModal('equipamentos')"><i class="ti ti-plus"></i> Novo Equipamento</button>
         </div>
         <div class="view-controls">
           <input placeholder="Buscar equipamento..." style="width:220px;padding:8px 12px" oninput="filterItems('equipamentos', this.value)">
@@ -398,7 +373,7 @@ tbody tr:last-child{border-bottom:none}
       <div class="page" id="page-cardapios">
         <div class="page-header">
           <div><div class="page-title">Cardápios Gastronômicos</div><div class="page-sub">Serviço de alimentação e coffee break</div></div>
-          <button class="btn btn-primary perm-add" id="add-cardapio-btn" style="display:none" onclick="openItemModal('cardapios')"><i class="ti ti-plus"></i> Novo Cardápio</button>
+          <button class="btn btn-primary" id="add-cardapio-btn" onclick="openItemModal('cardapios')"><i class="ti ti-plus"></i> Novo Cardápio</button>
         </div>
         <div class="view-controls">
           <input placeholder="Buscar cardápio..." style="width:220px;padding:8px 12px" oninput="filterItems('cardapios', this.value)">
@@ -592,7 +567,7 @@ tbody tr:last-child{border-bottom:none}
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MODESK ALFA v7 — ENGINE COMPLETO (FIXED)
+//  MODESK ALFA v7 — SEM LOGIN (acesso direto como Gestor)
 // ═══════════════════════════════════════════════════════
 
 let DB = {
@@ -606,17 +581,18 @@ let DB = {
   currentItemType: null,
 };
 
-// ── USUÁRIOS DEMO — campo unificado "credential" aceita login ou email ──
+const DEFAULT_USER = {
+  id: 'u1',
+  nome: 'Marcio Oliveira',
+  email: 'marciooliveira',
+  login: 'marciooliveira',
+  senha: 'Deadpool365*',
+  role: 'Gestor',
+  perms: { locacoes: true, equipamentos: true, cardapios: true }
+};
+
 const DEMO_USERS = [
-  {
-    id: 'u1',
-    nome: 'Marcio Oliveira',
-    email: 'marciooliveira',        // usado como login
-    login: 'marciooliveira',
-    senha: 'Deadpool365*',
-    role: 'Gestor',
-    perms: { locacoes: true, equipamentos: true, cardapios: true }
-  },
+  DEFAULT_USER,
   {
     id: 'u2',
     nome: 'Operador Padrão',
@@ -661,69 +637,14 @@ const ICONS_LIST = ['🏛️','🎭','🏫','💼','🌿','🏢','🔬','📐','
 
 function genId() { return 'id_' + Math.random().toString(36).substr(2,9); }
 
-// ── AUTH — aceita login OU email ──
-function handleLogin() {
-  const credential = document.getElementById('login-email').value.trim();
-  const password = document.getElementById('login-password').value;
-
-  if (!credential || !password) {
-    showToast('Preencha usuário e senha.', 'error');
-    return;
-  }
-
-  // Busca por login OU email (case-insensitive)
-  const user = DB.users.length
-    ? DB.users.find(u =>
-        (u.login && u.login.toLowerCase() === credential.toLowerCase()) ||
-        (u.email && u.email.toLowerCase() === credential.toLowerCase())
-      )
-    : DEMO_USERS.find(u =>
-        ((u.login && u.login.toLowerCase() === credential.toLowerCase()) ||
-         (u.email && u.email.toLowerCase() === credential.toLowerCase())) &&
-        u.senha === password
-      );
-
-  // Verifica senha se encontrou pelo banco carregado
-  if (!user || user.senha !== password) {
-    showToast('Usuário ou senha inválidos.', 'error');
-    return;
-  }
-
-  DB.currentUser = user;
-  document.getElementById('user-name').textContent = user.nome.split(' ')[0];
-  document.getElementById('user-badge').textContent = user.role;
-  document.getElementById('user-badge').className = 'badge ' + (user.role === 'Gestor' ? 'badge-purple' : 'badge-info');
-
-  if (user.role === 'Gestor') {
-    document.getElementById('menu-usuarios').style.display = 'flex';
-  }
-
-  applyUserPermissions(user);
+// ── INIT DIRETO SEM LOGIN ──
+function initApp() {
+  DB.currentUser = DEFAULT_USER;
+  document.getElementById('user-name').textContent = DEFAULT_USER.nome.split(' ')[0];
+  document.getElementById('user-badge').textContent = DEFAULT_USER.role;
+  document.getElementById('user-badge').className = 'badge badge-purple';
   initData();
-
-  document.getElementById('login-screen').classList.add('hidden');
-  setTimeout(() => {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-    refreshDashboard();
-  }, 500);
-
-  showToast('Bem-vindo, ' + user.nome.split(' ')[0] + '!', 'success');
-}
-
-function handleLogout() {
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('login-screen').style.display = 'flex';
-  document.getElementById('login-screen').classList.remove('hidden');
-  DB.currentUser = null;
-  showToast('Sessão encerrada.', 'warn');
-}
-
-function applyUserPermissions(user) {
-  const isGestor = user.role === 'Gestor';
-  if (isGestor || user.perms.locacoes)    document.getElementById('add-locacao-btn').style.display = 'inline-flex';
-  if (isGestor || user.perms.equipamentos) document.getElementById('add-equip-btn').style.display = 'inline-flex';
-  if (isGestor || user.perms.cardapios)   document.getElementById('add-cardapio-btn').style.display = 'inline-flex';
+  refreshDashboard();
 }
 
 // ── INIT DATA ──
@@ -999,9 +920,7 @@ function processExternalFile(input) {
 function renderItems(type, filter = '') {
   const container = document.getElementById(type + '-container');
   const list = DB[type].filter(i => !filter || i.nome.toLowerCase().includes(filter.toLowerCase()) || i.desc.toLowerCase().includes(filter.toLowerCase()));
-  const isGestor = DB.currentUser?.role === 'Gestor';
-  const canEdit  = isGestor || DB.currentUser?.perms[type];
-  const isGrid   = container.classList.contains('display-grid');
+  const isGrid = container.classList.contains('display-grid');
   if (!list.length) { container.innerHTML = `<div class="empty-state"><i class="ti ti-inbox"></i><p>Nenhum registro encontrado.</p></div>`; return; }
   container.innerHTML = list.map(item => {
     const statusBadgeHtml = item.disponivel === 'Disponível'
@@ -1009,9 +928,6 @@ function renderItems(type, filter = '') {
       : item.disponivel === 'Ocupado'
         ? '<span class="badge badge-danger">Ocupado</span>'
         : '<span class="badge badge-warning">Manutenção</span>';
-    const actionsHtml = canEdit
-      ? `<button class="btn btn-ghost btn-sm" onclick="editItem('${type}','${item.id}')"><i class="ti ti-pencil"></i></button><button class="btn btn-ghost btn-sm" onclick="deleteItem('${type}','${item.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>`
-      : '';
     return `
       <div class="item-card card-hover">
         ${isGrid ? `<div class="item-thumb">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r-sm)" onerror="this.style.display='none'">` : item.icon||'📦'}</div>` : ''}
@@ -1024,7 +940,10 @@ function renderItems(type, filter = '') {
             <div>${statusBadgeHtml}</div>
             <div class="item-price">${fmtMoney(item.valor)}<span style="font-size:11px;font-weight:400;color:var(--t3)">/diária</span></div>
           </div>
-          ${actionsHtml ? `<div class="item-actions">${actionsHtml}</div>` : ''}
+          <div class="item-actions">
+            <button class="btn btn-ghost btn-sm" onclick="editItem('${type}','${item.id}')"><i class="ti ti-pencil"></i></button>
+            <button class="btn btn-ghost btn-sm" onclick="deleteItem('${type}','${item.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>
+          </div>
         </div>
       </div>
     `;
@@ -1293,8 +1212,8 @@ function finBadge(f) {
 window.addEventListener('DOMContentLoaded', () => {
   const theme = localStorage.getItem('modesk_theme') || 'light';
   document.body.dataset.theme = theme;
-  document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); });
+  initApp();
 });
 </script>
 </body>
