@@ -2,1219 +2,1304 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>MODESK ALFA v7 — Gestão Avançada Senac</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MODESK ALFA v3 — Gestão Completa de Eventos Senac</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-:root {
-  --blue:       #003366;
-  --blue-mid:   #004f9f;
-  --blue-light: #dbeafe;
-  --blue-vivid: #1a6bcc;
-  --blue-soft:  #e8f0fe;
-  --orange:     #f97316;
-  --orange-d:   #c2570a;
-  --orange-l:   #fff3e0;
-  --green:      #0a7a5a;
-  --green-l:    #d1fae5;
-  --red:        #c0392b;
-  --red-l:      #fde8e8;
-  --purple:     #6d28d9;
-  --purple-l:   #ede9fe;
-  --bg:         #f4f7fc;
-  --bg2:        #e9eff8;
-  --surface:    #ffffff;
-  --surface2:   #f8fafc;
-  --t1:         #0f172a;
-  --t2:         #475569;
-  --t3:         #94a3b8;
-  --bdr:        #e2e8f0;
-  --r:          16px;
-  --r-sm:       10px;
-  --shadow:     0 4px 20px -2px rgba(0,40,100,.06);
-  --shadow-md:  0 12px 30px -4px rgba(0,40,100,.10);
-  --sidebar-w:  260px;
-  --top-h:      68px;
-  --ease:       0.28s cubic-bezier(.25,.8,.25,1);
-}
-[data-theme="dark"] {
-  --bg:        #090d16;
-  --bg2:       #0f1624;
-  --surface:   #131a26;
-  --surface2:  #1b2536;
-  --t1:        #f8fafc;
-  --t2:        #cbd5e1;
-  --t3:        #64748b;
-  --bdr:       #263347;
-  --blue-soft: #182635;
-  --blue-light:#1e3a5f;
-  --orange-l:  #2d1d11;
-  --green-l:   #0e2a22;
-  --red-l:     #341616;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;background:var(--bg);color:var(--t1);transition:background var(--ease),color var(--ease);min-height:100vh}
-
-/* ── TOPBAR ── */
-.topbar{position:sticky;top:0;height:var(--top-h);background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200;border-bottom:1px solid var(--bdr)}
-[data-theme="dark"] .topbar{background:rgba(13,18,30,.88)}
-.topbar-brand{font-family:'Space Grotesk';font-weight:800;font-size:17px;color:var(--blue-vivid);letter-spacing:-.4px}
-.topbar-right{display:flex;align-items:center;gap:12px}
-
-/* ── SIDEBAR ── */
-.sidebar{position:sticky;top:var(--top-h);height:calc(100vh - var(--top-h));width:var(--sidebar-w);flex-shrink:0;background:var(--surface);border-right:1px solid var(--bdr);padding:16px 0;overflow-y:auto;transition:var(--ease)}
-.sidebar-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);padding:18px 24px 6px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:11px 24px;cursor:pointer;color:var(--t2);font-weight:500;font-size:13.5px;border-left:3px solid transparent;transition:var(--ease);user-select:none}
-.nav-item i{font-size:18px;opacity:.7;transition:var(--ease)}
-.nav-item:hover{background:var(--bg2);color:var(--t1)}
-.nav-item:hover i{opacity:1}
-.nav-item.active{background:var(--blue-soft);color:var(--blue-vivid);border-left-color:var(--orange);font-weight:600}
-.nav-item.active i{opacity:1}
-.nav-badge{margin-left:auto;background:var(--orange);color:white;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px}
-
-/* ── MAIN LAYOUT ── */
-.app-body{display:flex;min-height:calc(100vh - var(--top-h))}
-.main-content{flex:1;padding:30px;overflow-x:hidden;min-width:0}
-
-/* ── PAGES ── */
-.page{display:none;opacity:0;transform:translateY(8px);transition:opacity .3s,transform .3s}
-.page.active{display:block;opacity:1;transform:translateY(0)}
-.page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
-.page-title{font-family:'Space Grotesk';font-weight:800;font-size:24px;letter-spacing:-.5px;color:var(--t1)}
-.page-sub{color:var(--t2);font-size:13px;margin-top:2px}
-
-/* ── CARDS ── */
-.card{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--r);padding:22px;box-shadow:var(--shadow);transition:var(--ease)}
-.card-hover:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--blue-vivid)}
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:26px}
-.kpi-card{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;position:relative;overflow:hidden}
-.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--blue-vivid))}
-.kpi-label{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--t3);margin-bottom:8px}
-.kpi-value{font-family:'Space Grotesk';font-size:26px;font-weight:800;color:var(--t1)}
-.kpi-icon{position:absolute;top:18px;right:18px;font-size:28px;opacity:.12}
-
-/* ── ITEM CARDS ── */
-.display-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
-.display-list{display:flex;flex-direction:column;gap:12px}
-.item-card{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);transition:var(--ease);position:relative}
-.item-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:rgba(26,107,204,.4)}
-.item-thumb{width:100%;height:150px;object-fit:cover;border-radius:var(--r-sm);margin-bottom:14px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--t3)}
-.display-list .item-thumb{width:60px;height:60px;flex-shrink:0;margin-bottom:0}
-.display-list .item-card{display:flex;align-items:center;gap:16px;padding:14px 20px}
-.item-name{font-weight:700;font-size:15px;margin-bottom:4px}
-.item-desc{font-size:12.5px;color:var(--t2);line-height:1.5}
-.item-price{font-family:'Space Grotesk';font-weight:700;color:var(--blue-vivid);font-size:16px;margin-top:8px}
-.item-actions{display:flex;gap:8px;margin-top:12px}
-.display-list .item-actions{margin-top:0;margin-left:auto;flex-shrink:0}
-
-/* ── BOTÕES ── */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:var(--r-sm);font-weight:600;font-size:13px;cursor:pointer;transition:var(--ease);border:1.5px solid var(--bdr);background:var(--surface);color:var(--t1);line-height:1;white-space:nowrap}
-.btn:hover{background:var(--bg2);border-color:var(--t3)}
-.btn-primary{background:var(--blue-vivid);color:white;border-color:var(--blue-vivid)}
-.btn-primary:hover{background:var(--blue-mid);border-color:var(--blue-mid)}
-.btn-orange{background:var(--orange);color:white;border-color:var(--orange)}
-.btn-orange:hover{background:var(--orange-d);border-color:var(--orange-d)}
-.btn-danger{background:var(--red-l);color:var(--red);border-color:var(--red)}
-.btn-danger:hover{background:var(--red);color:white}
-.btn-ghost{background:transparent;border-color:transparent;padding:6px 10px}
-.btn-ghost:hover{background:var(--bg2);border-color:var(--bdr)}
-.btn-sm{padding:6px 13px;font-size:12px}
-
-/* ── INPUTS ── */
-.fg{display:flex;flex-direction:column;gap:6px}
-.fg label{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t2)}
-input,select,textarea{padding:10px 14px;border:1.5px solid var(--bdr);border-radius:var(--r-sm);background:var(--surface);color:var(--t1);width:100%;outline:none;transition:var(--ease);font-family:inherit;font-size:14px}
-input:focus,select:focus,textarea:focus{border-color:var(--blue-vivid);box-shadow:0 0 0 4px rgba(26,107,204,.12)}
-[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:var(--surface2)}
-
-/* ── TABELAS ── */
-.table-wrap{overflow-x:auto;border-radius:var(--r-sm)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead th{background:var(--bg2);color:var(--t2);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.6px;padding:11px 14px;text-align:left;white-space:nowrap}
-tbody tr{border-bottom:1px solid var(--bdr);transition:background .15s}
-tbody tr:hover{background:var(--bg2)}
-tbody td{padding:12px 14px;color:var(--t1);vertical-align:middle}
-tbody tr:last-child{border-bottom:none}
-
-/* ── UPLOAD ZONE ── */
-.upload-zone{border:2px dashed var(--blue-vivid);background:var(--blue-soft);padding:28px 20px;border-radius:var(--r);text-align:center;cursor:pointer;transition:var(--ease);color:var(--blue-vivid)}
-.upload-zone:hover{background:var(--blue-light);transform:scale(1.01)}
-.upload-zone i{font-size:36px;display:block;margin-bottom:8px}
-.upload-zone p{font-size:13px;font-weight:600}
-.upload-zone small{color:var(--t3);font-size:11px}
-
-/* ── BADGES ── */
-.badge{padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
-.badge-success{background:var(--green-l);color:var(--green)}
-.badge-danger{background:var(--red-l);color:var(--red)}
-.badge-warning{background:var(--orange-l);color:var(--orange)}
-.badge-info{background:var(--blue-soft);color:var(--blue-vivid)}
-.badge-purple{background:var(--purple-l);color:var(--purple)}
-
-/* ── ALERT BANNER ── */
-.alert{padding:12px 18px;border-radius:var(--r-sm);font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.alert-warning{background:var(--orange-l);border:1px solid var(--orange);color:#92400e}
-.alert-danger{background:var(--red-l);border:1px solid var(--red);color:var(--red)}
-.alert-success{background:var(--green-l);border:1px solid var(--green);color:var(--green)}
-
-/* ── MODAL ── */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px}
-.modal-overlay.open{display:flex}
-.modal{background:var(--surface);border:1px solid var(--bdr);padding:28px;border-radius:var(--r);width:100%;max-width:640px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-md);animation:modalIn .25s ease}
-@keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--bdr)}
-.modal-title{font-family:'Space Grotesk';font-weight:700;font-size:18px}
-.modal-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:22px;padding-top:18px;border-top:1px solid var(--bdr)}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-.form-grid .full{grid-column:1/-1}
-
-/* ── VIEW TOGGLE ── */
-.view-controls{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px}
-.view-btns{display:flex;gap:4px}
-.view-btn{padding:7px 11px;border:1.5px solid var(--bdr);border-radius:8px;background:var(--surface);cursor:pointer;transition:var(--ease);color:var(--t3);font-size:16px}
-.view-btn.active{background:var(--blue-soft);border-color:var(--blue-vivid);color:var(--blue-vivid)}
-
-/* ── TOAST ── */
-#toast{position:fixed;bottom:28px;right:28px;z-index:3000;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.toast-item{background:var(--surface);border:1px solid var(--bdr);border-radius:12px;padding:14px 18px;box-shadow:var(--shadow-md);display:flex;align-items:center;gap:12px;font-size:13px;font-weight:500;min-width:280px;animation:toastIn .3s ease;pointer-events:all}
-@keyframes toastIn{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-.toast-item.removing{animation:toastOut .3s ease forwards}
-@keyframes toastOut{to{opacity:0;transform:translateX(30px)}}
-.toast-icon{font-size:20px}
-.toast-success .toast-icon{color:var(--green)}
-.toast-error .toast-icon{color:var(--red)}
-.toast-warn .toast-icon{color:var(--orange)}
-
-/* ── ICON PICKER ── */
-.icon-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px;max-height:220px;overflow-y:auto;margin-top:10px}
-.icon-option{padding:10px;border:1.5px solid var(--bdr);border-radius:8px;text-align:center;cursor:pointer;font-size:22px;transition:var(--ease)}
-.icon-option:hover{border-color:var(--blue-vivid);background:var(--blue-soft)}
-.icon-option.selected{border-color:var(--blue-vivid);background:var(--blue-soft);box-shadow:0 0 0 3px rgba(26,107,204,.2)}
-
-/* ── MISC ── */
-.section-title{font-family:'Space Grotesk';font-weight:700;font-size:16px;margin-bottom:14px}
-.empty-state{text-align:center;padding:50px 20px;color:var(--t3)}
-.empty-state i{font-size:48px;display:block;margin-bottom:12px;opacity:.4}
-.empty-state p{font-size:14px}
-.divider{height:1px;background:var(--bdr);margin:20px 0}
-.chart-container{position:relative;min-height:200px}
-.ocr-result{background:var(--bg2);border:1px solid var(--bdr);border-radius:var(--r-sm);padding:14px;font-size:12px;font-family:monospace;max-height:180px;overflow-y:auto;white-space:pre-wrap;color:var(--t2);margin-top:10px}
-
-/* ── RESPONSIVE ── */
-@media(max-width:768px){
-  .sidebar{display:none;position:fixed;z-index:150;height:100vh;top:0}
-  .sidebar.mobile-open{display:block}
-  .form-grid{grid-template-columns:1fr}
-  .kpi-grid{grid-template-columns:repeat(2,1fr)}
-  .main-content{padding:16px}
-  .topbar{padding:0 16px}
-}
+  :root {
+    --primary: #003366;
+    --accent: #f97316;
+    --accent2: #ea580c;
+    --success: #0a7a5a;
+    --danger: #c0392b;
+    --bg: #f0f4fa;
+    --surface: #ffffff;
+    --text: #1a2035;
+    --text2: #4a5878;
+    --border: #d0daf0;
+  }
+  body { font-family: 'Inter', system_ui, sans-serif; }
+  .font-display { font-family: 'Space Grotesk', system_ui, sans-serif; }
+  .glass { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); }
+  .modern-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+  .modern-card:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+  .nav-active { background: linear-gradient(90deg, #00336615, transparent); border-left: 3px solid #f97316; color: #003366; font-weight: 600; }
+  .wizard-step { transition: all 0.2s ease; }
+  .wizard-step.active { background: #003366; color: white; }
+  .equip-card { transition: all 0.15s ease; }
+  .equip-card.active { border-color: #f97316; background: #fff7ed; }
+  .status-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; }
+  .modal { animation: modalPop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+  @keyframes modalPop { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+  .kpi-value { font-variant-numeric: tabular-nums; }
+  .table-row { transition: background 0.1s; }
+  .table-row:hover { background: #f8fafc; }
 </style>
 </head>
-<body data-theme="light">
+<body class="bg-[#f0f4fa] text-[#1a2035]">
 
-<!-- APP -->
-<div id="app">
-  <!-- TOPBAR -->
-  <header class="topbar">
-    <div style="display:flex;align-items:center;gap:14px">
-      <button class="btn btn-ghost" onclick="toggleMobileSidebar()" id="hamburger"><i class="ti ti-menu-2" style="font-size:20px"></i></button>
-      <div class="topbar-brand">SENAC MODESK</div>
-    </div>
-    <div class="topbar-right">
-      <button class="btn btn-ghost btn-sm" onclick="toggleTheme()" title="Alternar tema"><i class="ti ti-sun-moon" style="font-size:17px"></i></button>
-      <span id="user-badge" class="badge badge-purple">Gestor</span>
-      <span id="user-name" style="font-weight:600;font-size:13px">Marcio</span>
-    </div>
-  </header>
-
-  <div class="app-body">
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebar">
-      <div class="sidebar-section">Principal</div>
-      <div class="nav-item active" data-page="dashboard" onclick="switchPage('dashboard')"><i class="ti ti-layout-dashboard"></i>Dashboard</div>
-      <div class="nav-item" data-page="propostas" onclick="switchPage('propostas')"><i class="ti ti-file-text"></i>Propostas Comerciais<span class="nav-badge" id="badge-propostas" style="display:none">0</span></div>
-      
-      <div class="sidebar-section">Catálogos</div>
-      <div class="nav-item" data-page="locacoes" onclick="switchPage('locacoes')"><i class="ti ti-building"></i>Locação de Espaços</div>
-      <div class="nav-item" data-page="equipamentos" onclick="switchPage('equipamentos')"><i class="ti ti-device-laptop"></i>Equipamentos TI/AV</div>
-      <div class="nav-item" data-page="cardapios" onclick="switchPage('cardapios')"><i class="ti ti-cookie"></i>Cardápios</div>
-
-      <div class="sidebar-section">Gestão</div>
-      <div class="nav-item" data-page="usuarios" onclick="switchPage('usuarios')"><i class="ti ti-users-group"></i>Permissões</div>
-      <div class="nav-item" data-page="bi" onclick="switchPage('bi')"><i class="ti ti-chart-bar"></i>Business Intelligence</div>
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main-content">
-
-      <!-- ── DASHBOARD ── -->
-      <div class="page active" id="page-dashboard">
-        <div class="page-header">
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#001a40] via-[#003366] to-[#002244]">
+  <div class="w-full max-w-md mx-4">
+    <div class="glass rounded-3xl p-10 shadow-2xl border border-white/20">
+      <div class="flex justify-center mb-8">
+        <div class="flex items-center gap-x-3">
+          <div class="w-12 h-12 rounded-2xl bg-[#f97316] flex items-center justify-center">
+            <span class="text-white font-black text-3xl tracking-tighter">M</span>
+          </div>
           <div>
-            <div class="page-title">Visão Geral</div>
-            <div class="page-sub" id="dash-greeting">Bem-vindo de volta!</div>
-          </div>
-          <button class="btn btn-sm" onclick="refreshDashboard()"><i class="ti ti-refresh"></i> Atualizar</button>
-        </div>
-        <div id="dash-alerts" style="margin-bottom:16px"></div>
-        <div class="kpi-grid" id="kpi-grid">
-          <div class="kpi-card" style="--accent:var(--blue-vivid)"><div class="kpi-label">Faturamento Confirmado</div><div class="kpi-value" id="kpi-faturamento">R$ 0,00</div><i class="ti ti-currency-dollar kpi-icon"></i></div>
-          <div class="kpi-card" style="--accent:var(--green)"><div class="kpi-label">Propostas Aceitas</div><div class="kpi-value" id="kpi-aceitas">0</div><i class="ti ti-circle-check kpi-icon"></i></div>
-          <div class="kpi-card" style="--accent:var(--orange)"><div class="kpi-label">Aguardando Pagamento</div><div class="kpi-value" id="kpi-pendentes">0</div><i class="ti ti-clock kpi-icon"></i></div>
-          <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Prazos Vencidos</div><div class="kpi-value" id="kpi-vencidas">0</div><i class="ti ti-alert-triangle kpi-icon"></i></div>
-        </div>
-        <div class="card">
-          <div class="section-title">Agenda de Eventos</div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Data</th><th>Evento</th><th>Cliente</th><th>Valor</th><th>Status</th><th>Financeiro</th><th>Ações</th></tr></thead>
-              <tbody id="dash-table-body"></tbody>
-            </table>
+            <div class="font-display text-3xl font-bold text-white tracking-tighter">MODESK</div>
+            <div class="text-[#f97316] text-xs tracking-[3px] font-semibold -mt-1">ALFA v3</div>
           </div>
         </div>
       </div>
 
-      <!-- ── PROPOSTAS ── -->
-      <div class="page" id="page-propostas">
-        <div class="page-header">
-          <div><div class="page-title">Propostas Comerciais</div><div class="page-sub">Gerencie e importe propostas de eventos</div></div>
-          <button class="btn btn-primary" onclick="openProposalModal()"><i class="ti ti-plus"></i> Nova Proposta</button>
-        </div>
-
-        <!-- OCR / IMPORTADOR -->
-        <div class="card" style="margin-bottom:20px;border:2px dashed var(--blue-vivid)">
-          <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
-            <i class="ti ti-brain" style="font-size:22px;color:var(--blue-vivid)"></i>
-            <div>
-              <div class="section-title" style="margin-bottom:0">Reconhecedor Inteligente de Dados</div>
-              <div style="font-size:12px;color:var(--t2)">Importe Excel, PDF, TXT ou cole texto bruto de briefing — o sistema analisa e registra automaticamente</div>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
-            <div class="upload-zone" onclick="document.getElementById('ocr-file-input').click()">
-              <i class="ti ti-cloud-upload"></i>
-              <p>Clique ou solte o arquivo aqui</p>
-              <small>Excel (.xlsx), Texto (.txt), CSV</small>
-              <input type="file" id="ocr-file-input" style="display:none" accept=".xlsx,.xls,.csv,.txt" onchange="processExternalFile(this)">
-            </div>
-            <div class="fg">
-              <textarea id="ocr-text-input" placeholder="Cole aqui o texto do briefing:&#10;&#10;Data: 2026-07-15&#10;Evento: Congresso de TI&#10;Cliente: TechCorp SA&#10;Valor: 8500&#10;Prazo: 2026-07-10" style="height:120px;font-family:monospace;font-size:12px;resize:none"></textarea>
-              <button class="btn btn-orange btn-sm" onclick="processRawText()"><i class="ti ti-sparkles"></i> Processar e Importar</button>
-            </div>
-          </div>
-          <div id="ocr-result-preview" style="display:none"></div>
-        </div>
-
-        <!-- FILTROS E TABELA -->
-        <div class="card">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <input id="filter-search" placeholder="Buscar por evento ou cliente..." style="width:220px;padding:8px 12px" oninput="renderProposalsTable()">
-              <select id="filter-status" style="width:160px;padding:8px 12px" onchange="renderProposalsTable()">
-                <option value="">Todos os status</option>
-                <option value="Em análise">Em análise</option>
-                <option value="Aceita">Aceita</option>
-                <option value="Rejeitada">Rejeitada</option>
-                <option value="Cancelada">Cancelada</option>
-              </select>
-            </div>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-sm" onclick="exportToExcel()"><i class="ti ti-file-spreadsheet"></i> Excel</button>
-              <button class="btn btn-sm" onclick="exportToPDF()"><i class="ti ti-file-type-pdf"></i> PDF</button>
-            </div>
-          </div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Data</th><th>Evento</th><th>Cliente</th><th>Valor</th><th>Prazo</th><th>Status</th><th>Pagamento</th><th>Ações</th></tr></thead>
-              <tbody id="proposals-table-body"></tbody>
-            </table>
-          </div>
-        </div>
+      <div class="text-center mb-8">
+        <h1 class="text-2xl font-semibold text-white">Bem-vindo de volta</h1>
+        <p class="text-white/60 text-sm mt-1">Acesse a plataforma de gestão de eventos</p>
       </div>
 
-      <!-- ── LOCAÇÕES ── -->
-      <div class="page" id="page-locacoes">
-        <div class="page-header">
-          <div><div class="page-title">Locação de Espaços</div><div class="page-sub">Ambientes disponíveis para eventos</div></div>
-          <button class="btn btn-primary" id="add-locacao-btn" onclick="openItemModal('locacoes')"><i class="ti ti-plus"></i> Novo Espaço</button>
+      <div class="space-y-5">
+        <div>
+          <label class="block text-xs font-medium text-white/70 mb-1.5 tracking-wider">USUÁRIO</label>
+          <input id="login-user" type="text" value="marciooliveira" 
+                 class="w-full bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-[#f97316] transition">
         </div>
-        <div class="view-controls">
-          <input placeholder="Buscar espaço..." style="width:220px;padding:8px 12px" oninput="filterItems('locacoes', this.value)">
-          <div class="view-btns">
-            <button class="view-btn active" onclick="setView('locacoes','grid',this)"><i class="ti ti-layout-grid"></i></button>
-            <button class="view-btn" onclick="setView('locacoes','list',this)"><i class="ti ti-list"></i></button>
-          </div>
+        <div>
+          <label class="block text-xs font-medium text-white/70 mb-1.5 tracking-wider">SENHA</label>
+          <input id="login-pass" type="password" value="Deadpool365*" 
+                 class="w-full bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-[#f97316] transition">
         </div>
-        <div id="locacoes-container" class="display-grid"></div>
-      </div>
 
-      <!-- ── EQUIPAMENTOS ── -->
-      <div class="page" id="page-equipamentos">
-        <div class="page-header">
-          <div><div class="page-title">Equipamentos TI & AV</div><div class="page-sub">Inventário de equipamentos disponíveis</div></div>
-          <button class="btn btn-primary" id="add-equip-btn" onclick="openItemModal('equipamentos')"><i class="ti ti-plus"></i> Novo Equipamento</button>
-        </div>
-        <div class="view-controls">
-          <input placeholder="Buscar equipamento..." style="width:220px;padding:8px 12px" oninput="filterItems('equipamentos', this.value)">
-          <div class="view-btns">
-            <button class="view-btn active" onclick="setView('equipamentos','grid',this)"><i class="ti ti-layout-grid"></i></button>
-            <button class="view-btn" onclick="setView('equipamentos','list',this)"><i class="ti ti-list"></i></button>
-          </div>
-        </div>
-        <div id="equipamentos-container" class="display-grid"></div>
-      </div>
+        <button onclick="doLogin()" 
+                class="w-full mt-2 bg-[#f97316] hover:bg-[#ea580c] active:scale-[0.985] transition-all text-white font-semibold py-4 rounded-2xl text-sm tracking-wider">
+          ENTRAR NA PLATAFORMA
+        </button>
 
-      <!-- ── CARDÁPIOS ── -->
-      <div class="page" id="page-cardapios">
-        <div class="page-header">
-          <div><div class="page-title">Cardápios Gastronômicos</div><div class="page-sub">Serviço de alimentação e coffee break</div></div>
-          <button class="btn btn-primary" id="add-cardapio-btn" onclick="openItemModal('cardapios')"><i class="ti ti-plus"></i> Novo Cardápio</button>
-        </div>
-        <div class="view-controls">
-          <input placeholder="Buscar cardápio..." style="width:220px;padding:8px 12px" oninput="filterItems('cardapios', this.value)">
-          <div class="view-btns">
-            <button class="view-btn active" onclick="setView('cardapios','grid',this)"><i class="ti ti-layout-grid"></i></button>
-            <button class="view-btn" onclick="setView('cardapios','list',this)"><i class="ti ti-list"></i></button>
-          </div>
-        </div>
-        <div id="cardapios-container" class="display-grid"></div>
-      </div>
-
-      <!-- ── USUÁRIOS ── -->
-      <div class="page" id="page-usuarios">
-        <div class="page-header">
-          <div><div class="page-title">Controle de Permissões</div><div class="page-sub">Gerencie acessos por usuário</div></div>
-          <button class="btn btn-primary" onclick="openUserModal()"><i class="ti ti-user-plus"></i> Adicionar Usuário</button>
-        </div>
-        <div class="card">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Nome</th><th>E-mail / Login</th><th>Função</th><th>Locações</th><th>Equipamentos</th><th>Cardápios</th><th>Ações</th></tr></thead>
-              <tbody id="users-table-body"></tbody>
-            </table>
-          </div>
+        <div class="text-center text-[10px] text-white/40 pt-3">
+          Credenciais padrão: marciooliveira / Deadpool365*
         </div>
       </div>
-
-      <!-- ── BI ── -->
-      <div class="page" id="page-bi">
-        <div class="page-header">
-          <div><div class="page-title">Business Intelligence</div><div class="page-sub">Análise de desempenho e faturamento</div></div>
-          <button class="btn btn-orange" onclick="exportBIReport()"><i class="ti ti-download"></i> Exportar BI</button>
-        </div>
-        <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px">
-          <div class="card chart-container"><canvas id="chart-faturamento"></canvas></div>
-          <div class="card chart-container"><canvas id="chart-status"></canvas></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px">
-          <div class="card">
-            <div class="section-title">Top Clientes</div>
-            <div id="bi-top-clients"></div>
-          </div>
-          <div class="card">
-            <div class="section-title">Espaços Mais Usados</div>
-            <div id="bi-spaces"></div>
-          </div>
-          <div class="card">
-            <div class="section-title">Taxa de Conversão</div>
-            <div id="bi-conversion" style="text-align:center;padding-top:20px">
-              <div style="font-family:'Space Grotesk';font-size:52px;font-weight:800;color:var(--blue-vivid)" id="bi-conv-rate">0%</div>
-              <div style="color:var(--t2);font-size:13px">Propostas Aceitas / Total</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </main>
+    </div>
+    <div class="text-center mt-6 text-white/40 text-xs">Senac Ceará • Aldeota • 2026</div>
   </div>
 </div>
 
-<!-- ═══ MODAIS ═══ -->
+<!-- MAIN APP -->
+<div id="app" class="hidden min-h-screen flex flex-col">
+  <!-- TOPBAR -->
+  <div class="h-14 bg-[#003366] text-white flex items-center px-6 shadow-lg z-50">
+    <div class="flex items-center gap-x-3 flex-1">
+      <div class="flex items-center gap-x-2.5">
+        <div class="w-8 h-8 bg-[#f97316] rounded-xl flex items-center justify-center">
+          <span class="font-black text-lg tracking-tighter">M</span>
+        </div>
+        <div>
+          <span class="font-display font-bold tracking-tighter text-lg">MODESK</span>
+          <span class="text-[#f97316] text-xs font-bold tracking-[1.5px] ml-0.5">ALFA</span>
+        </div>
+      </div>
+      <div class="text-xs px-3 py-0.5 rounded-full bg-white/10 text-white/60 font-medium">v3.0 • Completo</div>
+    </div>
 
-<!-- MODAL: PROPOSTA -->
-<div class="modal-overlay" id="modal-proposal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="proposal-modal-title">Nova Proposta</div>
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-proposal')"><i class="ti ti-x"></i></button>
+    <div class="flex items-center gap-x-4">
+      <div class="flex items-center gap-x-2 text-sm">
+        <div class="w-8 h-8 bg-[#f97316] rounded-full flex items-center justify-center text-xs font-bold">MO</div>
+        <div>
+          <div class="font-semibold text-sm">Marcio Oliveira</div>
+          <div class="text-[10px] text-white/50 -mt-0.5">Gestor • Administrador</div>
+        </div>
+      </div>
+      <button onclick="logout()" class="text-xs px-4 py-1.5 rounded-xl border border-white/20 hover:bg-white/10 transition flex items-center gap-x-1.5">
+        <i class="ti ti-logout text-base"></i>
+        <span class="text-xs">Sair</span>
+      </button>
     </div>
-    <div class="form-grid">
-      <div class="fg"><label>Nome do Evento</label><input id="p-nome" placeholder="Ex: Congresso Anual de TI"></div>
-      <div class="fg"><label>Cliente / Empresa</label><input id="p-cliente" placeholder="Ex: TechCorp SA"></div>
-      <div class="fg"><label>Data Programada</label><input type="date" id="p-data"></div>
-      <div class="fg"><label>Prazo Limite Pagamento</label><input type="date" id="p-prazo"></div>
-      <div class="fg"><label>Valor (R$)</label><input type="number" id="p-valor" placeholder="0.00" step="0.01"></div>
-      <div class="fg"><label>Status</label>
-        <select id="p-status">
-          <option value="Em análise">Em análise</option>
-          <option value="Aceita">Aceita</option>
-          <option value="Rejeitada">Rejeitada</option>
-          <option value="Cancelada">Cancelada</option>
-        </select>
+  </div>
+
+  <div class="flex flex-1">
+    <!-- SIDEBAR -->
+    <div class="w-64 bg-white border-r border-[#d0daf0] flex flex-col">
+      <div class="p-4">
+        <div onclick="switchSection('dashboard')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1 nav-active" data-section="dashboard">
+          <i class="ti ti-layout-dashboard text-xl w-5"></i>
+          <span class="font-medium">Dashboard</span>
+        </div>
+        <div onclick="switchSection('nova-proposta')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="nova-proposta">
+          <i class="ti ti-plus text-xl w-5"></i>
+          <span class="font-medium">Nova Proposta</span>
+        </div>
+        <div onclick="switchSection('locais')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="locais">
+          <i class="ti ti-building text-xl w-5"></i>
+          <span class="font-medium">Locais / Espaços</span>
+        </div>
+        <div onclick="switchSection('propostas')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="propostas">
+          <i class="ti ti-file-text text-xl w-5"></i>
+          <span class="font-medium">Todas as Propostas</span>
+        </div>
+        <div onclick="switchSection('eventos')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="eventos">
+          <i class="ti ti-calendar-event text-xl w-5"></i>
+          <span class="font-medium">Eventos Confirmados</span>
+        </div>
+        <div onclick="switchSection('arquivados')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="arquivados">
+          <i class="ti ti-archive text-xl w-5"></i>
+          <span class="font-medium">Arquivados</span>
+        </div>
       </div>
-      <div class="fg"><label>Situação Financeira</label>
-        <select id="p-financeiro">
-          <option value="Pendente">Pendente</option>
-          <option value="Pago">Pago</option>
-          <option value="Parcial">Parcial</option>
-        </select>
+
+      <div class="mt-auto p-4 border-t">
+        <div onclick="switchSection('config')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] text-sm" data-section="config">
+          <i class="ti ti-settings text-xl w-5"></i>
+          <span>Configurações</span>
+        </div>
+        <div onclick="switchSection('lixeira')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] text-sm" data-section="lixeira">
+          <i class="ti ti-trash text-xl w-5"></i>
+          <span>Lixeira</span>
+        </div>
       </div>
-      <div class="fg"><label>Espaço Utilizado</label>
-        <select id="p-espaco">
-          <option value="">— Selecionar —</option>
-        </select>
-      </div>
-      <div class="fg full"><label>Observações</label><textarea id="p-obs" style="height:80px;resize:none" placeholder="Informações adicionais sobre o evento..."></textarea></div>
     </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="closeModal('modal-proposal')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveProposal()"><i class="ti ti-device-floppy"></i> Salvar Proposta</button>
+
+    <!-- CONTENT AREA -->
+    <div class="flex-1 p-8 overflow-auto" id="content-area">
+
+      <!-- DASHBOARD -->
+      <div id="section-dashboard" class="section">
+        <div class="flex justify-between items-end mb-6">
+          <div>
+            <div class="font-display text-3xl font-bold tracking-tighter">Olá, Marcio 👋</div>
+            <div class="text-[#4a5878] text-sm">Visão geral dos eventos • <span id="current-date"></span></div>
+          </div>
+          <button onclick="refreshDashboard()" class="btn btn-sm flex items-center gap-x-2 px-4 py-2 bg-white border border-[#d0daf0] rounded-2xl text-sm hover:bg-[#f8fafc]">
+            <i class="ti ti-refresh"></i> Atualizar
+          </button>
+        </div>
+
+        <!-- ALERT BAR -->
+        <div id="alert-bar" class="hidden mb-6 px-5 py-3.5 rounded-3xl bg-red-50 border border-red-200 text-red-600 text-sm flex items-center gap-x-3">
+          <i class="ti ti-alert-triangle text-xl"></i>
+          <div><span class="font-semibold">Atenção:</span> <span id="alert-text"></span></div>
+        </div>
+
+        <!-- KPIs -->
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">PROPOSTAS ATIVAS</div>
+            <div class="text-4xl font-semibold mt-1 kpi-value" id="kpi-ativas">12</div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">CONFIRMADOS MÊS</div>
+            <div class="text-4xl font-semibold mt-1 text-[#0a7a5a] kpi-value" id="kpi-confirmados">5</div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">TAXA CONVERSÃO</div>
+            <div class="text-4xl font-semibold mt-1 text-[#f97316] kpi-value" id="kpi-conversao">42%</div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">FATURAMENTO MÊS</div>
+            <div class="text-3xl font-semibold mt-1 text-[#003366] kpi-value" id="kpi-faturamento">R$ 87.2k</div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">VENCIDAS</div>
+            <div class="text-4xl font-semibold mt-1 text-[#c0392b] kpi-value" id="kpi-vencidas">2</div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
+            <div class="text-xs text-[#4a5878] font-medium tracking-wider">EVENTOS HOJE</div>
+            <div class="text-4xl font-semibold mt-1 kpi-value" id="kpi-hoje">1</div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          <!-- Charts -->
+          <div class="lg:col-span-3 bg-white border border-[#d0daf0] rounded-3xl p-6">
+            <div class="font-semibold mb-4 flex items-center gap-x-2"><i class="ti ti-chart-bar"></i> Faturamento por Unidade</div>
+            <canvas id="chart-faturamento" height="110"></canvas>
+          </div>
+          <div class="lg:col-span-2 bg-white border border-[#d0daf0] rounded-3xl p-6">
+            <div class="font-semibold mb-4 flex items-center gap-x-2"><i class="ti ti-chart-pie"></i> Ocupação de Espaços</div>
+            <canvas id="chart-ocupacao" height="110"></canvas>
+          </div>
+        </div>
+
+        <!-- Próximos Eventos -->
+        <div class="mt-8">
+          <div class="flex justify-between items-center mb-4">
+            <div class="font-semibold">Próximos 5 Eventos Confirmados</div>
+            <button onclick="switchSection('eventos')" class="text-sm text-[#f97316] hover:underline">Ver todos →</button>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden" id="proximos-eventos"></div>
+        </div>
+      </div>
+
+      <!-- NOVA PROPOSTA (WIZARD) -->
+      <div id="section-nova-proposta" class="section hidden">
+        <div class="max-w-4xl mx-auto">
+          <div class="mb-6">
+            <div class="font-display text-2xl font-bold">Nova Proposta</div>
+            <div class="text-sm text-[#4a5878]">Wizard em 5 passos • Dados salvos automaticamente</div>
+          </div>
+
+          <!-- Progress -->
+          <div class="flex mb-8 bg-white border border-[#d0daf0] rounded-3xl p-1.5">
+            <div onclick="goToStep(1)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer active" id="step-1">1. Cliente</div>
+            <div onclick="goToStep(2)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-2">2. Data & Local</div>
+            <div onclick="goToStep(3)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-3">3. Equipamentos</div>
+            <div onclick="goToStep(4)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-4">4. Cardápio</div>
+            <div onclick="goToStep(5)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-5">5. Resumo</div>
+          </div>
+
+          <!-- STEP CONTENT -->
+          <div id="wizard-content" class="bg-white border border-[#d0daf0] rounded-3xl p-8 min-h-[420px]">
+            <!-- Step 1 -->
+            <div id="step-content-1">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">Nº DA PROPOSTA (AUTO)</label>
+                  <input id="prop-numero" class="inp w-full" value="0156/2026" readonly>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">TIPO DE EVENTO</label>
+                  <select id="prop-tipo" class="inp w-full">
+                    <option value="Interno">Interno (Centro de custo)</option>
+                    <option value="Externo">Externo (Pagamento integral)</option>
+                    <option value="Misto">Misto (Cessão + pagamento)</option>
+                    <option value="Comercial">Comercial (Mercado externo)</option>
+                  </select>
+                </div>
+                <div class="md:col-span-2">
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CLIENTE / EMPRESA</label>
+                  <input id="prop-cliente" class="inp w-full" placeholder="Nome da empresa ou cliente">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CONTATO (ATT.)</label>
+                  <input id="prop-contato" class="inp w-full" placeholder="Nome do responsável">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">TÍTULO / NOME DO EVENTO</label>
+                  <input id="prop-titulo" class="inp w-full" placeholder="Ex: Workshop de Inovação">
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="step-content-2" class="hidden">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DATA DO EVENTO</label>
+                  <input type="date" id="prop-data" class="inp w-full" onchange="checkAgendaConflict()">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DIA DA SEMANA</label>
+                  <input id="prop-dia-semana" class="inp w-full bg-gray-50" readonly>
+                </div>
+                <div class="md:col-span-2">
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">LOCAL / ESPAÇO</label>
+                  <select id="prop-local" class="inp w-full" onchange="updateLocalInfo(); checkAgendaConflict()">
+                    <!-- populated by JS -->
+                  </select>
+                  <div id="local-info" class="mt-3 p-3 bg-[#f8fafc] rounded-2xl text-xs hidden"></div>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO INÍCIO</label>
+                  <input type="time" id="prop-inicio" class="inp w-full">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO TÉRMINO</label>
+                  <input type="time" id="prop-termino" class="inp w-full">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO MONTAGEM</label>
+                  <input type="time" id="prop-montagem" class="inp w-full">
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DEADLINE APROVAÇÃO</label>
+                  <input type="date" id="prop-deadline" class="inp w-full">
+                </div>
+              </div>
+              <div id="agenda-alert" class="hidden mt-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm flex items-center gap-x-2">
+                <i class="ti ti-alert-triangle"></i>
+                <span>⚠️ Conflito de agenda! Já existe evento confirmado neste espaço e data.</span>
+              </div>
+            </div>
+
+            <!-- Step 3 - EQUIPAMENTOS -->
+            <div id="step-content-3" class="hidden">
+              <div class="mb-4">
+                <label class="text-xs font-semibold text-[#4a5878] block mb-2">TIPO DE EQUIPAMENTOS</label>
+                <div class="flex gap-x-3">
+                  <div onclick="toggleEquipType('interno')" id="equip-interno-btn"
+                       class="cursor-pointer flex-1 text-center py-3 border border-[#f97316] bg-[#fff7ed] rounded-2xl text-sm font-medium">Internos (Senac)</div>
+                  <div onclick="toggleEquipType('externo')" id="equip-externo-btn"
+                       class="cursor-pointer flex-1 text-center py-3 border border-[#d0daf0] rounded-2xl text-sm font-medium">Externos (Cliente)</div>
+                </div>
+              </div>
+
+              <!-- INTERNOS -->
+              <div id="equip-interno-section">
+                <div class="text-xs font-semibold text-[#4a5878] mb-3">Selecione os equipamentos internos (clique para adicionar quantidade)</div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="equip-grid">
+                  <!-- populated dynamically -->
+                </div>
+              </div>
+
+              <!-- EXTERNOS -->
+              <div id="equip-externo-section" class="hidden">
+                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl">
+                  <div class="font-medium text-amber-700 mb-2 flex items-center gap-x-2">
+                    <i class="ti ti-alert-triangle"></i> Equipamentos Externos
+                  </div>
+                  <textarea id="equip-externo-desc" class="w-full inp text-sm" rows="3" placeholder="Descreva os equipamentos que o cliente fornecerá..."></textarea>
+                  <div class="mt-3 flex items-center gap-x-2 text-xs">
+                    <input type="checkbox" id="equip-externo-confirm" class="accent-[#f97316]">
+                    <label for="equip-externo-confirm" class="text-amber-700">Confirmo que o cliente é responsável pelos equipamentos externos. O Senac fica isento de qualquer responsabilidade técnica ou financeira.</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div id="step-content-4" class="hidden">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CARDÁPIO PRINCIPAL</label>
+                  <select id="prop-cardapio" class="inp w-full" onchange="updateCardapioOptions()">
+                    <option value="">Selecione...</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">Nº DE PARTICIPANTES (PAX)</label>
+                  <input type="number" id="prop-pax" class="inp w-full" value="30" oninput="syncPax()">
+                </div>
+                <div class="md:col-span-2">
+                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">RESTRIÇÕES / NECESSIDADES ALIMENTARES</label>
+                  <textarea id="prop-restricoes" class="inp w-full" rows="2" placeholder="Vegetarianos, intolerâncias, etc."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div id="step-content-5" class="hidden">
+              <div class="bg-[#f8fafc] rounded-2xl p-6 text-sm">
+                <div class="font-semibold mb-4">Resumo da Proposta</div>
+                <div id="resumo-content" class="space-y-2 text-[#1a2035]"></div>
+                <div class="mt-6 pt-4 border-t flex justify-between items-center">
+                  <div class="text-xs text-[#4a5878]">TOTAL ESTIMADO</div>
+                  <div class="text-3xl font-semibold text-[#003366]" id="resumo-total">R$ 0,00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex justify-between mt-6">
+            <button onclick="prevStep()" id="btn-prev" class="px-8 py-3 rounded-2xl border border-[#d0daf0] text-sm font-medium flex items-center gap-x-2 hover:bg-white">← Anterior</button>
+            <button onclick="nextStep()" id="btn-next" class="px-8 py-3 bg-[#003366] text-white rounded-2xl text-sm font-medium flex items-center gap-x-2">Próximo →</button>
+            <button onclick="salvarProposta()" id="btn-save" class="hidden px-8 py-3 bg-[#f97316] text-white rounded-2xl text-sm font-medium">Salvar Proposta</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LOCAIS -->
+      <div id="section-locais" class="section hidden">
+        <div class="flex justify-between mb-6">
+          <div>
+            <div class="font-display text-2xl font-bold">Locais / Espaços</div>
+            <div class="text-sm text-[#4a5878]">Gerencie os espaços com fotos, valores e equipamentos</div>
+          </div>
+          <button onclick="openAddLocalModal()" class="btn btn-sm px-5 bg-[#003366] text-white rounded-2xl flex items-center gap-x-2">
+            <i class="ti ti-plus"></i> Novo Local
+          </button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="locais-grid">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- PROPOSTAS -->
+      <div id="section-propostas" class="section hidden">
+        <div class="flex justify-between items-center mb-5">
+          <div class="font-display text-2xl font-bold">Todas as Propostas</div>
+          <div class="flex gap-x-3">
+            <button onclick="exportPropostasExcel()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-spreadsheet"></i> Excel</button>
+            <button onclick="exportPropostasPDF()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-text"></i> PDF</button>
+            <button onclick="exportPropostasXML()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-code"></i> XML</button>
+          </div>
+        </div>
+
+        <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden">
+          <div class="p-4 border-b flex flex-wrap gap-2" id="status-chips">
+            <!-- chips populated by JS -->
+          </div>
+          <table class="w-full text-sm">
+            <thead class="bg-[#f8fafc]">
+              <tr>
+                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">PROPOSTA</th>
+                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">CLIENTE</th>
+                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">DATA</th>
+                <th class="px-6 py-4 text-right font-medium text-xs tracking-wider">VALOR</th>
+                <th class="px-6 py-4 text-center font-medium text-xs tracking-wider">STATUS</th>
+                <th class="px-6 py-4 text-center font-medium text-xs tracking-wider w-40">AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody id="propostas-tbody" class="divide-y"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- EVENTOS CONFIRMADOS + ARQUIVAR -->
+      <div id="section-eventos" class="section hidden">
+        <div class="flex justify-between mb-5">
+          <div class="font-display text-2xl font-bold">Eventos Confirmados (Aceitas)</div>
+          <button onclick="showArchiveModal()" class="btn btn-sm px-5 bg-[#c0392b] text-white rounded-2xl flex items-center gap-x-2">
+            <i class="ti ti-archive"></i> Arquivar por Período
+          </button>
+        </div>
+        <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden">
+          <table class="w-full text-sm">
+            <thead class="bg-[#f8fafc]">
+              <tr>
+                <th class="px-6 py-4 text-left">EVENTO</th>
+                <th class="px-6 py-4 text-left">CLIENTE / LOCAL</th>
+                <th class="px-6 py-4 text-left">DATA</th>
+                <th class="px-6 py-4 text-right">VALOR</th>
+                <th class="px-6 py-4 text-center">AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody id="eventos-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ARQUIVADOS -->
+      <div id="section-arquivados" class="section hidden">
+        <div class="font-display text-2xl font-bold mb-5">Eventos Arquivados</div>
+        <div class="bg-white border border-[#d0daf0] rounded-3xl p-8 text-center text-[#4a5878]" id="arquivados-content">
+          <!-- populated by JS -->
+        </div>
+      </div>
+
+      <!-- CONFIG -->
+      <div id="section-config" class="section hidden">
+        <div class="font-display text-2xl font-bold mb-6">Configurações & Backoffice</div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-6">
+            <div class="font-semibold mb-4">Preços de Locação (editáveis)</div>
+            <div id="config-locais" class="space-y-3 text-sm"></div>
+          </div>
+          <div class="bg-white border border-[#d0daf0] rounded-3xl p-6">
+            <div class="font-semibold mb-4">Equipamentos (preços diários)</div>
+            <div id="config-equip" class="space-y-3 text-sm"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIXEIRA -->
+      <div id="section-lixeira" class="section hidden">
+        <div class="font-display text-2xl font-bold mb-5">Lixeira (Auditoria)</div>
+        <div id="lixeira-content" class="bg-white border border-[#d0daf0] rounded-3xl p-6"></div>
+      </div>
+
     </div>
   </div>
 </div>
 
-<!-- MODAL: ITEM -->
-<div class="modal-overlay" id="modal-item">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title" id="item-modal-title">Novo Cadastro</div>
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-item')"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="form-grid">
-      <div class="fg full"><label>Nome</label><input id="item-nome" placeholder="Nome do item"></div>
-      <div class="fg full"><label>Descrição</label><textarea id="item-desc" style="height:70px;resize:none" placeholder="Descrição detalhada..."></textarea></div>
-      <div class="fg"><label>Categoria / Tipo</label><input id="item-categoria" placeholder="Ex: Auditório, Notebook"></div>
-      <div class="fg"><label>Capacidade / Quantidade</label><input id="item-capacidade" placeholder="Ex: 200 pessoas / 10 unid."></div>
-      <div class="fg"><label>Valor/hora ou Diária (R$)</label><input type="number" id="item-valor" placeholder="0.00"></div>
-      <div class="fg"><label>Disponibilidade</label>
-        <select id="item-disponivel">
-          <option value="Disponível">Disponível</option>
-          <option value="Ocupado">Ocupado</option>
-          <option value="Manutenção">Manutenção</option>
-        </select>
+<!-- MODALS -->
+<!-- Add/Edit Local Modal -->
+<div id="modal-local" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[200]">
+  <div class="bg-white rounded-3xl w-full max-w-lg p-7">
+    <div class="font-semibold text-xl mb-5">Cadastrar / Editar Local</div>
+    
+    <div class="space-y-4">
+      <div><label class="text-xs font-semibold">NOME DO ESPAÇO</label><input id="local-nome" class="inp w-full"></div>
+      <div><label class="text-xs font-semibold">ENDEREÇO COMPLETO</label><input id="local-endereco" class="inp w-full"></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="text-xs font-semibold">VALOR BASE (R$)</label><input type="number" id="local-valor" class="inp w-full"></div>
+        <div><label class="text-xs font-semibold">CAPACIDADE (PAX)</label><input type="number" id="local-capacidade" class="inp w-full"></div>
+      </div>
+      <div>
+        <label class="text-xs font-semibold">FOTO DO LOCAL</label>
+        <input type="file" id="local-foto" accept="image/*" class="block w-full text-sm mt-1" onchange="previewLocalFoto(this)">
+        <img id="local-foto-preview" class="mt-2 max-h-40 rounded-2xl hidden">
+      </div>
+      <div class="flex gap-x-6">
+        <div class="flex items-center gap-x-2">
+          <input type="checkbox" id="local-equip" class="accent-[#f97316]">
+          <label class="text-sm">Possui equipamentos acoplados</label>
+        </div>
+        <div class="flex items-center gap-x-2">
+          <input type="checkbox" id="local-montar" class="accent-[#f97316]">
+          <label class="text-sm">Precisa montar</label>
+        </div>
       </div>
     </div>
-    <div style="margin-top:14px">
-      <label style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--t2);display:block;margin-bottom:8px">Ícone Representativo</label>
-      <div class="icon-grid" id="icon-picker"></div>
-      <input type="hidden" id="item-icon" value="🏛️">
-    </div>
-    <div class="fg" style="margin-top:14px">
-      <label>Foto / Imagem (URL)</label>
-      <input id="item-img" placeholder="https://... ou deixe em branco para usar o ícone">
-    </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="closeModal('modal-item')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveItem()"><i class="ti ti-device-floppy"></i> Salvar</button>
+
+    <div class="flex gap-x-3 mt-7">
+      <button onclick="closeLocalModal()" class="flex-1 py-3 rounded-2xl border">Cancelar</button>
+      <button onclick="saveLocal()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl">Salvar Local</button>
     </div>
   </div>
 </div>
-
-<!-- MODAL: USUÁRIO -->
-<div class="modal-overlay" id="modal-user">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-header">
-      <div class="modal-title" id="user-modal-title">Adicionar Usuário</div>
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-user')"><i class="ti ti-x"></i></button>
-    </div>
-    <div class="form-grid">
-      <div class="fg"><label>Nome Completo</label><input id="u-nome" placeholder="Ex: João Silva"></div>
-      <div class="fg"><label>E-mail / Login</label><input id="u-email" type="text" placeholder="email ou usuário"></div>
-      <div class="fg"><label>Função</label>
-        <select id="u-role">
-          <option value="Operador">Operador</option>
-          <option value="Gestor">Gestor</option>
-        </select>
-      </div>
-      <div class="fg"><label>Senha Inicial</label><input type="password" id="u-senha" placeholder="••••••••"></div>
-    </div>
-    <div style="margin-top:16px">
-      <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--t2);margin-bottom:12px">Permissões de Cadastro</div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="u-perm-locacoes"> <span>Adicionar/editar Locações de Espaços</span></label>
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="u-perm-equip"> <span>Adicionar/editar Equipamentos</span></label>
-        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" id="u-perm-cardapios"> <span>Adicionar/editar Cardápios</span></label>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" onclick="closeModal('modal-user')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveUser()"><i class="ti ti-device-floppy"></i> Salvar Usuário</button>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL: DETALHE PROPOSTA -->
-<div class="modal-overlay" id="modal-proposal-detail">
-  <div class="modal" style="max-width:520px">
-    <div class="modal-header">
-      <div class="modal-title">Detalhes da Proposta</div>
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('modal-proposal-detail')"><i class="ti ti-x"></i></button>
-    </div>
-    <div id="proposal-detail-content"></div>
-    <div class="modal-footer">
-      <button class="btn" onclick="closeModal('modal-proposal-detail')">Fechar</button>
-    </div>
-  </div>
-</div>
-
-<!-- TOAST CONTAINER -->
-<div id="toast"></div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-//  MODESK ALFA v7 — SEM LOGIN (acesso direto como Gestor)
-// ═══════════════════════════════════════════════════════
-
-let DB = {
-  proposals: [],
-  locacoes: [],
-  equipamentos: [],
-  cardapios: [],
-  users: [],
-  currentUser: null,
-  editingId: null,
-  currentItemType: null,
-};
-
-const DEFAULT_USER = {
-  id: 'u1',
-  nome: 'Marcio Oliveira',
-  email: 'marciooliveira',
-  login: 'marciooliveira',
-  senha: 'Deadpool365*',
-  role: 'Gestor',
-  perms: { locacoes: true, equipamentos: true, cardapios: true }
-};
-
-const DEMO_USERS = [
-  DEFAULT_USER,
-  {
-    id: 'u2',
-    nome: 'Operador Padrão',
-    email: 'operador@senac.br',
-    login: 'operador@senac.br',
-    senha: 'op123',
-    role: 'Operador',
-    perms: { locacoes: false, equipamentos: false, cardapios: false }
-  },
-];
-
-const DEMO_PROPOSALS = [
-  { id: genId(), nome: 'Congresso Nacional de TI', cliente: 'TechBrasil SA', data: '2026-07-15', prazo: '2026-07-08', valor: 12500, status: 'Aceita', financeiro: 'Pago', espaco: 'Auditório Principal', obs: 'Inclui café da manhã' },
-  { id: genId(), nome: 'Workshop Lean Six Sigma', cliente: 'Consultoria FDR', data: '2026-07-22', prazo: '2026-07-15', valor: 4800, status: 'Em análise', financeiro: 'Pendente', espaco: 'Sala Multiuso A', obs: '' },
-  { id: genId(), nome: 'Treinamento Liderança', cliente: 'RH Corp', data: '2026-08-05', prazo: '2026-07-28', valor: 7200, status: 'Aceita', financeiro: 'Parcial', espaco: 'Sala de Reuniões', obs: 'Pagamento em 2x' },
-  { id: genId(), nome: 'Lançamento de Produto Alfa', cliente: 'Startup Nexus', data: '2026-06-30', prazo: '2026-06-10', valor: 5500, status: 'Aceita', financeiro: 'Pendente', espaco: 'Espaço Externo', obs: '' },
-  { id: genId(), nome: 'Seminário de Gastronomia', cliente: 'Instituto Culinário', data: '2026-09-12', prazo: '2026-09-01', valor: 3200, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: '' },
-];
-
-const DEMO_LOCACOES = [
-  { id: genId(), nome: 'Auditório Principal', desc: 'Auditório climatizado com palco, sistema de som profissional e projeção 4K.', categoria: 'Auditório', capacidade: '300 pessoas', valor: 2500, disponivel: 'Disponível', icon: '🎭', img: '' },
-  { id: genId(), nome: 'Sala Multiuso A', desc: 'Sala modular com mesas e cadeiras reconfiguráveis para até 80 participantes.', categoria: 'Sala', capacidade: '80 pessoas', valor: 800, disponivel: 'Disponível', icon: '🏫', img: '' },
-  { id: genId(), nome: 'Sala de Reuniões Premium', desc: 'Sala executiva com videoconferência, quadro interativo e 16 lugares.', categoria: 'Reunião', capacidade: '16 pessoas', valor: 350, disponivel: 'Ocupado', icon: '💼', img: '' },
-  { id: genId(), nome: 'Espaço Externo Garden', desc: 'Área ao ar livre com cobertura retrátil, jardim e capacidade para eventos sociais.', categoria: 'Externo', capacidade: '150 pessoas', valor: 1800, disponivel: 'Disponível', icon: '🌿', img: '' },
-];
-
-const DEMO_EQUIPAMENTOS = [
-  { id: genId(), nome: 'Projetor 4K Epson', desc: 'Projetor laser 4K com 8000 lúmens, ideal para auditórios grandes.', categoria: 'Projeção', capacidade: '10 unidades', valor: 200, disponivel: 'Disponível', icon: '📽️', img: '' },
-  { id: genId(), nome: 'Kit Som JBL Professional', desc: 'Sistema de som com 4 caixas, mixer 16 canais e 2 microfones sem fio.', categoria: 'Audiovisual', capacidade: '5 kits', valor: 450, disponivel: 'Disponível', icon: '🎙️', img: '' },
-  { id: genId(), nome: 'Notebook Dell Latitude', desc: 'Notebook i7 16GB RAM, Windows 11 Pro, para uso em treinamentos.', categoria: 'Informática', capacidade: '20 unidades', valor: 120, disponivel: 'Disponível', icon: '💻', img: '' },
-  { id: genId(), nome: 'Display LED 75"', desc: 'Televisor LED 4K 75 polegadas com suporte articulado e entradas HDMI/USB.', categoria: 'Display', capacidade: '8 unidades', valor: 280, disponivel: 'Ocupado', icon: '📺', img: '' },
-];
-
-const DEMO_CARDAPIOS = [
-  { id: genId(), nome: 'Coffee Break Clássico', desc: 'Café, chá, sucos, pão de queijo, mini croissants, frutas e biscoitos.', categoria: 'Coffee Break', capacidade: 'Por pessoa', valor: 28, disponivel: 'Disponível', icon: '☕', img: '' },
-  { id: genId(), nome: 'Almoço Executivo', desc: 'Buffet completo com prato principal, acompanhamentos, saladas e sobremesa.', categoria: 'Almoço', capacidade: 'Por pessoa', valor: 65, disponivel: 'Disponível', icon: '🍽️', img: '' },
-  { id: genId(), nome: 'Coquetel de Gala', desc: 'Finger foods finos, canapés, drinks com e sem álcool e petit fours.', categoria: 'Coquetel', capacidade: 'Por pessoa', valor: 95, disponivel: 'Disponível', icon: '🥂', img: '' },
-  { id: genId(), nome: 'Coffee Break Premium', desc: 'Versão premium com tapiocas, pães artesanais, frutas selecionadas e água saborizada.', categoria: 'Coffee Break', capacidade: 'Por pessoa', valor: 45, disponivel: 'Disponível', icon: '🥐', img: '' },
-];
-
-const ICONS_LIST = ['🏛️','🎭','🏫','💼','🌿','🏢','🔬','📐','🎪','🏟️','📽️','🎙️','💻','📺','🖥️','📡','🔌','🎛️','🔊','💡','☕','🍽️','🥂','🥐','🍱','🍕','🥗','🎂','🍰','🧁','📋','📊','📈','📁','🔑','⭐','🏆','✅','🔔','💎'];
-
-function genId() { return 'id_' + Math.random().toString(36).substr(2,9); }
-
-// ── INIT DIRETO SEM LOGIN ──
-function initApp() {
-  DB.currentUser = DEFAULT_USER;
-  document.getElementById('user-name').textContent = DEFAULT_USER.nome.split(' ')[0];
-  document.getElementById('user-badge').textContent = DEFAULT_USER.role;
-  document.getElementById('user-badge').className = 'badge badge-purple';
-  initData();
-  refreshDashboard();
+// ==================== TAILWIND CONFIG ====================
+function initTailwind() {
+  document.documentElement.style.setProperty('--accent', '#f97316');
 }
 
-// ── INIT DATA ──
-function initData() {
-  DB.proposals    = JSON.parse(localStorage.getItem('modesk_proposals')    || 'null') || DEMO_PROPOSALS.map(p => ({...p, id: genId()}));
-  DB.locacoes     = JSON.parse(localStorage.getItem('modesk_locacoes')     || 'null') || DEMO_LOCACOES.map(p => ({...p, id: genId()}));
-  DB.equipamentos = JSON.parse(localStorage.getItem('modesk_equipamentos') || 'null') || DEMO_EQUIPAMENTOS.map(p => ({...p, id: genId()}));
-  DB.cardapios    = JSON.parse(localStorage.getItem('modesk_cardapios')    || 'null') || DEMO_CARDAPIOS.map(p => ({...p, id: genId()}));
-  DB.users        = JSON.parse(localStorage.getItem('modesk_users')        || 'null') || DEMO_USERS.map(u => ({...u}));
-  renderAll();
+// ==================== DATA (localStorage) ====================
+let DB = {
+  propostas: [],
+  locais: [],
+  lixeira: [],
+  arquivados: []
+};
+
+function loadDB() {
+  const saved = localStorage.getItem('modesk_alfa_v3');
+  if (saved) {
+    try { Object.assign(DB, JSON.parse(saved)); } catch(e){}
+  } else {
+    // Seed data
+    DB.propostas = [
+      {id:1, numero:"0148/2026", cliente:"Superintendência do Sesc", contato:"Lyvia", titulo:"Reunião Sesc", tipo:"Interno", data:"2026-06-08", local:"Fecomércio 12º andar", valor:474.60, status:"Aceita", pax:25},
+      {id:2, numero:"0149/2026", cliente:"SINDVEL", contato:"Diretoria", titulo:"SINDVEL — Capacitação", tipo:"Externo", data:"2026-06-23", local:"Auditório Senac Aldeota", valor:3264.00, status:"Enviada", pax:80},
+      {id:3, numero:"0150/2026", cliente:"COCAL", contato:"Diretoria", titulo:"Congresso COCAL", tipo:"Externo", data:"2026-07-02", local:"Auditório Senac Aldeota", valor:77196.00, status:"Enviada", pax:120},
+      {id:4, numero:"0151/2026", cliente:"ABAV", contato:"Paulo Neto", titulo:"ABAV — Apresentação", tipo:"Externo", data:"2026-06-10", local:"Auditório Senac Aldeota", valor:4000.00, status:"Aceita", pax:60},
+      {id:5, numero:"0152/2026", cliente:"FACIC / EPROCE", contato:"Coordenação", titulo:"Almoço EPROCE", tipo:"Misto", data:"2026-06-12", local:"Restaurante Mayú - Sala Reservada", valor:7500.00, status:"Aceita", pax:35},
+      {id:6, numero:"0153/2026", cliente:"Patricia", contato:"Patricia", titulo:"NR1 na prática", tipo:"Externo", data:"2026-06-12", local:"Salas 5 e 6", valor:2000.00, status:"Em elaboração", pax:40},
+      {id:7, numero:"0154/2026", cliente:"Marco Frossard", contato:"Marco Frossard", titulo:"RATIONAL", tipo:"Externo", data:"2026-06-11", local:"Cozinha Experience", valor:1800.00, status:"Expirada", pax:20},
+      {id:8, numero:"0155/2026", cliente:"TechCorp", contato:"Inovação", titulo:"Workshop Inovação", tipo:"Externo", data:"2026-05-20", local:"Auditório Senac Aldeota", valor:12000.00, status:"Aceita", pax:90}
+    ];
+    
+    DB.locais = [
+      {id:"s1", nome:"Auditório — até 4h", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:1500, capacidade:150, foto:"https://picsum.photos/id/1015/600/400", temEquip:true, precisaMontar:false},
+      {id:"s2", nome:"Auditório — dia todo", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:2500, capacidade:150, foto:"https://picsum.photos/id/160/600/400", temEquip:true, precisaMontar:false},
+      {id:"s9", nome:"Restaurante Mayú (Sala Reservada)", endereco:"Av. Des. Moreira, 500 - térreo", valor:400, capacidade:35, foto:"https://picsum.photos/id/292/600/400", temEquip:true, precisaMontar:false},
+      {id:"s5", nome:"Salas 5 e 6 juntas", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:500, capacidade:60, foto:"https://picsum.photos/id/29/600/400", temEquip:false, precisaMontar:true},
+      {id:"s12", nome:"Cozinha Experience", endereco:"Av. Des. Moreira, 500 - subsolo", valor:1800, capacidade:25, foto:"https://picsum.photos/id/201/600/400", temEquip:true, precisaMontar:false}
+    ];
+    saveDB();
+  }
 }
 
 function saveDB() {
-  localStorage.setItem('modesk_proposals',    JSON.stringify(DB.proposals));
-  localStorage.setItem('modesk_locacoes',     JSON.stringify(DB.locacoes));
-  localStorage.setItem('modesk_equipamentos', JSON.stringify(DB.equipamentos));
-  localStorage.setItem('modesk_cardapios',    JSON.stringify(DB.cardapios));
-  localStorage.setItem('modesk_users',        JSON.stringify(DB.users));
+  localStorage.setItem('modesk_alfa_v3', JSON.stringify(DB));
 }
 
-function renderAll() {
-  renderProposalsTable();
-  renderItems('locacoes');
-  renderItems('equipamentos');
-  renderItems('cardapios');
-  renderUsersTable();
-  updateSpaceSelect();
-}
-
-// ── NAVIGATION ──
-function switchPage(id) {
-  document.querySelectorAll('.page').forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  const pg = document.getElementById('page-' + id);
-  if (pg) { pg.style.display = 'block'; setTimeout(() => pg.classList.add('active'), 10); }
-  const nav = document.querySelector('[data-page="' + id + '"]');
-  if (nav) nav.classList.add('active');
-  if (id === 'bi') renderBICharts();
-  if (id === 'dashboard') refreshDashboard();
-  document.getElementById('sidebar').classList.remove('mobile-open');
-}
-
-function toggleMobileSidebar() {
-  document.getElementById('sidebar').classList.toggle('mobile-open');
-}
-
-// ── DASHBOARD ──
-function refreshDashboard() {
-  const now = new Date();
-  const today = now.toISOString().split('T')[0];
-  const h = now.getHours();
-  const greeting = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
-  document.getElementById('dash-greeting').textContent = greeting + ', ' + (DB.currentUser?.nome.split(' ')[0] || '') + '! Hoje é ' + now.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
-
-  const aceitas   = DB.proposals.filter(p => p.status === 'Aceita');
-  const pendentes = DB.proposals.filter(p => p.financeiro === 'Pendente' && p.status === 'Aceita');
-  const faturamento = aceitas.filter(p => p.financeiro === 'Pago').reduce((s, p) => s + (+p.valor), 0);
-  const vencidas  = DB.proposals.filter(p => p.prazo && p.prazo < today && p.financeiro === 'Pendente' && p.status === 'Aceita');
-
-  document.getElementById('kpi-faturamento').textContent = fmtMoney(faturamento);
-  document.getElementById('kpi-aceitas').textContent = aceitas.length;
-  document.getElementById('kpi-pendentes').textContent = pendentes.length;
-  document.getElementById('kpi-vencidas').textContent = vencidas.length;
-
-  const badgeEl = document.getElementById('badge-propostas');
-  const pending = DB.proposals.filter(p => p.status === 'Em análise').length;
-  if (pending > 0) { badgeEl.style.display = ''; badgeEl.textContent = pending; } else badgeEl.style.display = 'none';
-
-  const alertsEl = document.getElementById('dash-alerts');
-  let html = '';
-  if (vencidas.length > 0) html += `<div class="alert alert-danger"><i class="ti ti-alert-triangle"></i> <strong>${vencidas.length} proposta(s) com pagamento vencido!</strong> Verifique os registros em Propostas Comerciais.</div>`;
-  if (pendentes.length > 0) html += `<div class="alert alert-warning"><i class="ti ti-clock"></i> <strong>${pendentes.length} evento(s) confirmado(s)</strong> aguardando pagamento.</div>`;
-  alertsEl.innerHTML = html;
-
-  const sorted = [...DB.proposals].sort((a, b) => (a.data || '').localeCompare(b.data || ''));
-  const body = document.getElementById('dash-table-body');
-  body.innerHTML = sorted.map(p => `
-    <tr>
-      <td>${fmtDate(p.data)}</td>
-      <td><strong>${p.nome}</strong></td>
-      <td>${p.cliente}</td>
-      <td><strong>${fmtMoney(p.valor)}</strong></td>
-      <td>${fmtDate(p.prazo) || '—'}</td>
-      <td>${statusBadge(p.status)}</td>
-      <td>${finBadge(p.financeiro)}</td>
-      <td><button class="btn btn-ghost btn-sm" onclick="viewProposal('${p.id}')"><i class="ti ti-eye"></i></button></td>
-    </tr>
-  `).join('');
-}
-
-// ── PROPOSALS TABLE ──
-function renderProposalsTable() {
-  const search  = (document.getElementById('filter-search')?.value || '').toLowerCase();
-  const statusF = document.getElementById('filter-status')?.value || '';
-  let list = DB.proposals.filter(p => {
-    const matchS  = !search || p.nome.toLowerCase().includes(search) || p.cliente.toLowerCase().includes(search);
-    const matchSt = !statusF || p.status === statusF;
-    return matchS && matchSt;
-  });
-  list.sort((a, b) => (a.data || '').localeCompare(b.data || ''));
-  const body = document.getElementById('proposals-table-body');
-  if (!list.length) { body.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--t3);padding:30px">Nenhuma proposta encontrada.</td></tr>`; return; }
-  body.innerHTML = list.map(p => `
-    <tr>
-      <td>${fmtDate(p.data)}</td>
-      <td><strong>${p.nome}</strong>${p.espaco ? `<br><small style="color:var(--t3)">${p.espaco}</small>` : ''}</td>
-      <td>${p.cliente}</td>
-      <td><strong>${fmtMoney(p.valor)}</strong></td>
-      <td>${fmtDate(p.prazo) || '—'}</td>
-      <td>${statusBadge(p.status)}</td>
-      <td>${finBadge(p.financeiro)}</td>
-      <td style="display:flex;gap:5px;align-items:center">
-        <button class="btn btn-ghost btn-sm" title="Ver"    onclick="viewProposal('${p.id}')"><i class="ti ti-eye"></i></button>
-        <button class="btn btn-ghost btn-sm" title="Editar" onclick="editProposal('${p.id}')"><i class="ti ti-pencil"></i></button>
-        <button class="btn btn-ghost btn-sm" title="Excluir" onclick="deleteProposal('${p.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function openProposalModal(id) {
-  DB.editingId = id || null;
-  const m = id ? DB.proposals.find(p => p.id === id) : null;
-  document.getElementById('proposal-modal-title').textContent = m ? 'Editar Proposta' : 'Nova Proposta';
-  document.getElementById('p-nome').value      = m?.nome      || '';
-  document.getElementById('p-cliente').value   = m?.cliente   || '';
-  document.getElementById('p-data').value      = m?.data      || '';
-  document.getElementById('p-prazo').value     = m?.prazo     || '';
-  document.getElementById('p-valor').value     = m?.valor     || '';
-  document.getElementById('p-status').value    = m?.status    || 'Em análise';
-  document.getElementById('p-financeiro').value= m?.financeiro|| 'Pendente';
-  document.getElementById('p-espaco').value    = m?.espaco    || '';
-  document.getElementById('p-obs').value       = m?.obs       || '';
-  openModal('modal-proposal');
-}
-
-function editProposal(id) { openProposalModal(id); }
-
-function saveProposal() {
-  const nome    = document.getElementById('p-nome').value.trim();
-  const cliente = document.getElementById('p-cliente').value.trim();
-  if (!nome || !cliente) { showToast('Preencha Nome e Cliente.', 'error'); return; }
-  const record = {
-    id: DB.editingId || genId(),
-    nome, cliente,
-    data:       document.getElementById('p-data').value,
-    prazo:      document.getElementById('p-prazo').value,
-    valor:      +document.getElementById('p-valor').value || 0,
-    status:     document.getElementById('p-status').value,
-    financeiro: document.getElementById('p-financeiro').value,
-    espaco:     document.getElementById('p-espaco').value,
-    obs:        document.getElementById('p-obs').value,
-  };
-  if (DB.editingId) {
-    const idx = DB.proposals.findIndex(p => p.id === DB.editingId);
-    if (idx !== -1) DB.proposals[idx] = record;
+// ==================== LOGIN ====================
+function doLogin() {
+  const user = document.getElementById('login-user').value.trim();
+  const pass = document.getElementById('login-pass').value.trim();
+  
+  if (user === "marciooliveira" && pass === "Deadpool365*") {
+    document.getElementById('login-screen').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+    initApp();
   } else {
-    DB.proposals.unshift(record);
+    alert("Credenciais inválidas. Use: marciooliveira / Deadpool365*");
   }
-  saveDB(); closeModal('modal-proposal'); renderProposalsTable(); refreshDashboard();
-  showToast(DB.editingId ? 'Proposta atualizada!' : 'Proposta criada!', 'success');
 }
 
-function deleteProposal(id) {
-  if (!confirm('Excluir esta proposta?')) return;
-  DB.proposals = DB.proposals.filter(p => p.id !== id);
-  saveDB(); renderProposalsTable(); refreshDashboard();
-  showToast('Proposta removida.', 'warn');
+function logout() {
+  document.getElementById('app').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
 }
 
-function viewProposal(id) {
-  const p = DB.proposals.find(x => x.id === id);
-  if (!p) return;
-  document.getElementById('proposal-detail-content').innerHTML = `
-    <div style="display:grid;gap:14px">
-      <div style="background:var(--bg2);border-radius:var(--r-sm);padding:16px">
-        <div style="font-family:'Space Grotesk';font-size:20px;font-weight:800">${p.nome}</div>
-        <div style="color:var(--t2);margin-top:4px">${p.cliente}</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Data do Evento</div><div style="font-weight:600">${fmtDate(p.data)||'—'}</div></div>
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Prazo Pagamento</div><div style="font-weight:600">${fmtDate(p.prazo)||'—'}</div></div>
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Valor</div><div style="font-family:'Space Grotesk';font-size:22px;font-weight:800;color:var(--blue-vivid)">${fmtMoney(p.valor)}</div></div>
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Espaço</div><div style="font-weight:600">${p.espaco||'—'}</div></div>
-        <div>${statusBadge(p.status)}</div>
-        <div>${finBadge(p.financeiro)}</div>
-      </div>
-      ${p.obs ? `<div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase;margin-bottom:6px">Observações</div><div style="font-size:13px;color:var(--t2)">${p.obs}</div></div>` : ''}
-    </div>
+// ==================== NAVIGATION ====================
+let currentSection = 'dashboard';
+
+function switchSection(section) {
+  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
+  document.getElementById('section-' + section).classList.remove('hidden');
+  
+  // update active nav
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('nav-active'));
+  const navEl = document.querySelector(`[data-section="${section}"]`);
+  if (navEl) navEl.classList.add('nav-active');
+
+  currentSection = section;
+
+  if (section === 'dashboard') refreshDashboard();
+  if (section === 'locais') renderLocais();
+  if (section === 'propostas') renderPropostasTable();
+  if (section === 'eventos') renderEventosTable();
+  if (section === 'arquivados') renderArquivados();
+  if (section === 'config') renderConfig();
+  if (section === 'lixeira') renderLixeira();
+}
+
+// ==================== DASHBOARD ====================
+let faturamentoChart, ocupacaoChart;
+
+function refreshDashboard() {
+  const today = new Date().toISOString().split('T')[0];
+  
+  // KPIs
+  const ativas = DB.propostas.filter(p => p.status !== 'Expirada' && p.status !== 'Cancelada').length;
+  const confirmadosMes = DB.propostas.filter(p => p.status === 'Aceita' && p.data && p.data.startsWith('2026-06')).length;
+  const valorMes = DB.propostas.filter(p => p.status === 'Aceita' && p.data && p.data.startsWith('2026-06'))
+                               .reduce((sum, p) => sum + (p.valor || 0), 0);
+  const vencidas = DB.propostas.filter(p => p.deadline && p.deadline < today && p.status !== 'Aceita').length;
+  const hoje = DB.propostas.filter(p => p.status === 'Aceita' && p.data === today).length;
+
+  document.getElementById('kpi-ativas').textContent = ativas;
+  document.getElementById('kpi-confirmados').textContent = confirmadosMes;
+  document.getElementById('kpi-conversao').textContent = Math.round((DB.propostas.filter(p=>p.status==='Aceita').length / DB.propostas.length) * 100) + '%';
+  document.getElementById('kpi-faturamento').textContent = 'R$ ' + (valorMes / 1000).toFixed(1) + 'k';
+  document.getElementById('kpi-vencidas').textContent = vencidas;
+  document.getElementById('kpi-hoje').textContent = hoje;
+
+  // Alert bar
+  const alertBar = document.getElementById('alert-bar');
+  if (vencidas > 0) {
+    alertBar.classList.remove('hidden');
+    document.getElementById('alert-text').textContent = `${vencidas} proposta(s) com prazo vencido.`;
+  } else {
+    alertBar.classList.add('hidden');
+  }
+
+  // Charts
+  renderDashboardCharts();
+
+  // Próximos eventos
+  renderProximosEventos();
+}
+
+function renderDashboardCharts() {
+  // Destroy old charts
+  if (faturamentoChart) faturamentoChart.destroy();
+  if (ocupacaoChart) ocupacaoChart.destroy();
+
+  // Faturamento por unidade (mock)
+  const ctx1 = document.getElementById('chart-faturamento');
+  faturamentoChart = new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: ['Aldeota', 'Fecomércio', 'Mayú'],
+      datasets: [{
+        label: 'Faturamento (R$)',
+        data: [45200, 12400, 7500],
+        backgroundColor: '#003366'
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { display: false } } }
+  });
+
+  // Ocupação
+  const ctx2 = document.getElementById('chart-ocupacao');
+  ocupacaoChart = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['Auditório Aldeota', 'Mayú', 'Salas 5-6', 'Outros'],
+      datasets: [{
+        data: [45, 18, 22, 15],
+        backgroundColor: ['#003366', '#f97316', '#0a7a5a', '#94a3b8']
+      }]
+    },
+    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
+  });
+}
+
+function renderProximosEventos() {
+  const container = document.getElementById('proximos-eventos');
+  const aceitas = DB.propostas.filter(p => p.status === 'Aceita')
+                              .sort((a,b) => (a.data || '').localeCompare(b.data || ''))
+                              .slice(0, 5);
+
+  if (!aceitas.length) {
+    container.innerHTML = `<div class="p-8 text-center text-sm text-[#4a5878]">Nenhum evento confirmado próximo.</div>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <table class="w-full text-sm">
+      <thead><tr class="bg-[#f8fafc]"><th class="px-6 py-3 text-left">Evento</th><th class="px-6 py-3 text-left">Cliente</th><th class="px-6 py-3 text-left">Data</th><th class="px-6 py-3 text-right">Valor</th></tr></thead>
+      <tbody>
+        ${aceitas.map(p => `
+          <tr class="border-t">
+            <td class="px-6 py-3 font-medium">${p.titulo}</td>
+            <td class="px-6 py-3">${p.cliente}</td>
+            <td class="px-6 py-3">${fmtDate(p.data)}</td>
+            <td class="px-6 py-3 text-right font-mono">R$ ${p.valor?.toFixed(2) || '0,00'}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
   `;
-  openModal('modal-proposal-detail');
 }
 
-// ── OCR / PARSER ──
-function processRawText() {
-  const raw = document.getElementById('ocr-text-input').value.trim();
-  if (!raw) { showToast('Cole o texto do briefing primeiro.', 'warn'); return; }
-  const parsed = parseTextBriefing(raw);
-  if (!parsed.nome && !parsed.cliente) { showToast('Não foi possível identificar dados. Use formato: Data, Evento, Cliente, Valor', 'error'); return; }
-  parsed.id = genId();
-  DB.proposals.unshift(parsed);
-  saveDB(); renderProposalsTable(); refreshDashboard();
-  const prev = document.getElementById('ocr-result-preview');
-  prev.style.display = 'block';
-  prev.innerHTML = `<div class="ocr-result"><strong>✅ Proposta importada com sucesso:</strong>\n\nEvento: ${parsed.nome||'—'}\nCliente: ${parsed.cliente||'—'}\nData: ${parsed.data||'—'}\nValor: ${fmtMoney(parsed.valor)}\nStatus: ${parsed.status}</div>`;
-  document.getElementById('ocr-text-input').value = '';
-  showToast('Proposta importada do texto!', 'success');
+// ==================== WIZARD ====================
+let currentStep = 1;
+let wizardData = {};
+
+function goToStep(step) {
+  currentStep = step;
+  document.querySelectorAll('[id^="step-content-"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById('step-content-' + step).classList.remove('hidden');
+
+  document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.remove('active'));
+  document.getElementById('step-' + step).classList.add('active');
+
+  if (step === 3) renderEquipGrid();
+  if (step === 4) populateCardapioSelect();
+  if (step === 5) renderResumo();
 }
 
-function parseTextBriefing(text) {
-  const get = (keys, fallback = '') => {
-    for (const k of keys) {
-      const rx = new RegExp(k + '[:\\s]+([^\\n]+)', 'i');
-      const m = text.match(rx);
-      if (m) return m[1].trim();
-    }
-    return fallback;
+function nextStep() {
+  if (currentStep < 5) {
+    goToStep(currentStep + 1);
+  }
+}
+
+function prevStep() {
+  if (currentStep > 1) goToStep(currentStep - 1);
+}
+
+function checkAgendaConflict() {
+  const data = document.getElementById('prop-data').value;
+  const local = document.getElementById('prop-local').value;
+  const alert = document.getElementById('agenda-alert');
+
+  if (!data || !local) { alert.classList.add('hidden'); return; }
+
+  const conflito = DB.propostas.find(p => 
+    p.status === 'Aceita' && p.data === data && p.local === local
+  );
+
+  if (conflito) {
+    alert.classList.remove('hidden');
+  } else {
+    alert.classList.add('hidden');
+  }
+}
+
+function updateLocalInfo() {
+  const select = document.getElementById('prop-local');
+  const infoDiv = document.getElementById('local-info');
+  const local = DB.locais.find(l => l.nome === select.value);
+
+  if (local) {
+    infoDiv.innerHTML = `
+      <div class="flex gap-x-4 items-center">
+        <img src="${local.foto}" class="w-16 h-16 rounded-xl object-cover">
+        <div class="text-xs">
+          <div class="font-semibold">${local.nome}</div>
+          <div>${local.endereco}</div>
+          <div class="mt-1">Valor base: <span class="font-mono">R$ ${local.valor}</span> • Capacidade: ${local.capacidade} pax</div>
+          <div class="mt-0.5">${local.temEquip ? '✓ Equipamentos inclusos' : ''} ${local.precisaMontar ? '• Precisa montar' : ''}</div>
+        </div>
+      </div>
+    `;
+    infoDiv.classList.remove('hidden');
+  } else {
+    infoDiv.classList.add('hidden');
+  }
+}
+
+function toggleEquipType(type) {
+  const internoBtn = document.getElementById('equip-interno-btn');
+  const externoBtn = document.getElementById('equip-externo-btn');
+  const internoSec = document.getElementById('equip-interno-section');
+  const externoSec = document.getElementById('equip-externo-section');
+
+  if (type === 'interno') {
+    internoBtn.classList.add('border-[#f97316]', 'bg-[#fff7ed]');
+    externoBtn.classList.remove('border-[#f97316]', 'bg-[#fff7ed]');
+    internoSec.classList.remove('hidden');
+    externoSec.classList.add('hidden');
+  } else {
+    externoBtn.classList.add('border-[#f97316]', 'bg-[#fff7ed]');
+    internoBtn.classList.remove('border-[#f97316]', 'bg-[#fff7ed]');
+    externoSec.classList.remove('hidden');
+    internoSec.classList.add('hidden');
+  }
+}
+
+function renderEquipGrid() {
+  const container = document.getElementById('equip-grid');
+  container.innerHTML = '';
+
+  const equipamentos = [
+    {id:'e1', nome:'Projetor multimídia', preco:250, icon:'📽️'},
+    {id:'e2', nome:'Mesa de som', preco:200, icon:'🎛️'},
+    {id:'e3', nome:'Microfone sem fio', preco:80, icon:'🎤'},
+    {id:'e5', nome:'TV 65"', preco:180, icon:'📺'},
+    {id:'e7', nome:'Técnico local', preco:300, icon:'👨‍💻'},
+    {id:'e9', nome:'Internet dedicada', preco:100, icon:'📡'},
+  ];
+
+  equipamentos.forEach(eq => {
+    const div = document.createElement('div');
+    div.className = `equip-card border border-[#d0daf0] rounded-2xl p-3 cursor-pointer flex flex-col`;
+    div.innerHTML = `
+      <div class="flex justify-between">
+        <div class="text-2xl">${eq.icon}</div>
+        <div class="text-right">
+          <div class="font-mono text-sm font-semibold">R$ ${eq.preco}</div>
+          <div class="text-[10px] text-[#4a5878]">/diária</div>
+        </div>
+      </div>
+      <div class="mt-auto pt-3 text-xs font-medium">${eq.nome}</div>
+      <div class="flex items-center justify-between mt-2">
+        <button onclick="changeEquipQty('${eq.id}', -1, event)" class="w-7 h-7 flex items-center justify-center border rounded-lg text-lg leading-none">-</button>
+        <span id="qty-${eq.id}" class="font-mono text-sm w-8 text-center">0</span>
+        <button onclick="changeEquipQty('${eq.id}', 1, event)" class="w-7 h-7 flex items-center justify-center border rounded-lg text-lg leading-none">+</button>
+      </div>
+    `;
+    div.onclick = () => changeEquipQty(eq.id, 1, event);
+    container.appendChild(div);
+  });
+}
+
+let equipSelection = {};
+
+function changeEquipQty(id, delta, e) {
+  e.stopImmediatePropagation();
+  if (!equipSelection[id]) equipSelection[id] = 0;
+  equipSelection[id] = Math.max(0, equipSelection[id] + delta);
+  document.getElementById('qty-' + id).textContent = equipSelection[id];
+}
+
+function populateCardapioSelect() {
+  const sel = document.getElementById('prop-cardapio');
+  sel.innerHTML = `<option value="">Selecione o cardápio...</option>`;
+  
+  const cardapios = [
+    {nome: "Coffee Break Nível 1 (Padrão)", preco: 35},
+    {nome: "Coffee Break Executivo", preco: 50},
+    {nome: "Almoço Executivo (Buffet)", preco: 75},
+    {nome: "Jantar Premium (Mayú)", preco: 120}
+  ];
+  
+  cardapios.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c.nome;
+    opt.textContent = `${c.nome} — R$ ${c.preco}/pax`;
+    sel.appendChild(opt);
+  });
+}
+
+function updateCardapioOptions() {
+  // Future: dynamic sub-options for cm1/cm2
+}
+
+function syncPax() {
+  // sync pax if needed
+}
+
+function renderResumo() {
+  const container = document.getElementById('resumo-content');
+  const totalEl = document.getElementById('resumo-total');
+
+  const cliente = document.getElementById('prop-cliente').value || '—';
+  const titulo = document.getElementById('prop-titulo').value || '—';
+  const data = document.getElementById('prop-data').value || '—';
+  const local = document.getElementById('prop-local').value || '—';
+  const pax = parseInt(document.getElementById('prop-pax').value) || 0;
+  const cardapio = document.getElementById('prop-cardapio').value || '—';
+
+  let total = 0;
+
+  // calculate equipment total
+  let equipTotal = 0;
+  Object.keys(equipSelection).forEach(id => {
+    const eq = [{id:'e1',preco:250},{id:'e2',preco:200},{id:'e3',preco:80},{id:'e5',preco:180},{id:'e7',preco:300},{id:'e9',preco:100}].find(e=>e.id===id);
+    if (eq) equipTotal += eq.preco * equipSelection[id];
+  });
+
+  // mock locacao + cardapio
+  const locacao = 1500; // placeholder
+  const cardapioValor = pax * 50; // placeholder
+
+  total = locacao + equipTotal + cardapioValor;
+
+  container.innerHTML = `
+    <div class="flex justify-between"><span>Cliente</span><span class="font-medium">${cliente}</span></div>
+    <div class="flex justify-between"><span>Evento</span><span class="font-medium">${titulo}</span></div>
+    <div class="flex justify-between"><span>Data</span><span class="font-medium">${fmtDate(data)}</span></div>
+    <div class="flex justify-between"><span>Local</span><span class="font-medium">${local}</span></div>
+    <div class="flex justify-between"><span>Participantes</span><span class="font-medium">${pax} pax</span></div>
+    <div class="flex justify-between"><span>Cardápio</span><span class="font-medium">${cardapio}</span></div>
+    <div class="pt-3 mt-3 border-t flex justify-between text-xs"><span>Locação + Equipamentos + Cardápio</span></div>
+  `;
+
+  totalEl.textContent = `R$ ${total.toFixed(2)}`;
+}
+
+function salvarProposta() {
+  const nova = {
+    id: Date.now(),
+    numero: document.getElementById('prop-numero').value,
+    cliente: document.getElementById('prop-cliente').value,
+    contato: document.getElementById('prop-contato').value,
+    titulo: document.getElementById('prop-titulo').value,
+    tipo: document.getElementById('prop-tipo').value,
+    data: document.getElementById('prop-data').value,
+    local: document.getElementById('prop-local').value,
+    valor: parseFloat(document.getElementById('resumo-total').textContent.replace('R$ ','').replace(',','.')) || 0,
+    status: "Em elaboração",
+    pax: parseInt(document.getElementById('prop-pax').value) || 0,
+    equipamentos: equipSelection,
+    cardapio: document.getElementById('prop-cardapio').value
   };
-  const nome      = get(['evento','nome do evento','event','nome']);
-  const cliente   = get(['cliente','empresa','company','organização']);
-  const data      = get(['data','date','data do evento']);
-  const prazo     = get(['prazo','deadline','prazo limite','vencimento']);
-  const valorStr  = get(['valor','value','preço','price','total']);
-  const valor     = parseFloat((valorStr||'0').replace(/[^\d,.]/g,'').replace(',','.')) || 0;
-  return { nome, cliente, data: parseDate(data), prazo: parseDate(prazo), valor, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: 'Importado via parser de texto' };
+
+  DB.propostas.unshift(nova);
+  saveDB();
+
+  alert("Proposta salva com sucesso!");
+  switchSection('propostas');
+  renderPropostasTable();
 }
 
-function parseDate(str) {
-  if (!str) return '';
-  const iso = str.match(/(\d{4}[-/]\d{2}[-/]\d{2})/);
-  if (iso) return iso[1].replace(/\//g,'-');
-  const br = str.match(/(\d{2})[\/\-](\d{2})[\/\-](\d{4})/);
-  if (br) return `${br[3]}-${br[2]}-${br[1]}`;
-  return '';
-}
+// ==================== LOCAIS ====================
+function renderLocais() {
+  const container = document.getElementById('locais-grid');
+  container.innerHTML = '';
 
-function processExternalFile(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const ext = file.name.split('.').pop().toLowerCase();
-  showToast('Lendo arquivo: ' + file.name, 'info');
-  if (ext === 'xlsx' || ext === 'xls' || ext === 'csv') {
-    const reader = new FileReader();
-    reader.onload = e => {
-      try {
-        const wb   = XLSX.read(e.target.result, { type: 'binary', cellDates: true });
-        const ws   = wb.Sheets[wb.SheetNames[0]];
-        const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
-        let count  = 0;
-        rows.forEach(row => {
-          const keys = Object.keys(row).map(k => k.toLowerCase());
-          const get  = (terms) => { const k = keys.find(k => terms.some(t => k.includes(t))); return k ? String(row[Object.keys(row).find(ok => ok.toLowerCase() === k)]||'') : ''; };
-          const nome    = get(['evento','event','nome']);
-          const cliente = get(['cliente','company','empresa']);
-          if (!nome && !cliente) return;
-          DB.proposals.unshift({ id: genId(), nome: nome||'Evento Importado', cliente: cliente||'—', data: parseDate(get(['data','date'])), prazo: parseDate(get(['prazo','deadline','vencimento'])), valor: parseFloat(get(['valor','value','preço','total']).replace(/[^\d,.]/g,'').replace(',','.')) || 0, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: 'Importado de Excel' });
-          count++;
-        });
-        saveDB(); renderProposalsTable(); refreshDashboard();
-        showToast(`${count} proposta(s) importada(s) do Excel!`, 'success');
-      } catch(e) { showToast('Erro ao ler arquivo: ' + e.message, 'error'); }
-    };
-    reader.readAsBinaryString(file);
-  } else if (ext === 'txt') {
-    const reader = new FileReader();
-    reader.onload = e => { document.getElementById('ocr-text-input').value = e.target.result; showToast('Texto carregado. Clique em "Processar".', 'info'); };
-    reader.readAsText(file);
-  } else { showToast('Formato não suportado. Use .xlsx, .csv ou .txt', 'error'); }
-  input.value = '';
-}
-
-// ── ITEMS ──
-function renderItems(type, filter = '') {
-  const container = document.getElementById(type + '-container');
-  const list = DB[type].filter(i => !filter || i.nome.toLowerCase().includes(filter.toLowerCase()) || i.desc.toLowerCase().includes(filter.toLowerCase()));
-  const isGrid = container.classList.contains('display-grid');
-  if (!list.length) { container.innerHTML = `<div class="empty-state"><i class="ti ti-inbox"></i><p>Nenhum registro encontrado.</p></div>`; return; }
-  container.innerHTML = list.map(item => {
-    const statusBadgeHtml = item.disponivel === 'Disponível'
-      ? '<span class="badge badge-success"><i class="ti ti-circle-check"></i>Disponível</span>'
-      : item.disponivel === 'Ocupado'
-        ? '<span class="badge badge-danger">Ocupado</span>'
-        : '<span class="badge badge-warning">Manutenção</span>';
-    return `
-      <div class="item-card card-hover">
-        ${isGrid ? `<div class="item-thumb">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r-sm)" onerror="this.style.display='none'">` : item.icon||'📦'}</div>` : ''}
-        ${!isGrid ? `<div class="item-thumb" style="width:52px;height:52px;font-size:26px;flex-shrink:0">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">` : item.icon}</div>` : ''}
-        <div style="flex:1;min-width:0">
-          <div class="item-name">${item.nome}</div>
-          <div class="item-desc">${item.desc}</div>
-          ${item.capacidade ? `<div style="font-size:12px;color:var(--t3);margin-top:4px"><i class="ti ti-users" style="font-size:11px"></i> ${item.capacidade}</div>` : ''}
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex-wrap:wrap;gap:8px">
-            <div>${statusBadgeHtml}</div>
-            <div class="item-price">${fmtMoney(item.valor)}<span style="font-size:11px;font-weight:400;color:var(--t3)">/diária</span></div>
+  DB.locais.forEach(local => {
+    const card = document.createElement('div');
+    card.className = `modern-card bg-white border border-[#d0daf0] rounded-3xl overflow-hidden`;
+    card.innerHTML = `
+      <img src="${local.foto}" class="w-full h-40 object-cover">
+      <div class="p-5">
+        <div class="font-semibold">${local.nome}</div>
+        <div class="text-xs text-[#4a5878] mt-0.5">${local.endereco}</div>
+        
+        <div class="flex justify-between items-end mt-4">
+          <div>
+            <div class="text-xs text-[#4a5878]">Valor base</div>
+            <div class="font-mono text-lg font-semibold">R$ ${local.valor}</div>
           </div>
-          <div class="item-actions">
-            <button class="btn btn-ghost btn-sm" onclick="editItem('${type}','${item.id}')"><i class="ti ti-pencil"></i></button>
-            <button class="btn btn-ghost btn-sm" onclick="deleteItem('${type}','${item.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>
+          <div class="text-right text-xs">
+            <div>${local.capacidade} pax</div>
+            <div class="mt-1">
+              ${local.temEquip ? '<span class="badge bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Equip. incluso</span>' : ''}
+              ${local.precisaMontar ? '<span class="badge bg-amber-100 text-amber-700 px-2 py-0.5 rounded ml-1">Precisa montar</span>' : ''}
+            </div>
           </div>
         </div>
       </div>
     `;
-  }).join('');
+    container.appendChild(card);
+  });
 }
 
-function filterItems(type, val) { renderItems(type, val); }
+let editingLocalId = null;
 
-function setView(type, mode, btn) {
-  const container = document.getElementById(type + '-container');
-  container.className = mode === 'grid' ? 'display-grid' : 'display-list';
-  btn.closest('.view-btns').querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderItems(type);
+function openAddLocalModal() {
+  editingLocalId = null;
+  document.getElementById('modal-local').classList.remove('hidden');
+  // clear fields
+  ['local-nome','local-endereco','local-valor','local-capacidade'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('local-foto-preview').classList.add('hidden');
 }
 
-function openItemModal(type, id) {
-  DB.currentItemType = type;
-  DB.editingId = id || null;
-  const titles = { locacoes: 'Espaço', equipamentos: 'Equipamento', cardapios: 'Cardápio' };
-  const m = id ? DB[type].find(i => i.id === id) : null;
-  document.getElementById('item-modal-title').textContent = (m ? 'Editar ' : 'Novo ') + titles[type];
-  document.getElementById('item-nome').value       = m?.nome       || '';
-  document.getElementById('item-desc').value       = m?.desc       || '';
-  document.getElementById('item-categoria').value  = m?.categoria  || '';
-  document.getElementById('item-capacidade').value = m?.capacidade || '';
-  document.getElementById('item-valor').value      = m?.valor      || '';
-  document.getElementById('item-disponivel').value = m?.disponivel || 'Disponível';
-  document.getElementById('item-icon').value       = m?.icon       || '🏛️';
-  document.getElementById('item-img').value        = m?.img        || '';
-  buildIconPicker(m?.icon || '🏛️');
-  openModal('modal-item');
+function closeLocalModal() {
+  document.getElementById('modal-local').classList.add('hidden');
 }
 
-function editItem(type, id) { openItemModal(type, id); }
-
-function saveItem() {
-  const nome = document.getElementById('item-nome').value.trim();
-  if (!nome) { showToast('Preencha o nome do item.', 'error'); return; }
-  const record = {
-    id: DB.editingId || genId(),
-    nome,
-    desc:       document.getElementById('item-desc').value,
-    categoria:  document.getElementById('item-categoria').value,
-    capacidade: document.getElementById('item-capacidade').value,
-    valor:      +document.getElementById('item-valor').value || 0,
-    disponivel: document.getElementById('item-disponivel').value,
-    icon:       document.getElementById('item-icon').value,
-    img:        document.getElementById('item-img').value,
-  };
-  const type = DB.currentItemType;
-  if (DB.editingId) {
-    const idx = DB[type].findIndex(i => i.id === DB.editingId);
-    if (idx !== -1) DB[type][idx] = record;
-  } else {
-    DB[type].unshift(record);
+function previewLocalFoto(input) {
+  const preview = document.getElementById('local-foto-preview');
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+    reader.onload = e => {
+      preview.src = e.target.result;
+      preview.classList.remove('hidden');
+    };
+    reader.readAsDataURL(input.files[0]);
   }
-  saveDB(); closeModal('modal-item'); renderItems(type);
-  if (type === 'locacoes') updateSpaceSelect();
-  showToast('Salvo com sucesso!', 'success');
 }
 
-function deleteItem(type, id) {
-  if (!confirm('Excluir este item?')) return;
-  DB[type] = DB[type].filter(i => i.id !== id);
-  saveDB(); renderItems(type);
-  if (type === 'locacoes') updateSpaceSelect();
-  showToast('Item removido.', 'warn');
+function saveLocal() {
+  const nome = document.getElementById('local-nome').value.trim();
+  if (!nome) return alert("Nome obrigatório");
+
+  const fotoPreview = document.getElementById('local-foto-preview');
+  const foto = fotoPreview.src || "https://picsum.photos/id/160/600/400";
+
+  const novo = {
+    id: editingLocalId || 'loc_' + Date.now(),
+    nome,
+    endereco: document.getElementById('local-endereco').value,
+    valor: parseFloat(document.getElementById('local-valor').value) || 0,
+    capacidade: parseInt(document.getElementById('local-capacidade').value) || 0,
+    foto,
+    temEquip: document.getElementById('local-equip').checked,
+    precisaMontar: document.getElementById('local-montar').checked
+  };
+
+  if (editingLocalId) {
+    const idx = DB.locais.findIndex(l => l.id === editingLocalId);
+    if (idx > -1) DB.locais[idx] = novo;
+  } else {
+    DB.locais.push(novo);
+  }
+
+  saveDB();
+  closeLocalModal();
+  renderLocais();
 }
 
-function buildIconPicker(selected) {
-  const grid = document.getElementById('icon-picker');
-  grid.innerHTML = ICONS_LIST.map(ic => `<div class="icon-option${ic===selected?' selected':''}" onclick="selectIcon('${ic}',this)">${ic}</div>`).join('');
-}
+// ==================== PROPOSTAS TABLE ====================
+function renderPropostasTable(filterStatus = '') {
+  const tbody = document.getElementById('propostas-tbody');
+  tbody.innerHTML = '';
 
-function selectIcon(icon, el) {
-  document.getElementById('item-icon').value = icon;
-  document.querySelectorAll('.icon-option').forEach(e => e.classList.remove('selected'));
-  el.classList.add('selected');
-}
+  let list = [...DB.propostas];
+  if (filterStatus) list = list.filter(p => p.status === filterStatus);
 
-function updateSpaceSelect() {
-  const sel = document.getElementById('p-espaco');
-  if (!sel) return;
-  const cur = sel.value;
-  sel.innerHTML = '<option value="">— Selecionar —</option>' + DB.locacoes.map(l => `<option value="${l.nome}">${l.nome}</option>`).join('');
-  sel.value = cur;
-}
-
-// ── USERS ──
-function renderUsersTable() {
-  const body = document.getElementById('users-table-body');
-  if (!body) return;
-  body.innerHTML = DB.users.map(u => `
-    <tr>
-      <td><strong>${u.nome}</strong></td>
-      <td>${u.email || u.login || '—'}</td>
-      <td><span class="badge ${u.role==='Gestor'?'badge-purple':'badge-info'}">${u.role}</span></td>
-      <td>${u.perms?.locacoes     ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
-      <td>${u.perms?.equipamentos ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
-      <td>${u.perms?.cardapios    ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
-      <td style="display:flex;gap:5px">
-        <button class="btn btn-ghost btn-sm" onclick="editUser('${u.id}')"><i class="ti ti-pencil"></i></button>
-        ${u.id !== DB.currentUser?.id ? `<button class="btn btn-ghost btn-sm" onclick="deleteUser('${u.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>` : ''}
+  list.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.className = 'table-row';
+    tr.innerHTML = `
+      <td class="px-6 py-4">
+        <div class="font-medium">${p.titulo}</div>
+        <div class="text-xs text-[#4a5878]">${p.numero}</div>
       </td>
-    </tr>
+      <td class="px-6 py-4">${p.cliente}</td>
+      <td class="px-6 py-4 font-mono text-xs">${fmtDate(p.data)}</td>
+      <td class="px-6 py-4 text-right font-mono">R$ ${p.valor?.toFixed(2) || '0,00'}</td>
+      <td class="px-6 py-4 text-center">
+        <span class="status-badge ${getStatusClass(p.status)}">${p.status}</span>
+      </td>
+      <td class="px-6 py-4">
+        <div class="flex justify-center gap-x-2">
+          <button onclick="changeStatus('${p.id}')" class="text-xs px-3 py-1 border rounded-xl">Status</button>
+          <button onclick="deleteProposta('${p.id}')" class="text-xs px-3 py-1 text-red-600 border border-red-200 rounded-xl">Excluir</button>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function getStatusClass(status) {
+  if (status === 'Aceita') return 'bg-emerald-100 text-emerald-700';
+  if (status === 'Enviada') return 'bg-blue-100 text-blue-700';
+  if (status === 'Em elaboração') return 'bg-amber-100 text-amber-700';
+  if (status === 'Expirada') return 'bg-red-100 text-red-700';
+  return 'bg-gray-100 text-gray-700';
+}
+
+function changeStatus(id) {
+  const p = DB.propostas.find(x => x.id == id);
+  if (!p) return;
+  
+  const novoStatus = prompt("Novo status (Aceita / Enviada / Em elaboração / Expirada):", p.status);
+  if (novoStatus) {
+    p.status = novoStatus;
+    saveDB();
+    renderPropostasTable();
+    refreshDashboard();
+  }
+}
+
+function deleteProposta(id) {
+  const justificativa = prompt("Justificativa para exclusão (obrigatória):");
+  if (!justificativa) return;
+
+  const idx = DB.propostas.findIndex(p => p.id == id);
+  if (idx === -1) return;
+
+  const item = DB.propostas[idx];
+  DB.lixeira.push({
+    id: Date.now(),
+    tipo: 'Proposta',
+    nome: item.titulo,
+    justificativa,
+    usuario: 'Marcio Oliveira',
+    deletedAt: new Date().toISOString(),
+    itemData: item
+  });
+
+  DB.propostas.splice(idx, 1);
+  saveDB();
+  renderPropostasTable();
+  refreshDashboard();
+}
+
+// ==================== EVENTOS + ARQUIVAR ====================
+function renderEventosTable() {
+  const tbody = document.getElementById('eventos-tbody');
+  tbody.innerHTML = '';
+
+  const aceitas = DB.propostas.filter(p => p.status === 'Aceita')
+                              .sort((a,b) => (a.data||'').localeCompare(b.data||''));
+
+  aceitas.forEach(p => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="px-6 py-4 font-medium">${p.titulo}</td>
+      <td class="px-6 py-4">${p.cliente}<br><span class="text-xs text-[#4a5878]">${p.local}</span></td>
+      <td class="px-6 py-4 font-mono text-xs">${fmtDate(p.data)}</td>
+      <td class="px-6 py-4 text-right font-mono">R$ ${p.valor?.toFixed(2)}</td>
+      <td class="px-6 py-4 text-center">
+        <button onclick="arquivarEvento(${p.id})" class="text-xs px-3 py-1 bg-red-100 text-red-600 rounded-xl">Arquivar</button>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function showArchiveModal() {
+  const from = prompt("Data inicial (AAAA-MM-DD):", "2026-05-01");
+  const to = prompt("Data final (AAAA-MM-DD):", "2026-06-30");
+  if (!from || !to) return;
+
+  if (confirm(`Arquivar todos os eventos confirmados entre ${from} e ${to}?`)) {
+    const toArchive = DB.propostas.filter(p => 
+      p.status === 'Aceita' && p.data >= from && p.data <= to
+    );
+
+    toArchive.forEach(p => {
+      p.arquivadoEm = new Date().toISOString();
+      DB.arquivados.push(p);
+    });
+
+    DB.propostas = DB.propostas.filter(p => !toArchive.find(a => a.id === p.id));
+    saveDB();
+    renderEventosTable();
+    alert(`${toArchive.length} evento(s) arquivado(s) com sucesso.`);
+  }
+}
+
+function renderArquivados() {
+  const container = document.getElementById('arquivados-content');
+  if (!DB.arquivados.length) {
+    container.innerHTML = `<div class="text-center py-8 text-[#4a5878]">Nenhum evento arquivado ainda.</div>`;
+    return;
+  }
+
+  container.innerHTML = DB.arquivados.map(p => `
+    <div class="flex justify-between items-center border-b py-3">
+      <div>
+        <div class="font-medium">${p.titulo}</div>
+        <div class="text-xs text-[#4a5878]">${p.cliente} • ${fmtDate(p.data)}</div>
+      </div>
+      <button onclick="restaurarArquivado(${p.id})" class="text-xs px-4 py-2 bg-emerald-100 text-emerald-700 rounded-2xl">Restaurar</button>
+    </div>
   `).join('');
 }
 
-function openUserModal(id) {
-  DB.editingId = id || null;
-  const u = id ? DB.users.find(x => x.id === id) : null;
-  document.getElementById('user-modal-title').textContent = u ? 'Editar Usuário' : 'Adicionar Usuário';
-  document.getElementById('u-nome').value              = u?.nome  || '';
-  document.getElementById('u-email').value             = u?.email || u?.login || '';
-  document.getElementById('u-role').value              = u?.role  || 'Operador';
-  document.getElementById('u-senha').value             = '';
-  document.getElementById('u-perm-locacoes').checked   = u?.perms?.locacoes     || false;
-  document.getElementById('u-perm-equip').checked      = u?.perms?.equipamentos || false;
-  document.getElementById('u-perm-cardapios').checked  = u?.perms?.cardapios    || false;
-  openModal('modal-user');
+function restaurarArquivado(id) {
+  const idx = DB.arquivados.findIndex(p => p.id == id);
+  if (idx === -1) return;
+  
+  const item = DB.arquivados[idx];
+  delete item.arquivadoEm;
+  item.status = 'Aceita';
+  
+  DB.propostas.unshift(item);
+  DB.arquivados.splice(idx, 1);
+  saveDB();
+  renderArquivados();
+  renderEventosTable();
 }
 
-function editUser(id) { openUserModal(id); }
-
-function saveUser() {
-  const nome  = document.getElementById('u-nome').value.trim();
-  const email = document.getElementById('u-email').value.trim();
-  if (!nome || !email) { showToast('Preencha Nome e E-mail/Login.', 'error'); return; }
-  const record = {
-    id:    DB.editingId || genId(),
-    nome, email, login: email,
-    senha: document.getElementById('u-senha').value || (DB.users.find(u => u.id === DB.editingId)?.senha || 'senac123'),
-    role:  document.getElementById('u-role').value,
-    perms: {
-      locacoes:     document.getElementById('u-perm-locacoes').checked,
-      equipamentos: document.getElementById('u-perm-equip').checked,
-      cardapios:    document.getElementById('u-perm-cardapios').checked,
-    },
-  };
-  if (DB.editingId) {
-    const idx = DB.users.findIndex(u => u.id === DB.editingId);
-    if (idx !== -1) DB.users[idx] = record;
-  } else {
-    DB.users.push(record);
-  }
-  saveDB(); closeModal('modal-user'); renderUsersTable();
-  showToast('Usuário salvo!', 'success');
-}
-
-function deleteUser(id) {
-  if (!confirm('Excluir este usuário?')) return;
-  DB.users = DB.users.filter(u => u.id !== id);
-  saveDB(); renderUsersTable();
-  showToast('Usuário removido.', 'warn');
-}
-
-// ── BI CHARTS ──
-let biCharts = {};
-function renderBICharts() {
-  const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  const monthlyData = Array(12).fill(0);
-  DB.proposals.filter(p => p.financeiro === 'Pago').forEach(p => {
-    if (p.data) { const m = new Date(p.data).getUTCMonth(); monthlyData[m] += +p.valor || 0; }
-  });
-  const statusCount = {};
-  DB.proposals.forEach(p => { statusCount[p.status] = (statusCount[p.status]||0) + 1; });
-
-  if (biCharts.fat) biCharts.fat.destroy();
-  if (biCharts.st)  biCharts.st.destroy();
-
-  biCharts.fat = new Chart(document.getElementById('chart-faturamento'), {
-    type: 'bar',
-    data: { labels: months, datasets: [{ label: 'Faturamento (R$)', data: monthlyData, backgroundColor: 'rgba(26,107,204,.7)', borderRadius: 8, borderSkipped: false }] },
-    options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Faturamento Mensal', font: { family: 'Space Grotesk', weight: '700', size: 14 } } }, scales: { y: { ticks: { callback: v => 'R$ ' + v.toLocaleString('pt-BR') } } } }
-  });
-
-  const statusColors = { 'Em análise': '#f97316', 'Aceita': '#0a7a5a', 'Rejeitada': '#c0392b', 'Cancelada': '#6d28d9' };
-  biCharts.st = new Chart(document.getElementById('chart-status'), {
-    type: 'doughnut',
-    data: { labels: Object.keys(statusCount), datasets: [{ data: Object.values(statusCount), backgroundColor: Object.keys(statusCount).map(s => statusColors[s]||'#94a3b8'), borderWidth: 0 }] },
-    options: { responsive: true, plugins: { title: { display: true, text: 'Status das Propostas', font: { family: 'Space Grotesk', weight: '700', size: 14 } }, legend: { position: 'bottom' } } }
-  });
-
-  const clientTotals = {};
-  DB.proposals.forEach(p => { clientTotals[p.cliente] = (clientTotals[p.cliente]||0) + (+p.valor||0); });
-  const topClients = Object.entries(clientTotals).sort((a,b) => b[1]-a[1]).slice(0,5);
-  document.getElementById('bi-top-clients').innerHTML = topClients.map(([name, val]) => `
-    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px">
-      <span>${name}</span><strong>${fmtMoney(val)}</strong>
-    </div>`).join('') || '<div style="color:var(--t3);font-size:13px;padding:10px 0">Sem dados.</div>';
-
-  const spaceTotals = {};
-  DB.proposals.filter(p => p.espaco).forEach(p => { spaceTotals[p.espaco] = (spaceTotals[p.espaco]||0) + 1; });
-  const topSpaces = Object.entries(spaceTotals).sort((a,b) => b[1]-a[1]).slice(0,5);
-  document.getElementById('bi-spaces').innerHTML = topSpaces.map(([name, count]) => `
-    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px">
-      <span>${name}</span><span class="badge badge-info">${count}x</span>
-    </div>`).join('') || '<div style="color:var(--t3);font-size:13px;padding:10px 0">Sem dados.</div>';
-
-  const total  = DB.proposals.length;
-  const aceitas = DB.proposals.filter(p => p.status === 'Aceita').length;
-  document.getElementById('bi-conv-rate').textContent = total ? Math.round(aceitas/total*100) + '%' : '0%';
-}
-
-function exportBIReport() {
-  const wb   = XLSX.utils.book_new();
-  const rows = [['Evento','Cliente','Data','Valor','Status','Financeiro']].concat(DB.proposals.map(p => [p.nome, p.cliente, p.data, p.valor, p.status, p.financeiro]));
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), 'Propostas');
-  XLSX.writeFile(wb, 'MODESK_BI_' + new Date().toISOString().split('T')[0] + '.xlsx');
-  showToast('Relatório BI exportado!', 'success');
-}
-
-// ── EXPORTAÇÕES ──
-function exportToExcel() {
-  const rows = [['Evento','Cliente','Data','Prazo','Valor','Status','Financeiro','Espaço']].concat(DB.proposals.map(p => [p.nome, p.cliente, p.data, p.prazo, p.valor, p.status, p.financeiro, p.espaco]));
+// ==================== EXPORTS ====================
+function exportPropostasExcel() {
   const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), 'Propostas');
-  XLSX.writeFile(wb, 'Propostas_MODESK_' + new Date().toISOString().split('T')[0] + '.xlsx');
-  showToast('Exportado para Excel!', 'success');
+  const data = DB.propostas.map(p => ({
+    Numero: p.numero,
+    Cliente: p.cliente,
+    Evento: p.titulo,
+    Data: p.data,
+    Local: p.local,
+    Valor: p.valor,
+    Status: p.status
+  }));
+  const ws = XLSX.utils.json_to_sheet(data);
+  XLSX.utils.book_append_sheet(wb, ws, "Propostas");
+  XLSX.writeFile(wb, "MODESK_Propostas.xlsx");
 }
 
-function exportToPDF() {
-  const rows = DB.proposals.map(p => `${p.data||'—'} | ${p.nome} | ${p.cliente} | ${fmtMoney(p.valor)} | ${p.status}`).join('\n');
-  const blob = new Blob(['MODESK ALFA v7 — Propostas Comerciais\n' + new Date().toLocaleString('pt-BR') + '\n\n' + rows], {type:'text/plain'});
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Propostas_MODESK.txt'; a.click();
-  showToast('Lista exportada!', 'success');
+function exportPropostasPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text("MODESK ALFA — Relatório de Propostas", 20, 20);
+  doc.text(new Date().toLocaleDateString('pt-BR'), 20, 28);
+
+  let y = 40;
+  DB.propostas.forEach((p, i) => {
+    if (y > 270) { doc.addPage(); y = 20; }
+    doc.text(`${p.numero} | ${p.titulo} | ${p.cliente} | R$ ${p.valor} | ${p.status}`, 20, y);
+    y += 8;
+  });
+  doc.save("MODESK_Propostas.pdf");
 }
 
-// ── MODAL HELPERS ──
-function openModal(id)  { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
-document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }));
+function exportPropostasXML() {
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<modesk_propostas>\n';
+  DB.propostas.forEach(p => {
+    xml += `  <proposta id="${p.id}">\n`;
+    Object.keys(p).forEach(k => {
+      xml += `    <${k}>${p[k]}</${k}>\n`;
+    });
+    xml += `  </proposta>\n`;
+  });
+  xml += '</modesk_propostas>';
 
-// ── THEME ──
-function toggleTheme() {
-  const b = document.body;
-  b.dataset.theme = b.dataset.theme === 'dark' ? 'light' : 'dark';
-  localStorage.setItem('modesk_theme', b.dataset.theme);
+  const blob = new Blob([xml], {type: 'application/xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'MODESK_Propostas.xml';
+  a.click();
 }
 
-// ── TOAST ──
-function showToast(msg, type = 'info') {
-  const icons = { success: 'ti-circle-check', error: 'ti-circle-x', warn: 'ti-alert-triangle', info: 'ti-info-circle' };
-  const el = document.createElement('div');
-  el.className = `toast-item toast-${type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warn' ? 'warn' : 'info'}`;
-  el.innerHTML = `<i class="ti ${icons[type]||'ti-info-circle'} toast-icon"></i><span>${msg}</span>`;
-  document.getElementById('toast').appendChild(el);
-  setTimeout(() => { el.classList.add('removing'); setTimeout(() => el.remove(), 300); }, 3200);
+// ==================== HELPERS ====================
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y, m, day] = d.split('-');
+  return `${day}/${m}/${y}`;
 }
 
-// ── FORMATTERS ──
-function fmtMoney(v) { return 'R$ ' + (+v||0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtDate(d)  { if (!d) return ''; try { const [y,m,day] = d.split('-'); return `${day}/${m}/${y}`; } catch(e) { return d; } }
+function initApp() {
+  loadDB();
+  
+  // populate local select in wizard
+  const localSelect = document.getElementById('prop-local');
+  if (localSelect) {
+    localSelect.innerHTML = '<option value="">Selecione o local...</option>';
+    DB.locais.forEach(l => {
+      const opt = document.createElement('option');
+      opt.value = l.nome;
+      opt.textContent = l.nome;
+      localSelect.appendChild(opt);
+    });
+  }
 
-function statusBadge(s) {
-  const map = { 'Em análise': 'badge-warning', 'Aceita': 'badge-success', 'Rejeitada': 'badge-danger', 'Cancelada': 'badge-purple' };
-  return `<span class="badge ${map[s]||'badge-info'}">${s}</span>`;
-}
-function finBadge(f) {
-  const map = { 'Pago': 'badge-success', 'Pendente': 'badge-warning', 'Parcial': 'badge-info' };
-  return `<span class="badge ${map[f]||''}">${f}</span>`;
+  // initial dashboard
+  document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR', {weekday:'long', month:'long', day:'numeric'});
+  refreshDashboard();
+  
+  // status chips for propostas
+  const chipsContainer = document.getElementById('status-chips');
+  if (chipsContainer) {
+    const statuses = ['Todos', 'Aceita', 'Enviada', 'Em elaboração', 'Expirada'];
+    chipsContainer.innerHTML = statuses.map(s => 
+      `<button onclick="filterPropostas('${s === 'Todos' ? '' : s}')" class="px-4 py-1 text-xs rounded-2xl border ${s==='Todos' ? 'bg-[#003366] text-white' : 'border-[#d0daf0]'}">${s}</button>`
+    ).join('');
+  }
+
+  // default to dashboard
+  switchSection('dashboard');
 }
 
-// ── INIT ──
-window.addEventListener('DOMContentLoaded', () => {
-  const theme = localStorage.getItem('modesk_theme') || 'light';
-  document.body.dataset.theme = theme;
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); });
-  initApp();
-});
+function filterPropostas(status) {
+  renderPropostasTable(status);
+}
+
+// init tailwind + app on load
+window.onload = function() {
+  initTailwind();
+  // App starts hidden, login shows first
+};
 </script>
 </body>
 </html>
