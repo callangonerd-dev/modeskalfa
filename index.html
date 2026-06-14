@@ -60,7 +60,7 @@
 body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;background:var(--bg);color:var(--t1);transition:background var(--ease),color var(--ease);min-height:100vh}
 
 /* ── LOGIN ── */
-#login-screen{display:no e;position:fixed;inset:0;background:linear-gradient(135deg,#00112c 0%,#003875 60%,#0a1f3a 100%);display:flex;align-items:center;justify-content:center;z-index:2000;transition:opacity .5s}
+#login-screen{display:flex;position:fixed;inset:0;background:linear-gradient(135deg,#00112c 0%,#003875 60%,#0a1f3a 100%);align-items:center;justify-content:center;z-index:2000;transition:opacity .5s}
 #login-screen.hidden{opacity:0;pointer-events:none}
 .login-card{background:white;padding:44px 40px;border-radius:20px;width:100%;max-width:400px;box-shadow:0 32px 64px rgba(0,0,0,.4)}
 .login-logo{font-family:'Space Grotesk';font-weight:800;font-size:24px;color:var(--blue);margin-bottom:4px;letter-spacing:-.5px}
@@ -68,7 +68,6 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .login-card label{display:block;font-size:12px;font-weight:600;color:var(--t2);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
 .login-card input{padding:12px 16px;border:1.5px solid var(--bdr);border-radius:10px;background:#f8fafc;color:#0f172a;width:100%;outline:none;transition:var(--ease);margin-bottom:16px;font-size:14px}
 .login-card input:focus{border-color:var(--blue-vivid);background:white;box-shadow:0 0 0 4px rgba(26,107,204,.12)}
-.login-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.25}
 
 /* ── TOPBAR ── */
 .topbar{position:sticky;top:0;height:var(--top-h);background:rgba(255,255,255,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:space-between;padding:0 28px;z-index:200;border-bottom:1px solid var(--bdr)}
@@ -108,7 +107,7 @@ body{font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.6;bac
 .kpi-value{font-family:'Space Grotesk';font-size:26px;font-weight:800;color:var(--t1)}
 .kpi-icon{position:absolute;top:18px;right:18px;font-size:28px;opacity:.12}
 
-/* ── ITEM CARDS (GRID/LIST) ── */
+/* ── ITEM CARDS ── */
 .display-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
 .display-list{display:flex;flex-direction:column;gap:12px}
 .item-card{background:var(--surface);border:1px solid var(--bdr);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);transition:var(--ease);position:relative}
@@ -235,10 +234,10 @@ tbody tr:last-child{border-bottom:none}
   <div class="login-card">
     <div class="login-logo">MODESK ALFA v7</div>
     <div class="login-sub">Plataforma de Gestão Avançada — Senac</div>
-    <div class="fg"><label>E-mail Corporativo</label><input id="login-email" type="email" placeholder="nome@ce.senac.br" value="gestor@senac.br"></div>
-    <div class="fg" style="margin-bottom:22px"><label>Senha</label><input id="login-password" type="password" placeholder="••••••••" value="gestor123"></div>
+    <div class="fg"><label>Usuário ou E-mail</label><input id="login-email" type="text" placeholder="usuário ou e-mail" value="marciooliveira"></div>
+    <div class="fg" style="margin-bottom:22px"><label>Senha</label><input id="login-password" type="password" placeholder="••••••••" value="Deadpool365*"></div>
     <button class="btn btn-primary" style="width:100%;justify-content:center;padding:13px" onclick="handleLogin()"><i class="ti ti-lock-open"></i> Entrar na Plataforma</button>
-    <p style="font-size:11px;color:var(--t3);text-align:center;margin-top:14px">Modo demo: gestor@senac.br / gestor123</p>
+    <p style="font-size:11px;color:var(--t3);text-align:center;margin-top:14px">Gestor: marciooliveira / Deadpool365*</p>
   </div>
 </div>
 
@@ -420,7 +419,7 @@ tbody tr:last-child{border-bottom:none}
         <div class="card">
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Nome</th><th>E-mail</th><th>Função</th><th>Locações</th><th>Equipamentos</th><th>Cardápios</th><th>Ações</th></tr></thead>
+              <thead><tr><th>Nome</th><th>E-mail / Login</th><th>Função</th><th>Locações</th><th>Equipamentos</th><th>Cardápios</th><th>Ações</th></tr></thead>
               <tbody id="users-table-body"></tbody>
             </table>
           </div>
@@ -504,7 +503,7 @@ tbody tr:last-child{border-bottom:none}
   </div>
 </div>
 
-<!-- MODAL: ITEM (LOCAÇÃO / EQUIP / CARDÁPIO) -->
+<!-- MODAL: ITEM -->
 <div class="modal-overlay" id="modal-item">
   <div class="modal">
     <div class="modal-header">
@@ -550,7 +549,7 @@ tbody tr:last-child{border-bottom:none}
     </div>
     <div class="form-grid">
       <div class="fg"><label>Nome Completo</label><input id="u-nome" placeholder="Ex: João Silva"></div>
-      <div class="fg"><label>E-mail</label><input id="u-email" type="email" placeholder="nome@senac.br"></div>
+      <div class="fg"><label>E-mail / Login</label><input id="u-email" type="text" placeholder="email ou usuário"></div>
       <div class="fg"><label>Função</label>
         <select id="u-role">
           <option value="Operador">Operador</option>
@@ -593,10 +592,9 @@ tbody tr:last-child{border-bottom:none}
 
 <script>
 // ═══════════════════════════════════════════════════════
-//  MODESK ALFA v7 — ENGINE COMPLETO
+//  MODESK ALFA v7 — ENGINE COMPLETO (FIXED)
 // ═══════════════════════════════════════════════════════
 
-// ── BANCO LOCAL ──
 let DB = {
   proposals: [],
   locacoes: [],
@@ -608,13 +606,28 @@ let DB = {
   currentItemType: null,
 };
 
-// ── USUÁRIOS DEMO ──
+// ── USUÁRIOS DEMO — campo unificado "credential" aceita login ou email ──
 const DEMO_USERS = [
-  { id: 'u1', nome: 'Administrador Gestor', login: 'marciooliveira', senha: 'Deadpool365*', role: 'Gestor', perms: { locacoes: true, equipamentos: true, cardapios: true } },
-  { id: 'u2', nome: 'Operador Padrão', email: 'operador@senac.br', senha: 'op123', role: 'Operador', perms: { locacoes: false, equipamentos: false, cardapios: false } },
+  {
+    id: 'u1',
+    nome: 'Marcio Oliveira',
+    email: 'marciooliveira',        // usado como login
+    login: 'marciooliveira',
+    senha: 'Deadpool365*',
+    role: 'Gestor',
+    perms: { locacoes: true, equipamentos: true, cardapios: true }
+  },
+  {
+    id: 'u2',
+    nome: 'Operador Padrão',
+    email: 'operador@senac.br',
+    login: 'operador@senac.br',
+    senha: 'op123',
+    role: 'Operador',
+    perms: { locacoes: false, equipamentos: false, cardapios: false }
+  },
 ];
 
-// ── DADOS DEMO ──
 const DEMO_PROPOSALS = [
   { id: genId(), nome: 'Congresso Nacional de TI', cliente: 'TechBrasil SA', data: '2026-07-15', prazo: '2026-07-08', valor: 12500, status: 'Aceita', financeiro: 'Pago', espaco: 'Auditório Principal', obs: 'Inclui café da manhã' },
   { id: genId(), nome: 'Workshop Lean Six Sigma', cliente: 'Consultoria FDR', data: '2026-07-22', prazo: '2026-07-15', valor: 4800, status: 'Em análise', financeiro: 'Pendente', espaco: 'Sala Multiuso A', obs: '' },
@@ -648,23 +661,53 @@ const ICONS_LIST = ['🏛️','🎭','🏫','💼','🌿','🏢','🔬','📐','
 
 function genId() { return 'id_' + Math.random().toString(36).substr(2,9); }
 
-// ── AUTH ──
+// ── AUTH — aceita login OU email ──
 function handleLogin() {
-  const email = document.getElementById('login-email').value.trim();
+  const credential = document.getElementById('login-email').value.trim();
   const password = document.getElementById('login-password').value;
-  const user = DEMO_USERS.find(u => u.email === email && u.senha === password);
-  if (!user) { showToast('E-mail ou senha inválidos.', 'error'); return; }
+
+  if (!credential || !password) {
+    showToast('Preencha usuário e senha.', 'error');
+    return;
+  }
+
+  // Busca por login OU email (case-insensitive)
+  const user = DB.users.length
+    ? DB.users.find(u =>
+        (u.login && u.login.toLowerCase() === credential.toLowerCase()) ||
+        (u.email && u.email.toLowerCase() === credential.toLowerCase())
+      )
+    : DEMO_USERS.find(u =>
+        ((u.login && u.login.toLowerCase() === credential.toLowerCase()) ||
+         (u.email && u.email.toLowerCase() === credential.toLowerCase())) &&
+        u.senha === password
+      );
+
+  // Verifica senha se encontrou pelo banco carregado
+  if (!user || user.senha !== password) {
+    showToast('Usuário ou senha inválidos.', 'error');
+    return;
+  }
+
   DB.currentUser = user;
   document.getElementById('user-name').textContent = user.nome.split(' ')[0];
   document.getElementById('user-badge').textContent = user.role;
   document.getElementById('user-badge').className = 'badge ' + (user.role === 'Gestor' ? 'badge-purple' : 'badge-info');
+
   if (user.role === 'Gestor') {
     document.getElementById('menu-usuarios').style.display = 'flex';
   }
+
   applyUserPermissions(user);
   initData();
+
   document.getElementById('login-screen').classList.add('hidden');
-  setTimeout(() => { document.getElementById('login-screen').style.display = 'none'; document.getElementById('app').style.display = 'block'; refreshDashboard(); }, 500);
+  setTimeout(() => {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    refreshDashboard();
+  }, 500);
+
   showToast('Bem-vindo, ' + user.nome.split(' ')[0] + '!', 'success');
 }
 
@@ -678,30 +721,27 @@ function handleLogout() {
 
 function applyUserPermissions(user) {
   const isGestor = user.role === 'Gestor';
-  document.querySelectorAll('.perm-add').forEach(btn => {
-    btn.style.display = 'none'; // Controlled individually below
-  });
-  if (isGestor || user.perms.locacoes) document.getElementById('add-locacao-btn').style.display = 'inline-flex';
+  if (isGestor || user.perms.locacoes)    document.getElementById('add-locacao-btn').style.display = 'inline-flex';
   if (isGestor || user.perms.equipamentos) document.getElementById('add-equip-btn').style.display = 'inline-flex';
-  if (isGestor || user.perms.cardapios) document.getElementById('add-cardapio-btn').style.display = 'inline-flex';
+  if (isGestor || user.perms.cardapios)   document.getElementById('add-cardapio-btn').style.display = 'inline-flex';
 }
 
 // ── INIT DATA ──
 function initData() {
-  DB.proposals = JSON.parse(localStorage.getItem('modesk_proposals') || 'null') || DEMO_PROPOSALS.map(p => ({...p, id: genId()}));
-  DB.locacoes = JSON.parse(localStorage.getItem('modesk_locacoes') || 'null') || DEMO_LOCACOES.map(p => ({...p, id: genId()}));
+  DB.proposals    = JSON.parse(localStorage.getItem('modesk_proposals')    || 'null') || DEMO_PROPOSALS.map(p => ({...p, id: genId()}));
+  DB.locacoes     = JSON.parse(localStorage.getItem('modesk_locacoes')     || 'null') || DEMO_LOCACOES.map(p => ({...p, id: genId()}));
   DB.equipamentos = JSON.parse(localStorage.getItem('modesk_equipamentos') || 'null') || DEMO_EQUIPAMENTOS.map(p => ({...p, id: genId()}));
-  DB.cardapios = JSON.parse(localStorage.getItem('modesk_cardapios') || 'null') || DEMO_CARDAPIOS.map(p => ({...p, id: genId()}));
-  DB.users = JSON.parse(localStorage.getItem('modesk_users') || 'null') || DEMO_USERS.map(u => ({...u}));
+  DB.cardapios    = JSON.parse(localStorage.getItem('modesk_cardapios')    || 'null') || DEMO_CARDAPIOS.map(p => ({...p, id: genId()}));
+  DB.users        = JSON.parse(localStorage.getItem('modesk_users')        || 'null') || DEMO_USERS.map(u => ({...u}));
   renderAll();
 }
 
 function saveDB() {
-  localStorage.setItem('modesk_proposals', JSON.stringify(DB.proposals));
-  localStorage.setItem('modesk_locacoes', JSON.stringify(DB.locacoes));
+  localStorage.setItem('modesk_proposals',    JSON.stringify(DB.proposals));
+  localStorage.setItem('modesk_locacoes',     JSON.stringify(DB.locacoes));
   localStorage.setItem('modesk_equipamentos', JSON.stringify(DB.equipamentos));
-  localStorage.setItem('modesk_cardapios', JSON.stringify(DB.cardapios));
-  localStorage.setItem('modesk_users', JSON.stringify(DB.users));
+  localStorage.setItem('modesk_cardapios',    JSON.stringify(DB.cardapios));
+  localStorage.setItem('modesk_users',        JSON.stringify(DB.users));
 }
 
 function renderAll() {
@@ -738,10 +778,10 @@ function refreshDashboard() {
   const greeting = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
   document.getElementById('dash-greeting').textContent = greeting + ', ' + (DB.currentUser?.nome.split(' ')[0] || '') + '! Hoje é ' + now.toLocaleDateString('pt-BR', {weekday:'long', day:'2-digit', month:'long'});
 
-  const aceitas = DB.proposals.filter(p => p.status === 'Aceita');
+  const aceitas   = DB.proposals.filter(p => p.status === 'Aceita');
   const pendentes = DB.proposals.filter(p => p.financeiro === 'Pendente' && p.status === 'Aceita');
   const faturamento = aceitas.filter(p => p.financeiro === 'Pago').reduce((s, p) => s + (+p.valor), 0);
-  const vencidas = DB.proposals.filter(p => p.prazo && p.prazo < today && p.financeiro === 'Pendente' && p.status === 'Aceita');
+  const vencidas  = DB.proposals.filter(p => p.prazo && p.prazo < today && p.financeiro === 'Pendente' && p.status === 'Aceita');
 
   document.getElementById('kpi-faturamento').textContent = fmtMoney(faturamento);
   document.getElementById('kpi-aceitas').textContent = aceitas.length;
@@ -752,14 +792,12 @@ function refreshDashboard() {
   const pending = DB.proposals.filter(p => p.status === 'Em análise').length;
   if (pending > 0) { badgeEl.style.display = ''; badgeEl.textContent = pending; } else badgeEl.style.display = 'none';
 
-  // Alerts
   const alertsEl = document.getElementById('dash-alerts');
   let html = '';
   if (vencidas.length > 0) html += `<div class="alert alert-danger"><i class="ti ti-alert-triangle"></i> <strong>${vencidas.length} proposta(s) com pagamento vencido!</strong> Verifique os registros em Propostas Comerciais.</div>`;
   if (pendentes.length > 0) html += `<div class="alert alert-warning"><i class="ti ti-clock"></i> <strong>${pendentes.length} evento(s) confirmado(s)</strong> aguardando pagamento.</div>`;
   alertsEl.innerHTML = html;
 
-  // Table
   const sorted = [...DB.proposals].sort((a, b) => (a.data || '').localeCompare(b.data || ''));
   const body = document.getElementById('dash-table-body');
   body.innerHTML = sorted.map(p => `
@@ -768,7 +806,7 @@ function refreshDashboard() {
       <td><strong>${p.nome}</strong></td>
       <td>${p.cliente}</td>
       <td><strong>${fmtMoney(p.valor)}</strong></td>
-      <td class="${p.prazo && p.prazo < today && p.financeiro === 'Pendente' ? 'text-danger' : ''}">${fmtDate(p.prazo) || '—'}</td>
+      <td>${fmtDate(p.prazo) || '—'}</td>
       <td>${statusBadge(p.status)}</td>
       <td>${finBadge(p.financeiro)}</td>
       <td><button class="btn btn-ghost btn-sm" onclick="viewProposal('${p.id}')"><i class="ti ti-eye"></i></button></td>
@@ -778,11 +816,10 @@ function refreshDashboard() {
 
 // ── PROPOSALS TABLE ──
 function renderProposalsTable() {
-  const search = (document.getElementById('filter-search')?.value || '').toLowerCase();
+  const search  = (document.getElementById('filter-search')?.value || '').toLowerCase();
   const statusF = document.getElementById('filter-status')?.value || '';
-  const today = new Date().toISOString().split('T')[0];
   let list = DB.proposals.filter(p => {
-    const matchS = !search || p.nome.toLowerCase().includes(search) || p.cliente.toLowerCase().includes(search);
+    const matchS  = !search || p.nome.toLowerCase().includes(search) || p.cliente.toLowerCase().includes(search);
     const matchSt = !statusF || p.status === statusF;
     return matchS && matchSt;
   });
@@ -795,11 +832,11 @@ function renderProposalsTable() {
       <td><strong>${p.nome}</strong>${p.espaco ? `<br><small style="color:var(--t3)">${p.espaco}</small>` : ''}</td>
       <td>${p.cliente}</td>
       <td><strong>${fmtMoney(p.valor)}</strong></td>
-      <td class="${p.prazo && p.prazo < today && p.financeiro === 'Pendente' ? '' : ''}">${fmtDate(p.prazo) || '—'}</td>
+      <td>${fmtDate(p.prazo) || '—'}</td>
       <td>${statusBadge(p.status)}</td>
       <td>${finBadge(p.financeiro)}</td>
       <td style="display:flex;gap:5px;align-items:center">
-        <button class="btn btn-ghost btn-sm" title="Ver" onclick="viewProposal('${p.id}')"><i class="ti ti-eye"></i></button>
+        <button class="btn btn-ghost btn-sm" title="Ver"    onclick="viewProposal('${p.id}')"><i class="ti ti-eye"></i></button>
         <button class="btn btn-ghost btn-sm" title="Editar" onclick="editProposal('${p.id}')"><i class="ti ti-pencil"></i></button>
         <button class="btn btn-ghost btn-sm" title="Excluir" onclick="deleteProposal('${p.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>
       </td>
@@ -811,34 +848,34 @@ function openProposalModal(id) {
   DB.editingId = id || null;
   const m = id ? DB.proposals.find(p => p.id === id) : null;
   document.getElementById('proposal-modal-title').textContent = m ? 'Editar Proposta' : 'Nova Proposta';
-  document.getElementById('p-nome').value = m?.nome || '';
-  document.getElementById('p-cliente').value = m?.cliente || '';
-  document.getElementById('p-data').value = m?.data || '';
-  document.getElementById('p-prazo').value = m?.prazo || '';
-  document.getElementById('p-valor').value = m?.valor || '';
-  document.getElementById('p-status').value = m?.status || 'Em análise';
-  document.getElementById('p-financeiro').value = m?.financeiro || 'Pendente';
-  document.getElementById('p-espaco').value = m?.espaco || '';
-  document.getElementById('p-obs').value = m?.obs || '';
+  document.getElementById('p-nome').value      = m?.nome      || '';
+  document.getElementById('p-cliente').value   = m?.cliente   || '';
+  document.getElementById('p-data').value      = m?.data      || '';
+  document.getElementById('p-prazo').value     = m?.prazo     || '';
+  document.getElementById('p-valor').value     = m?.valor     || '';
+  document.getElementById('p-status').value    = m?.status    || 'Em análise';
+  document.getElementById('p-financeiro').value= m?.financeiro|| 'Pendente';
+  document.getElementById('p-espaco').value    = m?.espaco    || '';
+  document.getElementById('p-obs').value       = m?.obs       || '';
   openModal('modal-proposal');
 }
 
 function editProposal(id) { openProposalModal(id); }
 
 function saveProposal() {
-  const nome = document.getElementById('p-nome').value.trim();
+  const nome    = document.getElementById('p-nome').value.trim();
   const cliente = document.getElementById('p-cliente').value.trim();
   if (!nome || !cliente) { showToast('Preencha Nome e Cliente.', 'error'); return; }
   const record = {
     id: DB.editingId || genId(),
     nome, cliente,
-    data: document.getElementById('p-data').value,
-    prazo: document.getElementById('p-prazo').value,
-    valor: +document.getElementById('p-valor').value || 0,
-    status: document.getElementById('p-status').value,
+    data:       document.getElementById('p-data').value,
+    prazo:      document.getElementById('p-prazo').value,
+    valor:      +document.getElementById('p-valor').value || 0,
+    status:     document.getElementById('p-status').value,
     financeiro: document.getElementById('p-financeiro').value,
-    espaco: document.getElementById('p-espaco').value,
-    obs: document.getElementById('p-obs').value,
+    espaco:     document.getElementById('p-espaco').value,
+    obs:        document.getElementById('p-obs').value,
   };
   if (DB.editingId) {
     const idx = DB.proposals.findIndex(p => p.id === DB.editingId);
@@ -867,10 +904,10 @@ function viewProposal(id) {
         <div style="color:var(--t2);margin-top:4px">${p.cliente}</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Data do Evento</div><div style="font-weight:600">${fmtDate(p.data) || '—'}</div></div>
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Prazo Pagamento</div><div style="font-weight:600">${fmtDate(p.prazo) || '—'}</div></div>
+        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Data do Evento</div><div style="font-weight:600">${fmtDate(p.data)||'—'}</div></div>
+        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Prazo Pagamento</div><div style="font-weight:600">${fmtDate(p.prazo)||'—'}</div></div>
         <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Valor</div><div style="font-family:'Space Grotesk';font-size:22px;font-weight:800;color:var(--blue-vivid)">${fmtMoney(p.valor)}</div></div>
-        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Espaço</div><div style="font-weight:600">${p.espaco || '—'}</div></div>
+        <div><div style="font-size:11px;color:var(--t3);font-weight:700;text-transform:uppercase">Espaço</div><div style="font-weight:600">${p.espaco||'—'}</div></div>
         <div>${statusBadge(p.status)}</div>
         <div>${finBadge(p.financeiro)}</div>
       </div>
@@ -889,10 +926,9 @@ function processRawText() {
   parsed.id = genId();
   DB.proposals.unshift(parsed);
   saveDB(); renderProposalsTable(); refreshDashboard();
-
   const prev = document.getElementById('ocr-result-preview');
   prev.style.display = 'block';
-  prev.innerHTML = `<div class="ocr-result"><strong>✅ Proposta importada com sucesso:</strong>\n\nEvento: ${parsed.nome || '—'}\nCliente: ${parsed.cliente || '—'}\nData: ${parsed.data || '—'}\nValor: ${fmtMoney(parsed.valor)}\nStatus: ${parsed.status}</div>`;
+  prev.innerHTML = `<div class="ocr-result"><strong>✅ Proposta importada com sucesso:</strong>\n\nEvento: ${parsed.nome||'—'}\nCliente: ${parsed.cliente||'—'}\nData: ${parsed.data||'—'}\nValor: ${fmtMoney(parsed.valor)}\nStatus: ${parsed.status}</div>`;
   document.getElementById('ocr-text-input').value = '';
   showToast('Proposta importada do texto!', 'success');
 }
@@ -906,12 +942,12 @@ function parseTextBriefing(text) {
     }
     return fallback;
   };
-  const nome = get(['evento','nome do evento','event','nome']);
-  const cliente = get(['cliente','empresa','company','organização']);
-  const data = get(['data','date','data do evento']);
-  const prazo = get(['prazo','deadline','prazo limite','vencimento']);
-  const valorStr = get(['valor','value','preço','price','total']);
-  const valor = parseFloat((valorStr || '0').replace(/[^\d,.]/g,'').replace(',','.')) || 0;
+  const nome      = get(['evento','nome do evento','event','nome']);
+  const cliente   = get(['cliente','empresa','company','organização']);
+  const data      = get(['data','date','data do evento']);
+  const prazo     = get(['prazo','deadline','prazo limite','vencimento']);
+  const valorStr  = get(['valor','value','preço','price','total']);
+  const valor     = parseFloat((valorStr||'0').replace(/[^\d,.]/g,'').replace(',','.')) || 0;
   return { nome, cliente, data: parseDate(data), prazo: parseDate(prazo), valor, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: 'Importado via parser de texto' };
 }
 
@@ -933,17 +969,17 @@ function processExternalFile(input) {
     const reader = new FileReader();
     reader.onload = e => {
       try {
-        const wb = XLSX.read(e.target.result, { type: 'binary', cellDates: true });
-        const ws = wb.Sheets[wb.SheetNames[0]];
+        const wb   = XLSX.read(e.target.result, { type: 'binary', cellDates: true });
+        const ws   = wb.Sheets[wb.SheetNames[0]];
         const rows = XLSX.utils.sheet_to_json(ws, { defval: '' });
-        let count = 0;
+        let count  = 0;
         rows.forEach(row => {
           const keys = Object.keys(row).map(k => k.toLowerCase());
-          const get = (terms) => { const k = keys.find(k => terms.some(t => k.includes(t))); return k ? String(row[Object.keys(row).find(ok => ok.toLowerCase() === k)] || '') : ''; };
-          const nome = get(['evento','event','nome']);
+          const get  = (terms) => { const k = keys.find(k => terms.some(t => k.includes(t))); return k ? String(row[Object.keys(row).find(ok => ok.toLowerCase() === k)]||'') : ''; };
+          const nome    = get(['evento','event','nome']);
           const cliente = get(['cliente','company','empresa']);
           if (!nome && !cliente) return;
-          DB.proposals.unshift({ id: genId(), nome: nome || 'Evento Importado', cliente: cliente || '—', data: parseDate(get(['data','date'])), prazo: parseDate(get(['prazo','deadline','vencimento'])), valor: parseFloat(get(['valor','value','preço','total']).replace(/[^\d,.]/g,'').replace(',','.')) || 0, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: 'Importado de Excel' });
+          DB.proposals.unshift({ id: genId(), nome: nome||'Evento Importado', cliente: cliente||'—', data: parseDate(get(['data','date'])), prazo: parseDate(get(['prazo','deadline','vencimento'])), valor: parseFloat(get(['valor','value','preço','total']).replace(/[^\d,.]/g,'').replace(',','.')) || 0, status: 'Em análise', financeiro: 'Pendente', espaco: '', obs: 'Importado de Excel' });
           count++;
         });
         saveDB(); renderProposalsTable(); refreshDashboard();
@@ -959,23 +995,26 @@ function processExternalFile(input) {
   input.value = '';
 }
 
-// ── ITEMS (LOCAÇÕES / EQUIP / CARDÁPIOS) ──
+// ── ITEMS ──
 function renderItems(type, filter = '') {
   const container = document.getElementById(type + '-container');
   const list = DB[type].filter(i => !filter || i.nome.toLowerCase().includes(filter.toLowerCase()) || i.desc.toLowerCase().includes(filter.toLowerCase()));
   const isGestor = DB.currentUser?.role === 'Gestor';
-  const canEdit = isGestor || DB.currentUser?.perms[type];
-  const isGrid = container.classList.contains('display-grid');
+  const canEdit  = isGestor || DB.currentUser?.perms[type];
+  const isGrid   = container.classList.contains('display-grid');
   if (!list.length) { container.innerHTML = `<div class="empty-state"><i class="ti ti-inbox"></i><p>Nenhum registro encontrado.</p></div>`; return; }
   container.innerHTML = list.map(item => {
-    const thumbHtml = item.img
-      ? `<img src="${item.img}" class="item-thumb" onerror="this.style.display='none'">`
-      : `<div class="item-thumb">${item.icon || '📦'}</div>`;
-    const statusBadgeHtml = item.disponivel === 'Disponível' ? '<span class="badge badge-success"><i class="ti ti-circle-check"></i>Disponível</span>' : item.disponivel === 'Ocupado' ? '<span class="badge badge-danger">Ocupado</span>' : '<span class="badge badge-warning">Manutenção</span>';
-    const actionsHtml = canEdit ? `<button class="btn btn-ghost btn-sm" onclick="editItem('${type}','${item.id}')"><i class="ti ti-pencil"></i></button><button class="btn btn-ghost btn-sm" onclick="deleteItem('${type}','${item.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>` : '';
+    const statusBadgeHtml = item.disponivel === 'Disponível'
+      ? '<span class="badge badge-success"><i class="ti ti-circle-check"></i>Disponível</span>'
+      : item.disponivel === 'Ocupado'
+        ? '<span class="badge badge-danger">Ocupado</span>'
+        : '<span class="badge badge-warning">Manutenção</span>';
+    const actionsHtml = canEdit
+      ? `<button class="btn btn-ghost btn-sm" onclick="editItem('${type}','${item.id}')"><i class="ti ti-pencil"></i></button><button class="btn btn-ghost btn-sm" onclick="deleteItem('${type}','${item.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>`
+      : '';
     return `
       <div class="item-card card-hover">
-        ${isGrid ? thumbHtml : ''}
+        ${isGrid ? `<div class="item-thumb">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:var(--r-sm)" onerror="this.style.display='none'">` : item.icon||'📦'}</div>` : ''}
         ${!isGrid ? `<div class="item-thumb" style="width:52px;height:52px;font-size:26px;flex-shrink:0">${item.img ? `<img src="${item.img}" style="width:100%;height:100%;object-fit:cover;border-radius:8px">` : item.icon}</div>` : ''}
         <div style="flex:1;min-width:0">
           <div class="item-name">${item.nome}</div>
@@ -1008,14 +1047,14 @@ function openItemModal(type, id) {
   const titles = { locacoes: 'Espaço', equipamentos: 'Equipamento', cardapios: 'Cardápio' };
   const m = id ? DB[type].find(i => i.id === id) : null;
   document.getElementById('item-modal-title').textContent = (m ? 'Editar ' : 'Novo ') + titles[type];
-  document.getElementById('item-nome').value = m?.nome || '';
-  document.getElementById('item-desc').value = m?.desc || '';
-  document.getElementById('item-categoria').value = m?.categoria || '';
+  document.getElementById('item-nome').value       = m?.nome       || '';
+  document.getElementById('item-desc').value       = m?.desc       || '';
+  document.getElementById('item-categoria').value  = m?.categoria  || '';
   document.getElementById('item-capacidade').value = m?.capacidade || '';
-  document.getElementById('item-valor').value = m?.valor || '';
+  document.getElementById('item-valor').value      = m?.valor      || '';
   document.getElementById('item-disponivel').value = m?.disponivel || 'Disponível';
-  document.getElementById('item-icon').value = m?.icon || '🏛️';
-  document.getElementById('item-img').value = m?.img || '';
+  document.getElementById('item-icon').value       = m?.icon       || '🏛️';
+  document.getElementById('item-img').value        = m?.img        || '';
   buildIconPicker(m?.icon || '🏛️');
   openModal('modal-item');
 }
@@ -1028,13 +1067,13 @@ function saveItem() {
   const record = {
     id: DB.editingId || genId(),
     nome,
-    desc: document.getElementById('item-desc').value,
-    categoria: document.getElementById('item-categoria').value,
+    desc:       document.getElementById('item-desc').value,
+    categoria:  document.getElementById('item-categoria').value,
     capacidade: document.getElementById('item-capacidade').value,
-    valor: +document.getElementById('item-valor').value || 0,
+    valor:      +document.getElementById('item-valor').value || 0,
     disponivel: document.getElementById('item-disponivel').value,
-    icon: document.getElementById('item-icon').value,
-    img: document.getElementById('item-img').value,
+    icon:       document.getElementById('item-icon').value,
+    img:        document.getElementById('item-img').value,
   };
   const type = DB.currentItemType;
   if (DB.editingId) {
@@ -1043,7 +1082,7 @@ function saveItem() {
   } else {
     DB[type].unshift(record);
   }
-  saveDB(); closeModal('modal-item'); renderItems(type); updateSpaceSelect();
+  saveDB(); closeModal('modal-item'); renderItems(type);
   if (type === 'locacoes') updateSpaceSelect();
   showToast('Salvo com sucesso!', 'success');
 }
@@ -1058,7 +1097,7 @@ function deleteItem(type, id) {
 
 function buildIconPicker(selected) {
   const grid = document.getElementById('icon-picker');
-  grid.innerHTML = ICONS_LIST.map(ic => `<div class="icon-option${ic === selected ? ' selected' : ''}" onclick="selectIcon('${ic}',this)">${ic}</div>`).join('');
+  grid.innerHTML = ICONS_LIST.map(ic => `<div class="icon-option${ic===selected?' selected':''}" onclick="selectIcon('${ic}',this)">${ic}</div>`).join('');
 }
 
 function selectIcon(icon, el) {
@@ -1082,11 +1121,11 @@ function renderUsersTable() {
   body.innerHTML = DB.users.map(u => `
     <tr>
       <td><strong>${u.nome}</strong></td>
-      <td>${u.email}</td>
-      <td><span class="badge ${u.role === 'Gestor' ? 'badge-purple' : 'badge-info'}">${u.role}</span></td>
-      <td>${u.perms?.locacoes ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
+      <td>${u.email || u.login || '—'}</td>
+      <td><span class="badge ${u.role==='Gestor'?'badge-purple':'badge-info'}">${u.role}</span></td>
+      <td>${u.perms?.locacoes     ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
       <td>${u.perms?.equipamentos ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
-      <td>${u.perms?.cardapios ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
+      <td>${u.perms?.cardapios    ? '<span class="badge badge-success">Sim</span>' : '<span class="badge badge-danger">Não</span>'}</td>
       <td style="display:flex;gap:5px">
         <button class="btn btn-ghost btn-sm" onclick="editUser('${u.id}')"><i class="ti ti-pencil"></i></button>
         ${u.id !== DB.currentUser?.id ? `<button class="btn btn-ghost btn-sm" onclick="deleteUser('${u.id}')"><i class="ti ti-trash" style="color:var(--red)"></i></button>` : ''}
@@ -1099,28 +1138,32 @@ function openUserModal(id) {
   DB.editingId = id || null;
   const u = id ? DB.users.find(x => x.id === id) : null;
   document.getElementById('user-modal-title').textContent = u ? 'Editar Usuário' : 'Adicionar Usuário';
-  document.getElementById('u-nome').value = u?.nome || '';
-  document.getElementById('u-email').value = u?.email || '';
-  document.getElementById('u-role').value = u?.role || 'Operador';
-  document.getElementById('u-senha').value = '';
-  document.getElementById('u-perm-locacoes').checked = u?.perms?.locacoes || false;
-  document.getElementById('u-perm-equip').checked = u?.perms?.equipamentos || false;
-  document.getElementById('u-perm-cardapios').checked = u?.perms?.cardapios || false;
+  document.getElementById('u-nome').value              = u?.nome  || '';
+  document.getElementById('u-email').value             = u?.email || u?.login || '';
+  document.getElementById('u-role').value              = u?.role  || 'Operador';
+  document.getElementById('u-senha').value             = '';
+  document.getElementById('u-perm-locacoes').checked   = u?.perms?.locacoes     || false;
+  document.getElementById('u-perm-equip').checked      = u?.perms?.equipamentos || false;
+  document.getElementById('u-perm-cardapios').checked  = u?.perms?.cardapios    || false;
   openModal('modal-user');
 }
 
 function editUser(id) { openUserModal(id); }
 
 function saveUser() {
-  const nome = document.getElementById('u-nome').value.trim();
+  const nome  = document.getElementById('u-nome').value.trim();
   const email = document.getElementById('u-email').value.trim();
-  if (!nome || !email) { showToast('Preencha Nome e E-mail.', 'error'); return; }
+  if (!nome || !email) { showToast('Preencha Nome e E-mail/Login.', 'error'); return; }
   const record = {
-    id: DB.editingId || genId(),
-    nome, email,
+    id:    DB.editingId || genId(),
+    nome, email, login: email,
     senha: document.getElementById('u-senha').value || (DB.users.find(u => u.id === DB.editingId)?.senha || 'senac123'),
-    role: document.getElementById('u-role').value,
-    perms: { locacoes: document.getElementById('u-perm-locacoes').checked, equipamentos: document.getElementById('u-perm-equip').checked, cardapios: document.getElementById('u-perm-cardapios').checked },
+    role:  document.getElementById('u-role').value,
+    perms: {
+      locacoes:     document.getElementById('u-perm-locacoes').checked,
+      equipamentos: document.getElementById('u-perm-equip').checked,
+      cardapios:    document.getElementById('u-perm-cardapios').checked,
+    },
   };
   if (DB.editingId) {
     const idx = DB.users.findIndex(u => u.id === DB.editingId);
@@ -1147,58 +1190,48 @@ function renderBICharts() {
   DB.proposals.filter(p => p.financeiro === 'Pago').forEach(p => {
     if (p.data) { const m = new Date(p.data).getUTCMonth(); monthlyData[m] += +p.valor || 0; }
   });
-
   const statusCount = {};
-  DB.proposals.forEach(p => { statusCount[p.status] = (statusCount[p.status] || 0) + 1; });
+  DB.proposals.forEach(p => { statusCount[p.status] = (statusCount[p.status]||0) + 1; });
 
   if (biCharts.fat) biCharts.fat.destroy();
-  if (biCharts.st) biCharts.st.destroy();
+  if (biCharts.st)  biCharts.st.destroy();
 
   biCharts.fat = new Chart(document.getElementById('chart-faturamento'), {
     type: 'bar',
-    data: {
-      labels: months,
-      datasets: [{ label: 'Faturamento (R$)', data: monthlyData, backgroundColor: 'rgba(26,107,204,.7)', borderRadius: 8, borderSkipped: false }]
-    },
+    data: { labels: months, datasets: [{ label: 'Faturamento (R$)', data: monthlyData, backgroundColor: 'rgba(26,107,204,.7)', borderRadius: 8, borderSkipped: false }] },
     options: { responsive: true, plugins: { legend: { display: false }, title: { display: true, text: 'Faturamento Mensal', font: { family: 'Space Grotesk', weight: '700', size: 14 } } }, scales: { y: { ticks: { callback: v => 'R$ ' + v.toLocaleString('pt-BR') } } } }
   });
 
   const statusColors = { 'Em análise': '#f97316', 'Aceita': '#0a7a5a', 'Rejeitada': '#c0392b', 'Cancelada': '#6d28d9' };
   biCharts.st = new Chart(document.getElementById('chart-status'), {
     type: 'doughnut',
-    data: {
-      labels: Object.keys(statusCount),
-      datasets: [{ data: Object.values(statusCount), backgroundColor: Object.keys(statusCount).map(s => statusColors[s] || '#94a3b8'), borderWidth: 0 }]
-    },
+    data: { labels: Object.keys(statusCount), datasets: [{ data: Object.values(statusCount), backgroundColor: Object.keys(statusCount).map(s => statusColors[s]||'#94a3b8'), borderWidth: 0 }] },
     options: { responsive: true, plugins: { title: { display: true, text: 'Status das Propostas', font: { family: 'Space Grotesk', weight: '700', size: 14 } }, legend: { position: 'bottom' } } }
   });
 
-  // Top clients
   const clientTotals = {};
-  DB.proposals.forEach(p => { clientTotals[p.cliente] = (clientTotals[p.cliente] || 0) + (+p.valor || 0); });
+  DB.proposals.forEach(p => { clientTotals[p.cliente] = (clientTotals[p.cliente]||0) + (+p.valor||0); });
   const topClients = Object.entries(clientTotals).sort((a,b) => b[1]-a[1]).slice(0,5);
   document.getElementById('bi-top-clients').innerHTML = topClients.map(([name, val]) => `
     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px">
       <span>${name}</span><strong>${fmtMoney(val)}</strong>
     </div>`).join('') || '<div style="color:var(--t3);font-size:13px;padding:10px 0">Sem dados.</div>';
 
-  // Spaces
   const spaceTotals = {};
-  DB.proposals.filter(p => p.espaco).forEach(p => { spaceTotals[p.espaco] = (spaceTotals[p.espaco] || 0) + 1; });
+  DB.proposals.filter(p => p.espaco).forEach(p => { spaceTotals[p.espaco] = (spaceTotals[p.espaco]||0) + 1; });
   const topSpaces = Object.entries(spaceTotals).sort((a,b) => b[1]-a[1]).slice(0,5);
   document.getElementById('bi-spaces').innerHTML = topSpaces.map(([name, count]) => `
     <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bdr);font-size:13px">
       <span>${name}</span><span class="badge badge-info">${count}x</span>
     </div>`).join('') || '<div style="color:var(--t3);font-size:13px;padding:10px 0">Sem dados.</div>';
 
-  // Conversion
-  const total = DB.proposals.length;
+  const total  = DB.proposals.length;
   const aceitas = DB.proposals.filter(p => p.status === 'Aceita').length;
   document.getElementById('bi-conv-rate').textContent = total ? Math.round(aceitas/total*100) + '%' : '0%';
 }
 
 function exportBIReport() {
-  const wb = XLSX.utils.book_new();
+  const wb   = XLSX.utils.book_new();
   const rows = [['Evento','Cliente','Data','Valor','Status','Financeiro']].concat(DB.proposals.map(p => [p.nome, p.cliente, p.data, p.valor, p.status, p.financeiro]));
   XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), 'Propostas');
   XLSX.writeFile(wb, 'MODESK_BI_' + new Date().toISOString().split('T')[0] + '.xlsx');
@@ -1215,14 +1248,14 @@ function exportToExcel() {
 }
 
 function exportToPDF() {
-  const rows = DB.proposals.map(p => `${p.data || '—'} | ${p.nome} | ${p.cliente} | ${fmtMoney(p.valor)} | ${p.status}`).join('\n');
+  const rows = DB.proposals.map(p => `${p.data||'—'} | ${p.nome} | ${p.cliente} | ${fmtMoney(p.valor)} | ${p.status}`).join('\n');
   const blob = new Blob(['MODESK ALFA v7 — Propostas Comerciais\n' + new Date().toLocaleString('pt-BR') + '\n\n' + rows], {type:'text/plain'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Propostas_MODESK.txt'; a.click();
   showToast('Lista exportada!', 'success');
 }
 
 // ── MODAL HELPERS ──
-function openModal(id) { document.getElementById(id).classList.add('open'); }
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
 function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); }));
 
@@ -1238,31 +1271,29 @@ function showToast(msg, type = 'info') {
   const icons = { success: 'ti-circle-check', error: 'ti-circle-x', warn: 'ti-alert-triangle', info: 'ti-info-circle' };
   const el = document.createElement('div');
   el.className = `toast-item toast-${type === 'error' ? 'error' : type === 'success' ? 'success' : type === 'warn' ? 'warn' : 'info'}`;
-  el.innerHTML = `<i class="ti ${icons[type] || 'ti-info-circle'} toast-icon"></i><span>${msg}</span>`;
+  el.innerHTML = `<i class="ti ${icons[type]||'ti-info-circle'} toast-icon"></i><span>${msg}</span>`;
   document.getElementById('toast').appendChild(el);
   setTimeout(() => { el.classList.add('removing'); setTimeout(() => el.remove(), 300); }, 3200);
 }
 
 // ── FORMATTERS ──
-function fmtMoney(v) { return 'R$ ' + (+v || 0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
-function fmtDate(d) { if (!d) return ''; try { const [y,m,day] = d.split('-'); return `${day}/${m}/${y}`; } catch(e) { return d; } }
+function fmtMoney(v) { return 'R$ ' + (+v||0).toLocaleString('pt-BR', {minimumFractionDigits:2, maximumFractionDigits:2}); }
+function fmtDate(d)  { if (!d) return ''; try { const [y,m,day] = d.split('-'); return `${day}/${m}/${y}`; } catch(e) { return d; } }
 
 function statusBadge(s) {
   const map = { 'Em análise': 'badge-warning', 'Aceita': 'badge-success', 'Rejeitada': 'badge-danger', 'Cancelada': 'badge-purple' };
-  return `<span class="badge ${map[s] || 'badge-info'}">${s}</span>`;
+  return `<span class="badge ${map[s]||'badge-info'}">${s}</span>`;
 }
 function finBadge(f) {
   const map = { 'Pago': 'badge-success', 'Pendente': 'badge-warning', 'Parcial': 'badge-info' };
-  return `<span class="badge ${map[f] || ''}">${f}</span>`;
+  return `<span class="badge ${map[f]||''}">${f}</span>`;
 }
 
 // ── INIT ──
 window.addEventListener('DOMContentLoaded', () => {
   const theme = localStorage.getItem('modesk_theme') || 'light';
   document.body.dataset.theme = theme;
-  // If Enter key on login
   document.getElementById('login-password').addEventListener('keydown', e => { if (e.key === 'Enter') handleLogin(); });
-  // Close modal on ESC
   document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open')); });
 });
 </script>
