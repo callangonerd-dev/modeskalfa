@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MODESK ALFA v7.1 • Senac</title>
+<title>MODESK ALFA v7 • Senac</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,21 +17,71 @@
 <style>
   body { font-family: 'Inter', system_ui, sans-serif; }
   .font-display { font-family: 'Space Grotesk', system_ui, sans-serif; }
-  .modesk-card { transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1); }
-  .modesk-card:hover { transform: translateY(-3px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
-  .nav-item { transition: all 0.2s ease; }
-  .nav-item.active { background-color: #dbeafe; color: #003366; border-left: 4px solid #f97316; }
-  .dark .nav-item.active { background-color: #1e3a5f; color: #60a5fa; }
+
+  .modesk-card {
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+  }
+  .modesk-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+
+  .nav-item {
+    transition: all 0.2s ease;
+  }
+  .nav-item.active {
+    background-color: #dbeafe;
+    color: #003366;
+    border-left: 4px solid #f97316;
+  }
+  .dark .nav-item.active {
+    background-color: #1e3a5f;
+    color: #60a5fa;
+  }
+
   .page { display: none; }
   .page.active { display: block; }
-  .modern-input { transition: all 0.2s ease; }
-  .modern-input:focus { border-color: #003366; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1); }
-  .item-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.5rem; }
-  .item-list { display: flex; flex-direction: column; gap: 12px; }
-  .status-badge { font-size: 0.75rem; padding: 4px 12px; border-radius: 9999px; font-weight: 600; }
-  .icon-option { padding: 12px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; text-align: center; transition: all 0.2s; }
+
+  .modern-input {
+    transition: all 0.2s ease;
+  }
+  .modern-input:focus {
+    border-color: #003366;
+    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-weight: 600;
+  }
+
+  .icon-option {
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+  }
   .icon-option:hover { border-color: #003366; }
-  .icon-option.selected { border-color: #003366; background-color: #dbeafe; }
+  .icon-option.selected {
+    border-color: #003366;
+    background-color: #dbeafe;
+  }
 </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
@@ -45,21 +95,20 @@
         <div class="w-16 h-16 bg-[#003366] rounded-2xl mx-auto flex items-center justify-center mb-4">
           <span class="text-white text-3xl font-bold">M</span>
         </div>
-        <h1 class="text-3xl font-bold font-display text-[#003366]">MODESK ALFA v7.1</h1>
-        <p class="text-slate-500 mt-1">Com Firebase • Senac Aldeota</p>
+        <h1 class="text-3xl font-bold font-display text-[#003366]">MODESK ALFA v7</h1>
+        <p class="text-slate-500 mt-1">Gestão Inteligente de Eventos • Senac</p>
       </div>
       
       <div class="space-y-5">
         <div>
-          <label class="block text-sm font-medium mb-1.5">E-mail Corporativo</label>
+          <label class="block text-sm font-medium mb-1.5">E-mail</label>
           <input id="login-email" type="email" value="gestor@ce.senac.br" class="modern-input w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-2xl">
         </div>
         <div>
           <label class="block text-sm font-medium mb-1.5">Senha</label>
           <input id="login-password" type="password" value="senac2026" class="modern-input w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-2xl">
         </div>
-        <button onclick="handleLogin()" class="w-full bg-[#003366] hover:bg-[#002244] text-white font-semibold py-3.5 rounded-2xl transition-all">Entrar com Firebase</button>
-        <p class="text-center text-xs text-slate-400">Modo real com Firebase + Fallback local</p>
+        <button onclick="handleLogin()" class="w-full bg-[#003366] hover:bg-[#002244] text-white font-semibold py-3.5 rounded-2xl transition-all">Entrar na Plataforma</button>
       </div>
     </div>
   </div>
@@ -72,7 +121,7 @@
       <div class="max-w-screen-2xl mx-auto px-6 h-16 flex items-center justify-between">
         <div class="flex items-center gap-x-4">
           <button onclick="toggleSidebar()" class="lg:hidden p-2"><i class="ti ti-menu-2 text-2xl"></i></button>
-          <span class="font-display text-2xl font-bold text-[#003366]">MODESK <span class="text-[#f97316]">ALFA v7.1</span></span>
+          <span class="font-display text-2xl font-bold text-[#003366]">MODESK <span class="text-[#f97316]">ALFA</span></span>
         </div>
 
         <div class="flex items-center gap-x-4">
@@ -172,13 +221,67 @@
           </div>
         </div>
 
-        <!-- LOCAIS / EQUIPAMENTOS / CARDÁPIOS (mantidos iguais da versão anterior com melhorias) -->
-        <!-- ... (código de Locais, Equipamentos e Cardápios mantido com Grid/Lista, upload de foto e ícones) ... -->
+        <!-- LOCAIS -->
+        <div id="page-locacoes" class="page">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold font-display">Locais de Locação</h1>
+            <div class="flex items-center gap-x-3">
+              <div class="flex border rounded-2xl overflow-hidden">
+                <button onclick="toggleViewMode('locacoes', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
+                <button onclick="toggleViewMode('locacoes', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
+              </div>
+              <button onclick="openGenericModal('locacoes')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo Local</button>
+            </div>
+          </div>
+          <div id="locacoes-container" class="item-grid"></div>
+        </div>
+
+        <!-- EQUIPAMENTOS -->
+        <div id="page-equipamentos" class="page">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold font-display">Equipamentos</h1>
+            <div class="flex items-center gap-x-3">
+              <div class="flex border rounded-2xl overflow-hidden">
+                <button onclick="toggleViewMode('equipamentos', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
+                <button onclick="toggleViewMode('equipamentos', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
+              </div>
+              <button onclick="openGenericModal('equipamentos')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo</button>
+            </div>
+          </div>
+          <div id="equipamentos-container" class="item-grid"></div>
+        </div>
+
+        <!-- CARDÁPIOS -->
+        <div id="page-cardapios" class="page">
+          <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold font-display">Cardápios</h1>
+            <div class="flex items-center gap-x-3">
+              <div class="flex border rounded-2xl overflow-hidden">
+                <button onclick="toggleViewMode('cardapios', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
+                <button onclick="toggleViewMode('cardapios', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
+              </div>
+              <button onclick="openGenericModal('cardapios')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo</button>
+            </div>
+          </div>
+          <div id="cardapios-container" class="item-grid"></div>
+        </div>
+
+        <!-- PERMISSÕES -->
+        <div id="page-usuarios" class="page">
+          <h1 class="text-3xl font-bold font-display mb-6">Controle de Permissões</h1>
+          <div class="bg-white dark:bg-slate-800 rounded-3xl border p-6">
+            <table class="w-full text-sm">
+              <thead><tr class="text-left text-slate-500"><th class="py-3">Nome</th><th>E-mail</th><th>Função</th><th>Locais</th><th>Equip.</th><th>Cardápios</th></tr></thead>
+              <tbody id="users-table" class="divide-y"></tbody>
+            </table>
+          </div>
+        </div>
 
         <!-- LIXEIRA -->
         <div id="page-lixeira" class="page">
           <h1 class="text-3xl font-bold font-display mb-6">Lixeira</h1>
           <div class="bg-white dark:bg-slate-800 rounded-3xl border p-6">
+            <p class="text-sm text-slate-500 mb-4">Propostas excluídas (retenção de 30 dias)</p>
             <table class="w-full text-sm">
               <thead><tr><th class="py-3 text-left">Evento</th><th>Justificativa</th><th>Excluído em</th><th></th></tr></thead>
               <tbody id="trash-table" class="divide-y"></tbody>
@@ -186,170 +289,568 @@
           </div>
         </div>
 
-        <!-- PERMISSÕES e BI mantidos -->
+        <!-- BI -->
+        <div id="page-bi" class="page">
+          <h1 class="text-3xl font-bold font-display mb-6">Business Intelligence</h1>
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><canvas id="chart-faturamento" height="130"></canvas></div>
+            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><canvas id="chart-status" height="130"></canvas></div>
+          </div>
+        </div>
 
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modais mantidos da versão anterior (Proposal, Generic com foto+ícones, Trash) -->
+<!-- MODAIS -->
 
-<script type="module">
-  // ==================== FIREBASE CONFIG ====================
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-  import { getFirestore, collection, doc, setDoc, getDoc, getDocs, updateDoc, onSnapshot, addDoc, deleteDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+<!-- Modal Proposta -->
+<div id="modal-proposal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+  <div class="bg-white dark:bg-slate-800 w-full max-w-lg mx-4 rounded-3xl p-8">
+    <h3 class="text-2xl font-bold mb-6">Nova Proposta</h3>
+    <div class="space-y-5">
+      <div><label class="text-sm font-medium">Nome do Evento</label><input id="p-nome" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
+      <div><label class="text-sm font-medium">Cliente</label><input id="p-cliente" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
+      <div class="grid grid-cols-2 gap-4">
+        <div><label class="text-sm font-medium">Data do Evento</label><input type="date" id="p-data" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
+        <div><label class="text-sm font-medium">Valor (R$)</label><input type="number" id="p-valor" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
+      </div>
+    </div>
+    <div class="flex gap-x-3 mt-8">
+      <button onclick="closeModal('modal-proposal')" class="flex-1 py-3 border rounded-2xl font-semibold">Cancelar</button>
+      <button onclick="saveProposal()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl font-semibold">Salvar</button>
+    </div>
+  </div>
+</div>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCdJ2elGKhjjc7SMnEzcvpX1Yw6SA-grJ8",
-    authDomain: "modesk-alfa.firebaseapp.com",
-    projectId: "modesk-alfa",
-    storageBucket: "modesk-alfa.firebasestorage.app",
-    messagingSenderId: "499970336809",
-    appId: "1:499970336809:web:e60f8bc4c5df09c4499438",
-    measurementId: "G-66T8PP8KFN"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // ==================== ESTADO GLOBAL ====================
-  let currentUser = null;
-  let isGestor = false;
-  let currentPermissions = { locacoes: "edit", equipamentos: "edit", cardapios: "edit" };
-
-  let proposals = [];
-  let locacoes = [];
-  let equipamentos = [];
-  let cardapios = [];
-  let users = [];
-  let trash = [];
-
-  let currentTheme = localStorage.getItem('theme') || 'light';
-  let currentViewMode = { locacoes: 'grid', equipamentos: 'grid', cardapios: 'grid' };
-  let currentTrashProposalId = null;
-  let tempImageBase64 = "";
-  let useFirebase = true; // Controle de modo
-
-  // ==================== INICIALIZAÇÃO ====================
-  function initApp() {
-    applyTheme();
-    document.getElementById('login-screen').classList.remove('hidden');
-  }
-
-  function applyTheme() {
-    document.documentElement.classList.toggle('dark', currentTheme === 'dark');
-  }
-
-  // ==================== LOGIN COM FIREBASE ====================
-  window.handleLogin = async function() {
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      currentUser = userCredential.user;
-      await loadUserPermissions();
-      enterApp();
-    } catch (error) {
-      console.warn("Firebase Auth falhou. Usando modo local/demo.");
-      // Fallback para modo local
-      currentUser = { email: email, uid: "local_" + Date.now() };
-      isGestor = email.includes("gestor") || email.includes("admin");
-      currentPermissions = isGestor 
-        ? { locacoes: "edit", equipamentos: "edit", cardapios: "edit" } 
-        : { locacoes: "view", equipamentos: "view", cardapios: "view" };
-      useFirebase = false;
-      enterApp();
-    }
-  }
-
-  async function loadUserPermissions() {
-    if (!currentUser) return;
+<!-- Modal Genérico Aprimorado -->
+<div id="modal-generic" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+  <div class="bg-white dark:bg-slate-800 w-full max-w-md mx-4 rounded-3xl p-8">
+    <h3 id="modal-generic-title" class="text-2xl font-bold mb-6">Novo Item</h3>
     
-    try {
-      const userDoc = await getDoc(doc(db, "users", currentUser.uid));
-      if (userDoc.exists()) {
-        const data = userDoc.data();
-        currentPermissions = data.permissions || currentPermissions;
-        isGestor = data.role === "Gestor";
-      } else {
-        isGestor = currentUser.email.includes("gestor");
-      }
-    } catch (e) {
-      console.log("Usando permissões locais");
-      isGestor = currentUser.email.includes("gestor");
-    }
-  }
+    <input type="hidden" id="generic-type">
+    <input type="hidden" id="generic-id">
 
-  function enterApp() {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('main-app').classList.remove('hidden');
+    <div class="space-y-5">
+      <div><label class="text-sm font-medium">Nome</label><input id="generic-name" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
+      <div><label class="text-sm font-medium">Preço Base (R$)</label><input type="number" id="generic-price" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
 
-    document.getElementById('user-name').innerText = currentUser.email.split('@')[0];
-    document.getElementById('user-role').innerText = isGestor ? 'Gestor' : 'Operador';
+      <!-- Campos extras para Locais -->
+      <div id="extra-locais-fields" class="hidden space-y-4">
+        <div><label class="text-sm font-medium">Precisa de Montagem?</label>
+          <select id="generic-montagem" class="modern-input w-full border rounded-2xl px-4 py-3">
+            <option value="Não">Não</option>
+            <option value="Sim">Sim</option>
+          </select>
+        </div>
+        <div><label class="text-sm font-medium">Equipamentos Acoplados</label><input id="generic-equipamentos" class="modern-input w-full border rounded-2xl px-4 py-3" placeholder="Ex: Projetor, Som"></div>
+      </div>
 
-    if (!isGestor) document.getElementById('menu-usuarios').classList.add('hidden');
+      <!-- Upload de Foto -->
+      <div>
+        <label class="text-sm font-medium">Foto (opcional)</label>
+        <input type="file" id="generic-image" accept="image/*" class="w-full text-sm" onchange="previewGenericImage(this)">
+        <div id="generic-image-preview" class="mt-3 hidden"><img id="preview-img" class="w-24 h-24 object-cover rounded-2xl border"></div>
+      </div>
 
-    // Carregar dados
-    if (useFirebase) {
-      setupFirestoreListeners();
+      <!-- Seletor de Ícones -->
+      <div>
+        <label class="text-sm font-medium mb-2 block">Ícone</label>
+        <div class="grid grid-cols-6 gap-2" id="icon-selector">
+          <div class="icon-option" data-icon="ti-building-arch" onclick="selectIcon(this)"><i class="ti ti-building-arch text-2xl"></i></div>
+          <div class="icon-option" data-icon="ti-sofa" onclick="selectIcon(this)"><i class="ti ti-sofa text-2xl"></i></div>
+          <div class="icon-option" data-icon="ti-device-projector" onclick="selectIcon(this)"><i class="ti ti-device-projector text-2xl"></i></div>
+          <div class="icon-option" data-icon="ti-microphone" onclick="selectIcon(this)"><i class="ti ti-microphone text-2xl"></i></div>
+          <div class="icon-option" data-icon="ti-coffee" onclick="selectIcon(this)"><i class="ti ti-coffee text-2xl"></i></div>
+          <div class="icon-option" data-icon="ti-soup" onclick="selectIcon(this)"><i class="ti ti-soup text-2xl"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex gap-x-3 mt-8">
+      <button onclick="closeModal('modal-generic')" class="flex-1 py-3 border rounded-2xl font-semibold">Cancelar</button>
+      <button onclick="saveGenericItem()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl font-semibold">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Lixeira (Justificativa) -->
+<div id="modal-trash" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
+  <div class="bg-white dark:bg-slate-800 w-full max-w-md mx-4 rounded-3xl p-8">
+    <h3 class="text-xl font-bold mb-4">Mover para Lixeira</h3>
+    <p class="text-sm text-slate-500 mb-4">Por favor, informe o motivo da exclusão:</p>
+    <textarea id="trash-justification" class="w-full border rounded-2xl p-4 h-24" placeholder="Ex: Cliente cancelou o evento"></textarea>
+    <div class="flex gap-x-3 mt-6">
+      <button onclick="closeModal('modal-trash')" class="flex-1 py-3 border rounded-2xl">Cancelar</button>
+      <button onclick="confirmMoveToTrash()" class="flex-1 py-3 bg-red-600 text-white rounded-2xl font-semibold">Mover para Lixeira</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ==================== ESTADO ====================
+let currentUser = null;
+let isGestor = true;
+let currentPermissions = { locacoes: "edit", equipamentos: "edit", cardapios: "edit" };
+
+let proposals = [];
+let locacoes = [];
+let equipamentos = [];
+let cardapios = [];
+let users = [];
+let trash = [];
+
+let currentTheme = localStorage.getItem('theme') || 'light';
+let currentViewMode = { locacoes: 'grid', equipamentos: 'grid', cardapios: 'grid' };
+let currentTrashProposalId = null;
+let tempImageBase64 = "";
+
+// ==================== INICIALIZAÇÃO ====================
+function initApp() {
+  loadData();
+  applyTheme();
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+
+function loadData() {
+  proposals = JSON.parse(localStorage.getItem('modesk_proposals_v7')) || getSeedProposals();
+  locacoes = JSON.parse(localStorage.getItem('modesk_locacoes_v7')) || getSeedLocacoes();
+  equipamentos = JSON.parse(localStorage.getItem('modesk_equip_v7')) || getSeedEquipamentos();
+  cardapios = JSON.parse(localStorage.getItem('modesk_cardapios_v7')) || getSeedCardapios();
+  users = JSON.parse(localStorage.getItem('modesk_users_v7')) || getSeedUsers();
+  trash = JSON.parse(localStorage.getItem('modesk_trash_v7')) || [];
+}
+
+function saveData() {
+  localStorage.setItem('modesk_proposals_v7', JSON.stringify(proposals));
+  localStorage.setItem('modesk_locacoes_v7', JSON.stringify(locacoes));
+  localStorage.setItem('modesk_equip_v7', JSON.stringify(equipamentos));
+  localStorage.setItem('modesk_cardapios_v7', JSON.stringify(cardapios));
+  localStorage.setItem('modesk_users_v7', JSON.stringify(users));
+  localStorage.setItem('modesk_trash_v7', JSON.stringify(trash));
+}
+
+function getSeedProposals() { return []; }
+function getSeedLocacoes() { return []; }
+function getSeedEquipamentos() { return []; }
+function getSeedCardapios() { return []; }
+function getSeedUsers() {
+  return [
+    { id: 1, name: "Marcio Oliveira", email: "gestor@ce.senac.br", role: "Gestor", permissions: { locacoes: "edit", equipamentos: "edit", cardapios: "edit" } }
+  ];
+}
+
+function applyTheme() {
+  document.documentElement.classList.toggle('dark', currentTheme === 'dark');
+}
+
+// ==================== LOGIN ====================
+function handleLogin() {
+  const email = document.getElementById('login-email').value;
+  currentUser = { email, name: email.split('@')[0] };
+  isGestor = email.includes('gestor') || email.includes('admin');
+
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('main-app').classList.remove('hidden');
+
+  document.getElementById('user-name').innerText = currentUser.name;
+  document.getElementById('user-role').innerText = isGestor ? 'Gestor' : 'Operador';
+
+  if (!isGestor) document.getElementById('menu-usuarios').classList.add('hidden');
+
+  showPage('dashboard');
+  renderAll();
+}
+
+function logout() { location.reload(); }
+
+// ==================== NAVEGAÇÃO ====================
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+
+  if (page === 'dashboard') renderDashboard();
+  if (page === 'propostas') renderProposals();
+  if (page === 'locacoes') renderGeneric('locacoes');
+  if (page === 'equipamentos') renderGeneric('equipamentos');
+  if (page === 'cardapios') renderGeneric('cardapios');
+  if (page === 'usuarios') renderUsersTable();
+  if (page === 'lixeira') renderTrash();
+  if (page === 'bi') renderBICharts();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('hidden');
+}
+
+function toggleTheme() {
+  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+  applyTheme();
+  localStorage.setItem('theme', currentTheme);
+}
+
+// ==================== RENDERIZAÇÕES ====================
+function renderDashboard() {
+  const fat = proposals.filter(p => p.status === 'Aceita' && p.financeiro === 'Pago').reduce((s, p) => s + p.valor, 0);
+  document.getElementById('kpi-faturamento').innerText = 'R$ ' + fat.toLocaleString('pt-BR');
+  document.getElementById('kpi-aceitas').innerText = proposals.filter(p => p.status === 'Aceita').length;
+  document.getElementById('kpi-pendentes').innerText = proposals.filter(p => p.financeiro === 'Pendente').length;
+
+  const today = new Date();
+  const vencidas = proposals.filter(p => new Date(p.prazoConfirmacao) < today && p.status !== 'Aceita');
+  document.getElementById('kpi-vencidas').innerText = vencidas.length;
+
+  // Alertas
+  const alerts = document.getElementById('alerts-container');
+  alerts.innerHTML = '';
+  vencidas.forEach(p => {
+    alerts.innerHTML += `<div class="bg-red-50 border border-red-200 text-red-700 px-5 py-3 rounded-2xl mb-2 flex items-center gap-x-3"><i class="ti ti-alert-triangle"></i> <span>Proposta "${p.evento}" venceu o prazo!</span></div>`;
+  });
+
+  // Tabela
+  const tbody = document.getElementById('dashboard-events');
+  tbody.innerHTML = '';
+  proposals.slice(0, 5).forEach(p => {
+    tbody.innerHTML += `<tr><td class="py-3">\( {p.dataProgramada}</td><td> \){p.evento}</td><td class="text-slate-500">${p.cliente}</td><td><span class="status-badge \( {p.status === 'Aceita' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}"> \){p.status}</span></td></tr>`;
+  });
+}
+
+function renderProposals() {
+  const tbody = document.getElementById('proposals-table');
+  tbody.innerHTML = '';
+  proposals.forEach(p => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="px-6 py-4">${p.dataProgramada}</td>
+        <td class="px-6 py-4 font-medium">${p.evento}</td>
+        <td class="px-6 py-4 text-slate-500">${p.cliente}</td>
+        <td class="px-6 py-4 font-semibold">R$ ${p.valor.toLocaleString('pt-BR')}</td>
+        <td class="px-6 py-4">
+          <select onchange="updateProposalStatus(${p.id}, this.value)" class="border rounded-xl px-3 py-1 text-sm">
+            <option value="Em Análise" ${p.status === 'Em Análise' ? 'selected' : ''}>Em Análise</option>
+            <option value="Aceita" ${p.status === 'Aceita' ? 'selected' : ''}>Aceita</option>
+            <option value="Recusada" ${p.status === 'Recusada' ? 'selected' : ''}>Recusada</option>
+          </select>
+        </td>
+        <td class="px-6 py-4">
+          <select onchange="updateProposalFinance(${p.id}, this.value)" class="border rounded-xl px-3 py-1 text-sm">
+            <option value="Pendente" ${p.financeiro === 'Pendente' ? 'selected' : ''}>Pendente</option>
+            <option value="Pago" ${p.financeiro === 'Pago' ? 'selected' : ''}>Pago</option>
+          </select>
+        </td>
+        <td class="px-6 py-4"><button onclick="moveToTrash(${p.id})" class="text-red-500"><i class="ti ti-trash"></i></button></td>
+      </tr>`;
+  });
+}
+
+function renderGeneric(type) {
+  const container = document.getElementById(type + '-container');
+  container.className = currentViewMode[type] === 'grid' ? 'item-grid' : 'item-list';
+  container.innerHTML = '';
+
+  let data = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
+
+  data.forEach(item => {
+    if (currentViewMode[type] === 'grid') {
+      container.innerHTML += `
+        <div class="modesk-card bg-white dark:bg-slate-800 border rounded-3xl p-5">
+          <div class="h-36 bg-slate-100 dark:bg-slate-700 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
+            \( {item.image ? `<img src=" \){item.image}" class="w-full h-full object-cover">` : `<i class="ti ${item.icon || 'ti-box'} text-6xl text-slate-300"></i>`}
+          </div>
+          <div class="font-semibold">${item.name}</div>
+          <div class="text-emerald-600 font-bold">R$ ${item.price}</div>
+          <div class="flex gap-x-2 mt-4">
+            <button onclick="editGenericItem('${type}', ${item.id})" class="flex-1 text-sm py-2 border rounded-2xl">Editar</button>
+            <button onclick="deleteGenericItem('${type}', ${item.id})" class="flex-1 text-sm py-2 border border-red-200 text-red-600 rounded-2xl">Excluir</button>
+          </div>
+        </div>`;
     } else {
-      loadLocalData();
-      renderAll();
+      container.innerHTML += `
+        <div class="bg-white dark:bg-slate-800 border rounded-2xl p-4 flex items-center justify-between">
+          <div class="flex items-center gap-x-4">
+            <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center"><i class="ti ${item.icon || 'ti-box'} text-3xl"></i></div>
+            <div><div class="font-semibold">\( {item.name}</div><div class="text-emerald-600">R \) ${item.price}</div></div>
+          </div>
+          <div class="flex gap-x-2">
+            <button onclick="editGenericItem('${type}', ${item.id})" class="px-4 py-2 text-sm border rounded-2xl">Editar</button>
+            <button onclick="deleteGenericItem('${type}', ${item.id})" class="px-4 py-2 text-sm border border-red-200 text-red-600 rounded-2xl">Excluir</button>
+          </div>
+        </div>`;
     }
+  });
+}
 
-    showPage('dashboard');
-  }
+function toggleViewMode(type, mode) {
+  currentViewMode[type] = mode;
+  renderGeneric(type);
+}
 
-  function setupFirestoreListeners() {
-    // Exemplo de listener em tempo real para propostas
-    onSnapshot(collection(db, "proposals"), (snapshot) => {
-      proposals = [];
-      snapshot.forEach(doc => proposals.push({ id: doc.id, ...doc.data() }));
-      renderProposals();
-      renderDashboard();
-    });
+function renderUsersTable() {
+  const tbody = document.getElementById('users-table');
+  tbody.innerHTML = '';
+  users.forEach(u => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="py-4">${u.name}</td>
+        <td class="py-4 text-sm text-slate-500">${u.email}</td>
+        <td><span class="px-3 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700">${u.role}</span></td>
+        <td>${createPermissionSelect(u, 'locacoes')}</td>
+        <td>${createPermissionSelect(u, 'equipamentos')}</td>
+        <td>${createPermissionSelect(u, 'cardapios')}</td>
+      </tr>`;
+  });
+}
 
-    // Você pode adicionar listeners para as outras coleções também
-  }
+function createPermissionSelect(user, module) {
+  const val = user.permissions?.[module] || 'view';
+  return `<select onchange="updateUserPermission(\( {user.id}, ' \){module}', this.value)" class="text-sm border rounded-xl px-2 py-1"><option value="view" ${val==='view'?'selected':''}>Visualizar</option><option value="edit" ${val==='edit'?'selected':''}>Editar</option></select>`;
+}
 
-  // ==================== FUNÇÕES DE DADOS (HÍBRIDO) ====================
-  async function saveProposalToFirebase(proposal) {
-    if (useFirebase) {
-      await addDoc(collection(db, "proposals"), proposal);
-    } else {
-      proposals.unshift(proposal);
-      localStorage.setItem('modesk_proposals_v7', JSON.stringify(proposals));
-    }
-  }
+function renderTrash() {
+  const tbody = document.getElementById('trash-table');
+  tbody.innerHTML = '';
+  trash.forEach((item, index) => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="py-3">${item.evento}</td>
+        <td class="py-3 text-sm text-slate-500">${item.justification}</td>
+        <td class="py-3 text-xs">${new Date(item.deletedAt).toLocaleDateString()}</td>
+        <td><button onclick="restoreFromTrash(${index})" class="text-emerald-600 text-sm">Restaurar</button></td>
+      </tr>`;
+  });
+}
 
-  // (Implementar funções semelhantes para update e delete)
+// ==================== PROPOSTAS ====================
+function openProposalModal() {
+  document.getElementById('modal-proposal').classList.remove('hidden');
+  document.getElementById('modal-proposal').classList.add('flex');
+}
 
-  function loadLocalData() {
-    proposals = JSON.parse(localStorage.getItem('modesk_proposals_v7')) || [];
-    // ... carregar outras coleções
-  }
-
-  // ==================== RESTANTE DO CÓDIGO (mantido da versão anterior) ====================
-  // Inclui: renderDashboard, renderProposals, openProposalModal, saveProposal, 
-  // moveToTrash, renderGeneric, upload de foto, seletor de ícones, Lixeira, etc.
-
-  // Por brevidade, mantive a estrutura. Na versão final completa eu uniria tudo.
-
-  window.logout = function() {
-    if (useFirebase) {
-      signOut(auth).then(() => location.reload());
-    } else {
-      location.reload();
-    }
-  }
-
-  window.onload = function() {
-    initApp();
+function saveProposal() {
+  const data = document.getElementById('p-data').value;
+  const obj = {
+    id: Date.now(),
+    dataProgramada: data,
+    evento: document.getElementById('p-nome').value,
+    cliente: document.getElementById('p-cliente').value,
+    valor: parseFloat(document.getElementById('p-valor').value) || 0,
+    status: "Em Análise",
+    financeiro: "Pendente",
+    prazoConfirmacao: new Date(new Date(data).setDate(new Date(data).getDate() - 15)).toISOString().split('T')[0]
   };
+  proposals.unshift(obj);
+  saveData();
+  closeModal('modal-proposal');
+  renderProposals();
+  renderDashboard();
+}
+
+function updateProposalStatus(id, status) {
+  const p = proposals.find(x => x.id == id);
+  if (status === 'Aceita' && p.financeiro !== 'Pago') {
+    alert('Só é possível marcar como Aceita quando o financeiro estiver como PAGO.');
+    renderProposals();
+    return;
+  }
+  p.status = status;
+  saveData();
+  renderProposals();
+  renderDashboard();
+}
+
+function updateProposalFinance(id, finance) {
+  const p = proposals.find(x => x.id == id);
+  if (p) p.financeiro = finance;
+  saveData();
+  renderProposals();
+  renderDashboard();
+}
+
+function moveToTrash(id) {
+  currentTrashProposalId = id;
+  document.getElementById('modal-trash').classList.remove('hidden');
+  document.getElementById('modal-trash').classList.add('flex');
+}
+
+function confirmMoveToTrash() {
+  const justification = document.getElementById('trash-justification').value || "Sem justificativa";
+  const p = proposals.find(x => x.id == currentTrashProposalId);
+  if (p) {
+    trash.unshift({ ...p, justification, deletedAt: new Date() });
+    proposals = proposals.filter(x => x.id != currentTrashProposalId);
+    saveData();
+    closeModal('modal-trash');
+    document.getElementById('trash-justification').value = '';
+    renderProposals();
+    renderDashboard();
+  }
+}
+
+function restoreFromTrash(index) {
+  const item = trash[index];
+  proposals.unshift(item);
+  trash.splice(index, 1);
+  saveData();
+  renderTrash();
+  renderProposals();
+}
+
+// ==================== CRUD GENÉRICO ====================
+let selectedIcon = "ti-box";
+
+function openGenericModal(type) {
+  document.getElementById('modal-generic').classList.remove('hidden');
+  document.getElementById('modal-generic').classList.add('flex');
+  document.getElementById('generic-type').value = type;
+  document.getElementById('generic-id').value = '';
+  document.getElementById('modal-generic-title').innerText = `Novo ${type}`;
+  document.getElementById('extra-locais-fields').classList.toggle('hidden', type !== 'locacoes');
+  tempImageBase64 = "";
+  document.getElementById('generic-image-preview').classList.add('hidden');
+}
+
+function previewGenericImage(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    tempImageBase64 = e.target.result;
+    document.getElementById('preview-img').src = tempImageBase64;
+    document.getElementById('generic-image-preview').classList.remove('hidden');
+  };
+  reader.readAsDataURL(file);
+}
+
+function selectIcon(element) {
+  document.querySelectorAll('#icon-selector .icon-option').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  selectedIcon = element.getAttribute('data-icon');
+}
+
+function saveGenericItem() {
+  const type = document.getElementById('generic-type').value;
+  const id = document.getElementById('generic-id').value;
+  const name = document.getElementById('generic-name').value;
+  const price = parseFloat(document.getElementById('generic-price').value) || 0;
+
+  let list = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
+
+  const newItem = {
+    id: id || Date.now(),
+    name,
+    price,
+    image: tempImageBase64,
+    icon: selectedIcon
+  };
+
+  if (type === 'locacoes') {
+    newItem.precisa_montar = document.getElementById('generic-montagem').value;
+    newItem.equipamentos_acoplados = document.getElementById('generic-equipamentos').value;
+  }
+
+  if (id) {
+    const index = list.findIndex(x => x.id == id);
+    list[index] = newItem;
+  } else {
+    list.unshift(newItem);
+  }
+
+  saveData();
+  closeModal('modal-generic');
+  renderGeneric(type);
+}
+
+function editGenericItem(type, id) {
+  let list = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
+  const item = list.find(x => x.id == id);
+  if (!item) return;
+
+  openGenericModal(type);
+  document.getElementById('generic-id').value = id;
+  document.getElementById('generic-name').value = item.name;
+  document.getElementById('generic-price').value = item.price;
+  selectedIcon = item.icon || "ti-box";
+
+  if (type === 'locacoes') {
+    document.getElementById('generic-montagem').value = item.precisa_montar || 'Não';
+    document.getElementById('generic-equipamentos').value = item.equipamentos_acoplados || '';
+  }
+
+  if (item.image) {
+    tempImageBase64 = item.image;
+    document.getElementById('preview-img').src = item.image;
+    document.getElementById('generic-image-preview').classList.remove('hidden');
+  }
+}
+
+function deleteGenericItem(type, id) {
+  if (!confirm('Excluir este item?')) return;
+  if (type === 'locacoes') locacoes = locacoes.filter(x => x.id != id);
+  if (type === 'equipamentos') equipamentos = equipamentos.filter(x => x.id != id);
+  if (type === 'cardapios') cardapios = cardapios.filter(x => x.id != id);
+  saveData();
+  renderGeneric(type);
+}
+
+// ==================== PERMISSÕES ====================
+function updateUserPermission(userId, module, value) {
+  const user = users.find(u => u.id == userId);
+  if (user) {
+    if (!user.permissions) user.permissions = {};
+    user.permissions[module] = value;
+    saveData();
+  }
+}
+
+// ==================== EXPORTAÇÕES ====================
+function exportProposalsToExcel() {
+  const ws = XLSX.utils.json_to_sheet(proposals);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Propostas");
+  XLSX.writeFile(wb, "MODESK_Propostas.xlsx");
+}
+
+function exportProposalsToPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.text("MODESK ALFA - Relatório de Propostas", 14, 20);
+  let y = 30;
+  proposals.forEach(p => {
+    doc.text(`${p.dataProgramada} | ${p.evento} | \( {p.cliente} | R \) ${p.valor}`, 14, y);
+    y += 10;
+    if (y > 280) { doc.addPage(); y = 20; }
+  });
+  doc.save("Propostas_MODESK.pdf");
+}
+
+function renderBICharts() {
+  // Gráficos simples
+  new Chart(document.getElementById('chart-faturamento'), {
+    type: 'line',
+    data: { labels: proposals.map(p => p.dataProgramada), datasets: [{ label: 'Valor', data: proposals.map(p => p.valor), borderColor: '#003366' }] }
+  });
+  const aceitas = proposals.filter(p => p.status === 'Aceita').length;
+  new Chart(document.getElementById('chart-status'), {
+    type: 'doughnut',
+    data: { labels: ['Aceitas', 'Outras'], datasets: [{ data: [aceitas, proposals.length - aceitas], backgroundColor: ['#10b981', '#f59e0b'] }] }
+  });
+}
+
+function renderAll() {
+  renderDashboard();
+  renderProposals();
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove('flex');
+  document.getElementById(id).classList.add('hidden');
+}
+
+// ==================== INICIALIZAR ====================
+window.onload = function() {
+  initApp();
+};
 </script>
 
 </body>
