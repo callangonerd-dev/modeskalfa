@@ -1,1885 +1,798 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MODESK ALFA — Gestão de Eventos Senac</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MODESK ALFA — Gestão de Propostas</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
-:root {
-  --navy: #040E24;
-  --navy2: #071530;
-  --navy3: #0C2040;
-  --cobalt: #2563EB;
-  --cobalt-light: #3B82F6;
-  --cobalt-glow: rgba(37,99,235,0.35);
-  --gold: #F59E0B;
-  --gold-light: #FCD34D;
-  --emerald: #10B981;
-  --ruby: #EF4444;
-  --violet: #8B5CF6;
-  --sky: #0EA5E9;
-  --surface: rgba(255,255,255,0.04);
-  --surface2: rgba(255,255,255,0.07);
-  --surface3: rgba(255,255,255,0.11);
-  --border: rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.14);
-  --text: #F1F5F9;
-  --text2: #94A3B8;
-  --text3: #475569;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
-  --font: 'Inter', system-ui, sans-serif;
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:var(--font);background:var(--navy);color:var(--text);min-height:100vh;overflow-x:hidden}
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-::-webkit-scrollbar-thumb:hover{background:var(--cobalt)}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── LAYOUT ── */
-.shell{display:flex;min-height:100vh}
+  :root {
+    --bg: #0B0E14;
+    --surface: #131720;
+    --surface2: #1A2030;
+    --border: #232B3A;
+    --border2: #2E3A50;
+    --text: #E8EDF5;
+    --muted: #6B7A96;
+    --accent: #3D8EFF;
+    --accent2: #0A5FE0;
+    --green: #22C55E;
+    --yellow: #F59E0B;
+    --red: #EF4444;
+    --purple: #A78BFA;
+    --orange: #F97316;
+    --font: 'Space Grotesk', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
 
-/* ── SIDEBAR ── */
-.sidebar{
-  width:240px;flex-shrink:0;background:var(--navy2);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  position:fixed;top:0;left:0;height:100vh;z-index:300;
-  transition:width 0.28s cubic-bezier(.4,0,.2,1);
-  overflow:hidden;
-}
-.sidebar.mini{width:64px}
-.sb-logo{
-  display:flex;align-items:center;gap:12px;
-  padding:20px 16px;border-bottom:1px solid var(--border);
-  min-height:68px;flex-shrink:0;
-}
-.sb-logo-mark{
-  width:36px;height:36px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--cobalt),var(--cobalt-light));
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-family:var(--font-display);font-weight:800;font-size:13px;color:#fff;
-  box-shadow:0 0 20px var(--cobalt-glow);letter-spacing:-0.5px;
-}
-.sb-logo-text{overflow:hidden;white-space:nowrap;transition:opacity 0.2s}
-.sidebar.mini .sb-logo-text{opacity:0;width:0;pointer-events:none}
-.sb-logo-name{font-family:var(--font-display);font-weight:700;font-size:0.95rem;color:var(--text);line-height:1}
-.sb-logo-sub{font-size:0.62rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-.sb-nav{flex:1;padding:10px 8px;overflow-y:auto;overflow-x:hidden}
-.sb-section-label{
-  font-size:0.58rem;text-transform:uppercase;letter-spacing:2.5px;
-  color:var(--text3);padding:12px 10px 4px;
-  white-space:nowrap;overflow:hidden;transition:opacity 0.2s;
-}
-.sidebar.mini .sb-section-label{opacity:0}
+  /* ── TOP NAV ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,14,20,.92);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 17px; letter-spacing: .03em;
+  }
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .1em;
+  }
+  .nav-actions { display: flex; gap: 10px; align-items: center; }
+  .btn {
+    cursor: pointer; border: none; border-radius: 8px;
+    font-family: var(--font); font-size: 13px; font-weight: 600;
+    padding: 8px 16px; transition: all .18s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border2); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-danger { background: rgba(239,68,68,.15); color: var(--red); border: 1px solid rgba(239,68,68,.3); }
+  .btn-danger:hover { background: rgba(239,68,68,.3); }
+  .btn-sm { padding: 5px 10px; font-size: 12px; }
 
-.nav-item{
-  display:flex;align-items:center;gap:11px;
-  padding:10px 10px;border-radius:var(--radius-sm);
-  cursor:pointer;transition:all 0.18s;
-  white-space:nowrap;position:relative;overflow:hidden;
-  color:var(--text2);margin-bottom:2px;
-}
-.nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{background:linear-gradient(90deg,rgba(37,99,235,0.22),rgba(37,99,235,0.08));color:var(--cobalt-light)}
-.nav-item.active::before{content:'';position:absolute;left:0;top:20%;bottom:20%;width:3px;background:var(--cobalt-light);border-radius:0 3px 3px 0}
-.nav-icon{font-size:1.05rem;width:22px;text-align:center;flex-shrink:0}
-.nav-label{font-size:0.82rem;font-weight:500;transition:opacity 0.2s;overflow:hidden}
-.sidebar.mini .nav-label{opacity:0;width:0}
-.nav-badge{
-  margin-left:auto;background:var(--ruby);color:#fff;
-  font-size:0.58rem;font-weight:700;padding:2px 6px;
-  border-radius:99px;flex-shrink:0;transition:opacity 0.2s;
-}
-.sidebar.mini .nav-badge{opacity:0}
+  /* ── MAIN LAYOUT ── */
+  .app { display: flex; flex: 1; }
 
-.sb-footer{padding:12px 8px;border-top:1px solid var(--border);flex-shrink:0}
-.sb-toggle{
-  width:100%;padding:8px 10px;border-radius:var(--radius-sm);
-  background:var(--surface);border:1px solid var(--border);
-  color:var(--text2);font-size:0.78rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all 0.18s;font-family:var(--font);
-}
-.sb-toggle:hover{background:var(--surface2);color:var(--text)}
-.sidebar.mini .sb-toggle-label{display:none}
+  /* ── SIDEBAR ── */
+  aside {
+    width: 220px; flex-shrink: 0;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 20px 12px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .sidebar-label {
+    font-size: 10px; font-weight: 600; letter-spacing: .12em;
+    color: var(--muted); text-transform: uppercase;
+    padding: 12px 10px 6px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: 8px;
+    font-size: 13px; font-weight: 500; color: var(--muted);
+    cursor: pointer; transition: all .15s; border: none; background: none; width: 100%; text-align: left;
+  }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { background: rgba(61,142,255,.12); color: var(--accent); }
+  .nav-item .icon { font-size: 16px; }
+  .nav-count {
+    margin-left: auto; background: var(--border2); color: var(--muted);
+    font-size: 10px; font-family: var(--mono); padding: 2px 7px; border-radius: 20px;
+  }
 
-/* ── MAIN ── */
-.main{margin-left:240px;flex:1;display:flex;flex-direction:column;min-height:100vh;transition:margin-left 0.28s cubic-bezier(.4,0,.2,1)}
-.sidebar.mini ~ .main{margin-left:64px}
+  /* ── CONTENT ── */
+  main { flex: 1; overflow-y: auto; padding: 28px; display: flex; flex-direction: column; gap: 24px; }
 
-/* ── TOPBAR ── */
-.topbar{
-  height:64px;background:rgba(4,14,36,0.85);backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;position:sticky;top:0;z-index:200;flex-shrink:0;
-}
-.topbar-left{display:flex;align-items:center;gap:16px}
-.page-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text)}
-.breadcrumb{font-size:0.72rem;color:var(--text3)}
-.topbar-right{display:flex;align-items:center;gap:10px}
-.top-btn{
-  width:36px;height:36px;border-radius:var(--radius-xs);
-  background:var(--surface);border:1px solid var(--border);
-  color:var(--text2);display:flex;align-items:center;justify-content:center;
-  cursor:pointer;transition:all 0.18s;font-size:0.95rem;
-}
-.top-btn:hover{background:var(--surface3);color:var(--text);border-color:var(--border2)}
-.user-chip{
-  display:flex;align-items:center;gap:9px;padding:6px 14px 6px 6px;
-  background:var(--surface);border:1px solid var(--border);border-radius:99px;cursor:pointer;
-  transition:all 0.18s;
-}
-.user-chip:hover{background:var(--surface2);border-color:var(--border2)}
-.user-avatar{
-  width:28px;height:28px;border-radius:50%;
-  background:linear-gradient(135deg,var(--cobalt),var(--violet));
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.7rem;font-weight:800;color:#fff;
-}
-.user-name-text{font-size:0.78rem;font-weight:600;color:var(--text)}
+  /* ── KPI STRIP ── */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .kpi {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px 20px;
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .kpi-label { font-size: 11px; font-weight: 500; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+  .kpi-value { font-size: 26px; font-weight: 700; line-height: 1; }
+  .kpi-sub { font-size: 11px; color: var(--muted); font-family: var(--mono); }
+  .kpi-accent-blue .kpi-value { color: var(--accent); }
+  .kpi-accent-green .kpi-value { color: var(--green); }
+  .kpi-accent-yellow .kpi-value { color: var(--yellow); }
+  .kpi-accent-purple .kpi-value { color: var(--purple); }
 
-/* ── PAGES ── */
-.page{display:none;padding:28px;animation:fadeUp 0.28s ease both}
-.page.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+  /* ── SECTION ── */
+  .section-head {
+    display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+  }
+  .section-title { font-size: 15px; font-weight: 600; }
 
-/* ── KPI STRIP ── */
-.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-bottom:28px}
-.kpi{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;position:relative;overflow:hidden;cursor:default;
-  transition:transform 0.18s,box-shadow 0.18s,border-color 0.18s;
-}
-.kpi:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.4);border-color:var(--border2)}
-.kpi-glow{
-  position:absolute;top:-30px;right:-30px;width:100px;height:100px;
-  border-radius:50%;filter:blur(30px);opacity:0.18;
-  background:var(--kpi-c,var(--cobalt));pointer-events:none;
-}
-.kpi-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
-.kpi-ico{
-  width:40px;height:40px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;
-  background:color-mix(in srgb,var(--kpi-c,var(--cobalt)) 18%,transparent);
-}
-.kpi-trend{font-size:0.68rem;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
-.kpi-trend.up{background:color-mix(in srgb,var(--emerald) 15%,transparent);color:var(--emerald)}
-.kpi-trend.dn{background:color-mix(in srgb,var(--ruby) 15%,transparent);color:var(--ruby)}
-.kpi-val{font-family:var(--font-display);font-size:2.2rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:4px}
-.kpi-lbl{font-size:0.7rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--text3);font-weight:600}
+  /* ── TOOLBAR ── */
+  .toolbar {
+    display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 12px 16px;
+  }
+  .search-box {
+    position: relative; flex: 1; min-width: 200px;
+  }
+  .search-box input {
+    width: 100%; background: var(--bg); border: 1px solid var(--border2);
+    border-radius: 8px; color: var(--text); font-family: var(--font);
+    font-size: 13px; padding: 8px 12px 8px 36px; outline: none;
+    transition: border-color .15s;
+  }
+  .search-box input:focus { border-color: var(--accent); }
+  .search-box::before {
+    content: '🔍'; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+    font-size: 12px; pointer-events: none;
+  }
+  select {
+    background: var(--bg); border: 1px solid var(--border2); border-radius: 8px;
+    color: var(--text); font-family: var(--font); font-size: 13px;
+    padding: 8px 12px; outline: none; cursor: pointer; transition: border-color .15s;
+  }
+  select:focus { border-color: var(--accent); }
 
-/* ── CARDS ── */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.card-head{padding:18px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
-.card-title{font-family:var(--font-display);font-size:0.9rem;font-weight:700;color:var(--text)}
-.card-subtitle{font-size:0.72rem;color:var(--text3);margin-top:1px}
-.card-body{padding:22px}
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead tr { background: var(--surface2); }
+  th {
+    text-align: left; padding: 11px 16px;
+    font-size: 10px; font-weight: 600; color: var(--muted);
+    text-transform: uppercase; letter-spacing: .08em;
+    border-bottom: 1px solid var(--border); white-space: nowrap;
+    cursor: pointer; user-select: none;
+  }
+  th:hover { color: var(--text); }
+  tbody tr {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    transition: background .12s;
+  }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--surface2); }
+  td { padding: 12px 16px; vertical-align: middle; }
+  .cell-title { font-weight: 600; color: var(--text); }
+  .cell-client { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .cell-space { font-size: 12px; color: var(--muted); }
+  .cell-value { font-family: var(--mono); font-weight: 600; color: var(--green); }
+  .cell-date { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .actions { display: flex; gap: 6px; }
 
-/* ── GRID HELPERS ── */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.g4{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
-.mb-4{margin-bottom:16px}
-.mb-6{margin-bottom:24px}
-.mb-8{margin-bottom:32px}
-.flex{display:flex}
-.flex-center{display:flex;align-items:center}
-.flex-between{display:flex;align-items:center;justify-content:space-between}
-.gap-2{gap:8px}
-.gap-3{gap:12px}
+  /* ── STATUS BADGES ── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+    letter-spacing: .03em; white-space: nowrap;
+  }
+  .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; }
+  .badge-aceita { background: rgba(34,197,94,.12); color: var(--green); }
+  .badge-aceita::before { background: var(--green); }
+  .badge-enviada { background: rgba(61,142,255,.12); color: var(--accent); }
+  .badge-enviada::before { background: var(--accent); }
+  .badge-elaboracao { background: rgba(245,158,11,.12); color: var(--yellow); }
+  .badge-elaboracao::before { background: var(--yellow); }
+  .badge-expirada { background: rgba(239,68,68,.12); color: var(--red); }
+  .badge-expirada::before { background: var(--red); }
+  .badge-cancelada { background: rgba(107,122,150,.12); color: var(--muted); }
+  .badge-cancelada::before { background: var(--muted); }
 
-/* ── BUTTONS ── */
-.btn{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:9px 18px;border-radius:var(--radius-sm);
-  font-size:0.82rem;font-weight:600;border:none;
-  cursor:pointer;transition:all 0.18s;font-family:var(--font);
-  white-space:nowrap;
-}
-.btn-primary{background:var(--cobalt);color:#fff}
-.btn-primary:hover{background:var(--cobalt-light);box-shadow:0 4px 20px var(--cobalt-glow)}
-.btn-gold{background:var(--gold);color:#1a1100}
-.btn-gold:hover{background:var(--gold-light)}
-.btn-emerald{background:var(--emerald);color:#fff}
-.btn-emerald:hover{filter:brightness(1.1)}
-.btn-ruby{background:var(--ruby);color:#fff}
-.btn-ruby:hover{filter:brightness(1.1)}
-.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text2)}
-.btn-ghost:hover{background:var(--surface2);border-color:var(--border2);color:var(--text)}
-.btn-sm{padding:6px 12px;font-size:0.75rem}
-.btn-lg{padding:12px 26px;font-size:0.9rem}
-.btn-icon-only{padding:8px;width:36px;height:36px}
+  /* ── MODAL ── */
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,.7);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity .2s;
+    backdrop-filter: blur(4px);
+  }
+  .overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--surface); border: 1px solid var(--border2);
+    border-radius: 16px; padding: 28px; width: 560px; max-width: 95vw;
+    max-height: 90vh; overflow-y: auto;
+    transform: translateY(12px); transition: transform .2s;
+  }
+  .overlay.open .modal { transform: translateY(0); }
+  .modal-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+  .modal-title { font-size: 17px; font-weight: 700; }
+  .modal-close { background: none; border: none; color: var(--muted); font-size: 20px; cursor: pointer; padding: 4px; }
+  .modal-close:hover { color: var(--text); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+  input, textarea, select.form-select {
+    background: var(--bg); border: 1px solid var(--border2); border-radius: 8px;
+    color: var(--text); font-family: var(--font); font-size: 13px;
+    padding: 10px 12px; outline: none; transition: border-color .15s; width: 100%;
+  }
+  input:focus, textarea:focus, select.form-select:focus { border-color: var(--accent); }
+  .modal-footer { display: flex; gap: 10px; justify-content: flex-end; margin-top: 24px; }
 
-/* ── FORM ── */
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:0.72rem;font-weight:700;color:var(--text2);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.8px}
-.form-control{
-  width:100%;padding:10px 14px;
-  background:rgba(255,255,255,0.05);
-  border:1px solid var(--border2);border-radius:var(--radius-xs);
-  color:var(--text);font-size:0.88rem;
-  transition:all 0.18s;outline:none;font-family:var(--font);
-}
-.form-control:focus{border-color:var(--cobalt);box-shadow:0 0 0 3px var(--cobalt-glow)}
-.form-control::placeholder{color:var(--text3)}
-select.form-control{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394A3B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;appearance:none;padding-right:34px}
-select.form-control option{background:var(--navy2);color:var(--text)}
-textarea.form-control{resize:vertical;min-height:88px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.form-hint{font-size:0.68rem;color:var(--text3);margin-top:4px}
+  /* ── TOAST ── */
+  #toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 999; display: flex; flex-direction: column; gap: 8px; }
+  .toast {
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 10px; padding: 12px 18px; font-size: 13px;
+    display: flex; align-items: center; gap: 10px; min-width: 240px;
+    transform: translateX(110%); transition: transform .3s;
+    box-shadow: 0 8px 32px rgba(0,0,0,.4);
+  }
+  .toast.show { transform: translateX(0); }
+  .toast.success { border-left: 3px solid var(--green); }
+  .toast.error { border-left: 3px solid var(--red); }
+  .toast.info { border-left: 3px solid var(--accent); }
 
-/* ── CHIPS / STATUS ── */
-.chip{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
-.chip::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;flex-shrink:0}
-.chip-confirmado{background:rgba(16,185,129,0.15);color:var(--emerald)}
-.chip-cancelado{background:rgba(239,68,68,0.15);color:var(--ruby)}
-.chip-elaboracao{background:rgba(148,163,184,0.15);color:var(--text2)}
-.chip-interno{background:rgba(37,99,235,0.15);color:var(--cobalt-light)}
-.chip-comercial{background:rgba(245,158,11,0.15);color:var(--gold)}
-.chip-aguardando{background:rgba(139,92,246,0.15);color:var(--violet)}
-.chip-aceita{background:rgba(16,185,129,0.15);color:var(--emerald)}
-.chip-recusada{background:rgba(239,68,68,0.15);color:var(--ruby)}
-.chip-vencida{background:rgba(245,158,11,0.2);color:var(--gold)}
+  /* ── EMPTY STATE ── */
+  .empty {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
 
-/* ── TABLE ── */
-.table-wrap{overflow-x:auto;border-radius:var(--radius-sm)}
-table{width:100%;border-collapse:collapse;font-size:0.82rem}
-th{
-  background:rgba(255,255,255,0.04);color:var(--text3);
-  font-size:0.65rem;text-transform:uppercase;letter-spacing:1.2px;
-  font-weight:700;padding:10px 14px;text-align:left;
-  border-bottom:1px solid var(--border);white-space:nowrap;
-}
-td{padding:11px 14px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:var(--surface)}
-.td-mono{font-family:monospace;font-size:0.78rem;color:var(--text2)}
+  /* ── DETAIL VIEW ── */
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .detail-item { background: var(--surface2); border-radius: 8px; padding: 12px 14px; }
+  .detail-item-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+  .detail-item-value { font-size: 14px; font-weight: 600; }
 
-/* ── MODAL ── */
-.overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,0.7);
-  z-index:1000;display:flex;align-items:center;justify-content:center;
-  padding:20px;backdrop-filter:blur(8px);
-  opacity:0;pointer-events:none;transition:opacity 0.22s;
-}
-.overlay.open{opacity:1;pointer-events:all}
-.modal{
-  background:var(--navy2);border:1px solid var(--border2);
-  border-radius:var(--radius);box-shadow:0 24px 80px rgba(0,0,0,0.6);
-  width:100%;max-height:90vh;overflow-y:auto;
-  transform:translateY(16px) scale(0.97);transition:transform 0.25s;
-}
-.overlay.open .modal{transform:translateY(0) scale(1)}
-.modal-sm{max-width:460px}
-.modal-md{max-width:640px}
-.modal-lg{max-width:860px}
-.modal-xl{max-width:1080px}
-.mh{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.mh-title{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--text)}
-.mh-close{background:none;border:none;font-size:1.2rem;color:var(--text3);cursor:pointer;padding:4px;border-radius:6px;transition:all 0.15s;display:flex;align-items:center;justify-content:center;width:32px;height:32px}
-.mh-close:hover{background:var(--surface2);color:var(--text)}
-.mb-body{padding:24px}
-.mf{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+  /* ── LOADING ── */
+  .loading { display: flex; align-items: center; gap: 10px; color: var(--muted); padding: 40px; justify-content: center; }
+  .spinner { width: 20px; height: 20px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ── TABS ── */
-.tabs{display:flex;gap:4px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;width:fit-content;margin-bottom:20px}
-.tab{padding:7px 16px;border-radius:var(--radius-xs);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.18s;color:var(--text2);border:none;background:none;font-family:var(--font)}
-.tab.active{background:var(--cobalt);color:#fff;box-shadow:0 2px 12px var(--cobalt-glow)}
-.tab:not(.active):hover{color:var(--text);background:var(--surface2)}
+  /* ── PIPELINE ── */
+  .pipeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .pipeline-col { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px; }
+  .pipeline-col-head { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .pipeline-card { background: var(--surface2); border: 1px solid var(--border2); border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+  .pipeline-card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .pipeline-card-client { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .pipeline-card-value { font-family: var(--mono); font-size: 12px; color: var(--green); }
 
-/* ── FILTER ROW ── */
-.filter-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;align-items:center}
-.filter-chip{
-  padding:6px 14px;border-radius:99px;font-size:0.75rem;
-  font-weight:600;border:1px solid var(--border);
-  background:var(--surface);color:var(--text2);cursor:pointer;transition:all 0.18s;
-}
-.filter-chip:hover{border-color:var(--border2);color:var(--text)}
-.filter-chip.active{background:var(--cobalt);border-color:var(--cobalt);color:#fff}
+  /* responsive */
+  @media (max-width: 900px) {
+    .kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .pipeline { grid-template-columns: repeat(2, 1fr); }
+    aside { display: none; }
+  }
+  @media (max-width: 600px) {
+    .kpi-row { grid-template-columns: 1fr; }
+    .pipeline { grid-template-columns: 1fr; }
+    main { padding: 16px; }
+  }
 
-/* ── WIZARD ── */
-.wiz-bar{display:flex;align-items:center;margin-bottom:28px;gap:0;overflow-x:auto;padding-bottom:6px}
-.wiz-step{display:flex;align-items:center;flex-shrink:0}
-.wiz-node{display:flex;flex-direction:column;align-items:center;gap:5px;width:90px}
-.wiz-circle{
-  width:34px;height:34px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:0.78rem;font-weight:800;
-  border:2px solid var(--border2);background:var(--surface);color:var(--text3);
-  transition:all 0.22s;
-}
-.wiz-lbl{font-size:0.62rem;color:var(--text3);text-align:center;white-space:nowrap;transition:color 0.22s;font-weight:600;text-transform:uppercase;letter-spacing:.8px}
-.wiz-line{flex:1;height:2px;background:var(--border);min-width:30px;transition:background 0.22s;margin-bottom:20px}
-.wiz-step.done .wiz-circle{background:var(--emerald);border-color:var(--emerald);color:#fff}
-.wiz-step.done .wiz-line,.wiz-step.active .wiz-line{background:var(--cobalt)}
-.wiz-step.active .wiz-circle{background:var(--cobalt);border-color:var(--cobalt);color:#fff;box-shadow:0 0 16px var(--cobalt-glow)}
-.wiz-step.active .wiz-lbl{color:var(--cobalt-light)}
-.wiz-panel{display:none}
-.wiz-panel.active{display:block}
+  /* ── VIEW TABS ── */
+  .view-tabs { display: flex; gap: 4px; background: var(--surface2); border-radius: 10px; padding: 4px; }
+  .view-tab { cursor: pointer; padding: 7px 16px; border-radius: 7px; font-size: 12px; font-weight: 600; color: var(--muted); border: none; background: none; font-family: var(--font); transition: all .15s; }
+  .view-tab.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 4px rgba(0,0,0,.3); }
 
-/* ── EQUIP GRID ── */
-.eq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;margin-top:10px}
-.eq-card{
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  padding:14px 12px;text-align:center;cursor:pointer;
-  transition:all 0.18s;background:var(--surface);
-}
-.eq-card:hover{border-color:var(--cobalt);background:rgba(37,99,235,0.07)}
-.eq-card.sel{border-color:var(--cobalt);background:rgba(37,99,235,0.12);box-shadow:0 0 0 1px var(--cobalt)}
-.eq-icon{font-size:1.8rem;margin-bottom:7px}
-.eq-name{font-size:0.72rem;font-weight:700;color:var(--text);margin-bottom:2px}
-.eq-info{font-size:0.65rem;color:var(--text3)}
-.eq-qty{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:8px}
-.qty-btn{width:24px;height:24px;border-radius:50%;border:1px solid var(--border2);background:var(--surface2);color:var(--text);font-size:0.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s}
-.qty-btn:hover{background:var(--cobalt);border-color:var(--cobalt)}
-.qty-num{font-weight:700;font-size:0.82rem;min-width:18px;text-align:center;color:var(--text)}
+  .panel { display: none; }
+  .panel.visible { display: block; }
 
-/* ── VENUE CARDS ── */
-.venue-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
-.venue-card{
-  background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;cursor:pointer;transition:all 0.2s;
-}
-.venue-card:hover{border-color:var(--cobalt-light);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.4)}
-.venue-img{height:130px;object-fit:cover;width:100%;background:var(--navy3);display:flex;align-items:center;justify-content:center;font-size:3rem;flex-shrink:0}
-.venue-info{padding:14px}
-.venue-name{font-weight:700;font-size:0.88rem;color:var(--text);margin-bottom:3px}
-.venue-cap{font-size:0.72rem;color:var(--text3)}
-.venue-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.venue-tag{padding:2px 8px;border-radius:99px;font-size:0.6rem;font-weight:700;background:rgba(37,99,235,0.15);color:var(--cobalt-light);text-transform:uppercase;letter-spacing:.4px}
-.venue-tag.ext{background:rgba(245,158,11,0.15);color:var(--gold)}
-
-/* ── SUMMARY BOX ── */
-.sum-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:14px}
-.sum-title{font-size:0.65rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text3);font-weight:700;margin-bottom:12px}
-.sum-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,0.06)}
-.sum-row:last-child{border-bottom:none}
-.sum-lbl{font-size:0.8rem;color:var(--text2)}
-.sum-val{font-size:0.82rem;font-weight:600;color:var(--text)}
-.sum-total{
-  margin-top:14px;padding:16px;
-  background:linear-gradient(135deg,var(--cobalt),rgba(37,99,235,0.6));
-  border-radius:var(--radius-sm);
-  display:flex;justify-content:space-between;align-items:center;
-}
-.sum-total-lbl{font-size:0.82rem;font-weight:700;color:rgba(255,255,255,0.8)}
-.sum-total-val{font-family:var(--font-display);font-size:1.6rem;font-weight:900;color:#fff}
-
-/* ── PHOTO UPLOAD AREA ── */
-.upload-zone{
-  border:2px dashed var(--border2);border-radius:var(--radius-sm);
-  padding:28px;text-align:center;cursor:pointer;transition:all 0.18s;
-  background:var(--surface);
-}
-.upload-zone:hover{border-color:var(--cobalt);background:rgba(37,99,235,0.05)}
-.upload-zone.drag{border-color:var(--cobalt);background:rgba(37,99,235,0.1)}
-.upload-icon{font-size:2rem;margin-bottom:10px;color:var(--text3)}
-.upload-text{font-size:0.82rem;color:var(--text2);margin-bottom:4px}
-.upload-hint{font-size:0.7rem;color:var(--text3)}
-.photo-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:12px}
-.photo-thumb{
-  width:100%;aspect-ratio:1;border-radius:8px;
-  object-fit:cover;border:1px solid var(--border);
-  position:relative;overflow:hidden;
-}
-.photo-thumb-wrap{position:relative}
-.photo-thumb-wrap .rm-photo{
-  position:absolute;top:4px;right:4px;width:20px;height:20px;
-  background:rgba(239,68,68,0.9);border:none;border-radius:50%;
-  color:#fff;font-size:10px;cursor:pointer;display:flex;
-  align-items:center;justify-content:center;
-}
-
-/* ── ARCHIVE NOTICE ── */
-.archive-banner{
-  background:linear-gradient(90deg,rgba(139,92,246,0.18),rgba(37,99,235,0.12));
-  border:1px solid rgba(139,92,246,0.3);border-radius:var(--radius-sm);
-  padding:14px 18px;display:flex;align-items:center;gap:12px;margin-bottom:18px;
-}
-.archive-banner-icon{font-size:1.3rem}
-.archive-banner-text{font-size:0.82rem;color:var(--text2)}
-.archive-banner-text strong{color:var(--text)}
-
-/* ── DASHBOARD TIMELINE ── */
-.timeline{display:flex;flex-direction:column;gap:0}
-.tl-item{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);position:relative}
-.tl-item:last-child{border-bottom:none}
-.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px;position:relative}
-.tl-dot::before{content:'';position:absolute;inset:-4px;border-radius:50%;opacity:0.25;background:inherit;animation:tl-pulse 2s ease-in-out infinite}
-@keyframes tl-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.5)}}
-.tl-dot.green{background:var(--emerald)}
-.tl-dot.red{background:var(--ruby)}
-.tl-dot.blue{background:var(--cobalt)}
-.tl-dot.gold{background:var(--gold)}
-.tl-body{flex:1;min-width:0}
-.tl-event-name{font-size:0.85rem;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tl-meta{font-size:0.7rem;color:var(--text3);margin-top:2px}
-.tl-right{text-align:right;flex-shrink:0}
-.tl-time{font-size:0.72rem;font-weight:600;color:var(--text2)}
-.tl-date{font-size:0.65rem;color:var(--text3)}
-
-/* ── SEARCH BAR ── */
-.search-bar{
-  display:flex;align-items:center;gap:10px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius-sm);padding:8px 14px;
-  transition:all 0.18s;
-}
-.search-bar:focus-within{border-color:var(--cobalt);box-shadow:0 0 0 3px var(--cobalt-glow)}
-.search-bar input{background:none;border:none;outline:none;color:var(--text);font-size:0.85rem;font-family:var(--font);flex:1;min-width:0}
-.search-bar input::placeholder{color:var(--text3)}
-.search-icon{color:var(--text3);font-size:0.85rem;flex-shrink:0}
-
-/* ── GLOW DIVIDER ── */
-.glow-divider{height:1px;background:linear-gradient(90deg,transparent,var(--cobalt),transparent);opacity:0.3;margin:24px 0}
-
-/* ── ALERT ── */
-.alert{padding:12px 18px;border-radius:var(--radius-sm);margin-bottom:16px;font-size:0.82rem;display:flex;align-items:center;gap:10px}
-.alert-ruby{background:rgba(239,68,68,0.12);border:1px solid rgba(239,68,68,0.25);color:#FCA5A5}
-.alert-gold{background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);color:var(--gold-light)}
-
-/* ── SECTION HEADER ── */
-.sec-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}
-.sec-title{font-family:var(--font-display);font-size:1.25rem;font-weight:800;color:var(--text)}
-.sec-sub{font-size:0.78rem;color:var(--text3);margin-top:3px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}
-
-/* ── EQUIPMENT TYPE TOGGLE ── */
-.eq-type-toggle{display:flex;gap:8px;margin-bottom:14px}
-.eq-type-btn{
-  flex:1;padding:10px;border-radius:var(--radius-sm);
-  border:2px solid var(--border);background:var(--surface);
-  color:var(--text2);cursor:pointer;text-align:center;transition:all 0.18s;
-}
-.eq-type-btn.sel{border-color:var(--cobalt);background:rgba(37,99,235,0.1);color:var(--cobalt-light)}
-.eq-type-btn.sel.ext{border-color:var(--gold);background:rgba(245,158,11,0.1);color:var(--gold)}
-.eq-type-icon{font-size:1.4rem;margin-bottom:5px;display:block}
-.eq-type-lbl{font-size:0.75rem;font-weight:700}
-.eq-type-desc{font-size:0.65rem;color:var(--text3);margin-top:2px}
-
-/* ── SCROLLBAR IN MODAL ── */
-.modal::-webkit-scrollbar{width:4px}
-.modal::-webkit-scrollbar-thumb{background:var(--border2);border-radius:99px}
-
-/* ── EXTERNAL EQ NOTE ── */
-.ext-note{
-  background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);
-  border-radius:var(--radius-sm);padding:14px;display:none;
-}
-.ext-note.show{display:block}
-.ext-note-title{font-size:0.78rem;font-weight:700;color:var(--gold);margin-bottom:6px;display:flex;align-items:center;gap:6px}
-.ext-note-text{font-size:0.75rem;color:var(--text2);line-height:1.6}
-
-/* ── DATE PICKER STYLE ── */
-input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(0.5);cursor:pointer}
-
-/* ── PRINT/EXPORT ── */
-@media print{.sidebar,.topbar,.no-print{display:none!important}.main{margin-left:0!important}}
-
-/* ── MOBILE ── */
-@media(max-width:768px){
-  .sidebar{width:64px}
-  .sidebar .sb-logo-text,.sidebar .nav-label,.sidebar .nav-badge,.sidebar .sb-section-label,.sidebar .sb-toggle-label{opacity:0;width:0;pointer-events:none}
-  .main{margin-left:64px}
-  .kpi-strip{grid-template-columns:1fr 1fr}
-  .g2,.g3,.form-row,.form-row-3{grid-template-columns:1fr}
-  .topbar{padding:0 16px}
-  .page{padding:16px}
-}
-
-/* ── ANIMATION: SKELETON ── */
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-
-/* ── PROGRESS PILL ── */
-.progress-pill{height:6px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:8px}
-.progress-fill{height:100%;border-radius:99px;transition:width 0.5s}
-
-/* ── TOOLTIP ── */
-[data-tip]{position:relative;cursor:help}
-[data-tip]::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:var(--navy);border:1px solid var(--border2);color:var(--text);font-size:0.68rem;padding:5px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.15s;z-index:100}
-[data-tip]:hover::after{opacity:1}
-
-/* ── TAG INPUT LIKE ── */
-.tag-area{display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:rgba(255,255,255,0.05);border:1px solid var(--border2);border-radius:var(--radius-xs)}
-.tag-item{padding:3px 10px;background:rgba(37,99,235,0.2);border:1px solid rgba(37,99,235,0.3);border-radius:99px;font-size:0.7rem;color:var(--cobalt-light);font-weight:600;display:flex;align-items:center;gap:5px}
-.tag-item button{background:none;border:none;color:inherit;cursor:pointer;font-size:0.7rem;padding:0;opacity:0.7}
-.tag-item button:hover{opacity:1}
+  .dot-pulse { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
 </style>
 </head>
 <body>
-<div class="shell">
 
-<!-- ═══════════════ SIDEBAR ═══════════════ -->
-<nav class="sidebar" id="sidebar">
-  <div class="sb-logo">
-    <div class="sb-logo-mark">MO<br>α</div>
-    <div class="sb-logo-text">
-      <div class="sb-logo-name">MODESK ALFA</div>
-      <div class="sb-logo-sub">Senac CE</div>
-    </div>
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <span class="logo-badge">ALFA</span>
+    MODESK
+    <span style="color:var(--muted);font-weight:300">— Gestão de Propostas</span>
   </div>
-  <div class="sb-nav">
-    <div class="sb-section-label">Principal</div>
-    <div class="nav-item active" data-page="dashboard" onclick="goPage('dashboard',this)">
-      <span class="nav-icon">📊</span><span class="nav-label">Dashboard</span>
+  <div class="nav-actions">
+    <div style="font-size:12px;color:var(--muted);font-family:var(--mono);display:flex;align-items:center;gap:6px;">
+      <span class="dot-pulse"></span> Firebase conectado
     </div>
-    <div class="nav-item" data-page="events" onclick="goPage('events',this)">
-      <span class="nav-icon">📅</span><span class="nav-label">Eventos</span>
-      <span class="nav-badge" id="badge-events">11</span>
-    </div>
-    <div class="nav-item" data-page="proposals" onclick="goPage('proposals',this)">
-      <span class="nav-icon">📋</span><span class="nav-label">Propostas</span>
-    </div>
-    <div class="sb-section-label">Cadastros</div>
-    <div class="nav-item" data-page="venues" onclick="goPage('venues',this)">
-      <span class="nav-icon">🏛️</span><span class="nav-label">Locais</span>
-    </div>
-    <div class="nav-item" data-page="equipment" onclick="goPage('equipment',this)">
-      <span class="nav-icon">🔧</span><span class="nav-label">Equipamentos</span>
-    </div>
-    <div class="sb-section-label">Arquivo</div>
-    <div class="nav-item" data-page="archive" onclick="goPage('archive',this)">
-      <span class="nav-icon">🗄️</span><span class="nav-label">Arquivados</span>
-    </div>
-  </div>
-  <div class="sb-footer">
-    <button class="sb-toggle" onclick="toggleSidebar()">
-      <span id="sb-arrow">◀</span>
-      <span class="sb-toggle-label">Recolher</span>
-    </button>
-  </div>
-</nav>
-
-<div class="main">
-<!-- ═══════════════ TOPBAR ═══════════════ -->
-<header class="topbar">
-  <div class="topbar-left">
-    <div>
-      <div class="page-title" id="topbar-title">Dashboard</div>
-      <div class="breadcrumb" id="topbar-bc">Início > Visão Geral</div>
-    </div>
-  </div>
-  <div class="topbar-right">
-    <button class="top-btn" onclick="exportCurrentPage()" title="Exportar">⬇️</button>
-    <div class="user-chip">
-      <div class="user-avatar">SN</div>
-      <span class="user-name-text">Senac CE</span>
-    </div>
+    <button class="btn btn-primary" onclick="openModal()">+ Nova Proposta</button>
   </div>
 </header>
 
-<!-- ════════ PAGE: DASHBOARD ════════ -->
-<div class="page active" id="page-dashboard">
-  <div class="kpi-strip">
-    <div class="kpi" style="--kpi-c:var(--cobalt)">
-      <div class="kpi-glow"></div>
-      <div class="kpi-top">
-        <div class="kpi-ico">📅</div>
-        <span class="kpi-trend up" id="kpi-trend-events">↑ Jun</span>
-      </div>
-      <div class="kpi-val" id="kpi-events">11</div>
-      <div class="kpi-lbl">Eventos Jun</div>
-    </div>
-    <div class="kpi" style="--kpi-c:var(--emerald)">
-      <div class="kpi-glow"></div>
-      <div class="kpi-top">
-        <div class="kpi-ico">✅</div>
-        <span class="kpi-trend up">Ativos</span>
-      </div>
-      <div class="kpi-val" id="kpi-confirmed">9</div>
-      <div class="kpi-lbl">Confirmados</div>
-    </div>
-    <div class="kpi" style="--kpi-c:var(--ruby)">
-      <div class="kpi-glow"></div>
-      <div class="kpi-top">
-        <div class="kpi-ico">❌</div>
-        <span class="kpi-trend dn">!</span>
-      </div>
-      <div class="kpi-val" id="kpi-cancelled">1</div>
-      <div class="kpi-lbl">Cancelados</div>
-    </div>
-    <div class="kpi" style="--kpi-c:var(--gold)">
-      <div class="kpi-glow"></div>
-      <div class="kpi-top">
-        <div class="kpi-ico">🏛️</div>
-        <span class="kpi-trend up">Ativos</span>
-      </div>
-      <div class="kpi-val" id="kpi-venues">6</div>
-      <div class="kpi-lbl">Locais Ativos</div>
-    </div>
-    <div class="kpi" style="--kpi-c:var(--violet)">
-      <div class="kpi-glow"></div>
-      <div class="kpi-top">
-        <div class="kpi-ico">👥</div>
-        <span class="kpi-trend up">Total</span>
-      </div>
-      <div class="kpi-val" id="kpi-pax">401</div>
-      <div class="kpi-lbl">Participantes</div>
-    </div>
-  </div>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="sidebar-label">Painel</div>
+    <button class="nav-item active" onclick="switchNav(this,'dashboard')"><span class="icon">📊</span> Dashboard</button>
+    <button class="nav-item" onclick="switchNav(this,'proposals')"><span class="icon">📋</span> Propostas <span class="nav-count" id="cnt-all">—</span></button>
+    <button class="nav-item" onclick="switchNav(this,'pipeline')"><span class="icon">🔄</span> Pipeline</button>
 
-  <div class="g2 mb-6">
-    <div class="card">
-      <div class="card-head">
-        <div><div class="card-title">📅 Próximos Eventos</div><div class="card-subtitle">Semana de 15–20 Jun 2026</div></div>
-        <button class="btn btn-ghost btn-sm" onclick="goPage('events', document.querySelector('[data-page=events]'))">Ver todos</button>
+    <div class="sidebar-label" style="margin-top:8px">Status</div>
+    <button class="nav-item" onclick="filterSidebar('Aceita',this)"><span class="icon">✅</span> Aceitas <span class="nav-count" id="cnt-aceita">—</span></button>
+    <button class="nav-item" onclick="filterSidebar('Enviada',this)"><span class="icon">📤</span> Enviadas <span class="nav-count" id="cnt-enviada">—</span></button>
+    <button class="nav-item" onclick="filterSidebar('Em elaboração',this)"><span class="icon">✏️</span> Em Elaboração <span class="nav-count" id="cnt-elab">—</span></button>
+    <button class="nav-item" onclick="filterSidebar('Expirada',this)"><span class="icon">⏰</span> Expiradas <span class="nav-count" id="cnt-exp">—</span></button>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi kpi-accent-blue">
+        <div class="kpi-label">Total de Propostas</div>
+        <div class="kpi-value" id="kpi-total">—</div>
+        <div class="kpi-sub">registros ativos</div>
       </div>
-      <div class="card-body" style="padding:0">
-        <div class="timeline" id="dash-timeline"></div>
+      <div class="kpi kpi-accent-green">
+        <div class="kpi-label">Volume Aceito</div>
+        <div class="kpi-value" id="kpi-aceito">—</div>
+        <div class="kpi-sub">propostas aceitas</div>
+      </div>
+      <div class="kpi kpi-accent-yellow">
+        <div class="kpi-label">Valor Total Aceito</div>
+        <div class="kpi-value" id="kpi-valor">—</div>
+        <div class="kpi-sub">soma das aceitas</div>
+      </div>
+      <div class="kpi kpi-accent-purple">
+        <div class="kpi-label">Em Negociação</div>
+        <div class="kpi-value" id="kpi-neg">—</div>
+        <div class="kpi-sub">enviadas + elaboração</div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-head"><div class="card-title">📊 Distribuição por Tipo</div></div>
-      <div class="card-body" style="height:260px;position:relative">
-        <canvas id="chart-type"></canvas>
+
+    <!-- VIEW TABS -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div class="view-tabs">
+        <button class="view-tab active" onclick="switchView('list',this)">Lista</button>
+        <button class="view-tab" onclick="switchView('pipeline',this)">Pipeline</button>
+      </div>
+      <div id="status-filter-badge" style="font-size:12px;color:var(--accent);display:none">
+        Filtrando: <span id="filter-label"></span>
+        <button onclick="clearFilter()" style="background:none;border:none;color:var(--muted);cursor:pointer;margin-left:6px;font-size:14px">✕</button>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="card-head">
-      <div><div class="card-title">⚠️ Atenção Necessária</div><div class="card-subtitle">Eventos que precisam de ação</div></div>
-    </div>
-    <div class="card-body">
-      <div class="alert alert-ruby">❌ <strong>18/06 Qui — Cancelado:</strong> Evento via send (Eduardo Pragmácio) — Auditório e Terraço — Aguardando informações Juliana</div>
-      <div class="alert alert-gold">🎤 <strong>15/06 Seg:</strong> Mostra de Projetos (Janaina) — VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO</div>
-      <div class="alert alert-gold">🎤 <strong>16/06 Ter:</strong> Mostra de Projetos (Janaina) — VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO</div>
-      <div class="alert alert-gold">🎤 <strong>17/06 Qua:</strong> Aulas Gestão Financeira (Josué) — VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO</div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ PAGE: EVENTS ════════ -->
-<div class="page" id="page-events">
-  <div class="sec-header">
-    <div>
-      <div class="sec-title">Controle de Eventos</div>
-      <div class="sec-sub">Junho 2026 · Fecomércio CE / Senac</div>
-    </div>
-    <div class="actions">
-      <div class="search-bar" style="min-width:220px">
-        <span class="search-icon">🔍</span>
-        <input type="text" placeholder="Buscar evento, cliente…" id="ev-search" oninput="filterEvents()">
-      </div>
-      <button class="btn btn-ghost" onclick="showArchiveModal()">🗄️ Arquivar Período</button>
-      <button class="btn btn-ghost" onclick="exportEventsExcel()">📊 Excel</button>
-      <button class="btn btn-ghost" onclick="exportEventsPDF()">📄 PDF</button>
-      <button class="btn btn-primary" onclick="openEvModal()">+ Novo Evento</button>
-    </div>
-  </div>
-
-  <div class="filter-row" id="ev-filters">
-    <span class="filter-chip active" onclick="filterChip(this,'ALL')">Todos</span>
-    <span class="filter-chip" onclick="filterChip(this,'CONFIRMADO')">Confirmados</span>
-    <span class="filter-chip" onclick="filterChip(this,'CANCELADO')">Cancelados</span>
-    <span class="filter-chip" onclick="filterChip(this,'INTERNO')">Interno</span>
-    <span class="filter-chip" onclick="filterChip(this,'COMERCIAL')">Comercial</span>
-  </div>
-
-  <div class="card">
-    <div class="table-wrap">
-      <table id="events-table">
-        <thead>
-          <tr>
-            <th>Data</th><th>Dia</th><th>Tipo</th><th>Proposta</th>
-            <th>Local</th><th>Início</th><th>Término</th><th>Pax</th>
-            <th>Cliente</th><th>Evento</th><th>Observações</th><th>Status</th><th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="events-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ PAGE: PROPOSALS ════════ -->
-<div class="page" id="page-proposals">
-  <div class="sec-header">
-    <div>
-      <div class="sec-title">Propostas Comerciais</div>
-      <div class="sec-sub">Gerencie e acompanhe todas as propostas</div>
-    </div>
-    <div class="actions">
-      <button class="btn btn-ghost" onclick="exportProposalsExcel()">📊 Excel</button>
-      <button class="btn btn-ghost" onclick="exportProposalsPDF()">📄 PDF</button>
-      <button class="btn btn-primary" onclick="openProposalWizard()">+ Nova Proposta</button>
-    </div>
-  </div>
-
-  <div class="filter-row">
-    <span class="filter-chip active" onclick="propFilter(this,'ALL')">Todas</span>
-    <span class="filter-chip" onclick="propFilter(this,'elaboracao')">Em Elaboração</span>
-    <span class="filter-chip" onclick="propFilter(this,'aceita')">Aceitas</span>
-    <span class="filter-chip" onclick="propFilter(this,'recusada')">Recusadas</span>
-    <span class="filter-chip" onclick="propFilter(this,'vencida')">Vencidas</span>
-  </div>
-
-  <div class="card">
-    <div class="table-wrap">
-      <table id="prop-table">
-        <thead>
-          <tr>
-            <th>#</th><th>Cliente</th><th>Evento</th><th>Data</th>
-            <th>Local</th><th>Pax</th><th>Valor</th><th>Status</th><th>Ações</th>
-          </tr>
-        </thead>
-        <tbody id="prop-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ PAGE: VENUES ════════ -->
-<div class="page" id="page-venues">
-  <div class="sec-header">
-    <div>
-      <div class="sec-title">Locais de Eventos</div>
-      <div class="sec-sub">Gerencie espaços, equipamentos e fotos</div>
-    </div>
-    <div class="actions">
-      <button class="btn btn-primary" onclick="openVenueModal()">+ Novo Local</button>
-    </div>
-  </div>
-  <div class="venue-grid" id="venues-grid"></div>
-</div>
-
-<!-- ════════ PAGE: EQUIPMENT ════════ -->
-<div class="page" id="page-equipment">
-  <div class="sec-header">
-    <div>
-      <div class="sec-title">Equipamentos Internos</div>
-      <div class="sec-sub">Patrimônio disponível para eventos</div>
-    </div>
-    <div class="actions">
-      <button class="btn btn-primary" onclick="openEquipModal()">+ Novo Equipamento</button>
-    </div>
-  </div>
-  <div class="card">
-    <div class="table-wrap">
-      <table id="equip-table">
-        <thead>
-          <tr><th>Ícone</th><th>Nome</th><th>Qtd Total</th><th>Categoria</th><th>Descrição</th><th>Ações</th></tr>
-        </thead>
-        <tbody id="equip-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ════════ PAGE: ARCHIVE ════════ -->
-<div class="page" id="page-archive">
-  <div class="sec-header">
-    <div>
-      <div class="sec-title">Eventos Arquivados</div>
-      <div class="sec-sub">Histórico por período</div>
-    </div>
-    <div class="actions">
-      <button class="btn btn-ghost" onclick="exportArchiveExcel()">📊 Excel</button>
-      <button class="btn btn-ghost" onclick="exportArchivePDF()">📄 PDF</button>
-    </div>
-  </div>
-  <div class="archive-banner">
-    <span class="archive-banner-icon">🗄️</span>
-    <div class="archive-banner-text">
-      <strong>Arquivo de Eventos</strong> — Registros movidos do controle ativo após encerramento do período. Use o botão <strong>"Arquivar Período"</strong> na tela de Eventos.
-    </div>
-  </div>
-  <div class="filter-row" style="align-items:center">
-    <label style="font-size:0.78rem;color:var(--text3)">Período:</label>
-    <select class="form-control" style="width:auto" id="archive-period-filter" onchange="filterArchive()">
-      <option value="">Todos</option>
-    </select>
-  </div>
-  <div class="card">
-    <div class="table-wrap">
-      <table><thead><tr><th>Período</th><th>Data</th><th>Dia</th><th>Evento</th><th>Cliente</th><th>Local</th><th>Status</th><th>Arquivado em</th></tr></thead>
-        <tbody id="archive-tbody"><tr><td colspan="8" style="text-align:center;color:var(--text3);padding:40px">Nenhum evento arquivado ainda.</td></tr></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-</div><!-- /main -->
-</div><!-- /shell -->
-
-<!-- ════════════════════════════════
-     MODALS
-═════════════════════════════════ -->
-
-<!-- EVENT MODAL -->
-<div class="overlay" id="ev-overlay" onclick="closeOverlay('ev-overlay')">
-  <div class="modal modal-xl" onclick.stop="void(0)" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title" id="ev-modal-title">Novo Evento</span><button class="mh-close" onclick="closeOverlay('ev-overlay')">✕</button></div>
-    <div class="mb-body">
-      <div class="form-row-3">
-        <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-control" id="ev-date"></div>
-        <div class="form-group"><label class="form-label">Dia</label><input type="text" class="form-control" id="ev-day" readonly placeholder="Auto"></div>
-        <div class="form-group"><label class="form-label">Tipo</label>
-          <select class="form-control" id="ev-type">
-            <option>INTERNO</option><option>COMERCIAL</option>
-          </select>
+    <!-- LIST VIEW -->
+    <div id="view-list" class="panel visible">
+      <div class="toolbar">
+        <div class="search-box">
+          <input type="text" id="search" placeholder="Buscar proposta, cliente ou espaço…" oninput="renderTable()" />
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Proposta Nº</label><input type="text" class="form-control" id="ev-prop" placeholder="Ex: 157"></div>
-        <div class="form-group"><label class="form-label">Local</label>
-          <select class="form-control" id="ev-venue">
-            <option value="">Selecione…</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row-3">
-        <div class="form-group"><label class="form-label">Horário Início</label><input type="time" class="form-control" id="ev-start"></div>
-        <div class="form-group"><label class="form-label">Horário Término</label><input type="time" class="form-control" id="ev-end"></div>
-        <div class="form-group"><label class="form-label">Nº Participantes</label><input type="number" class="form-control" id="ev-pax" min="0"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Cliente</label><input type="text" class="form-control" id="ev-client"></div>
-        <div class="form-group"><label class="form-label">Nome do Evento</label><input type="text" class="form-control" id="ev-name"></div>
-      </div>
-      <div class="form-group"><label class="form-label">Observações</label><textarea class="form-control" id="ev-obs" rows="2"></textarea></div>
-      <div class="form-group"><label class="form-label">Status</label>
-        <select class="form-control" id="ev-status">
-          <option>CONFIRMADO</option><option>CANCELADO</option><option>AGUARDANDO</option>
+        <select id="filter-status" onchange="renderTable()">
+          <option value="">Todos os status</option>
+          <option value="Aceita">Aceita</option>
+          <option value="Enviada">Enviada</option>
+          <option value="Em elaboração">Em elaboração</option>
+          <option value="Expirada">Expirada</option>
+          <option value="Cancelada">Cancelada</option>
+        </select>
+        <select id="sort-col" onchange="renderTable()">
+          <option value="data">Ordenar por data</option>
+          <option value="valor">Ordenar por valor</option>
+          <option value="titulo">Ordenar por nome</option>
         </select>
       </div>
+
+      <div class="table-wrap" style="margin-top:14px">
+        <table>
+          <thead>
+            <tr>
+              <th onclick="toggleSort('titulo')">Proposta ↕</th>
+              <th onclick="toggleSort('espaco')">Espaço</th>
+              <th onclick="toggleSort('data')">Data ↕</th>
+              <th onclick="toggleSort('valor')">Valor ↕</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr><td colspan="6"><div class="loading"><div class="spinner"></div>Carregando propostas…</div></td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div class="mf">
-      <button class="btn btn-ghost" onclick="closeOverlay('ev-overlay')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveEvent()">💾 Salvar Evento</button>
+
+    <!-- PIPELINE VIEW -->
+    <div id="view-pipeline" class="panel">
+      <div class="pipeline" id="pipeline-board"></div>
     </div>
-  </div>
+  </main>
 </div>
 
-<!-- VENUE MODAL -->
-<div class="overlay" id="venue-overlay" onclick="closeOverlay('venue-overlay')">
-  <div class="modal modal-lg" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title" id="venue-modal-title">Novo Local</span><button class="mh-close" onclick="closeOverlay('venue-overlay')">✕</button></div>
-    <div class="mb-body">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Nome do Local</label><input type="text" class="form-control" id="vn-name"></div>
-        <div class="form-group"><label class="form-label">Capacidade (Pax)</label><input type="number" class="form-control" id="vn-cap" min="0"></div>
-      </div>
-      <div class="form-group"><label class="form-label">Endereço Completo</label><input type="text" class="form-control" id="vn-addr" placeholder="Rua, número, bairro, cidade…"></div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Valor por Hora (R$)</label><input type="number" class="form-control" id="vn-price-h" min="0" step="0.01" placeholder="0,00"></div>
-        <div class="form-group"><label class="form-label">Valor Diária (R$)</label><input type="number" class="form-control" id="vn-price-d" min="0" step="0.01" placeholder="0,00"></div>
-      </div>
-      <div class="form-group"><label class="form-label">Equipamentos Acoplados (já instalados)</label>
-        <div class="tag-area" id="vn-built-in-tags"></div>
-        <div style="margin-top:8px;display:flex;gap:8px">
-          <input type="text" class="form-control" id="vn-built-in-input" placeholder="Ex: Projetor fixo, Ar-condicionado…" style="flex:1">
-          <button class="btn btn-ghost btn-sm" onclick="addBuiltInTag()">+ Adicionar</button>
-        </div>
-        <p class="form-hint">Equipamentos permanentemente instalados no local</p>
-      </div>
-      <div class="form-group"><label class="form-label">Necessidade de Montagem</label>
-        <select class="form-control" id="vn-setup">
-          <option value="none">Sem montagem — já está pronto</option>
-          <option value="partial">Montagem parcial necessária</option>
-          <option value="full">Montagem completa necessária</option>
+<!-- MODAL NOVA / EDITAR PROPOSTA -->
+<div class="overlay" id="modal-overlay" onclick="closeOnBackdrop(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title" id="modal-title">Nova Proposta</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="form-grid">
+      <div class="form-group full"><label>Título da Proposta</label><input type="text" id="f-titulo" placeholder="Ex: Workshop de Inovação" /></div>
+      <div class="form-group"><label>Cliente</label><input type="text" id="f-cliente" placeholder="Nome do cliente" /></div>
+      <div class="form-group"><label>Espaço</label><input type="text" id="f-espaco" placeholder="Local do evento" /></div>
+      <div class="form-group"><label>Data do Evento</label><input type="date" id="f-data" /></div>
+      <div class="form-group"><label>Valor (R$)</label><input type="number" id="f-valor" placeholder="0,00" step="0.01" /></div>
+      <div class="form-group full">
+        <label>Status</label>
+        <select class="form-select" id="f-status">
+          <option value="Em elaboração">Em elaboração</option>
+          <option value="Enviada">Enviada</option>
+          <option value="Aceita">Aceita</option>
+          <option value="Expirada">Expirada</option>
+          <option value="Cancelada">Cancelada</option>
         </select>
       </div>
-      <div class="form-group"><label class="form-label">Observações do Local</label><textarea class="form-control" id="vn-obs" rows="2"></textarea></div>
-      <div class="form-group">
-        <label class="form-label">Fotos do Local</label>
-        <div class="upload-zone" id="vn-upload-zone" onclick="document.getElementById('vn-photo-input').click()">
-          <div class="upload-icon">📷</div>
-          <div class="upload-text">Clique ou arraste fotos aqui</div>
-          <div class="upload-hint">JPG, PNG, WEBP · Máx 5MB cada</div>
-        </div>
-        <input type="file" id="vn-photo-input" multiple accept="image/*" style="display:none" onchange="handleVenuePhotos(this)">
-        <div class="photo-preview-grid" id="vn-photo-preview"></div>
-      </div>
+      <div class="form-group full"><label>Observações</label><textarea id="f-obs" rows="3" placeholder="Detalhes, condições ou notas…"></textarea></div>
     </div>
-    <div class="mf">
-      <button class="btn btn-ghost" onclick="closeOverlay('venue-overlay')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveVenue()">💾 Salvar Local</button>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveProposal()">Salvar Proposta</button>
     </div>
   </div>
 </div>
 
-<!-- EQUIPMENT MODAL -->
-<div class="overlay" id="equip-overlay" onclick="closeOverlay('equip-overlay')">
-  <div class="modal modal-md" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title">Novo Equipamento</span><button class="mh-close" onclick="closeOverlay('equip-overlay')">✕</button></div>
-    <div class="mb-body">
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Nome</label><input type="text" class="form-control" id="eq-name" placeholder="Ex: Microfone Sem Fio"></div>
-        <div class="form-group"><label class="form-label">Ícone (emoji)</label><input type="text" class="form-control" id="eq-icon" placeholder="🎤" maxlength="4"></div>
+<!-- MODAL DETALHE -->
+<div class="overlay" id="detail-overlay" onclick="closeDetailOnBackdrop(event)">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="modal-title" id="detail-titulo">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:3px" id="detail-cliente">—</div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Quantidade Total</label><input type="number" class="form-control" id="eq-qty" min="1" value="1"></div>
-        <div class="form-group"><label class="form-label">Categoria</label>
-          <select class="form-control" id="eq-cat">
-            <option>Áudio</option><option>Vídeo</option><option>Iluminação</option>
-            <option>Mobiliário</option><option>TI</option><option>Outros</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group"><label class="form-label">Descrição / Especificações</label><textarea class="form-control" id="eq-desc" rows="2" placeholder="Modelo, marca, especificações técnicas…"></textarea></div>
+      <button class="modal-close" onclick="closeDetail()">✕</button>
     </div>
-    <div class="mf">
-      <button class="btn btn-ghost" onclick="closeOverlay('equip-overlay')">Cancelar</button>
-      <button class="btn btn-primary" onclick="saveEquipment()">💾 Salvar</button>
+    <div id="detail-badge-wrap"></div>
+    <div class="detail-grid" id="detail-grid"></div>
+    <div id="detail-obs-wrap" style="margin-top:12px;display:none">
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Observações</div>
+      <div id="detail-obs" style="background:var(--surface2);border-radius:8px;padding:12px;font-size:13px;color:var(--muted)"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-sm" id="detail-del-btn">Excluir</button>
+      <button class="btn btn-ghost btn-sm" id="detail-edit-btn">Editar</button>
+      <button class="btn btn-ghost btn-sm" onclick="closeDetail()">Fechar</button>
     </div>
   </div>
 </div>
 
-<!-- PROPOSAL WIZARD MODAL -->
-<div class="overlay" id="prop-overlay" onclick="closeOverlay('prop-overlay')">
-  <div class="modal modal-xl" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title">Nova Proposta Comercial</span><button class="mh-close" onclick="closeOverlay('prop-overlay')">✕</button></div>
-    <div class="mb-body">
-      <div class="wiz-bar" id="wiz-bar">
-        <div class="wiz-step active" id="ws0"><div class="wiz-node"><div class="wiz-circle">1</div><div class="wiz-lbl">Dados</div></div></div>
-        <div class="wiz-line"></div>
-        <div class="wiz-step" id="ws1"><div class="wiz-node"><div class="wiz-circle">2</div><div class="wiz-lbl">Equipamentos</div></div></div>
-        <div class="wiz-line"></div>
-        <div class="wiz-step" id="ws2"><div class="wiz-node"><div class="wiz-circle">3</div><div class="wiz-lbl">Serviços</div></div></div>
-        <div class="wiz-line"></div>
-        <div class="wiz-step" id="ws3"><div class="wiz-node"><div class="wiz-circle">4</div><div class="wiz-lbl">Resumo</div></div></div>
-      </div>
+<!-- TOAST -->
+<div id="toast-container"></div>
 
-      <!-- STEP 1: DADOS -->
-      <div class="wiz-panel active" id="wp0">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Cliente</label><input type="text" class="form-control" id="pr-client"></div>
-          <div class="form-group"><label class="form-label">Contato</label><input type="text" class="form-control" id="pr-contact" placeholder="Nome do responsável"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Nome do Evento</label><input type="text" class="form-control" id="pr-event"></div>
-          <div class="form-group"><label class="form-label">Local</label>
-            <select class="form-control" id="pr-venue"><option value="">Selecione…</option></select>
-          </div>
-        </div>
-        <div class="form-row-3">
-          <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-control" id="pr-date"></div>
-          <div class="form-group"><label class="form-label">Horário</label><input type="text" class="form-control" id="pr-time" placeholder="18h00 – 22h00"></div>
-          <div class="form-group"><label class="form-label">Nº Participantes</label><input type="number" class="form-control" id="pr-pax" min="0"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Valor Base (R$)</label><input type="number" class="form-control" id="pr-base" min="0" step="0.01" oninput="recalcProp()"></div>
-          <div class="form-group"><label class="form-label">Desconto (%)</label><input type="number" class="form-control" id="pr-disc" min="0" max="100" value="0" oninput="recalcProp()"></div>
-        </div>
-        <div class="form-group"><label class="form-label">Observações</label><textarea class="form-control" id="pr-obs" rows="2"></textarea></div>
-      </div>
+<!-- FIREBASE SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, getDocs, updateDoc, deleteDoc, doc, onSnapshot, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-      <!-- STEP 2: EQUIPAMENTOS -->
-      <div class="wiz-panel" id="wp1">
-        <div class="eq-type-toggle">
-          <div class="eq-type-btn sel" id="eqtype-int" onclick="setEqType('int')">
-            <span class="eq-type-icon">🏠</span>
-            <div class="eq-type-lbl">Equipamento Interno</div>
-            <div class="eq-type-desc">Do nosso patrimônio</div>
-          </div>
-          <div class="eq-type-btn" id="eqtype-ext" onclick="setEqType('ext')">
-            <span class="eq-type-icon">🚚</span>
-            <div class="eq-type-lbl">Equipamento Externo</div>
-            <div class="eq-type-desc">Responsabilidade do cliente</div>
-          </div>
-        </div>
+const firebaseConfig = {
+  apiKey: "AIzaSyCdJ2elGKhjjc7SMnEzcvpX1Yw6SA-grJ8",
+  authDomain: "modesk-alfa.firebaseapp.com",
+  projectId: "modesk-alfa",
+  storageBucket: "modesk-alfa.firebasestorage.app",
+  messagingSenderId: "499970336809",
+  appId: "1:499970336809:web:e60f8bc4c5df09c4499438",
+  measurementId: "G-66T8PP8KFN"
+};
 
-        <div id="eq-int-area">
-          <p style="font-size:0.78rem;color:var(--text3);margin-bottom:12px">Selecione os equipamentos do nosso patrimônio para incluir na proposta:</p>
-          <div class="eq-grid" id="prop-eq-grid"></div>
-        </div>
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const COL = 'propostas';
 
-        <div class="ext-note" id="ext-note-area">
-          <div class="ext-note-title">🚚 Equipamento Externo — Responsabilidade do Cliente</div>
-          <p class="ext-note-text">Ao marcar como <strong>Externo</strong>, a responsabilidade pela provisão, transporte, instalação e desmontagem dos equipamentos é inteiramente do cliente ou do contratado por ele. A organização <strong>não se responsabiliza</strong> por equipamentos externos.</p>
-          <div style="margin-top:12px">
-            <label class="form-label">Descreva os equipamentos que o cliente trará:</label>
-            <textarea class="form-control" id="ext-eq-desc" rows="3" placeholder="Ex: 2 caixas de som JBL, Mesa de som 16 canais, Telão 4x3m…"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 3: SERVIÇOS -->
-      <div class="wiz-panel" id="wp2">
-        <p style="font-size:0.78rem;color:var(--text3);margin-bottom:14px">Selecione os serviços incluídos na proposta:</p>
-        <div class="g3" id="services-grid">
-          <div class="eq-card" data-svc="coffee" onclick="toggleSvc(this)"><div class="eq-icon">☕</div><div class="eq-name">Coffee Break</div><div class="eq-info">Serviço de coffee</div></div>
-          <div class="eq-card" data-svc="lunch" onclick="toggleSvc(this)"><div class="eq-icon">🍽️</div><div class="eq-name">Almoço/Jantar</div><div class="eq-info">Refeição completa</div></div>
-          <div class="eq-card" data-svc="hostess" onclick="toggleSvc(this)"><div class="eq-icon">👩‍💼</div><div class="eq-name">Recepcionistas</div><div class="eq-info">Equipe de apoio</div></div>
-          <div class="eq-card" data-svc="decor" onclick="toggleSvc(this)"><div class="eq-icon">🌸</div><div class="eq-name">Decoração</div><div class="eq-info">Mesa e ambiente</div></div>
-          <div class="eq-card" data-svc="photo" onclick="toggleSvc(this)"><div class="eq-icon">📸</div><div class="eq-name">Fotografia</div><div class="eq-info">Cobertura fotográfica</div></div>
-          <div class="eq-card" data-svc="parking" onclick="toggleSvc(this)"><div class="eq-icon">🚗</div><div class="eq-name">Estacionamento</div><div class="eq-info">Vaga para participantes</div></div>
-        </div>
-        <div class="form-group" style="margin-top:16px">
-          <label class="form-label">Valor Adicional de Serviços (R$)</label>
-          <input type="number" class="form-control" id="pr-svc-val" min="0" step="0.01" value="0" oninput="recalcProp()">
-        </div>
-      </div>
-
-      <!-- STEP 4: RESUMO -->
-      <div class="wiz-panel" id="wp3">
-        <div class="sum-box">
-          <div class="sum-title">Dados do Evento</div>
-          <div class="sum-row"><span class="sum-lbl">Cliente</span><span class="sum-val" id="sum-client">—</span></div>
-          <div class="sum-row"><span class="sum-lbl">Evento</span><span class="sum-val" id="sum-event">—</span></div>
-          <div class="sum-row"><span class="sum-lbl">Local</span><span class="sum-val" id="sum-venue">—</span></div>
-          <div class="sum-row"><span class="sum-lbl">Data / Horário</span><span class="sum-val" id="sum-date">—</span></div>
-          <div class="sum-row"><span class="sum-lbl">Participantes</span><span class="sum-val" id="sum-pax">—</span></div>
-        </div>
-        <div class="sum-box">
-          <div class="sum-title">Equipamentos</div>
-          <div id="sum-eq-list"><span style="color:var(--text3);font-size:0.8rem">Nenhum selecionado</span></div>
-        </div>
-        <div class="sum-box">
-          <div class="sum-title">Financeiro</div>
-          <div class="sum-row"><span class="sum-lbl">Valor Base</span><span class="sum-val" id="sum-base">R$ 0,00</span></div>
-          <div class="sum-row"><span class="sum-lbl">Serviços</span><span class="sum-val" id="sum-svc">R$ 0,00</span></div>
-          <div class="sum-row"><span class="sum-lbl">Desconto</span><span class="sum-val" id="sum-disc" style="color:var(--ruby)">- R$ 0,00</span></div>
-        </div>
-        <div class="sum-total">
-          <span class="sum-total-lbl">TOTAL DA PROPOSTA</span>
-          <span class="sum-total-val" id="sum-total">R$ 0,00</span>
-        </div>
-        <div class="form-group" style="margin-top:16px">
-          <label class="form-label">Status da Proposta</label>
-          <select class="form-control" id="pr-status">
-            <option value="elaboracao">Em Elaboração</option>
-            <option value="aceita">Aceita</option>
-            <option value="recusada">Recusada</option>
-            <option value="vencida">Vencida</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="mf">
-      <button class="btn btn-ghost" id="prop-back-btn" onclick="propWizBack()" style="display:none">← Voltar</button>
-      <button class="btn btn-ghost" onclick="closeOverlay('prop-overlay')">Cancelar</button>
-      <button class="btn btn-primary" id="prop-next-btn" onclick="propWizNext()">Próximo →</button>
-    </div>
-  </div>
-</div>
-
-<!-- ARCHIVE MODAL -->
-<div class="overlay" id="archive-overlay" onclick="closeOverlay('archive-overlay')">
-  <div class="modal modal-sm" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title">🗄️ Arquivar Período</span><button class="mh-close" onclick="closeOverlay('archive-overlay')">✕</button></div>
-    <div class="mb-body">
-      <p style="font-size:0.82rem;color:var(--text2);margin-bottom:16px">Selecione o período que deseja mover para o arquivo. Os eventos serão removidos da lista ativa e ficará disponíveis na tela de <strong>Arquivados</strong>.</p>
-      <div class="form-group"><label class="form-label">Data Início</label><input type="date" class="form-control" id="arc-from"></div>
-      <div class="form-group"><label class="form-label">Data Fim</label><input type="date" class="form-control" id="arc-to"></div>
-      <div class="form-group"><label class="form-label">Rótulo do Período (opcional)</label><input type="text" class="form-control" id="arc-label" placeholder="Ex: Junho 2026, 1º Semestre…"></div>
-    </div>
-    <div class="mf">
-      <button class="btn btn-ghost" onclick="closeOverlay('archive-overlay')">Cancelar</button>
-      <button class="btn btn-ruby" onclick="doArchive()">🗄️ Arquivar</button>
-    </div>
-  </div>
-</div>
-
-<!-- VENUE DETAIL MODAL -->
-<div class="overlay" id="vdetail-overlay" onclick="closeOverlay('vdetail-overlay')">
-  <div class="modal modal-lg" onclick="event.stopPropagation()">
-    <div class="mh"><span class="mh-title" id="vd-title">Detalhes do Local</span><button class="mh-close" onclick="closeOverlay('vdetail-overlay')">✕</button></div>
-    <div class="mb-body" id="vd-body"></div>
-    <div class="mf"><button class="btn btn-ghost" onclick="closeOverlay('vdetail-overlay')">Fechar</button></div>
-  </div>
-</div>
-
-<script>
-// ═══════════════════════════════════════
-// DATA STORE
-// ═══════════════════════════════════════
-const DAYS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-
-let events = [
-  {id:1,date:'2026-06-15',day:'SEGUNDA',type:'INTERNO',prop:'-',venue:'Auditório Senac Aldeota',start:'18:00',end:'21:30',pax:'',client:'Janaina Faculdade Senac',event:'Mostra de Projetos Integradores',obs:'VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO',status:'CONFIRMADO'},
-  {id:2,date:'2026-06-15',day:'SEGUNDA',type:'INTERNO',prop:'157',venue:'Panorama 4º andar',start:'10:00',end:'11:00',pax:38,client:'Alessandra Soares',event:'Academia de Líderes Módulo',obs:'OS Enviada',status:'CONFIRMADO'},
-  {id:3,date:'2026-06-15',day:'SEGUNDA',type:'INTERNO',prop:'157',venue:'Panorama 4º andar',start:'10:00',end:'11:00',pax:38,client:'Alessandra Soares',event:'Academia de Líderes Módulo',obs:'OS Enviada',status:'CONFIRMADO'},
-  {id:4,date:'2026-06-15',day:'SEGUNDA',type:'INTERNO',prop:'160',venue:'Retirada Café Senac',start:'14:00',end:'',pax:'',client:'Kelly Lisboa',event:'Gabinete da Presidência',obs:'OS Enviada',status:'CONFIRMADO'},
-  {id:5,date:'2026-06-16',day:'TERÇA',type:'INTERNO',prop:'',venue:'Auditório Senac Aldeota',start:'08:00',end:'12:00',pax:'',client:'Janaina Faculdade Senac',event:'Mostra de Projetos Integradores',obs:'VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO',status:'CONFIRMADO'},
-  {id:6,date:'2026-06-17',day:'QUARTA',type:'INTERNO',prop:'147',venue:'Auditório',start:'08:00',end:'18:00',pax:170,client:'ACESU SENAC CE',event:'Jornada Supermercadista',obs:'OS ENVIADA',status:'CONFIRMADO'},
-  {id:7,date:'2026-06-17',day:'QUARTA',type:'INTERNO',prop:'',venue:'Auditório Senac Aldeota',start:'18:00',end:'21:30',pax:'',client:'Josué',event:'Aulas da disciplina de Gestão Financeira',obs:'VAI PRECISAR DE MICROFONE, SOM, PROJETOR E O MÁRCIO',status:'CONFIRMADO'},
-  {id:8,date:'2026-06-18',day:'QUINTA',type:'COMERCIAL',prop:'',venue:'Auditório e Terraço',start:'18:30',end:'22:00',pax:150,client:'Eduardo Pragmácio',event:'Evento via send',obs:'Aguardando informações Juliana',status:'CANCELADO'},
-  {id:9,date:'2026-06-19',day:'SEXTA',type:'COMERCIAL',prop:'',venue:'Café Comércio',start:'11:00',end:'12:00',pax:5,client:'Thaís Escóssia',event:'Alinhamento sobre casamento',obs:'Fazer Proposta Visita para alinhar cardápio do casamento dia 08/08',status:''},
-  {id:10,date:'2026-06-20',day:'SÁBADO',type:'INTERNO',prop:'',venue:'Auditório Senac Aldeota',start:'08:00',end:'12:00',pax:'',client:'Janaina Faculdade Senac',event:'Mostra de Projetos Integradores',obs:'',status:'CONFIRMADO'},
-  {id:11,date:'2026-06-20',day:'SÁBADO',type:'COMERCIAL',prop:'4611',venue:'Sala 05 e 07',start:'08:30',end:'12:30',pax:30,client:'Flamma',event:'São Carlos Imagem',obs:'OS ENVIADA - FECHAR APÓS O EVENTO EM 23/06',status:'CONFIRMADO'},
+// ── SEED DATA ──
+const SEED = [
+  { titulo:"Reunião Sesc",      cliente:"Superintendência do Sesc", espaco:"Fecomércio 12º andar",         data:"2026-06-08", valor:474.60,    status:"Aceita",        obs:"" },
+  { titulo:"SINDVEL — Capacitação", cliente:"SINDVEL",             espaco:"Auditório Senac Aldeota",       data:"2026-06-23", valor:3264.00,   status:"Enviada",       obs:"" },
+  { titulo:"Congresso COCAL",   cliente:"COCAL",                   espaco:"Auditório Senac Aldeota",       data:"2026-07-02", valor:77196.00,  status:"Enviada",       obs:"" },
+  { titulo:"ABAV — Apresentação", cliente:"ABAV",                  espaco:"Auditório Senac Aldeota",       data:"2026-06-10", valor:4000.00,   status:"Aceita",        obs:"" },
+  { titulo:"Almoço EPROCE",     cliente:"FACIC / EPROCE",          espaco:"Restaurante Mayú - Sala Reservada", data:"2026-06-12", valor:7500.00, status:"Aceita",     obs:"" },
+  { titulo:"NR1 na prática",    cliente:"Patricia",                espaco:"Salas 5 e 6",                   data:"2026-06-12", valor:2000.00,   status:"Em elaboração", obs:"" },
+  { titulo:"RATIONAL",          cliente:"Marco Frossard",          espaco:"Cozinha Experience",             data:"2026-06-11", valor:1800.00,   status:"Expirada",      obs:"" },
+  { titulo:"Workshop Inovação", cliente:"TechCorp",                espaco:"Auditório Senac Aldeota",       data:"2026-05-20", valor:12000.00,  status:"Aceita",        obs:"" },
 ];
 
-let venues = [
-  {id:1,name:'Auditório Senac Aldeota',cap:200,addr:'Av. Santos Dumont, 1200, Aldeota, Fortaleza-CE',priceH:500,priceD:2800,builtIn:['Projetor fixo','Tela de projeção','Sistema de sonorização','Ar-condicionado'],setup:'none',obs:'Principal auditório. Necessita Márcio para AV.',photos:[]},
-  {id:2,name:'Panorama 4º Andar',cap:50,addr:'Av. Santos Dumont, 1200, 4º Andar, Aldeota, Fortaleza-CE',priceH:200,priceD:1200,builtIn:['Ar-condicionado','TV 65"'],setup:'partial',obs:'Sala de reuniões premium com vista panorâmica.',photos:[]},
-  {id:3,name:'Auditório',cap:300,addr:'Av. Santos Dumont, 1200, Aldeota, Fortaleza-CE',priceH:700,priceD:3500,builtIn:['Sonorização completa','Projetor','Camarim'],setup:'none',obs:'Grande auditório para eventos de maior porte.',photos:[]},
-  {id:4,name:'Café Comércio',cap:30,addr:'R. Barão do Rio Branco, 1117, Centro, Fortaleza-CE',priceH:150,priceD:700,builtIn:['Cozinha equipada','TV'],setup:'none',obs:'Espaço gastronômico integrado.',photos:[]},
-  {id:5,name:'Sala 05 e 07',cap:40,addr:'Av. Santos Dumont, 1200, Aldeota, Fortaleza-CE',priceH:180,priceD:900,builtIn:['Ar-condicionado','Quadro branco'],setup:'none',obs:'Salas de aula adaptáveis.',photos:[]},
-  {id:6,name:'Auditório e Terraço',cap:250,addr:'Av. Santos Dumont, 1200, Cobertura, Fortaleza-CE',priceH:900,priceD:4500,builtIn:['Espaço ao ar livre','Pontos elétricos'],setup:'full',obs:'Terraço para eventos ao ar livre. Requer montagem completa.',photos:[]},
-];
+// STATE
+window._proposals = [];
+window._editId = null;
+window._filterStatus = '';
+let _sortCol = 'data';
+let _sortDir = 1;
 
-let equipment = [
-  {id:1,icon:'🎤',name:'Microfone Sem Fio',qty:4,cat:'Áudio',desc:'Shure SLX2 UHF'},
-  {id:2,icon:'🔊',name:'Caixa de Som Ativa',qty:2,cat:'Áudio',desc:'JBL EON610 10" 1000W'},
-  {id:3,icon:'🎚️',name:'Mesa de Som',qty:1,cat:'Áudio',desc:'Soundcraft 16 canais'},
-  {id:4,icon:'📽️',name:'Projetor',qty:3,cat:'Vídeo',desc:'Epson 3500 lúmens WXGA'},
-  {id:5,icon:'🖥️',name:'Notebook para Apresentação',qty:5,cat:'TI',desc:'Dell Latitude i5'},
-  {id:6,icon:'💡',name:'Iluminação de Palco',qty:8,cat:'Iluminação',desc:'LED Par 64 RGBW'},
-];
+// ── REAL-TIME LISTENER ──
+const q = collection(db, COL);
+onSnapshot(q, (snap) => {
+  window._proposals = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  updateKPIs();
+  renderTable();
+  renderPipeline();
+  updateCounts();
+});
 
-let proposals = [];
-let archive = [];
-let propWizStep = 0;
-let currentEqType = 'int';
-let editingEventId = null;
-let editingVenueId = null;
-let venuePhotosData = [];
-let evFilterStatus = 'ALL';
-let propFilterStatus = 'ALL';
-let nextEventId = 12;
-let nextVenueId = 7;
-
-// ═══════════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════════
-const pageTitles = {dashboard:'Dashboard',events:'Controle de Eventos',proposals:'Propostas Comerciais',venues:'Locais de Eventos',equipment:'Equipamentos',archive:'Eventos Arquivados'};
-const pageBCs = {dashboard:'Início > Visão Geral',events:'Início > Eventos',proposals:'Início > Propostas',venues:'Início > Locais',equipment:'Início > Equipamentos',archive:'Início > Arquivo'};
-
-function goPage(id, el) {
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  el.classList.add('active');
-  document.getElementById('topbar-title').textContent = pageTitles[id]||id;
-  document.getElementById('topbar-bc').textContent = pageBCs[id]||'';
-  if(id==='events') renderEvents();
-  if(id==='dashboard') renderDashboard();
-  if(id==='venues') renderVenues();
-  if(id==='equipment') renderEquipment();
-  if(id==='proposals') renderProposals();
-  if(id==='archive') renderArchive();
-}
-
-function toggleSidebar(){
-  const sb = document.getElementById('sidebar');
-  sb.classList.toggle('mini');
-  document.getElementById('sb-arrow').textContent = sb.classList.contains('mini')? '▶':'◀';
-}
-
-// ═══════════════════════════════════════
-// OVERLAYS
-// ═══════════════════════════════════════
-function openOverlay(id){document.getElementById(id).classList.add('open')}
-function closeOverlay(id){document.getElementById(id).classList.remove('open')}
-
-// ═══════════════════════════════════════
-// DASHBOARD
-// ═══════════════════════════════════════
-function renderDashboard(){
-  const confirmed = events.filter(e=>e.status==='CONFIRMADO').length;
-  const cancelled = events.filter(e=>e.status==='CANCELADO').length;
-  const totalPax = events.reduce((s,e)=>s+(parseInt(e.pax)||0),0);
-  document.getElementById('kpi-events').textContent = events.length;
-  document.getElementById('kpi-confirmed').textContent = confirmed;
-  document.getElementById('kpi-cancelled').textContent = cancelled;
-  document.getElementById('kpi-pax').textContent = totalPax;
-  document.getElementById('kpi-venues').textContent = venues.length;
-
-  // Timeline
-  const tl = document.getElementById('dash-timeline');
-  const sorted = [...events].sort((a,b)=>a.date.localeCompare(b.date));
-  tl.innerHTML = sorted.map(e=>{
-    const dotColor = e.status==='CONFIRMADO'?'green':e.status==='CANCELADO'?'red':e.type==='COMERCIAL'?'gold':'blue';
-    return `<div class="tl-item">
-      <div class="tl-dot ${dotColor}" style="margin-top:5px"></div>
-      <div class="tl-body">
-        <div class="tl-event-name">${e.event}</div>
-        <div class="tl-meta">${e.client} · ${e.venue}</div>
-      </div>
-      <div class="tl-right">
-        <div class="tl-time">${e.start}${e.end?'–'+e.end:''}</div>
-        <div class="tl-date">${formatDate(e.date)} ${e.day}</div>
-      </div>
-    </div>`;
-  }).join('');
-
-  // Chart
-  const interno = events.filter(e=>e.type==='INTERNO').length;
-  const comercial = events.filter(e=>e.type==='COMERCIAL').length;
-  const ctx = document.getElementById('chart-type');
-  if(ctx._chartInst) ctx._chartInst.destroy();
-  ctx._chartInst = new Chart(ctx, {
-    type:'doughnut',
-    data:{
-      labels:['Interno','Comercial'],
-      datasets:[{data:[interno,comercial],backgroundColor:['rgba(37,99,235,0.8)','rgba(245,158,11,0.8)'],borderWidth:0}]
-    },
-    options:{
-      responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{color:'#94A3B8',font:{size:11},padding:16}}}
+// ── SEED (only if empty) ──
+async function maybeSeed() {
+  const snap = await getDocs(collection(db, COL));
+  if (snap.empty) {
+    for (const p of SEED) {
+      await addDoc(collection(db, COL), { ...p, criadoEm: serverTimestamp() });
     }
-  });
-}
-
-function formatDate(d){
-  if(!d) return '';
-  const [y,m,di]=d.split('-');
-  return `${di}/${m}`;
-}
-
-// ═══════════════════════════════════════
-// EVENTS
-// ═══════════════════════════════════════
-let evFilter = 'ALL';
-function filterChip(el, val){
-  document.querySelectorAll('#ev-filters .filter-chip').forEach(c=>c.classList.remove('active'));
-  el.classList.add('active');
-  evFilter = val;
-  renderEvents();
-}
-function filterEvents(){renderEvents()}
-
-function renderEvents(){
-  const search = (document.getElementById('ev-search')||{value:''}).value.toLowerCase();
-  let list = [...events];
-  if(evFilter!=='ALL'){
-    list = list.filter(e=> e.status===evFilter || e.type===evFilter);
   }
-  if(search) list = list.filter(e=> (e.event+e.client+e.venue+e.obs).toLowerCase().includes(search));
+}
+maybeSeed();
 
-  const tb = document.getElementById('events-tbody');
-  if(!list.length){
-    tb.innerHTML=`<tr><td colspan="13" style="text-align:center;padding:40px;color:var(--text3)">Nenhum evento encontrado.</td></tr>`;
+// ── SAVE ──
+window.saveProposal = async function() {
+  const titulo  = document.getElementById('f-titulo').value.trim();
+  const cliente = document.getElementById('f-cliente').value.trim();
+  const espaco  = document.getElementById('f-espaco').value.trim();
+  const data    = document.getElementById('f-data').value;
+  const valor   = parseFloat(document.getElementById('f-valor').value) || 0;
+  const status  = document.getElementById('f-status').value;
+  const obs     = document.getElementById('f-obs').value.trim();
+
+  if (!titulo || !cliente) { showToast('Preencha ao menos o título e o cliente.','error'); return; }
+
+  try {
+    if (window._editId) {
+      await updateDoc(doc(db, COL, window._editId), { titulo, cliente, espaco, data, valor, status, obs });
+      showToast('Proposta atualizada ✓','success');
+    } else {
+      await addDoc(collection(db, COL), { titulo, cliente, espaco, data, valor, status, obs, criadoEm: serverTimestamp() });
+      showToast('Proposta criada ✓','success');
+    }
+    closeModal();
+  } catch(e) {
+    showToast('Erro ao salvar: ' + e.message,'error');
+  }
+};
+
+// ── DELETE ──
+window.deleteProposal = async function(id) {
+  if (!confirm('Excluir esta proposta permanentemente?')) return;
+  try {
+    await deleteDoc(doc(db, COL, id));
+    showToast('Proposta excluída','info');
+    closeDetail();
+  } catch(e) {
+    showToast('Erro ao excluir','error');
+  }
+};
+
+// ── RENDER TABLE ──
+window.renderTable = function() {
+  const q  = document.getElementById('search').value.toLowerCase();
+  const fs = document.getElementById('filter-status').value || window._filterStatus;
+  const sc = document.getElementById('sort-col').value || _sortCol;
+
+  let rows = [...window._proposals];
+  if (q)  rows = rows.filter(p => (p.titulo+p.cliente+p.espaco).toLowerCase().includes(q));
+  if (fs) rows = rows.filter(p => p.status === fs);
+  rows.sort((a,b) => {
+    let va = a[sc], vb = b[sc];
+    if (sc==='valor') { va=+va; vb=+vb; }
+    if (va<vb) return -_sortDir; if (va>vb) return _sortDir; return 0;
+  });
+
+  const tbody = document.getElementById('table-body');
+  if (rows.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="6"><div class="empty"><div class="empty-icon">🔍</div><div class="empty-title">Nenhuma proposta encontrada</div><div>Tente outro filtro ou crie uma nova proposta.</div></div></td></tr>`;
     return;
   }
-  tb.innerHTML = list.map(e=>`
-    <tr style="${e.status==='CANCELADO'?'opacity:0.65':''}">
-      <td class="td-mono">${e.date.split('-').reverse().join('/')}</td>
-      <td>${e.day}</td>
-      <td><span class="chip chip-${e.type.toLowerCase()}">${e.type}</span></td>
-      <td class="td-mono">${e.prop||'—'}</td>
-      <td>${e.venue}</td>
-      <td class="td-mono">${e.start||'—'}</td>
-      <td class="td-mono">${e.end||'—'}</td>
-      <td>${e.pax||'—'}</td>
-      <td>${e.client}</td>
-      <td style="max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.event}</td>
-      <td style="max-width:200px;font-size:0.73rem;color:var(--text2)">${e.obs||'—'}</td>
-      <td>${e.status?`<span class="chip chip-${e.status.toLowerCase()}">${e.status}</span>`:'<span style="color:var(--text3);font-size:0.72rem">—</span>'}</td>
+  tbody.innerHTML = rows.map(p => `
+    <tr onclick="openDetail('${p.id}')" style="cursor:pointer">
       <td>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost btn-sm" onclick="editEvent(${e.id})">✏️</button>
-          <button class="btn btn-ruby btn-sm" onclick="deleteEvent(${e.id})">🗑</button>
+        <div class="cell-title">${esc(p.titulo)}</div>
+        <div class="cell-client">${esc(p.cliente)}</div>
+      </td>
+      <td class="cell-space">${esc(p.espaco||'—')}</td>
+      <td class="cell-date">${fmtDate(p.data)}</td>
+      <td class="cell-value">${fmtMoney(p.valor)}</td>
+      <td>${statusBadge(p.status)}</td>
+      <td onclick="event.stopPropagation()">
+        <div class="actions">
+          <button class="btn btn-ghost btn-sm" onclick="openEdit('${p.id}')">Editar</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteProposal('${p.id}')">✕</button>
         </div>
       </td>
     </tr>
   `).join('');
-}
+};
 
-function openEvModal(id){
-  editingEventId = id||null;
-  populateVenueSelects();
-  if(id){
-    const ev = events.find(e=>e.id===id);
-    document.getElementById('ev-modal-title').textContent = 'Editar Evento';
-    document.getElementById('ev-date').value=ev.date;
-    document.getElementById('ev-day').value=ev.day;
-    document.getElementById('ev-type').value=ev.type;
-    document.getElementById('ev-prop').value=ev.prop;
-    document.getElementById('ev-venue').value=ev.venue;
-    document.getElementById('ev-start').value=ev.start;
-    document.getElementById('ev-end').value=ev.end||'';
-    document.getElementById('ev-pax').value=ev.pax||'';
-    document.getElementById('ev-client').value=ev.client;
-    document.getElementById('ev-name').value=ev.event;
-    document.getElementById('ev-obs').value=ev.obs||'';
-    document.getElementById('ev-status').value=ev.status||'CONFIRMADO';
-  } else {
-    document.getElementById('ev-modal-title').textContent = 'Novo Evento';
-    ['ev-date','ev-prop','ev-start','ev-end','ev-pax','ev-client','ev-name','ev-obs'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('ev-day').value='';
-  }
-  document.getElementById('ev-date').addEventListener('change',function(){
-    const d=new Date(this.value+'T12:00:00');
-    document.getElementById('ev-day').value=DAYS[d.getDay()].toUpperCase();
-  });
-  openOverlay('ev-overlay');
-}
-
-function editEvent(id){openEvModal(id)}
-
-function saveEvent(){
-  const date=document.getElementById('ev-date').value;
-  const d=new Date(date+'T12:00:00');
-  const ev={
-    id: editingEventId||nextEventId++,
-    date, day: DAYS[d.getDay()].toUpperCase(),
-    type: document.getElementById('ev-type').value,
-    prop: document.getElementById('ev-prop').value,
-    venue: document.getElementById('ev-venue').value,
-    start: document.getElementById('ev-start').value,
-    end: document.getElementById('ev-end').value,
-    pax: document.getElementById('ev-pax').value,
-    client: document.getElementById('ev-client').value,
-    event: document.getElementById('ev-name').value,
-    obs: document.getElementById('ev-obs').value,
-    status: document.getElementById('ev-status').value,
-  };
-  if(editingEventId){
-    const idx=events.findIndex(e=>e.id===editingEventId);
-    events[idx]=ev;
-  } else events.push(ev);
-  closeOverlay('ev-overlay');
-  renderEvents();
-  updateBadge();
-}
-
-function deleteEvent(id){
-  if(!confirm('Remover este evento?')) return;
-  events=events.filter(e=>e.id!==id);
-  renderEvents();
-  updateBadge();
-}
-
-function updateBadge(){document.getElementById('badge-events').textContent=events.length}
-
-// ═══════════════════════════════════════
-// VENUES
-// ═══════════════════════════════════════
-function renderVenues(){
-  const g = document.getElementById('venues-grid');
-  if(!venues.length){g.innerHTML='<p style="color:var(--text3)">Nenhum local cadastrado.</p>';return}
-  g.innerHTML = venues.map(v=>`
-    <div class="venue-card" onclick="showVenueDetail(${v.id})">
-      <div class="venue-img" style="font-size:${v.photos&&v.photos[0]?'0':'3rem'};background:var(--navy3)">
-        ${v.photos&&v.photos[0]?`<img src="${v.photos[0]}" style="width:100%;height:130px;object-fit:cover">`:'🏛️'}
-      </div>
-      <div class="venue-info">
-        <div class="venue-name">${v.name}</div>
-        <div class="venue-cap">Cap. ${v.cap} pax · R$ ${Number(v.priceD||0).toLocaleString('pt-BR')}/dia</div>
-        <div class="venue-tags">
-          ${(v.builtIn||[]).slice(0,3).map(b=>`<span class="venue-tag">${b}</span>`).join('')}
-          ${(v.builtIn||[]).length>3?`<span class="venue-tag">+${v.builtIn.length-3}</span>`:''}
-          ${v.setup==='full'?`<span class="venue-tag ext">Montagem total</span>`:v.setup==='partial'?`<span class="venue-tag ext">Montagem parcial</span>`:''}
+// ── PIPELINE ──
+window.renderPipeline = function() {
+  const COLS = [
+    { key:'Em elaboração', label:'Em Elaboração', color:'var(--yellow)' },
+    { key:'Enviada',       label:'Enviadas',      color:'var(--accent)' },
+    { key:'Aceita',        label:'Aceitas',       color:'var(--green)'  },
+    { key:'Expirada',      label:'Expiradas',     color:'var(--red)'    },
+  ];
+  const board = document.getElementById('pipeline-board');
+  board.innerHTML = COLS.map(col => {
+    const items = window._proposals.filter(p => p.status === col.key);
+    const total = items.reduce((s,p) => s + (+p.valor||0), 0);
+    return `
+      <div class="pipeline-col">
+        <div class="pipeline-col-head" style="color:${col.color}">
+          ${col.label}
+          <span style="color:var(--muted);font-size:10px">${items.length}</span>
         </div>
+        ${items.length ? items.map(p=>`
+          <div class="pipeline-card" onclick="openDetail('${p.id}')" style="cursor:pointer">
+            <div class="pipeline-card-title">${esc(p.titulo)}</div>
+            <div class="pipeline-card-client">${esc(p.cliente)}</div>
+            <div class="pipeline-card-value">${fmtMoney(p.valor)}</div>
+          </div>
+        `).join('') : `<div style="font-size:12px;color:var(--muted);text-align:center;padding:20px">Nenhuma</div>`}
+        ${items.length ? `<div style="font-size:11px;color:var(--muted);font-family:var(--mono);text-align:right;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">Total: ${fmtMoney(total)}</div>` : ''}
       </div>
-    </div>
-  `).join('');
-}
+    `;
+  }).join('');
+};
 
-function showVenueDetail(id){
-  const v = venues.find(x=>x.id===id);
-  if(!v) return;
-  document.getElementById('vd-title').textContent = v.name;
-  document.getElementById('vd-body').innerHTML = `
-    <div style="display:flex;gap:10px;overflow-x:auto;margin-bottom:16px">
-      ${v.photos&&v.photos.length?v.photos.map(p=>`<img src="${p}" style="height:160px;border-radius:10px;object-fit:cover;flex-shrink:0">`).join('')
-      :`<div style="width:100%;height:120px;background:var(--surface2);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:3rem">🏛️</div>`}
-    </div>
-    <div class="g2">
-      <div>
-        <div class="sum-box"><div class="sum-title">Informações</div>
-          <div class="sum-row"><span class="sum-lbl">Endereço</span><span class="sum-val" style="text-align:right;max-width:200px">${v.addr||'—'}</span></div>
-          <div class="sum-row"><span class="sum-lbl">Capacidade</span><span class="sum-val">${v.cap} pax</span></div>
-          <div class="sum-row"><span class="sum-lbl">Valor/Hora</span><span class="sum-val">R$ ${Number(v.priceH||0).toLocaleString('pt-BR')}</span></div>
-          <div class="sum-row"><span class="sum-lbl">Valor Diária</span><span class="sum-val">R$ ${Number(v.priceD||0).toLocaleString('pt-BR')}</span></div>
-          <div class="sum-row"><span class="sum-lbl">Montagem</span><span class="sum-val">${{none:'Não necessária',partial:'Parcial',full:'Completa'}[v.setup]||'—'}</span></div>
-        </div>
-      </div>
-      <div>
-        <div class="sum-box"><div class="sum-title">Equipamentos Acoplados</div>
-          ${(v.builtIn||[]).length?v.builtIn.map(b=>`<div class="sum-row"><span class="sum-val">✅ ${b}</span></div>`).join(''):'<span style="color:var(--text3);font-size:0.8rem">Nenhum</span>'}
-        </div>
-        ${v.obs?`<div class="sum-box"><div class="sum-title">Observações</div><p style="font-size:0.82rem;color:var(--text2)">${v.obs}</p></div>`:''}
-      </div>
-    </div>
-    <div style="display:flex;gap:10px;margin-top:16px">
-      <button class="btn btn-ghost btn-sm" onclick="closeOverlay('vdetail-overlay');openVenueModal(${id})">✏️ Editar</button>
-      <button class="btn btn-ruby btn-sm" onclick="if(confirm('Remover local?')){venues=venues.filter(v=>v.id!==${id});closeOverlay('vdetail-overlay');renderVenues()}">🗑 Remover</button>
-    </div>
+// ── KPIs ──
+window.updateKPIs = function() {
+  const all = window._proposals;
+  const aceitas = all.filter(p => p.status==='Aceita');
+  const neg = all.filter(p => p.status==='Enviada'||p.status==='Em elaboração');
+  const valorAceito = aceitas.reduce((s,p)=>s+(+p.valor||0),0);
+  document.getElementById('kpi-total').textContent = all.length;
+  document.getElementById('kpi-aceito').textContent = aceitas.length;
+  document.getElementById('kpi-valor').textContent = fmtMoneyShort(valorAceito);
+  document.getElementById('kpi-neg').textContent = neg.length;
+};
+
+window.updateCounts = function() {
+  const all = window._proposals;
+  document.getElementById('cnt-all').textContent     = all.length;
+  document.getElementById('cnt-aceita').textContent  = all.filter(p=>p.status==='Aceita').length;
+  document.getElementById('cnt-enviada').textContent = all.filter(p=>p.status==='Enviada').length;
+  document.getElementById('cnt-elab').textContent    = all.filter(p=>p.status==='Em elaboração').length;
+  document.getElementById('cnt-exp').textContent     = all.filter(p=>p.status==='Expirada').length;
+};
+
+// ── MODAL ──
+window.openModal = function() {
+  window._editId = null;
+  document.getElementById('modal-title').textContent = 'Nova Proposta';
+  ['f-titulo','f-cliente','f-espaco','f-data','f-obs'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-valor').value = '';
+  document.getElementById('f-status').value = 'Em elaboração';
+  document.getElementById('modal-overlay').classList.add('open');
+};
+
+window.openEdit = function(id) {
+  const p = window._proposals.find(x=>x.id===id); if(!p) return;
+  window._editId = id;
+  document.getElementById('modal-title').textContent = 'Editar Proposta';
+  document.getElementById('f-titulo').value  = p.titulo||'';
+  document.getElementById('f-cliente').value = p.cliente||'';
+  document.getElementById('f-espaco').value  = p.espaco||'';
+  document.getElementById('f-data').value    = p.data||'';
+  document.getElementById('f-valor').value   = p.valor||'';
+  document.getElementById('f-status').value  = p.status||'Em elaboração';
+  document.getElementById('f-obs').value     = p.obs||'';
+  closeDetail();
+  document.getElementById('modal-overlay').classList.add('open');
+};
+
+window.closeModal = function() { document.getElementById('modal-overlay').classList.remove('open'); };
+window.closeOnBackdrop = function(e) { if(e.target.id==='modal-overlay') closeModal(); };
+
+// ── DETAIL ──
+window.openDetail = function(id) {
+  const p = window._proposals.find(x=>x.id===id); if(!p) return;
+  document.getElementById('detail-titulo').textContent = p.titulo;
+  document.getElementById('detail-cliente').textContent = p.cliente;
+  document.getElementById('detail-badge-wrap').innerHTML = statusBadge(p.status);
+  document.getElementById('detail-grid').innerHTML = `
+    <div class="detail-item"><div class="detail-item-label">Espaço</div><div class="detail-item-value">${esc(p.espaco||'—')}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Data</div><div class="detail-item-value" style="font-family:var(--mono)">${fmtDate(p.data)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Valor</div><div class="detail-item-value" style="color:var(--green)">${fmtMoney(p.valor)}</div></div>
+    <div class="detail-item"><div class="detail-item-label">Status</div><div class="detail-item-value">${p.status}</div></div>
   `;
-  openOverlay('vdetail-overlay');
-}
+  const obsWrap = document.getElementById('detail-obs-wrap');
+  if (p.obs) { obsWrap.style.display='block'; document.getElementById('detail-obs').textContent = p.obs; }
+  else { obsWrap.style.display='none'; }
+  document.getElementById('detail-del-btn').onclick = () => deleteProposal(id);
+  document.getElementById('detail-edit-btn').onclick = () => openEdit(id);
+  document.getElementById('detail-overlay').classList.add('open');
+};
+window.closeDetail = function() { document.getElementById('detail-overlay').classList.remove('open'); };
+window.closeDetailOnBackdrop = function(e) { if(e.target.id==='detail-overlay') closeDetail(); };
 
-let builtInTags = [];
-function openVenueModal(id){
-  editingVenueId=id||null;
-  venuePhotosData=[];
-  builtInTags=[];
-  document.getElementById('vn-photo-preview').innerHTML='';
-  if(id){
-    const v=venues.find(x=>x.id===id);
-    document.getElementById('venue-modal-title').textContent='Editar Local';
-    document.getElementById('vn-name').value=v.name;
-    document.getElementById('vn-cap').value=v.cap;
-    document.getElementById('vn-addr').value=v.addr||'';
-    document.getElementById('vn-price-h').value=v.priceH||'';
-    document.getElementById('vn-price-d').value=v.priceD||'';
-    document.getElementById('vn-setup').value=v.setup||'none';
-    document.getElementById('vn-obs').value=v.obs||'';
-    builtInTags=[...(v.builtIn||[])];
-    venuePhotosData=[...(v.photos||[])];
-    renderBuiltInTags();
-    renderVenuePhotoPreviews();
-  } else {
-    document.getElementById('venue-modal-title').textContent='Novo Local';
-    ['vn-name','vn-cap','vn-addr','vn-price-h','vn-price-d','vn-obs'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('vn-setup').value='none';
-    renderBuiltInTags();
-  }
-  openOverlay('venue-overlay');
+// ── HELPERS ──
+function fmtMoney(v) { return 'R$ ' + (+v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function fmtMoneyShort(v) {
+  if (v>=1000) return 'R$ ' + (v/1000).toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:1}) + 'k';
+  return fmtMoney(v);
 }
-
-function addBuiltInTag(){
-  const inp=document.getElementById('vn-built-in-input');
-  const val=inp.value.trim();
-  if(!val) return;
-  builtInTags.push(val);
-  inp.value='';
-  renderBuiltInTags();
+function fmtDate(d) {
+  if (!d) return '—';
+  const [y,m,day] = d.split('-');
+  return `${day}/${m}/${y}`;
 }
-
-function renderBuiltInTags(){
-  const area=document.getElementById('vn-built-in-tags');
-  area.innerHTML=builtInTags.map((t,i)=>
-    `<div class="tag-item">${t}<button onclick="builtInTags.splice(${i},1);renderBuiltInTags()">✕</button></div>`
-  ).join('');
-}
-
-function handleVenuePhotos(input){
-  const files=[...input.files];
-  files.forEach(f=>{
-    const r=new FileReader();
-    r.onload=e=>{venuePhotosData.push(e.target.result);renderVenuePhotoPreviews()}
-    r.readAsDataURL(f);
-  });
-}
-
-function renderVenuePhotoPreviews(){
-  const g=document.getElementById('vn-photo-preview');
-  g.innerHTML=venuePhotosData.map((src,i)=>
-    `<div class="photo-thumb-wrap"><img class="photo-thumb" src="${src}"><button class="rm-photo" onclick="venuePhotosData.splice(${i},1);renderVenuePhotoPreviews()">✕</button></div>`
-  ).join('');
-}
-
-function saveVenue(){
-  const v={
-    id:editingVenueId||nextVenueId++,
-    name:document.getElementById('vn-name').value,
-    cap:parseInt(document.getElementById('vn-cap').value)||0,
-    addr:document.getElementById('vn-addr').value,
-    priceH:parseFloat(document.getElementById('vn-price-h').value)||0,
-    priceD:parseFloat(document.getElementById('vn-price-d').value)||0,
-    setup:document.getElementById('vn-setup').value,
-    obs:document.getElementById('vn-obs').value,
-    builtIn:[...builtInTags],
-    photos:[...venuePhotosData],
+function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function statusBadge(s) {
+  const map = {
+    'Aceita':'aceita','Enviada':'enviada','Em elaboração':'elaboracao','Expirada':'expirada','Cancelada':'cancelada'
   };
-  if(editingVenueId){venues=venues.map(x=>x.id===editingVenueId?v:x)}
-  else venues.push(v);
-  closeOverlay('venue-overlay');
-  renderVenues();
-  populateVenueSelects();
+  return `<span class="badge badge-${map[s]||'cancelada'}">${esc(s)}</span>`;
 }
 
-function populateVenueSelects(){
-  ['ev-venue','pr-venue'].forEach(sid=>{
-    const sel=document.getElementById(sid);
-    if(!sel) return;
-    const cur=sel.value;
-    sel.innerHTML='<option value="">Selecione…</option>'+venues.map(v=>`<option value="${v.name}">${v.name}</option>`).join('');
-    sel.value=cur;
-  });
-}
+window.toggleSort = function(col) {
+  if (_sortCol===col) _sortDir*=-1; else { _sortCol=col; _sortDir=1; }
+  document.getElementById('sort-col').value = col;
+  renderTable();
+};
 
-// ═══════════════════════════════════════
-// EQUIPMENT
-// ═══════════════════════════════════════
-function renderEquipment(){
-  const tb=document.getElementById('equip-tbody');
-  tb.innerHTML=equipment.map(e=>`
-    <tr>
-      <td style="font-size:1.5rem;text-align:center">${e.icon}</td>
-      <td style="font-weight:700">${e.name}</td>
-      <td>${e.qty}</td>
-      <td><span class="chip chip-interno">${e.cat}</span></td>
-      <td style="color:var(--text3);font-size:0.78rem">${e.desc||'—'}</td>
-      <td>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost btn-sm" onclick="editEquip(${e.id})">✏️</button>
-          <button class="btn btn-ruby btn-sm" onclick="delEquip(${e.id})">🗑</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function openEquipModal(id){
-  if(id){
-    const e=equipment.find(x=>x.id===id);
-    document.getElementById('eq-name').value=e.name;
-    document.getElementById('eq-icon').value=e.icon;
-    document.getElementById('eq-qty').value=e.qty;
-    document.getElementById('eq-cat').value=e.cat;
-    document.getElementById('eq-desc').value=e.desc;
-    document.querySelector('#equip-overlay .mh-title').textContent='Editar Equipamento';
-    document.getElementById('equip-overlay')._editId=id;
-  } else {
-    ['eq-name','eq-icon','eq-desc'].forEach(i=>document.getElementById(i).value='');
-    document.getElementById('eq-qty').value=1;
-    document.querySelector('#equip-overlay .mh-title').textContent='Novo Equipamento';
-    document.getElementById('equip-overlay')._editId=null;
-  }
-  openOverlay('equip-overlay');
-}
-
-function editEquip(id){openEquipModal(id)}
-function delEquip(id){if(confirm('Remover?')){equipment=equipment.filter(e=>e.id!==id);renderEquipment()}}
-
-function saveEquipment(){
-  const editId=document.getElementById('equip-overlay')._editId;
-  const e={
-    id:editId||(equipment.length?Math.max(...equipment.map(e=>e.id))+1:1),
-    name:document.getElementById('eq-name').value,
-    icon:document.getElementById('eq-icon').value||'🔧',
-    qty:parseInt(document.getElementById('eq-qty').value)||1,
-    cat:document.getElementById('eq-cat').value,
-    desc:document.getElementById('eq-desc').value,
-  };
-  if(editId) equipment=equipment.map(x=>x.id===editId?e:x);
-  else equipment.push(e);
-  closeOverlay('equip-overlay');
-  renderEquipment();
-}
-
-// ═══════════════════════════════════════
-// PROPOSALS
-// ═══════════════════════════════════════
-function renderProposals(){
-  let list=propFilterStatus==='ALL'?proposals:proposals.filter(p=>p.status===propFilterStatus);
-  const tb=document.getElementById('prop-tbody');
-  if(!list.length){
-    tb.innerHTML=`<tr><td colspan="9" style="text-align:center;padding:40px;color:var(--text3)">Nenhuma proposta encontrada. Crie sua primeira!</td></tr>`;return;
-  }
-  tb.innerHTML=list.map(p=>`
-    <tr>
-      <td class="td-mono">#${String(p.id).padStart(4,'0')}</td>
-      <td style="font-weight:600">${p.client}</td>
-      <td>${p.event}</td>
-      <td class="td-mono">${p.date?p.date.split('-').reverse().join('/'):'—'}</td>
-      <td>${p.venue||'—'}</td>
-      <td>${p.pax||'—'}</td>
-      <td style="font-weight:700;color:var(--emerald)">R$ ${Number(p.total||0).toLocaleString('pt-BR',{minimumFractionDigits:2})}</td>
-      <td><span class="chip chip-${p.status}">${{elaboracao:'Em Elaboração',aceita:'Aceita',recusada:'Recusada',vencida:'Vencida'}[p.status]||p.status}</span></td>
-      <td>
-        <div style="display:flex;gap:6px">
-          <button class="btn btn-ghost btn-sm" onclick="deleteProposal(${p.id})">🗑</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-}
-
-function propFilter(el,val){
-  document.querySelectorAll('#page-proposals .filter-chip').forEach(c=>c.classList.remove('active'));
+window.filterSidebar = function(status, el) {
+  window._filterStatus = status;
+  document.getElementById('filter-status').value = '';
+  document.getElementById('status-filter-badge').style.display = 'flex';
+  document.getElementById('filter-label').textContent = status;
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
   el.classList.add('active');
-  propFilterStatus=val;
-  renderProposals();
-}
+  // switch to list if on pipeline
+  document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.view-tab')[0].classList.add('active');
+  switchPanel('list');
+  renderTable();
+};
 
-function deleteProposal(id){
-  if(!confirm('Remover proposta?')) return;
-  proposals=proposals.filter(p=>p.id!==id);
-  renderProposals();
-}
+window.clearFilter = function() {
+  window._filterStatus = '';
+  document.getElementById('status-filter-badge').style.display = 'none';
+  renderTable();
+};
 
-// WIZARD
-let propData={};
-function openProposalWizard(){
-  propWizStep=0;
-  propData={eqs:{},svcs:[],extEqDesc:'',eqType:'int'};
-  currentEqType='int';
-  ['pr-client','pr-contact','pr-event','pr-time','pr-pax','pr-obs','ext-eq-desc'].forEach(i=>{const el=document.getElementById(i);if(el)el.value=''});
-  document.getElementById('pr-base').value='';
-  document.getElementById('pr-disc').value='0';
-  document.getElementById('pr-svc-val').value='0';
-  populateVenueSelects();
-  setEqType('int');
-  buildPropEqGrid();
-  updateWizUI();
-  openOverlay('prop-overlay');
-}
-
-function propWizNext(){
-  if(propWizStep===3){saveProposal();return}
-  if(propWizStep===2){buildSummary()}
-  propWizStep++;
-  updateWizUI();
-}
-function propWizBack(){if(propWizStep>0){propWizStep--;updateWizUI()}}
-
-function updateWizUI(){
-  document.querySelectorAll('.wiz-panel').forEach((p,i)=>{p.classList.toggle('active',i===propWizStep)});
-  document.querySelectorAll('.wiz-step').forEach((s,i)=>{
-    s.classList.remove('active','done');
-    if(i<propWizStep) s.classList.add('done');
-    if(i===propWizStep) s.classList.add('active');
-  });
-  document.getElementById('prop-back-btn').style.display=propWizStep>0?'inline-flex':'none';
-  document.getElementById('prop-next-btn').textContent=propWizStep===3?'✅ Salvar Proposta':'Próximo →';
-}
-
-function setEqType(type){
-  currentEqType=type;
-  document.getElementById('eqtype-int').classList.toggle('sel',type==='int');
-  document.getElementById('eqtype-ext').classList.toggle('sel',type==='ext');
-  document.getElementById('eqtype-ext').classList.toggle('ext',type==='ext');
-  document.getElementById('eq-int-area').style.display=type==='int'?'block':'none';
-  document.getElementById('ext-note-area').classList.toggle('show',type==='ext');
-}
-
-function buildPropEqGrid(){
-  const g=document.getElementById('prop-eq-grid');
-  g.innerHTML=equipment.map(e=>{
-    const qty=propData.eqs[e.id]||0;
-    return `<div class="eq-card ${qty>0?'sel':''}" id="peq-${e.id}">
-      <div class="eq-icon">${e.icon}</div>
-      <div class="eq-name">${e.name}</div>
-      <div class="eq-info">${e.cat} · ${e.qty} disp.</div>
-      <div class="eq-qty">
-        <button class="qty-btn" onclick="propEqAdj(${e.id},-1)">−</button>
-        <span class="qty-num" id="peqn-${e.id}">${qty}</span>
-        <button class="qty-btn" onclick="propEqAdj(${e.id},1)">+</button>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function propEqAdj(id,delta){
-  const eq=equipment.find(e=>e.id===id);
-  if(!eq) return;
-  const cur=propData.eqs[id]||0;
-  const nv=Math.max(0,Math.min(eq.qty,cur+delta));
-  propData.eqs[id]=nv;
-  document.getElementById('peqn-'+id).textContent=nv;
-  document.getElementById('peq-'+id).classList.toggle('sel',nv>0);
-}
-
-function toggleSvc(el){el.classList.toggle('sel')}
-
-function recalcProp(){
-  const base=parseFloat(document.getElementById('pr-base').value)||0;
-  const disc=(parseFloat(document.getElementById('pr-disc').value)||0)/100;
-  const svc=parseFloat(document.getElementById('pr-svc-val').value)||0;
-  const total=(base+svc)*(1-disc);
-  if(document.getElementById('sum-total')) document.getElementById('sum-total').textContent='R$ '+total.toLocaleString('pt-BR',{minimumFractionDigits:2});
-  if(document.getElementById('sum-base')) document.getElementById('sum-base').textContent='R$ '+base.toLocaleString('pt-BR',{minimumFractionDigits:2});
-  if(document.getElementById('sum-svc')) document.getElementById('sum-svc').textContent='R$ '+svc.toLocaleString('pt-BR',{minimumFractionDigits:2});
-  if(document.getElementById('sum-disc')) document.getElementById('sum-disc').textContent='- R$ '+((base+svc)*disc).toLocaleString('pt-BR',{minimumFractionDigits:2});
-  return total;
-}
-
-function buildSummary(){
-  const venueName=(document.getElementById('pr-venue').value)||(document.getElementById('pr-venue').options[document.getElementById('pr-venue').selectedIndex]||{}).text||'—';
-  document.getElementById('sum-client').textContent=document.getElementById('pr-client').value||'—';
-  document.getElementById('sum-event').textContent=document.getElementById('pr-event').value||'—';
-  document.getElementById('sum-venue').textContent=document.getElementById('pr-venue').value||'—';
-  document.getElementById('sum-date').textContent=(document.getElementById('pr-date').value||'—')+' · '+(document.getElementById('pr-time').value||'');
-  document.getElementById('sum-pax').textContent=document.getElementById('pr-pax').value||'—';
-
-  const selEqs=Object.entries(propData.eqs).filter(([,q])=>q>0).map(([id,q])=>{
-    const eq=equipment.find(e=>e.id==id);
-    return eq?`<div class="sum-row"><span class="sum-lbl">${eq.icon} ${eq.name}</span><span class="sum-val">${q}x</span></div>`:'';
-  }).join('');
-  document.getElementById('sum-eq-list').innerHTML=currentEqType==='ext'
-    ?`<div style="color:var(--gold);font-size:0.82rem">🚚 Externo — ${document.getElementById('ext-eq-desc').value||'Não especificado'}</div>`
-    :(selEqs||'<span style="color:var(--text3);font-size:0.8rem">Nenhum</span>');
-  recalcProp();
-}
-
-function saveProposal(){
-  const total=recalcProp();
-  const p={
-    id:(proposals.length?Math.max(...proposals.map(p=>p.id))+1:1),
-    client:document.getElementById('pr-client').value,
-    event:document.getElementById('pr-event').value,
-    date:document.getElementById('pr-date').value,
-    venue:document.getElementById('pr-venue').value,
-    pax:document.getElementById('pr-pax').value,
-    base:parseFloat(document.getElementById('pr-base').value)||0,
-    disc:parseFloat(document.getElementById('pr-disc').value)||0,
-    svc:parseFloat(document.getElementById('pr-svc-val').value)||0,
-    total,
-    eqs:{...propData.eqs},
-    eqType:currentEqType,
-    extDesc:document.getElementById('ext-eq-desc').value,
-    status:document.getElementById('pr-status').value,
-    obs:document.getElementById('pr-obs').value,
-  };
-  proposals.push(p);
-  closeOverlay('prop-overlay');
-  renderProposals();
-}
-
-// ═══════════════════════════════════════
-// ARCHIVE
-// ═══════════════════════════════════════
-function showArchiveModal(){
-  const today=new Date().toISOString().slice(0,10);
-  document.getElementById('arc-to').value=today;
-  const month=new Date(); month.setDate(1);
-  document.getElementById('arc-from').value=month.toISOString().slice(0,10);
-  document.getElementById('arc-label').value='';
-  openOverlay('archive-overlay');
-}
-
-function doArchive(){
-  const from=document.getElementById('arc-from').value;
-  const to=document.getElementById('arc-to').value;
-  const label=document.getElementById('arc-label').value||`${from} a ${to}`;
-  const toMove=events.filter(e=>e.date>=from && e.date<=to);
-  if(!toMove.length){alert('Nenhum evento encontrado neste período.');return}
-  if(!confirm(`Arquivar ${toMove.length} evento(s) do período "${label}"?`)) return;
-  const ts=new Date().toLocaleString('pt-BR');
-  toMove.forEach(e=>archive.push({...e,period:label,archivedAt:ts}));
-  events=events.filter(e=>!(e.date>=from && e.date<=to));
-  closeOverlay('archive-overlay');
-  renderEvents();
-  updateBadge();
-  renderArchiveFilter();
-  alert(`✅ ${toMove.length} evento(s) arquivado(s) com sucesso!`);
-}
-
-function renderArchive(){
-  renderArchiveFilter();
-  filterArchive();
-}
-
-function renderArchiveFilter(){
-  const sel=document.getElementById('archive-period-filter');
-  const periods=[...new Set(archive.map(a=>a.period))];
-  sel.innerHTML='<option value="">Todos os períodos</option>'+periods.map(p=>`<option>${p}</option>`).join('');
-}
-
-function filterArchive(){
-  const period=document.getElementById('archive-period-filter').value;
-  const list=period?archive.filter(a=>a.period===period):archive;
-  const tb=document.getElementById('archive-tbody');
-  if(!list.length){
-    tb.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text3)">Nenhum evento arquivado${period?' neste período':''}.</td></tr>`;return;
+window.switchNav = function(el, view) {
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  el.classList.add('active');
+  clearFilter();
+  if (view==='pipeline') {
+    document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.view-tab')[1].classList.add('active');
+    switchPanel('pipeline');
+  } else {
+    document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.view-tab')[0].classList.add('active');
+    switchPanel('list');
   }
-  tb.innerHTML=list.map(e=>`
-    <tr>
-      <td><span style="font-size:0.72rem;background:rgba(139,92,246,0.15);color:var(--violet);padding:3px 10px;border-radius:99px;font-weight:700">${e.period}</span></td>
-      <td class="td-mono">${e.date.split('-').reverse().join('/')}</td>
-      <td>${e.day}</td>
-      <td style="font-weight:600">${e.event}</td>
-      <td>${e.client}</td>
-      <td>${e.venue}</td>
-      <td>${e.status?`<span class="chip chip-${e.status.toLowerCase()}">${e.status}</span>`:'—'}</td>
-      <td class="td-mono" style="font-size:0.72rem;color:var(--text3)">${e.archivedAt}</td>
-    </tr>
-  `).join('');
+};
+
+window.switchView = function(view, el) {
+  document.querySelectorAll('.view-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  switchPanel(view);
+};
+
+function switchPanel(view) {
+  document.getElementById('view-list').classList.toggle('visible', view==='list');
+  document.getElementById('view-pipeline').classList.toggle('visible', view==='pipeline');
 }
 
-// ═══════════════════════════════════════
-// EXPORT
-// ═══════════════════════════════════════
-function exportEventsExcel(){
-  const rows=[['Data','Dia','Tipo','Proposta','Local','Início','Término','Pax','Cliente','Evento','Observações','Status'],...events.map(e=>[e.date,e.day,e.type,e.prop,e.venue,e.start,e.end,e.pax,e.client,e.event,e.obs,e.status])];
-  downloadCSV('eventos_'+new Date().toISOString().slice(0,10)+'.csv',rows);
-}
-
-function exportEventsPDF(){exportTablePDF('Controle de Eventos — Junho 2026',['Data','Dia','Tipo','Local','Pax','Cliente','Evento','Status'],events.map(e=>[e.date.split('-').reverse().join('/'),e.day,e.type,e.venue,e.pax||'—',e.client.substring(0,20),e.event.substring(0,25),e.status||'—']),'eventos')}
-
-function exportProposalsExcel(){
-  const rows=[['#','Cliente','Evento','Data','Local','Pax','Total','Status'],...proposals.map(p=>['#'+String(p.id).padStart(4,'0'),p.client,p.event,p.date,p.venue,p.pax,'R$ '+Number(p.total||0).toFixed(2),p.status])];
-  downloadCSV('propostas_'+new Date().toISOString().slice(0,10)+'.csv',rows);
-}
-
-function exportProposalsPDF(){exportTablePDF('Propostas Comerciais',['#','Cliente','Evento','Data','Local','Total','Status'],proposals.map(p=>['#'+String(p.id).padStart(4,'0'),p.client,p.event,p.date?p.date.split('-').reverse().join('/'):'—',p.venue,'R$ '+Number(p.total||0).toFixed(2),p.status]),'propostas')}
-
-function exportArchiveExcel(){
-  const rows=[['Período','Data','Dia','Evento','Cliente','Local','Status','Arquivado em'],...archive.map(e=>[e.period,e.date,e.day,e.event,e.client,e.venue,e.status,e.archivedAt])];
-  downloadCSV('arquivo_'+new Date().toISOString().slice(0,10)+'.csv',rows);
-}
-
-function exportArchivePDF(){exportTablePDF('Eventos Arquivados',['Período','Data','Evento','Cliente','Local','Status'],archive.map(e=>[e.period,e.date.split('-').reverse().join('/'),e.event,e.client,e.venue,e.status||'—']),'arquivo')}
-
-function downloadCSV(filename,rows){
-  const bom='\uFEFF';
-  const csv=rows.map(r=>r.map(c=>`"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
-  const blob=new Blob([bom+csv],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;a.click();
-}
-
-function exportTablePDF(title,headers,rows,prefix){
-  const {jsPDF}=window.jspdf;
-  const doc=new jsPDF({orientation:'landscape',unit:'mm',format:'a4'});
-  doc.setFillColor(4,14,36);doc.rect(0,0,297,210,'F');
-  doc.setFontSize(16);doc.setTextColor(255,255,255);doc.setFont(undefined,'bold');
-  doc.text('MODESK ALFA — '+title,14,18);
-  doc.setFontSize(9);doc.setTextColor(148,163,184);doc.setFont(undefined,'normal');
-  doc.text('Gerado em: '+new Date().toLocaleString('pt-BR'),14,25);
-  const colW=Math.floor((297-28)/headers.length);
-  let y=34;
-  doc.setFillColor(37,99,235);doc.roundedRect(14,y,269,8,2,2,'F');
-  doc.setFontSize(8);doc.setTextColor(255,255,255);doc.setFont(undefined,'bold');
-  headers.forEach((h,i)=>doc.text(h,14+i*colW+2,y+5.5));
-  y+=10;
-  rows.forEach((row,ri)=>{
-    if(y>185){doc.addPage();y=20;doc.setFillColor(4,14,36);doc.rect(0,0,297,210,'F')}
-    if(ri%2===0){doc.setFillColor(22,32,64);doc.rect(14,y-1,269,8,'F')}
-    doc.setTextColor(241,245,249);doc.setFont(undefined,'normal');doc.setFontSize(7.5);
-    row.forEach((cell,i)=>doc.text(String(cell||'—').substring(0,Math.floor(colW/2.5)),14+i*colW+2,y+5));
-    y+=8;
-  });
-  doc.save(prefix+'_'+new Date().toISOString().slice(0,10)+'.pdf');
-}
-
-function exportCurrentPage(){
-  const active=document.querySelector('.nav-item.active');
-  const page=active?active.dataset.page:'';
-  if(page==='events') exportEventsPDF();
-  else if(page==='proposals') exportProposalsPDF();
-  else if(page==='archive') exportArchivePDF();
-  else alert('Selecione uma página com dados exportáveis (Eventos, Propostas ou Arquivo).');
-}
-
-// ═══════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════
-document.addEventListener('DOMContentLoaded',()=>{
-  populateVenueSelects();
-  renderDashboard();
-  renderEvents();
-
-  // Setup drag-drop zone
-  const zone=document.getElementById('vn-upload-zone');
-  if(zone){
-    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag')});
-    zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
-    zone.addEventListener('drop',e=>{
-      e.preventDefault();zone.classList.remove('drag');
-      const input=document.getElementById('vn-photo-input');
-      const dt=new DataTransfer();
-      [...e.dataTransfer.files].forEach(f=>dt.items.add(f));
-      input.files=dt.files;
-      handleVenuePhotos(input);
-    });
-  }
-
-  // Auto-fill day on date change in event modal
-  document.getElementById('ev-date').addEventListener('change',function(){
-    const d=new Date(this.value+'T12:00:00');
-    document.getElementById('ev-day').value=DAYS[d.getDay()].toUpperCase();
-  });
-});
+// ── TOAST ──
+window.showToast = function(msg, type='info') {
+  const container = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  const icons = { success:'✅', error:'❌', info:'ℹ️' };
+  t.innerHTML = `<span>${icons[type]||''}</span><span>${msg}</span>`;
+  container.appendChild(t);
+  requestAnimationFrame(() => { requestAnimationFrame(() => t.classList.add('show')); });
+  setTimeout(() => { t.classList.remove('show'); setTimeout(()=>t.remove(),350); }, 3000);
+};
 </script>
 </body>
 </html>
