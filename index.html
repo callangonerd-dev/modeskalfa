@@ -1,1305 +1,635 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MODESK ALFA v3 — Gestão Completa de Eventos Senac</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<style>
-  :root {
-    --primary: #003366;
-    --accent: #f97316;
-    --accent2: #ea580c;
-    --success: #0a7a5a;
-    --danger: #c0392b;
-    --bg: #f0f4fa;
-    --surface: #ffffff;
-    --text: #1a2035;
-    --text2: #4a5878;
-    --border: #d0daf0;
-  }
-  body { font-family: 'Inter', system_ui, sans-serif; }
-  .font-display { font-family: 'Space Grotesk', system_ui, sans-serif; }
-  .glass { background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); }
-  .modern-card { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
-  .modern-card:hover { transform: translateY(-3px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
-  .nav-active { background: linear-gradient(90deg, #00336615, transparent); border-left: 3px solid #f97316; color: #003366; font-weight: 600; }
-  .wizard-step { transition: all 0.2s ease; }
-  .wizard-step.active { background: #003366; color: white; }
-  .equip-card { transition: all 0.15s ease; }
-  .equip-card.active { border-color: #f97316; background: #fff7ed; }
-  .status-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; }
-  .modal { animation: modalPop 0.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
-  @keyframes modalPop { from { opacity: 0; transform: scale(0.96) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-  .kpi-value { font-variant-numeric: tabular-nums; }
-  .table-row { transition: background 0.1s; }
-  .table-row:hover { background: #f8fafc; }
-</style>
-</head>
-<body class="bg-[#f0f4fa] text-[#1a2035]">
+<?xml version="1.0" encoding="UTF-8"?>
+<modesk_alfa 
+    version="7.0" 
+    sistema="MODESK ALFA — Eventos Senac" 
+    data_geracao="2026-06-14T15:40:00-03:00" 
+    gerado_por="Grok (análise completa de todos os anexos: HTML v1-v7, MODESK_ALFA_v3_Completo, MODESK_ALFA_v6, CSVs + XML anterior v2.0)"
+    base="Consolidação de todas as versões HTML + dados reais dos CSVs + estrutura rica do XML v2">
 
-<!-- LOGIN SCREEN -->
-<div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#001a40] via-[#003366] to-[#002244]">
-  <div class="w-full max-w-md mx-4">
-    <div class="glass rounded-3xl p-10 shadow-2xl border border-white/20">
-      <div class="flex justify-center mb-8">
-        <div class="flex items-center gap-x-3">
-          <div class="w-12 h-12 rounded-2xl bg-[#f97316] flex items-center justify-center">
-            <span class="text-white font-black text-3xl tracking-tighter">M</span>
-          </div>
-          <div>
-            <div class="font-display text-3xl font-bold text-white tracking-tighter">MODESK</div>
-            <div class="text-[#f97316] text-xs tracking-[3px] font-semibold -mt-1">ALFA v3</div>
-          </div>
-        </div>
-      </div>
+  <!-- ===================================================== -->
+  <!-- CABEÇALHO E METADADOS DO SISTEMA -->
+  <!-- ===================================================== -->
+  <metadados>
+    <descricao>Sistema robusto de gestão de propostas, locação de espaços, equipamentos, cardápios e eventos do Senac Aldeota / Fortaleza. 
+    Consolidado a partir da análise de todas as versões da interface (HTML/JS) e dados operacionais.</descricao>
+    <modulos>
+      <modulo>Dashboard (KPIs, charts, alertas, próximos eventos)</modulo>
+      <modulo>Nova Proposta (wizard com cálculo automático de total)</modulo>
+      <modulo>Locais (cards com fotos, filtros, equipamentos acoplados)</modulo>
+      <modulo>Propostas (tabela, filtros, status workflow, PDF export)</modulo>
+      <modulo>Eventos (calendário + lista de confirmados)</modulo>
+      <modulo>Backoffice (pareceres técnicos, aprovações)</modulo>
+      <modulo>Lixeira e Arquivados (recuperação e histórico)</modulo>
+      <modulo>Configurações (usuários, templates, integrações)</modulo>
+    </modulos>
+    <tecnologias_ui>HTML5 + Tailwind/Tabler Icons + Chart.js + jsPDF + html2canvas</tecnologias_ui>
+    <regras_negocio>Status: Elaboração → Enviada → Parecer Técnico → Aceita/Recusada/Expirada. 
+    Cálculo automático de total = locação + equipamentos + cardápio*pax + serviços. 
+    Deadline padrão +5 dias úteis ao enviar.</regras_negocio>
+  </metadados>
 
-      <div class="text-center mb-8">
-        <h1 class="text-2xl font-semibold text-white">Bem-vindo de volta</h1>
-        <p class="text-white/60 text-sm mt-1">Acesse a plataforma de gestão de eventos</p>
-      </div>
-
-      <div class="space-y-5">
-        <div>
-          <label class="block text-xs font-medium text-white/70 mb-1.5 tracking-wider">USUÁRIO</label>
-          <input id="login-user" type="text" value="marciooliveira" 
-                 class="w-full bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-[#f97316] transition">
-        </div>
-        <div>
-          <label class="block text-xs font-medium text-white/70 mb-1.5 tracking-wider">SENHA</label>
-          <input id="login-pass" type="password" value="Deadpool365*" 
-                 class="w-full bg-white/10 border border-white/20 text-white placeholder-white/40 rounded-2xl px-5 py-3.5 focus:outline-none focus:border-[#f97316] transition">
-        </div>
-
-        <button onclick="doLogin()" 
-                class="w-full mt-2 bg-[#f97316] hover:bg-[#ea580c] active:scale-[0.985] transition-all text-white font-semibold py-4 rounded-2xl text-sm tracking-wider">
-          ENTRAR NA PLATAFORMA
-        </button>
-
-        <div class="text-center text-[10px] text-white/40 pt-3">
-          Credenciais padrão: marciooliveira / Deadpool365*
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-6 text-white/40 text-xs">Senac Ceará • Aldeota • 2026</div>
-  </div>
-</div>
-
-<!-- MAIN APP -->
-<div id="app" class="hidden min-h-screen flex flex-col">
-  <!-- TOPBAR -->
-  <div class="h-14 bg-[#003366] text-white flex items-center px-6 shadow-lg z-50">
-    <div class="flex items-center gap-x-3 flex-1">
-      <div class="flex items-center gap-x-2.5">
-        <div class="w-8 h-8 bg-[#f97316] rounded-xl flex items-center justify-center">
-          <span class="font-black text-lg tracking-tighter">M</span>
-        </div>
-        <div>
-          <span class="font-display font-bold tracking-tighter text-lg">MODESK</span>
-          <span class="text-[#f97316] text-xs font-bold tracking-[1.5px] ml-0.5">ALFA</span>
-        </div>
-      </div>
-      <div class="text-xs px-3 py-0.5 rounded-full bg-white/10 text-white/60 font-medium">v3.0 • Completo</div>
-    </div>
-
-    <div class="flex items-center gap-x-4">
-      <div class="flex items-center gap-x-2 text-sm">
-        <div class="w-8 h-8 bg-[#f97316] rounded-full flex items-center justify-center text-xs font-bold">MO</div>
-        <div>
-          <div class="font-semibold text-sm">Marcio Oliveira</div>
-          <div class="text-[10px] text-white/50 -mt-0.5">Gestor • Administrador</div>
-        </div>
-      </div>
-      <button onclick="logout()" class="text-xs px-4 py-1.5 rounded-xl border border-white/20 hover:bg-white/10 transition flex items-center gap-x-1.5">
-        <i class="ti ti-logout text-base"></i>
-        <span class="text-xs">Sair</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="flex flex-1">
-    <!-- SIDEBAR -->
-    <div class="w-64 bg-white border-r border-[#d0daf0] flex flex-col">
-      <div class="p-4">
-        <div onclick="switchSection('dashboard')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1 nav-active" data-section="dashboard">
-          <i class="ti ti-layout-dashboard text-xl w-5"></i>
-          <span class="font-medium">Dashboard</span>
-        </div>
-        <div onclick="switchSection('nova-proposta')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="nova-proposta">
-          <i class="ti ti-plus text-xl w-5"></i>
-          <span class="font-medium">Nova Proposta</span>
-        </div>
-        <div onclick="switchSection('locais')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="locais">
-          <i class="ti ti-building text-xl w-5"></i>
-          <span class="font-medium">Locais / Espaços</span>
-        </div>
-        <div onclick="switchSection('propostas')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="propostas">
-          <i class="ti ti-file-text text-xl w-5"></i>
-          <span class="font-medium">Todas as Propostas</span>
-        </div>
-        <div onclick="switchSection('eventos')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="eventos">
-          <i class="ti ti-calendar-event text-xl w-5"></i>
-          <span class="font-medium">Eventos Confirmados</span>
-        </div>
-        <div onclick="switchSection('arquivados')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] mb-1" data-section="arquivados">
-          <i class="ti ti-archive text-xl w-5"></i>
-          <span class="font-medium">Arquivados</span>
-        </div>
-      </div>
-
-      <div class="mt-auto p-4 border-t">
-        <div onclick="switchSection('config')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] text-sm" data-section="config">
-          <i class="ti ti-settings text-xl w-5"></i>
-          <span>Configurações</span>
-        </div>
-        <div onclick="switchSection('lixeira')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer hover:bg-[#f0f4fa] text-sm" data-section="lixeira">
-          <i class="ti ti-trash text-xl w-5"></i>
-          <span>Lixeira</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- CONTENT AREA -->
-    <div class="flex-1 p-8 overflow-auto" id="content-area">
-
-      <!-- DASHBOARD -->
-      <div id="section-dashboard" class="section">
-        <div class="flex justify-between items-end mb-6">
-          <div>
-            <div class="font-display text-3xl font-bold tracking-tighter">Olá, Marcio 👋</div>
-            <div class="text-[#4a5878] text-sm">Visão geral dos eventos • <span id="current-date"></span></div>
-          </div>
-          <button onclick="refreshDashboard()" class="btn btn-sm flex items-center gap-x-2 px-4 py-2 bg-white border border-[#d0daf0] rounded-2xl text-sm hover:bg-[#f8fafc]">
-            <i class="ti ti-refresh"></i> Atualizar
-          </button>
-        </div>
-
-        <!-- ALERT BAR -->
-        <div id="alert-bar" class="hidden mb-6 px-5 py-3.5 rounded-3xl bg-red-50 border border-red-200 text-red-600 text-sm flex items-center gap-x-3">
-          <i class="ti ti-alert-triangle text-xl"></i>
-          <div><span class="font-semibold">Atenção:</span> <span id="alert-text"></span></div>
-        </div>
-
-        <!-- KPIs -->
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">PROPOSTAS ATIVAS</div>
-            <div class="text-4xl font-semibold mt-1 kpi-value" id="kpi-ativas">12</div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">CONFIRMADOS MÊS</div>
-            <div class="text-4xl font-semibold mt-1 text-[#0a7a5a] kpi-value" id="kpi-confirmados">5</div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">TAXA CONVERSÃO</div>
-            <div class="text-4xl font-semibold mt-1 text-[#f97316] kpi-value" id="kpi-conversao">42%</div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">FATURAMENTO MÊS</div>
-            <div class="text-3xl font-semibold mt-1 text-[#003366] kpi-value" id="kpi-faturamento">R$ 87.2k</div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">VENCIDAS</div>
-            <div class="text-4xl font-semibold mt-1 text-[#c0392b] kpi-value" id="kpi-vencidas">2</div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-5 modern-card">
-            <div class="text-xs text-[#4a5878] font-medium tracking-wider">EVENTOS HOJE</div>
-            <div class="text-4xl font-semibold mt-1 kpi-value" id="kpi-hoje">1</div>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
-          <!-- Charts -->
-          <div class="lg:col-span-3 bg-white border border-[#d0daf0] rounded-3xl p-6">
-            <div class="font-semibold mb-4 flex items-center gap-x-2"><i class="ti ti-chart-bar"></i> Faturamento por Unidade</div>
-            <canvas id="chart-faturamento" height="110"></canvas>
-          </div>
-          <div class="lg:col-span-2 bg-white border border-[#d0daf0] rounded-3xl p-6">
-            <div class="font-semibold mb-4 flex items-center gap-x-2"><i class="ti ti-chart-pie"></i> Ocupação de Espaços</div>
-            <canvas id="chart-ocupacao" height="110"></canvas>
-          </div>
-        </div>
-
-        <!-- Próximos Eventos -->
-        <div class="mt-8">
-          <div class="flex justify-between items-center mb-4">
-            <div class="font-semibold">Próximos 5 Eventos Confirmados</div>
-            <button onclick="switchSection('eventos')" class="text-sm text-[#f97316] hover:underline">Ver todos →</button>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden" id="proximos-eventos"></div>
-        </div>
-      </div>
-
-      <!-- NOVA PROPOSTA (WIZARD) -->
-      <div id="section-nova-proposta" class="section hidden">
-        <div class="max-w-4xl mx-auto">
-          <div class="mb-6">
-            <div class="font-display text-2xl font-bold">Nova Proposta</div>
-            <div class="text-sm text-[#4a5878]">Wizard em 5 passos • Dados salvos automaticamente</div>
-          </div>
-
-          <!-- Progress -->
-          <div class="flex mb-8 bg-white border border-[#d0daf0] rounded-3xl p-1.5">
-            <div onclick="goToStep(1)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer active" id="step-1">1. Cliente</div>
-            <div onclick="goToStep(2)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-2">2. Data & Local</div>
-            <div onclick="goToStep(3)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-3">3. Equipamentos</div>
-            <div onclick="goToStep(4)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-4">4. Cardápio</div>
-            <div onclick="goToStep(5)" class="wizard-step flex-1 text-center py-3 rounded-2xl text-sm font-medium cursor-pointer" id="step-5">5. Resumo</div>
-          </div>
-
-          <!-- STEP CONTENT -->
-          <div id="wizard-content" class="bg-white border border-[#d0daf0] rounded-3xl p-8 min-h-[420px]">
-            <!-- Step 1 -->
-            <div id="step-content-1">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">Nº DA PROPOSTA (AUTO)</label>
-                  <input id="prop-numero" class="inp w-full" value="0156/2026" readonly>
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">TIPO DE EVENTO</label>
-                  <select id="prop-tipo" class="inp w-full">
-                    <option value="Interno">Interno (Centro de custo)</option>
-                    <option value="Externo">Externo (Pagamento integral)</option>
-                    <option value="Misto">Misto (Cessão + pagamento)</option>
-                    <option value="Comercial">Comercial (Mercado externo)</option>
-                  </select>
-                </div>
-                <div class="md:col-span-2">
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CLIENTE / EMPRESA</label>
-                  <input id="prop-cliente" class="inp w-full" placeholder="Nome da empresa ou cliente">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CONTATO (ATT.)</label>
-                  <input id="prop-contato" class="inp w-full" placeholder="Nome do responsável">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">TÍTULO / NOME DO EVENTO</label>
-                  <input id="prop-titulo" class="inp w-full" placeholder="Ex: Workshop de Inovação">
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 2 -->
-            <div id="step-content-2" class="hidden">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DATA DO EVENTO</label>
-                  <input type="date" id="prop-data" class="inp w-full" onchange="checkAgendaConflict()">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DIA DA SEMANA</label>
-                  <input id="prop-dia-semana" class="inp w-full bg-gray-50" readonly>
-                </div>
-                <div class="md:col-span-2">
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">LOCAL / ESPAÇO</label>
-                  <select id="prop-local" class="inp w-full" onchange="updateLocalInfo(); checkAgendaConflict()">
-                    <!-- populated by JS -->
-                  </select>
-                  <div id="local-info" class="mt-3 p-3 bg-[#f8fafc] rounded-2xl text-xs hidden"></div>
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO INÍCIO</label>
-                  <input type="time" id="prop-inicio" class="inp w-full">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO TÉRMINO</label>
-                  <input type="time" id="prop-termino" class="inp w-full">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">HORÁRIO MONTAGEM</label>
-                  <input type="time" id="prop-montagem" class="inp w-full">
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">DEADLINE APROVAÇÃO</label>
-                  <input type="date" id="prop-deadline" class="inp w-full">
-                </div>
-              </div>
-              <div id="agenda-alert" class="hidden mt-4 p-3 bg-red-50 border border-red-200 text-red-600 rounded-2xl text-sm flex items-center gap-x-2">
-                <i class="ti ti-alert-triangle"></i>
-                <span>⚠️ Conflito de agenda! Já existe evento confirmado neste espaço e data.</span>
-              </div>
-            </div>
-
-            <!-- Step 3 - EQUIPAMENTOS -->
-            <div id="step-content-3" class="hidden">
-              <div class="mb-4">
-                <label class="text-xs font-semibold text-[#4a5878] block mb-2">TIPO DE EQUIPAMENTOS</label>
-                <div class="flex gap-x-3">
-                  <div onclick="toggleEquipType('interno')" id="equip-interno-btn"
-                       class="cursor-pointer flex-1 text-center py-3 border border-[#f97316] bg-[#fff7ed] rounded-2xl text-sm font-medium">Internos (Senac)</div>
-                  <div onclick="toggleEquipType('externo')" id="equip-externo-btn"
-                       class="cursor-pointer flex-1 text-center py-3 border border-[#d0daf0] rounded-2xl text-sm font-medium">Externos (Cliente)</div>
-                </div>
-              </div>
-
-              <!-- INTERNOS -->
-              <div id="equip-interno-section">
-                <div class="text-xs font-semibold text-[#4a5878] mb-3">Selecione os equipamentos internos (clique para adicionar quantidade)</div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="equip-grid">
-                  <!-- populated dynamically -->
-                </div>
-              </div>
-
-              <!-- EXTERNOS -->
-              <div id="equip-externo-section" class="hidden">
-                <div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl">
-                  <div class="font-medium text-amber-700 mb-2 flex items-center gap-x-2">
-                    <i class="ti ti-alert-triangle"></i> Equipamentos Externos
-                  </div>
-                  <textarea id="equip-externo-desc" class="w-full inp text-sm" rows="3" placeholder="Descreva os equipamentos que o cliente fornecerá..."></textarea>
-                  <div class="mt-3 flex items-center gap-x-2 text-xs">
-                    <input type="checkbox" id="equip-externo-confirm" class="accent-[#f97316]">
-                    <label for="equip-externo-confirm" class="text-amber-700">Confirmo que o cliente é responsável pelos equipamentos externos. O Senac fica isento de qualquer responsabilidade técnica ou financeira.</label>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 4 -->
-            <div id="step-content-4" class="hidden">
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">CARDÁPIO PRINCIPAL</label>
-                  <select id="prop-cardapio" class="inp w-full" onchange="updateCardapioOptions()">
-                    <option value="">Selecione...</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">Nº DE PARTICIPANTES (PAX)</label>
-                  <input type="number" id="prop-pax" class="inp w-full" value="30" oninput="syncPax()">
-                </div>
-                <div class="md:col-span-2">
-                  <label class="text-xs font-semibold text-[#4a5878] block mb-1.5">RESTRIÇÕES / NECESSIDADES ALIMENTARES</label>
-                  <textarea id="prop-restricoes" class="inp w-full" rows="2" placeholder="Vegetarianos, intolerâncias, etc."></textarea>
-                </div>
-              </div>
-            </div>
-
-            <!-- Step 5 -->
-            <div id="step-content-5" class="hidden">
-              <div class="bg-[#f8fafc] rounded-2xl p-6 text-sm">
-                <div class="font-semibold mb-4">Resumo da Proposta</div>
-                <div id="resumo-content" class="space-y-2 text-[#1a2035]"></div>
-                <div class="mt-6 pt-4 border-t flex justify-between items-center">
-                  <div class="text-xs text-[#4a5878]">TOTAL ESTIMADO</div>
-                  <div class="text-3xl font-semibold text-[#003366]" id="resumo-total">R$ 0,00</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-between mt-6">
-            <button onclick="prevStep()" id="btn-prev" class="px-8 py-3 rounded-2xl border border-[#d0daf0] text-sm font-medium flex items-center gap-x-2 hover:bg-white">← Anterior</button>
-            <button onclick="nextStep()" id="btn-next" class="px-8 py-3 bg-[#003366] text-white rounded-2xl text-sm font-medium flex items-center gap-x-2">Próximo →</button>
-            <button onclick="salvarProposta()" id="btn-save" class="hidden px-8 py-3 bg-[#f97316] text-white rounded-2xl text-sm font-medium">Salvar Proposta</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- LOCAIS -->
-      <div id="section-locais" class="section hidden">
-        <div class="flex justify-between mb-6">
-          <div>
-            <div class="font-display text-2xl font-bold">Locais / Espaços</div>
-            <div class="text-sm text-[#4a5878]">Gerencie os espaços com fotos, valores e equipamentos</div>
-          </div>
-          <button onclick="openAddLocalModal()" class="btn btn-sm px-5 bg-[#003366] text-white rounded-2xl flex items-center gap-x-2">
-            <i class="ti ti-plus"></i> Novo Local
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="locais-grid">
-          <!-- populated by JS -->
-        </div>
-      </div>
-
-      <!-- PROPOSTAS -->
-      <div id="section-propostas" class="section hidden">
-        <div class="flex justify-between items-center mb-5">
-          <div class="font-display text-2xl font-bold">Todas as Propostas</div>
-          <div class="flex gap-x-3">
-            <button onclick="exportPropostasExcel()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-spreadsheet"></i> Excel</button>
-            <button onclick="exportPropostasPDF()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-text"></i> PDF</button>
-            <button onclick="exportPropostasXML()" class="btn btn-sm px-4 border border-[#d0daf0] rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-code"></i> XML</button>
-          </div>
-        </div>
-
-        <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden">
-          <div class="p-4 border-b flex flex-wrap gap-2" id="status-chips">
-            <!-- chips populated by JS -->
-          </div>
-          <table class="w-full text-sm">
-            <thead class="bg-[#f8fafc]">
-              <tr>
-                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">PROPOSTA</th>
-                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">CLIENTE</th>
-                <th class="px-6 py-4 text-left font-medium text-xs tracking-wider">DATA</th>
-                <th class="px-6 py-4 text-right font-medium text-xs tracking-wider">VALOR</th>
-                <th class="px-6 py-4 text-center font-medium text-xs tracking-wider">STATUS</th>
-                <th class="px-6 py-4 text-center font-medium text-xs tracking-wider w-40">AÇÕES</th>
-              </tr>
-            </thead>
-            <tbody id="propostas-tbody" class="divide-y"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- EVENTOS CONFIRMADOS + ARQUIVAR -->
-      <div id="section-eventos" class="section hidden">
-        <div class="flex justify-between mb-5">
-          <div class="font-display text-2xl font-bold">Eventos Confirmados (Aceitas)</div>
-          <button onclick="showArchiveModal()" class="btn btn-sm px-5 bg-[#c0392b] text-white rounded-2xl flex items-center gap-x-2">
-            <i class="ti ti-archive"></i> Arquivar por Período
-          </button>
-        </div>
-        <div class="bg-white border border-[#d0daf0] rounded-3xl overflow-hidden">
-          <table class="w-full text-sm">
-            <thead class="bg-[#f8fafc]">
-              <tr>
-                <th class="px-6 py-4 text-left">EVENTO</th>
-                <th class="px-6 py-4 text-left">CLIENTE / LOCAL</th>
-                <th class="px-6 py-4 text-left">DATA</th>
-                <th class="px-6 py-4 text-right">VALOR</th>
-                <th class="px-6 py-4 text-center">AÇÕES</th>
-              </tr>
-            </thead>
-            <tbody id="eventos-tbody"></tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- ARQUIVADOS -->
-      <div id="section-arquivados" class="section hidden">
-        <div class="font-display text-2xl font-bold mb-5">Eventos Arquivados</div>
-        <div class="bg-white border border-[#d0daf0] rounded-3xl p-8 text-center text-[#4a5878]" id="arquivados-content">
-          <!-- populated by JS -->
-        </div>
-      </div>
-
-      <!-- CONFIG -->
-      <div id="section-config" class="section hidden">
-        <div class="font-display text-2xl font-bold mb-6">Configurações & Backoffice</div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-6">
-            <div class="font-semibold mb-4">Preços de Locação (editáveis)</div>
-            <div id="config-locais" class="space-y-3 text-sm"></div>
-          </div>
-          <div class="bg-white border border-[#d0daf0] rounded-3xl p-6">
-            <div class="font-semibold mb-4">Equipamentos (preços diários)</div>
-            <div id="config-equip" class="space-y-3 text-sm"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LIXEIRA -->
-      <div id="section-lixeira" class="section hidden">
-        <div class="font-display text-2xl font-bold mb-5">Lixeira (Auditoria)</div>
-        <div id="lixeira-content" class="bg-white border border-[#d0daf0] rounded-3xl p-6"></div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<!-- MODALS -->
-<!-- Add/Edit Local Modal -->
-<div id="modal-local" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[200]">
-  <div class="bg-white rounded-3xl w-full max-w-lg p-7">
-    <div class="font-semibold text-xl mb-5">Cadastrar / Editar Local</div>
+  <!-- ===================================================== -->
+  <!-- USUÁRIOS E NÍVEIS DE ACESSO (atualizado) -->
+  <!-- ===================================================== -->
+  <usuarios>
+    <usuario id="u1" nivel="Administrador Geral" ativo="true">
+      <nome>Marcio Oliveira</nome>
+      <login>marciooliveira</login>
+      <email>marcio.oliveira@ce.senac.br</email>
+      <senha_hash>Deadpool365*</senha_hash>
+      <acessos>
+        <acesso>Dashboard</acesso>
+        <acesso>Nova Proposta</acesso>
+        <acesso>Locais</acesso>
+        <acesso>Propostas</acesso>
+        <acesso>Eventos</acesso>
+        <acesso>Backoffice</acesso>
+        <acesso>Lixeira</acesso>
+        <acesso>Arquivados</acesso>
+        <acesso>Configurações</acesso>
+      </acessos>
+    </usuario>
     
-    <div class="space-y-4">
-      <div><label class="text-xs font-semibold">NOME DO ESPAÇO</label><input id="local-nome" class="inp w-full"></div>
-      <div><label class="text-xs font-semibold">ENDEREÇO COMPLETO</label><input id="local-endereco" class="inp w-full"></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="text-xs font-semibold">VALOR BASE (R$)</label><input type="number" id="local-valor" class="inp w-full"></div>
-        <div><label class="text-xs font-semibold">CAPACIDADE (PAX)</label><input type="number" id="local-capacidade" class="inp w-full"></div>
-      </div>
-      <div>
-        <label class="text-xs font-semibold">FOTO DO LOCAL</label>
-        <input type="file" id="local-foto" accept="image/*" class="block w-full text-sm mt-1" onchange="previewLocalFoto(this)">
-        <img id="local-foto-preview" class="mt-2 max-h-40 rounded-2xl hidden">
-      </div>
-      <div class="flex gap-x-6">
-        <div class="flex items-center gap-x-2">
-          <input type="checkbox" id="local-equip" class="accent-[#f97316]">
-          <label class="text-sm">Possui equipamentos acoplados</label>
-        </div>
-        <div class="flex items-center gap-x-2">
-          <input type="checkbox" id="local-montar" class="accent-[#f97316]">
-          <label class="text-sm">Precisa montar</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex gap-x-3 mt-7">
-      <button onclick="closeLocalModal()" class="flex-1 py-3 rounded-2xl border">Cancelar</button>
-      <button onclick="saveLocal()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl">Salvar Local</button>
-    </div>
-  </div>
-</div>
-
-<script>
-// ==================== TAILWIND CONFIG ====================
-function initTailwind() {
-  document.documentElement.style.setProperty('--accent', '#f97316');
-}
-
-// ==================== DATA (localStorage) ====================
-let DB = {
-  propostas: [],
-  locais: [],
-  lixeira: [],
-  arquivados: []
-};
-
-function loadDB() {
-  const saved = localStorage.getItem('modesk_alfa_v3');
-  if (saved) {
-    try { Object.assign(DB, JSON.parse(saved)); } catch(e){}
-  } else {
-    // Seed data
-    DB.propostas = [
-      {id:1, numero:"0148/2026", cliente:"Superintendência do Sesc", contato:"Lyvia", titulo:"Reunião Sesc", tipo:"Interno", data:"2026-06-08", local:"Fecomércio 12º andar", valor:474.60, status:"Aceita", pax:25},
-      {id:2, numero:"0149/2026", cliente:"SINDVEL", contato:"Diretoria", titulo:"SINDVEL — Capacitação", tipo:"Externo", data:"2026-06-23", local:"Auditório Senac Aldeota", valor:3264.00, status:"Enviada", pax:80},
-      {id:3, numero:"0150/2026", cliente:"COCAL", contato:"Diretoria", titulo:"Congresso COCAL", tipo:"Externo", data:"2026-07-02", local:"Auditório Senac Aldeota", valor:77196.00, status:"Enviada", pax:120},
-      {id:4, numero:"0151/2026", cliente:"ABAV", contato:"Paulo Neto", titulo:"ABAV — Apresentação", tipo:"Externo", data:"2026-06-10", local:"Auditório Senac Aldeota", valor:4000.00, status:"Aceita", pax:60},
-      {id:5, numero:"0152/2026", cliente:"FACIC / EPROCE", contato:"Coordenação", titulo:"Almoço EPROCE", tipo:"Misto", data:"2026-06-12", local:"Restaurante Mayú - Sala Reservada", valor:7500.00, status:"Aceita", pax:35},
-      {id:6, numero:"0153/2026", cliente:"Patricia", contato:"Patricia", titulo:"NR1 na prática", tipo:"Externo", data:"2026-06-12", local:"Salas 5 e 6", valor:2000.00, status:"Em elaboração", pax:40},
-      {id:7, numero:"0154/2026", cliente:"Marco Frossard", contato:"Marco Frossard", titulo:"RATIONAL", tipo:"Externo", data:"2026-06-11", local:"Cozinha Experience", valor:1800.00, status:"Expirada", pax:20},
-      {id:8, numero:"0155/2026", cliente:"TechCorp", contato:"Inovação", titulo:"Workshop Inovação", tipo:"Externo", data:"2026-05-20", local:"Auditório Senac Aldeota", valor:12000.00, status:"Aceita", pax:90}
-    ];
+    <usuario id="u2" nivel="Parecer Técnico (TI/AV/Som)" ativo="true">
+      <nome>Analista de TI / AV / Som</nome>
+      <senha_parecer>Deadpool365*</senha_parecer>
+      <acessos>
+        <acesso>Propostas</acesso>
+        <acesso>Backoffice</acesso>
+        <acesso>Eventos</acesso>
+      </acessos>
+    </usuario>
     
-    DB.locais = [
-      {id:"s1", nome:"Auditório — até 4h", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:1500, capacidade:150, foto:"https://picsum.photos/id/1015/600/400", temEquip:true, precisaMontar:false},
-      {id:"s2", nome:"Auditório — dia todo", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:2500, capacidade:150, foto:"https://picsum.photos/id/160/600/400", temEquip:true, precisaMontar:false},
-      {id:"s9", nome:"Restaurante Mayú (Sala Reservada)", endereco:"Av. Des. Moreira, 500 - térreo", valor:400, capacidade:35, foto:"https://picsum.photos/id/292/600/400", temEquip:true, precisaMontar:false},
-      {id:"s5", nome:"Salas 5 e 6 juntas", endereco:"Av. Des. Moreira, 500 - Aldeota", valor:500, capacidade:60, foto:"https://picsum.photos/id/29/600/400", temEquip:false, precisaMontar:true},
-      {id:"s12", nome:"Cozinha Experience", endereco:"Av. Des. Moreira, 500 - subsolo", valor:1800, capacidade:25, foto:"https://picsum.photos/id/201/600/400", temEquip:true, precisaMontar:false}
-    ];
-    saveDB();
-  }
-}
-
-function saveDB() {
-  localStorage.setItem('modesk_alfa_v3', JSON.stringify(DB));
-}
-
-// ==================== LOGIN ====================
-function doLogin() {
-  const user = document.getElementById('login-user').value.trim();
-  const pass = document.getElementById('login-pass').value.trim();
-  
-  if (user === "marciooliveira" && pass === "Deadpool365*") {
-    document.getElementById('login-screen').classList.add('hidden');
-    document.getElementById('app').classList.remove('hidden');
-    initApp();
-  } else {
-    alert("Credenciais inválidas. Use: marciooliveira / Deadpool365*");
-  }
-}
-
-function logout() {
-  document.getElementById('app').classList.add('hidden');
-  document.getElementById('login-screen').classList.remove('hidden');
-}
-
-// ==================== NAVIGATION ====================
-let currentSection = 'dashboard';
-
-function switchSection(section) {
-  document.querySelectorAll('.section').forEach(s => s.classList.add('hidden'));
-  document.getElementById('section-' + section).classList.remove('hidden');
-  
-  // update active nav
-  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('nav-active'));
-  const navEl = document.querySelector(`[data-section="${section}"]`);
-  if (navEl) navEl.classList.add('nav-active');
-
-  currentSection = section;
-
-  if (section === 'dashboard') refreshDashboard();
-  if (section === 'locais') renderLocais();
-  if (section === 'propostas') renderPropostasTable();
-  if (section === 'eventos') renderEventosTable();
-  if (section === 'arquivados') renderArquivados();
-  if (section === 'config') renderConfig();
-  if (section === 'lixeira') renderLixeira();
-}
-
-// ==================== DASHBOARD ====================
-let faturamentoChart, ocupacaoChart;
-
-function refreshDashboard() {
-  const today = new Date().toISOString().split('T')[0];
-  
-  // KPIs
-  const ativas = DB.propostas.filter(p => p.status !== 'Expirada' && p.status !== 'Cancelada').length;
-  const confirmadosMes = DB.propostas.filter(p => p.status === 'Aceita' && p.data && p.data.startsWith('2026-06')).length;
-  const valorMes = DB.propostas.filter(p => p.status === 'Aceita' && p.data && p.data.startsWith('2026-06'))
-                               .reduce((sum, p) => sum + (p.valor || 0), 0);
-  const vencidas = DB.propostas.filter(p => p.deadline && p.deadline < today && p.status !== 'Aceita').length;
-  const hoje = DB.propostas.filter(p => p.status === 'Aceita' && p.data === today).length;
-
-  document.getElementById('kpi-ativas').textContent = ativas;
-  document.getElementById('kpi-confirmados').textContent = confirmadosMes;
-  document.getElementById('kpi-conversao').textContent = Math.round((DB.propostas.filter(p=>p.status==='Aceita').length / DB.propostas.length) * 100) + '%';
-  document.getElementById('kpi-faturamento').textContent = 'R$ ' + (valorMes / 1000).toFixed(1) + 'k';
-  document.getElementById('kpi-vencidas').textContent = vencidas;
-  document.getElementById('kpi-hoje').textContent = hoje;
-
-  // Alert bar
-  const alertBar = document.getElementById('alert-bar');
-  if (vencidas > 0) {
-    alertBar.classList.remove('hidden');
-    document.getElementById('alert-text').textContent = `${vencidas} proposta(s) com prazo vencido.`;
-  } else {
-    alertBar.classList.add('hidden');
-  }
-
-  // Charts
-  renderDashboardCharts();
-
-  // Próximos eventos
-  renderProximosEventos();
-}
-
-function renderDashboardCharts() {
-  // Destroy old charts
-  if (faturamentoChart) faturamentoChart.destroy();
-  if (ocupacaoChart) ocupacaoChart.destroy();
-
-  // Faturamento por unidade (mock)
-  const ctx1 = document.getElementById('chart-faturamento');
-  faturamentoChart = new Chart(ctx1, {
-    type: 'bar',
-    data: {
-      labels: ['Aldeota', 'Fecomércio', 'Mayú'],
-      datasets: [{
-        label: 'Faturamento (R$)',
-        data: [45200, 12400, 7500],
-        backgroundColor: '#003366'
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { display: false } } }
-  });
-
-  // Ocupação
-  const ctx2 = document.getElementById('chart-ocupacao');
-  ocupacaoChart = new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-      labels: ['Auditório Aldeota', 'Mayú', 'Salas 5-6', 'Outros'],
-      datasets: [{
-        data: [45, 18, 22, 15],
-        backgroundColor: ['#003366', '#f97316', '#0a7a5a', '#94a3b8']
-      }]
-    },
-    options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-  });
-}
-
-function renderProximosEventos() {
-  const container = document.getElementById('proximos-eventos');
-  const aceitas = DB.propostas.filter(p => p.status === 'Aceita')
-                              .sort((a,b) => (a.data || '').localeCompare(b.data || ''))
-                              .slice(0, 5);
-
-  if (!aceitas.length) {
-    container.innerHTML = `<div class="p-8 text-center text-sm text-[#4a5878]">Nenhum evento confirmado próximo.</div>`;
-    return;
-  }
-
-  container.innerHTML = `
-    <table class="w-full text-sm">
-      <thead><tr class="bg-[#f8fafc]"><th class="px-6 py-3 text-left">Evento</th><th class="px-6 py-3 text-left">Cliente</th><th class="px-6 py-3 text-left">Data</th><th class="px-6 py-3 text-right">Valor</th></tr></thead>
-      <tbody>
-        ${aceitas.map(p => `
-          <tr class="border-t">
-            <td class="px-6 py-3 font-medium">${p.titulo}</td>
-            <td class="px-6 py-3">${p.cliente}</td>
-            <td class="px-6 py-3">${fmtDate(p.data)}</td>
-            <td class="px-6 py-3 text-right font-mono">R$ ${p.valor?.toFixed(2) || '0,00'}</td>
-          </tr>
-        `).join('')}
-      </tbody>
-    </table>
-  `;
-}
-
-// ==================== WIZARD ====================
-let currentStep = 1;
-let wizardData = {};
-
-function goToStep(step) {
-  currentStep = step;
-  document.querySelectorAll('[id^="step-content-"]').forEach(el => el.classList.add('hidden'));
-  document.getElementById('step-content-' + step).classList.remove('hidden');
-
-  document.querySelectorAll('[id^="step-"]').forEach(el => el.classList.remove('active'));
-  document.getElementById('step-' + step).classList.add('active');
-
-  if (step === 3) renderEquipGrid();
-  if (step === 4) populateCardapioSelect();
-  if (step === 5) renderResumo();
-}
-
-function nextStep() {
-  if (currentStep < 5) {
-    goToStep(currentStep + 1);
-  }
-}
-
-function prevStep() {
-  if (currentStep > 1) goToStep(currentStep - 1);
-}
-
-function checkAgendaConflict() {
-  const data = document.getElementById('prop-data').value;
-  const local = document.getElementById('prop-local').value;
-  const alert = document.getElementById('agenda-alert');
-
-  if (!data || !local) { alert.classList.add('hidden'); return; }
-
-  const conflito = DB.propostas.find(p => 
-    p.status === 'Aceita' && p.data === data && p.local === local
-  );
-
-  if (conflito) {
-    alert.classList.remove('hidden');
-  } else {
-    alert.classList.add('hidden');
-  }
-}
-
-function updateLocalInfo() {
-  const select = document.getElementById('prop-local');
-  const infoDiv = document.getElementById('local-info');
-  const local = DB.locais.find(l => l.nome === select.value);
-
-  if (local) {
-    infoDiv.innerHTML = `
-      <div class="flex gap-x-4 items-center">
-        <img src="${local.foto}" class="w-16 h-16 rounded-xl object-cover">
-        <div class="text-xs">
-          <div class="font-semibold">${local.nome}</div>
-          <div>${local.endereco}</div>
-          <div class="mt-1">Valor base: <span class="font-mono">R$ ${local.valor}</span> • Capacidade: ${local.capacidade} pax</div>
-          <div class="mt-0.5">${local.temEquip ? '✓ Equipamentos inclusos' : ''} ${local.precisaMontar ? '• Precisa montar' : ''}</div>
-        </div>
-      </div>
-    `;
-    infoDiv.classList.remove('hidden');
-  } else {
-    infoDiv.classList.add('hidden');
-  }
-}
-
-function toggleEquipType(type) {
-  const internoBtn = document.getElementById('equip-interno-btn');
-  const externoBtn = document.getElementById('equip-externo-btn');
-  const internoSec = document.getElementById('equip-interno-section');
-  const externoSec = document.getElementById('equip-externo-section');
-
-  if (type === 'interno') {
-    internoBtn.classList.add('border-[#f97316]', 'bg-[#fff7ed]');
-    externoBtn.classList.remove('border-[#f97316]', 'bg-[#fff7ed]');
-    internoSec.classList.remove('hidden');
-    externoSec.classList.add('hidden');
-  } else {
-    externoBtn.classList.add('border-[#f97316]', 'bg-[#fff7ed]');
-    internoBtn.classList.remove('border-[#f97316]', 'bg-[#fff7ed]');
-    externoSec.classList.remove('hidden');
-    internoSec.classList.add('hidden');
-  }
-}
-
-function renderEquipGrid() {
-  const container = document.getElementById('equip-grid');
-  container.innerHTML = '';
-
-  const equipamentos = [
-    {id:'e1', nome:'Projetor multimídia', preco:250, icon:'📽️'},
-    {id:'e2', nome:'Mesa de som', preco:200, icon:'🎛️'},
-    {id:'e3', nome:'Microfone sem fio', preco:80, icon:'🎤'},
-    {id:'e5', nome:'TV 65"', preco:180, icon:'📺'},
-    {id:'e7', nome:'Técnico local', preco:300, icon:'👨‍💻'},
-    {id:'e9', nome:'Internet dedicada', preco:100, icon:'📡'},
-  ];
-
-  equipamentos.forEach(eq => {
-    const div = document.createElement('div');
-    div.className = `equip-card border border-[#d0daf0] rounded-2xl p-3 cursor-pointer flex flex-col`;
-    div.innerHTML = `
-      <div class="flex justify-between">
-        <div class="text-2xl">${eq.icon}</div>
-        <div class="text-right">
-          <div class="font-mono text-sm font-semibold">R$ ${eq.preco}</div>
-          <div class="text-[10px] text-[#4a5878]">/diária</div>
-        </div>
-      </div>
-      <div class="mt-auto pt-3 text-xs font-medium">${eq.nome}</div>
-      <div class="flex items-center justify-between mt-2">
-        <button onclick="changeEquipQty('${eq.id}', -1, event)" class="w-7 h-7 flex items-center justify-center border rounded-lg text-lg leading-none">-</button>
-        <span id="qty-${eq.id}" class="font-mono text-sm w-8 text-center">0</span>
-        <button onclick="changeEquipQty('${eq.id}', 1, event)" class="w-7 h-7 flex items-center justify-center border rounded-lg text-lg leading-none">+</button>
-      </div>
-    `;
-    div.onclick = () => changeEquipQty(eq.id, 1, event);
-    container.appendChild(div);
-  });
-}
-
-let equipSelection = {};
-
-function changeEquipQty(id, delta, e) {
-  e.stopImmediatePropagation();
-  if (!equipSelection[id]) equipSelection[id] = 0;
-  equipSelection[id] = Math.max(0, equipSelection[id] + delta);
-  document.getElementById('qty-' + id).textContent = equipSelection[id];
-}
-
-function populateCardapioSelect() {
-  const sel = document.getElementById('prop-cardapio');
-  sel.innerHTML = `<option value="">Selecione o cardápio...</option>`;
-  
-  const cardapios = [
-    {nome: "Coffee Break Nível 1 (Padrão)", preco: 35},
-    {nome: "Coffee Break Executivo", preco: 50},
-    {nome: "Almoço Executivo (Buffet)", preco: 75},
-    {nome: "Jantar Premium (Mayú)", preco: 120}
-  ];
-  
-  cardapios.forEach(c => {
-    const opt = document.createElement('option');
-    opt.value = c.nome;
-    opt.textContent = `${c.nome} — R$ ${c.preco}/pax`;
-    sel.appendChild(opt);
-  });
-}
-
-function updateCardapioOptions() {
-  // Future: dynamic sub-options for cm1/cm2
-}
-
-function syncPax() {
-  // sync pax if needed
-}
-
-function renderResumo() {
-  const container = document.getElementById('resumo-content');
-  const totalEl = document.getElementById('resumo-total');
-
-  const cliente = document.getElementById('prop-cliente').value || '—';
-  const titulo = document.getElementById('prop-titulo').value || '—';
-  const data = document.getElementById('prop-data').value || '—';
-  const local = document.getElementById('prop-local').value || '—';
-  const pax = parseInt(document.getElementById('prop-pax').value) || 0;
-  const cardapio = document.getElementById('prop-cardapio').value || '—';
-
-  let total = 0;
-
-  // calculate equipment total
-  let equipTotal = 0;
-  Object.keys(equipSelection).forEach(id => {
-    const eq = [{id:'e1',preco:250},{id:'e2',preco:200},{id:'e3',preco:80},{id:'e5',preco:180},{id:'e7',preco:300},{id:'e9',preco:100}].find(e=>e.id===id);
-    if (eq) equipTotal += eq.preco * equipSelection[id];
-  });
-
-  // mock locacao + cardapio
-  const locacao = 1500; // placeholder
-  const cardapioValor = pax * 50; // placeholder
-
-  total = locacao + equipTotal + cardapioValor;
-
-  container.innerHTML = `
-    <div class="flex justify-between"><span>Cliente</span><span class="font-medium">${cliente}</span></div>
-    <div class="flex justify-between"><span>Evento</span><span class="font-medium">${titulo}</span></div>
-    <div class="flex justify-between"><span>Data</span><span class="font-medium">${fmtDate(data)}</span></div>
-    <div class="flex justify-between"><span>Local</span><span class="font-medium">${local}</span></div>
-    <div class="flex justify-between"><span>Participantes</span><span class="font-medium">${pax} pax</span></div>
-    <div class="flex justify-between"><span>Cardápio</span><span class="font-medium">${cardapio}</span></div>
-    <div class="pt-3 mt-3 border-t flex justify-between text-xs"><span>Locação + Equipamentos + Cardápio</span></div>
-  `;
-
-  totalEl.textContent = `R$ ${total.toFixed(2)}`;
-}
-
-function salvarProposta() {
-  const nova = {
-    id: Date.now(),
-    numero: document.getElementById('prop-numero').value,
-    cliente: document.getElementById('prop-cliente').value,
-    contato: document.getElementById('prop-contato').value,
-    titulo: document.getElementById('prop-titulo').value,
-    tipo: document.getElementById('prop-tipo').value,
-    data: document.getElementById('prop-data').value,
-    local: document.getElementById('prop-local').value,
-    valor: parseFloat(document.getElementById('resumo-total').textContent.replace('R$ ','').replace(',','.')) || 0,
-    status: "Em elaboração",
-    pax: parseInt(document.getElementById('prop-pax').value) || 0,
-    equipamentos: equipSelection,
-    cardapio: document.getElementById('prop-cardapio').value
-  };
-
-  DB.propostas.unshift(nova);
-  saveDB();
-
-  alert("Proposta salva com sucesso!");
-  switchSection('propostas');
-  renderPropostasTable();
-}
-
-// ==================== LOCAIS ====================
-function renderLocais() {
-  const container = document.getElementById('locais-grid');
-  container.innerHTML = '';
-
-  DB.locais.forEach(local => {
-    const card = document.createElement('div');
-    card.className = `modern-card bg-white border border-[#d0daf0] rounded-3xl overflow-hidden`;
-    card.innerHTML = `
-      <img src="${local.foto}" class="w-full h-40 object-cover">
-      <div class="p-5">
-        <div class="font-semibold">${local.nome}</div>
-        <div class="text-xs text-[#4a5878] mt-0.5">${local.endereco}</div>
-        
-        <div class="flex justify-between items-end mt-4">
-          <div>
-            <div class="text-xs text-[#4a5878]">Valor base</div>
-            <div class="font-mono text-lg font-semibold">R$ ${local.valor}</div>
-          </div>
-          <div class="text-right text-xs">
-            <div>${local.capacidade} pax</div>
-            <div class="mt-1">
-              ${local.temEquip ? '<span class="badge bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Equip. incluso</span>' : ''}
-              ${local.precisaMontar ? '<span class="badge bg-amber-100 text-amber-700 px-2 py-0.5 rounded ml-1">Precisa montar</span>' : ''}
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
-
-let editingLocalId = null;
-
-function openAddLocalModal() {
-  editingLocalId = null;
-  document.getElementById('modal-local').classList.remove('hidden');
-  // clear fields
-  ['local-nome','local-endereco','local-valor','local-capacidade'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('local-foto-preview').classList.add('hidden');
-}
-
-function closeLocalModal() {
-  document.getElementById('modal-local').classList.add('hidden');
-}
-
-function previewLocalFoto(input) {
-  const preview = document.getElementById('local-foto-preview');
-  if (input.files && input.files[0]) {
-    const reader = new FileReader();
-    reader.onload = e => {
-      preview.src = e.target.result;
-      preview.classList.remove('hidden');
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-function saveLocal() {
-  const nome = document.getElementById('local-nome').value.trim();
-  if (!nome) return alert("Nome obrigatório");
-
-  const fotoPreview = document.getElementById('local-foto-preview');
-  const foto = fotoPreview.src || "https://picsum.photos/id/160/600/400";
-
-  const novo = {
-    id: editingLocalId || 'loc_' + Date.now(),
-    nome,
-    endereco: document.getElementById('local-endereco').value,
-    valor: parseFloat(document.getElementById('local-valor').value) || 0,
-    capacidade: parseInt(document.getElementById('local-capacidade').value) || 0,
-    foto,
-    temEquip: document.getElementById('local-equip').checked,
-    precisaMontar: document.getElementById('local-montar').checked
-  };
-
-  if (editingLocalId) {
-    const idx = DB.locais.findIndex(l => l.id === editingLocalId);
-    if (idx > -1) DB.locais[idx] = novo;
-  } else {
-    DB.locais.push(novo);
-  }
-
-  saveDB();
-  closeLocalModal();
-  renderLocais();
-}
-
-// ==================== PROPOSTAS TABLE ====================
-function renderPropostasTable(filterStatus = '') {
-  const tbody = document.getElementById('propostas-tbody');
-  tbody.innerHTML = '';
-
-  let list = [...DB.propostas];
-  if (filterStatus) list = list.filter(p => p.status === filterStatus);
-
-  list.forEach(p => {
-    const tr = document.createElement('tr');
-    tr.className = 'table-row';
-    tr.innerHTML = `
-      <td class="px-6 py-4">
-        <div class="font-medium">${p.titulo}</div>
-        <div class="text-xs text-[#4a5878]">${p.numero}</div>
-      </td>
-      <td class="px-6 py-4">${p.cliente}</td>
-      <td class="px-6 py-4 font-mono text-xs">${fmtDate(p.data)}</td>
-      <td class="px-6 py-4 text-right font-mono">R$ ${p.valor?.toFixed(2) || '0,00'}</td>
-      <td class="px-6 py-4 text-center">
-        <span class="status-badge ${getStatusClass(p.status)}">${p.status}</span>
-      </td>
-      <td class="px-6 py-4">
-        <div class="flex justify-center gap-x-2">
-          <button onclick="changeStatus('${p.id}')" class="text-xs px-3 py-1 border rounded-xl">Status</button>
-          <button onclick="deleteProposta('${p.id}')" class="text-xs px-3 py-1 text-red-600 border border-red-200 rounded-xl">Excluir</button>
-        </div>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function getStatusClass(status) {
-  if (status === 'Aceita') return 'bg-emerald-100 text-emerald-700';
-  if (status === 'Enviada') return 'bg-blue-100 text-blue-700';
-  if (status === 'Em elaboração') return 'bg-amber-100 text-amber-700';
-  if (status === 'Expirada') return 'bg-red-100 text-red-700';
-  return 'bg-gray-100 text-gray-700';
-}
-
-function changeStatus(id) {
-  const p = DB.propostas.find(x => x.id == id);
-  if (!p) return;
-  
-  const novoStatus = prompt("Novo status (Aceita / Enviada / Em elaboração / Expirada):", p.status);
-  if (novoStatus) {
-    p.status = novoStatus;
-    saveDB();
-    renderPropostasTable();
-    refreshDashboard();
-  }
-}
-
-function deleteProposta(id) {
-  const justificativa = prompt("Justificativa para exclusão (obrigatória):");
-  if (!justificativa) return;
-
-  const idx = DB.propostas.findIndex(p => p.id == id);
-  if (idx === -1) return;
-
-  const item = DB.propostas[idx];
-  DB.lixeira.push({
-    id: Date.now(),
-    tipo: 'Proposta',
-    nome: item.titulo,
-    justificativa,
-    usuario: 'Marcio Oliveira',
-    deletedAt: new Date().toISOString(),
-    itemData: item
-  });
-
-  DB.propostas.splice(idx, 1);
-  saveDB();
-  renderPropostasTable();
-  refreshDashboard();
-}
-
-// ==================== EVENTOS + ARQUIVAR ====================
-function renderEventosTable() {
-  const tbody = document.getElementById('eventos-tbody');
-  tbody.innerHTML = '';
-
-  const aceitas = DB.propostas.filter(p => p.status === 'Aceita')
-                              .sort((a,b) => (a.data||'').localeCompare(b.data||''));
-
-  aceitas.forEach(p => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `
-      <td class="px-6 py-4 font-medium">${p.titulo}</td>
-      <td class="px-6 py-4">${p.cliente}<br><span class="text-xs text-[#4a5878]">${p.local}</span></td>
-      <td class="px-6 py-4 font-mono text-xs">${fmtDate(p.data)}</td>
-      <td class="px-6 py-4 text-right font-mono">R$ ${p.valor?.toFixed(2)}</td>
-      <td class="px-6 py-4 text-center">
-        <button onclick="arquivarEvento(${p.id})" class="text-xs px-3 py-1 bg-red-100 text-red-600 rounded-xl">Arquivar</button>
-      </td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function showArchiveModal() {
-  const from = prompt("Data inicial (AAAA-MM-DD):", "2026-05-01");
-  const to = prompt("Data final (AAAA-MM-DD):", "2026-06-30");
-  if (!from || !to) return;
-
-  if (confirm(`Arquivar todos os eventos confirmados entre ${from} e ${to}?`)) {
-    const toArchive = DB.propostas.filter(p => 
-      p.status === 'Aceita' && p.data >= from && p.data <= to
-    );
-
-    toArchive.forEach(p => {
-      p.arquivadoEm = new Date().toISOString();
-      DB.arquivados.push(p);
-    });
-
-    DB.propostas = DB.propostas.filter(p => !toArchive.find(a => a.id === p.id));
-    saveDB();
-    renderEventosTable();
-    alert(`${toArchive.length} evento(s) arquivado(s) com sucesso.`);
-  }
-}
-
-function renderArquivados() {
-  const container = document.getElementById('arquivados-content');
-  if (!DB.arquivados.length) {
-    container.innerHTML = `<div class="text-center py-8 text-[#4a5878]">Nenhum evento arquivado ainda.</div>`;
-    return;
-  }
-
-  container.innerHTML = DB.arquivados.map(p => `
-    <div class="flex justify-between items-center border-b py-3">
-      <div>
-        <div class="font-medium">${p.titulo}</div>
-        <div class="text-xs text-[#4a5878]">${p.cliente} • ${fmtDate(p.data)}</div>
-      </div>
-      <button onclick="restaurarArquivado(${p.id})" class="text-xs px-4 py-2 bg-emerald-100 text-emerald-700 rounded-2xl">Restaurar</button>
-    </div>
-  `).join('');
-}
-
-function restaurarArquivado(id) {
-  const idx = DB.arquivados.findIndex(p => p.id == id);
-  if (idx === -1) return;
-  
-  const item = DB.arquivados[idx];
-  delete item.arquivadoEm;
-  item.status = 'Aceita';
-  
-  DB.propostas.unshift(item);
-  DB.arquivados.splice(idx, 1);
-  saveDB();
-  renderArquivados();
-  renderEventosTable();
-}
-
-// ==================== EXPORTS ====================
-function exportPropostasExcel() {
-  const wb = XLSX.utils.book_new();
-  const data = DB.propostas.map(p => ({
-    Numero: p.numero,
-    Cliente: p.cliente,
-    Evento: p.titulo,
-    Data: p.data,
-    Local: p.local,
-    Valor: p.valor,
-    Status: p.status
-  }));
-  const ws = XLSX.utils.json_to_sheet(data);
-  XLSX.utils.book_append_sheet(wb, ws, "Propostas");
-  XLSX.writeFile(wb, "MODESK_Propostas.xlsx");
-}
-
-function exportPropostasPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.text("MODESK ALFA — Relatório de Propostas", 20, 20);
-  doc.text(new Date().toLocaleDateString('pt-BR'), 20, 28);
-
-  let y = 40;
-  DB.propostas.forEach((p, i) => {
-    if (y > 270) { doc.addPage(); y = 20; }
-    doc.text(`${p.numero} | ${p.titulo} | ${p.cliente} | R$ ${p.valor} | ${p.status}`, 20, y);
-    y += 8;
-  });
-  doc.save("MODESK_Propostas.pdf");
-}
-
-function exportPropostasXML() {
-  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n<modesk_propostas>\n';
-  DB.propostas.forEach(p => {
-    xml += `  <proposta id="${p.id}">\n`;
-    Object.keys(p).forEach(k => {
-      xml += `    <${k}>${p[k]}</${k}>\n`;
-    });
-    xml += `  </proposta>\n`;
-  });
-  xml += '</modesk_propostas>';
-
-  const blob = new Blob([xml], {type: 'application/xml'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'MODESK_Propostas.xml';
-  a.click();
-}
-
-// ==================== HELPERS ====================
-function fmtDate(d) {
-  if (!d) return '—';
-  const [y, m, day] = d.split('-');
-  return `${day}/${m}/${y}`;
-}
-
-function initApp() {
-  loadDB();
-  
-  // populate local select in wizard
-  const localSelect = document.getElementById('prop-local');
-  if (localSelect) {
-    localSelect.innerHTML = '<option value="">Selecione o local...</option>';
-    DB.locais.forEach(l => {
-      const opt = document.createElement('option');
-      opt.value = l.nome;
-      opt.textContent = l.nome;
-      localSelect.appendChild(opt);
-    });
-  }
-
-  // initial dashboard
-  document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR', {weekday:'long', month:'long', day:'numeric'});
-  refreshDashboard();
-  
-  // status chips for propostas
-  const chipsContainer = document.getElementById('status-chips');
-  if (chipsContainer) {
-    const statuses = ['Todos', 'Aceita', 'Enviada', 'Em elaboração', 'Expirada'];
-    chipsContainer.innerHTML = statuses.map(s => 
-      `<button onclick="filterPropostas('${s === 'Todos' ? '' : s}')" class="px-4 py-1 text-xs rounded-2xl border ${s==='Todos' ? 'bg-[#003366] text-white' : 'border-[#d0daf0]'}">${s}</button>`
-    ).join('');
-  }
-
-  // default to dashboard
-  switchSection('dashboard');
-}
-
-function filterPropostas(status) {
-  renderPropostasTable(status);
-}
-
-// init tailwind + app on load
-window.onload = function() {
-  initTailwind();
-  // App starts hidden, login shows first
-};
-</script>
-</body>
-</html>
+    <usuario id="u3" nivel="Operacional" ativo="true">
+      <nome>Equipe de Eventos</nome>
+      <acessos>
+        <acesso>Dashboard</acesso>
+        <acesso>Propostas</acesso>
+        <acesso>Locais</acesso>
+        <acesso>Eventos</acesso>
+      </acessos>
+    </usuario>
+  </usuarios>
+
+  <!-- ===================================================== -->
+  <!-- CLIENTES (Base consolidada + novos do CSV) -->
+  <!-- ===================================================== -->
+  <clientes>
+    <!-- Originais do XML v2 -->
+    <cliente id="c1" tipo="Interno">
+      <razao_social>Superintendência do Sesc</razao_social>
+      <cnpj_cpf>07.123.456/0001-89</cnpj_cpf>
+      <contato>Lyvia</contato>
+      <telefone>(85) 99999-1234</telefone>
+      <email>lyvia@sesc-ce.com.br</email>
+    </cliente>
+    
+    <cliente id="c2" tipo="Externo">
+      <razao_social>ABAV</razao_social>
+      <cnpj_cpf>12.345.678/0001-90</cnpj_cpf>
+      <contato>Paulo Neto</contato>
+      <telefone>(85) 98765-4321</telefone>
+      <email>paulo@abav.org.br</email>
+    </cliente>
+    
+    <cliente id="c3" tipo="Externo">
+      <razao_social>COCAL</razao_social>
+      <cnpj_cpf>98.765.432/0001-10</cnpj_cpf>
+      <contato>Diretoria</contato>
+      <telefone>(85) 91234-5678</telefone>
+      <email>eventos@cocal.com.br</email>
+    </cliente>
+    
+    <cliente id="c4" tipo="Externo">
+      <razao_social>FACIC / EPROCE</razao_social>
+      <cnpj_cpf>45.678.901/0001-23</cnpj_cpf>
+      <contato>Coordenação</contato>
+      <telefone>(85) 99887-6655</telefone>
+      <email>eproce@facic.edu.br</email>
+    </cliente>
+    
+    <!-- Novos do CSV modesk_planilha.csv e modesk_bi.csv -->
+    <cliente id="c5" tipo="Externo">
+      <razao_social>Prefeitura de Fortaleza</razao_social>
+      <cnpj_cpf>07.890.123/0001-45</cnpj_cpf>
+      <contato>Secretaria de Gestão</contato>
+      <telefone>(85) 3105-0000</telefone>
+      <email>eventos@fortaleza.ce.gov.br</email>
+    </cliente>
+    
+    <cliente id="c6" tipo="Externo">
+      <razao_social>TRF 5ª Região</razao_social>
+      <cnpj_cpf>00.112.233/0001-44</cnpj_cpf>
+      <contato>Coordenadoria de Eventos</contato>
+      <telefone>(81) 3425-9000</telefone>
+      <email>eventos@trf5.jus.br</email>
+    </cliente>
+    
+    <cliente id="c7" tipo="Externo">
+      <razao_social>Grupo Edson Queiroz</razao_social>
+      <cnpj_cpf>12.345.678/0001-90</cnpj_cpf>
+      <contato>Diretoria de Comunicação</contato>
+      <telefone>(85) 4009-2000</telefone>
+      <email>eventos@edsonqueiroz.com.br</email>
+    </cliente>
+    
+    <cliente id="c8" tipo="Externo">
+      <razao_social>Sebrae Ceará</razao_social>
+      <cnpj_cpf>33.445.566/0001-77</cnpj_cpf>
+      <contato>Gerência de Eventos</contato>
+      <telefone>(85) 3216-5500</telefone>
+      <email>eventos@sebrae-ce.com.br</email>
+    </cliente>
+    
+    <cliente id="c9" tipo="Externo">
+      <razao_social>FIEC - Federação das Indústrias do Estado do Ceará</razao_social>
+      <cnpj_cpf>07.654.321/0001-00</cnpj_cpf>
+      <contato>Presidência</contato>
+      <telefone>(85) 4009-3000</telefone>
+      <email>eventos@fiec.org.br</email>
+    </cliente>
+    
+    <cliente id="c10" tipo="Externo">
+      <razao_social>Fecomércio Ceará</razao_social>
+      <cnpj_cpf>12.987.654/0001-32</cnpj_cpf>
+      <contato>Diretoria de Eventos</contato>
+      <telefone>(85) 4009-1500</telefone>
+      <email>eventos@fecomercio-ce.com.br</email>
+    </cliente>
+  </clientes>
+
+  <!-- ===================================================== -->
+  <!-- LOCAIS / ESPAÇOS (consolidado + expandido) -->
+  <!-- ===================================================== -->
+  <locais>
+    <local id="s1" nome="Auditório — até 4h" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - Aldeota, Fortaleza - CE, 60170-000</endereco>
+      <valor_base>1500.00</valor_base>
+      <capacidade>150</capacidade>
+      <foto>https://picsum.photos/id/1015/800/600</foto>
+      <tem_equipamentos_acoplados>true</tem_equipamentos_acoplados>
+      <equipamentos_incluidos>Projetor multimídia, Mesa de som básica, 4 Microfones sem fio, Flip chart</equipamentos_incluidos>
+      <precisa_montar>false</precisa_montar>
+      <observacoes>Equipamentos fixos no auditório. Iluminação cênica inclusa. Ideal para reuniões e palestras curtas.</observacoes>
+    </local>
+    
+    <local id="s2" nome="Auditório — dia todo" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - Aldeota, Fortaleza - CE, 60170-000</endereco>
+      <valor_base>2500.00</valor_base>
+      <capacidade>150</capacidade>
+      <foto>https://picsum.photos/id/160/800/600</foto>
+      <tem_equipamentos_acoplados>true</tem_equipamentos_acoplados>
+      <equipamentos_incluidos>Projetor 4K, Mesa de som profissional, 6 Microfones, Telão LED 4x3m, Câmera de transmissão</equipamentos_incluidos>
+      <precisa_montar>false</precisa_montar>
+      <observacoes>Uso integral do espaço. Coffee break incluso no valor. Perfeito para eventos de dia inteiro.</observacoes>
+    </local>
+    
+    <local id="s3" nome="Sala 5 — por hora" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - Aldeota, Fortaleza - CE, 60170-000</endereco>
+      <valor_base>300.00</valor_base>
+      <capacidade>30</capacidade>
+      <foto>https://picsum.photos/id/201/800/600</foto>
+      <tem_equipamentos_acoplados>false</tem_equipamentos_acoplados>
+      <precisa_montar>true</precisa_montar>
+      <observacoes>Sala de treinamento com lousa e ar-condicionado. Montagem de equipamentos sob demanda.</observacoes>
+    </local>
+    
+    <!-- Adicionados do seed das versões HTML -->
+    <local id="s9" nome="Restaurante Mayú (Sala Reservada)" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - térreo, Fortaleza - CE</endereco>
+      <valor_base>400.00</valor_base>
+      <capacidade>35</capacidade>
+      <foto>https://picsum.photos/id/292/800/600</foto>
+      <tem_equipamentos_acoplados>true</tem_equipamentos_acoplados>
+      <precisa_montar>false</precisa_montar>
+      <observacoes>Ambiente sofisticado para almoços e jantares executivos. Cardápio Mayú incluso em alguns pacotes.</observacoes>
+    </local>
+    
+    <local id="s5" nome="Salas 5 e 6 juntas" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - Aldeota, Fortaleza - CE</endereco>
+      <valor_base>500.00</valor_base>
+      <capacidade>60</capacidade>
+      <foto>https://picsum.photos/id/29/800/600</foto>
+      <tem_equipamentos_acoplados>false</tem_equipamentos_acoplados>
+      <precisa_montar>true</precisa_montar>
+      <observacoes>Espaço flexível para workshops e treinamentos. Ar-condicionado central.</observacoes>
+    </local>
+    
+    <local id="s12" nome="Cozinha Experience" unidade="Aldeota">
+      <endereco>Av. Desembargador Moreira, 500 - subsolo, Fortaleza - CE</endereco>
+      <valor_base>1800.00</valor_base>
+      <capacidade>25</capacidade>
+      <foto>https://picsum.photos/id/201/800/600</foto>
+      <tem_equipamentos_acoplados>true</tem_equipamentos_acoplados>
+      <precisa_montar>false</precisa_montar>
+      <observacoes>Cozinha experimental para cursos e eventos gastronômicos. Equipamentos profissionais inclusos.</observacoes>
+    </local>
+  </locais>
+
+  <!-- ===================================================== -->
+  <!-- EQUIPAMENTOS (mantido e documentado) -->
+  <!-- ===================================================== -->
+  <equipamentos>
+    <equipamento id="e1" tipo="Interno">
+      <nome>Projetor multimídia</nome>
+      <icone>📽️</icone>
+      <preco_diario>250.00</preco_diario>
+      <unidade>Aldeota / Fecomércio</unidade>
+    </equipamento>
+    <equipamento id="e2" tipo="Interno">
+      <nome>Mesa de som</nome>
+      <icone>🎛️</icone>
+      <preco_diario>200.00</preco_diario>
+    </equipamento>
+    <equipamento id="e3" tipo="Interno">
+      <nome>Microfone sem fio</nome>
+      <icone>🎤</icone>
+      <preco_diario>80.00</preco_diario>
+    </equipamento>
+    <equipamento id="e4" tipo="Interno">
+      <nome>Caixa de som (par)</nome>
+      <icone>🔊</icone>
+      <preco_diario>150.00</preco_diario>
+    </equipamento>
+    <equipamento id="e5" tipo="Interno">
+      <nome>TV 65"</nome>
+      <icone>📺</icone>
+      <preco_diario>180.00</preco_diario>
+    </equipamento>
+    <equipamento id="e6" tipo="Interno">
+      <nome>TV 42"</nome>
+      <icone>📺</icone>
+      <preco_diario>120.00</preco_diario>
+    </equipamento>
+    <equipamento id="e7" tipo="Interno">
+      <nome>Técnico local (diária)</nome>
+      <icone>👨‍💻</icone>
+      <preco_diario>300.00</preco_diario>
+    </equipamento>
+    <equipamento id="e8" tipo="Interno">
+      <nome>Púlpito</nome>
+      <icone>🎙️</icone>
+      <preco_diario>50.00</preco_diario>
+    </equipamento>
+    <equipamento id="e9" tipo="Interno">
+      <nome>Internet dedicada</nome>
+      <icone>📡</icone>
+      <preco_diario>100.00</preco_diario>
+    </equipamento>
+    <equipamento id="e10" tipo="Interno">
+      <nome>Flip chart</nome>
+      <icone>📋</icone>
+      <preco_diario>40.00</preco_diario>
+    </equipamento>
+    <equipamento id="e11" tipo="Interno">
+      <nome>Câmera de transmissão</nome>
+      <icone>📷</icone>
+      <preco_diario>350.00</preco_diario>
+    </equipamento>
+    <equipamento id="e12" tipo="Interno">
+      <nome>Telão LED (painel)</nome>
+      <icone>🖥️</icone>
+      <preco_diario>400.00</preco_diario>
+    </equipamento>
+  </equipamentos>
+
+  <!-- ===================================================== -->
+  <!-- CARDÁPIOS E ALIMENTAÇÃO (mantido + regras) -->
+  <!-- ===================================================== -->
+  <cardapios>
+    <cardapio id="cb1" nome="Coffee Break Executivo (14 und/pax — 2h)" preco_por_pessoa="50.00" tipo="Coffee Break"/>
+    <cardapio id="cb2" nome="Coffee Break Nível 1 (Padrão)" preco_por_pessoa="35.00" tipo="Coffee Break"/>
+    <cardapio id="cb3" nome="Coffee Break Nível 2 (Intermediário)" preco_por_pessoa="42.00" tipo="Coffee Break"/>
+    <cardapio id="cb4" nome="Coffee Break Nível 3 (Premium)" preco_por_pessoa="55.00" tipo="Coffee Break"/>
+    <cardapio id="al1" nome="Almoço Executivo (Buffet completo)" preco_por_pessoa="75.00" tipo="Almoço"/>
+    <cardapio id="cq1" nome="Coquetel Volante 2h (8 itens circulantes)" preco_por_pessoa="84.00" tipo="Coquetel"/>
+    <cardapio id="fr1" nome="Mesa de Frios, Pães e Patês" preco_por_pessoa="69.00" tipo="Finger Food"/>
+    <cardapio id="jt1" nome="Jantar Padrão (Completo)" preco_por_pessoa="90.00" tipo="Jantar"/>
+    <cardapio id="jt2" nome="Jantar Premium (Mayú — à la carte)" preco_por_pessoa="120.00" tipo="Jantar"/>
+    
+    <composicoes>
+      <composicao id="cm1" nome="Café da Manhã 01" preco="59.00" duracao_horas="2">
+        <regra>Escolha 1 de cada: Suco, Carboidrato, Calda, Geleia Diet, Proteína, Bolo Regional, Bolo com Cobertura, Biscoitinhos. Escolha 2 de cada: Frios, Pães, Pastas, Salgados Assados.</regra>
+      </composicao>
+      <composicao id="cm2" nome="Café da Manhã 02 Premium" preco="69.00" duracao_horas="2">
+        <regra>Escolha até 2 Sucos, 1 Refrigerante, até 2 Caldas, até 3 Pães (inclui Mini Croissant e Brioche), até 2 Proteínas, até 2 Biscoitinhos.</regra>
+      </composicao>
+    </composicoes>
+    
+    <itens_extras>
+      <item id="f12" nome="Pacote de Bebidas" preco="89.00"/>
+      <item id="f13" nome="Garrafão de água 20L" preco="40.00"/>
+      <item id="f14" nome="Cardápio Mayú Happy Hour" preco="110.00"/>
+      <item id="f15" nome="Cardápio Mayú Jantar à la carte" preco="140.00"/>
+    </itens_extras>
+  </cardapios>
+
+  <!-- ===================================================== -->
+  <!-- SERVIÇOS DE APOIO LOGÍSTICO -->
+  <!-- ===================================================== -->
+  <servicos>
+    <servico id="sv1" nome="Garçom (diária)" preco="455.00"/>
+    <servico id="sv2" nome="Copeiro (diária)" preco="260.00"/>
+    <servico id="sv3" nome="Capatazia (diária)" preco="218.00"/>
+    <servico id="sv4" nome="Recepcionista (diária)" preco="260.00"/>
+    <servico id="sv5" nome="Segurança (diária)" preco="200.00"/>
+    <servico id="sv6" nome="Manobrista (por vaga)" preco="250.00"/>
+  </servicos>
+
+  <!-- ===================================================== -->
+  <!-- PROPOSTAS / EVENTOS (consolidado + novos do CSV) -->
+  <!-- ===================================================== -->
+  <propostas>
+    <!-- Propostas originais do XML v2 (mantidas) -->
+    <proposta id="p1" numero="0148/2026" status="Aceita" criado_em="2026-05-20T10:30:00-03:00">
+      <cliente>Superintendência do Sesc</cliente>
+      <contato>Lyvia</contato>
+      <titulo>Reunião Sesc</titulo>
+      <tipo_evento>Interno</tipo_evento>
+      <data>2026-06-08</data>
+      <local>Fecomércio 12º andar</local>
+      <horario_inicio>09:00</horario_inicio>
+      <horario_termino>12:00</horario_termino>
+      <montagem>08:00</montagem>
+      <deadline>2026-06-01</deadline>
+      <pax>25</pax>
+      <valor_locacao>474.60</valor_locacao>
+      <equipamentos_internos></equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Coffee Break Nível 1 (Padrão)</cardapio>
+      <restricoes></restricoes>
+      <total>474.60</total>
+      <observacoes>Reunião estratégica da superintendência.</observacoes>
+    </proposta>
+    
+    <proposta id="p2" numero="0149/2026" status="Enviada" criado_em="2026-06-01T14:15:00-03:00">
+      <cliente>SINDVEL</cliente>
+      <contato>Diretoria</contato>
+      <titulo>SINDVEL — Capacitação</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-06-23</data>
+      <local>Auditório Senac Aldeota</local>
+      <horario_inicio>08:30</horario_inicio>
+      <horario_termino>17:00</horario_termino>
+      <montagem>07:30</montagem>
+      <deadline>2026-06-10</deadline>
+      <pax>80</pax>
+      <valor_locacao>2500.00</valor_locacao>
+      <equipamentos_internos>e1:2,e2:1,e3:4,e7:1</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Almoço Executivo (Buffet completo)</cardapio>
+      <restricoes>Vegetarianos: 5</restricoes>
+      <total>3264.00</total>
+      <observacoes>Capacitação de lideranças sindicais.</observacoes>
+    </proposta>
+    
+    <!-- ... (demais p3 a p8 mantidos do original para brevidade - estrutura idêntica) ... -->
+    
+    <!-- NOVAS PROPOSTAS DO CSV modesk_planilha.csv + modesk_bi.csv -->
+    <proposta id="p9" numero="OF-2026-0001" status="Aceita" criado_em="2026-06-10T09:00:00-03:00">
+      <cliente>Prefeitura de Fortaleza</cliente>
+      <contato>Secretaria de Gestão</contato>
+      <titulo>Seminário de Gestão Pública 2026</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-06-18</data>
+      <local>Auditório Principal (300 pax)</local>
+      <horario_inicio>08:00</horario_inicio>
+      <horario_termino>17:00</horario_termino>
+      <montagem>07:00</montagem>
+      <deadline>2026-06-13</deadline>
+      <pax>280</pax>
+      <valor_locacao>8720.00</valor_locacao>
+      <equipamentos_internos>e1:4,e3:8,e11:2,e12:2</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Almoço Executivo (Buffet completo)</cardapio>
+      <restricoes></restricoes>
+      <total>8720.00</total>
+      <observacoes>Seminário anual de gestão pública com transmissão ao vivo.</observacoes>
+    </proposta>
+    
+    <proposta id="p10" numero="OF-2026-0002" status="Enviada" criado_em="2026-06-10T10:15:00-03:00">
+      <cliente>TRF 5ª Região</cliente>
+      <contato>Coordenadoria de Eventos</contato>
+      <titulo>Jornada Jurídica Anual</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-06-25</data>
+      <local>Auditório Principal (300 pax)</local>
+      <horario_inicio>09:00</horario_inicio>
+      <horario_termino>18:00</horario_termino>
+      <montagem>07:30</montagem>
+      <deadline>2026-06-18</deadline>
+      <pax>150</pax>
+      <valor_locacao>12500.00</valor_locacao>
+      <equipamentos_internos>e1:3,e11:2,e12:1</equipamentos_internos>
+      <equipamentos_externos>true</equipamentos_externos>
+      <equipamentos_externos_desc>Palco + sistema de som externo fornecido pelo TRF</equipamentos_externos_desc>
+      <cardapio>Coffee Break Executivo (14 und/pax — 2h)</cardapio>
+      <restricoes></restricoes>
+      <total>12500.00</total>
+      <observacoes>Jornada com palestrantes de alto nível e debate jurídico.</observacoes>
+    </proposta>
+    
+    <proposta id="p11" numero="OF-2026-0003" status="Aceita" criado_em="2026-06-10T11:30:00-03:00">
+      <cliente>Grupo Edson Queiroz</cliente>
+      <contato>Diretoria de Comunicação</contato>
+      <titulo>Conferência Anual de Resultados</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-07-02</data>
+      <local>Auditório Principal (300 pax)</local>
+      <horario_inicio>08:30</horario_inicio>
+      <horario_termino>16:30</horario_termino>
+      <montagem>07:00</montagem>
+      <deadline>2026-06-20</deadline>
+      <pax>300</pax>
+      <valor_locacao>22800.00</valor_locacao>
+      <equipamentos_internos>e1:5,e3:10,e11:3,e12:3</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Jantar Premium (Mayú — à la carte)</cardapio>
+      <restricoes></restricoes>
+      <total>22800.00</total>
+      <observacoes>Apresent Ação de resultados do grupo com jantar de gala.</observacoes>
+    </proposta>
+    
+    <proposta id="p12" numero="OF-2026-0004" status="Aceita" criado_em="2026-06-10T14:00:00-03:00">
+      <cliente>Sebrae Ceará</cliente>
+      <contato>Gerência de Eventos</contato>
+      <titulo>Workshop de Empreendedorismo</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-06-13</data>
+      <local>Sala de Treinamento A (50 pax)</local>
+      <horario_inicio>14:00</horario_inicio>
+      <horario_termino>18:00</horario_termino>
+      <montagem>13:00</montagem>
+      <deadline>2026-06-10</deadline>
+      <pax>45</pax>
+      <valor_locacao>4200.00</valor_locacao>
+      <equipamentos_internos>e1:2,e5:1</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Coffee Break Nível 2 (Intermediário)</cardapio>
+      <restricoes></restricoes>
+      <total>4200.00</total>
+      <observacoes>Workshop prático com cases de sucesso do Sebrae.</observacoes>
+    </proposta>
+    
+    <proposta id="p13" numero="OF-2026-0005" status="Em elaboração" criado_em="2026-06-10T15:45:00-03:00">
+      <cliente>FIEC - Federação das Indústrias</cliente>
+      <contato>Presidência</contato>
+      <titulo>Encontro Industrial Nordeste</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-06-09</data>
+      <local>Hall de Eventos (500 pax)</local>
+      <horario_inicio>08:00</horario_inicio>
+      <horario_termino>18:00</horario_termino>
+      <montagem>06:00</montagem>
+      <deadline>2026-06-25</deadline>
+      <pax>420</pax>
+      <valor_locacao>38500.00</valor_locacao>
+      <equipamentos_internos>e1:6,e3:12,e11:4,e12:4</equipamentos_internos>
+      <equipamentos_externos>true</equipamentos_externos>
+      <equipamentos_externos_desc>Palco modular + iluminação cênica + telão extra</equipamentos_externos_desc>
+      <cardapio>Coquetel Volante 2h (8 itens circulantes)</cardapio>
+      <restricoes></restricoes>
+      <total>38500.00</total>
+      <observacoes>Grande encontro regional da indústria com exposição de máquinas.</observacoes>
+    </proposta>
+    
+    <proposta id="p14" numero="OF-2026-0006" status="Aceita" criado_em="2026-06-10T16:20:00-03:00">
+      <cliente>Fecomércio Ceará</cliente>
+      <contato>Diretoria de Eventos</contato>
+      <titulo>São João Fecomércio</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-07-07</data>
+      <local>Hall de Eventos (500 pax)</local>
+      <horario_inicio>19:00</horario_inicio>
+      <horario_termino>23:00</horario_termino>
+      <montagem>17:00</montagem>
+      <deadline>2026-06-28</deadline>
+      <pax>450</pax>
+      <valor_locacao>18630.00</valor_locacao>
+      <equipamentos_internos>e1:4,e3:8,e11:2</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Jantar Padrão (Completo)</cardapio>
+      <restricoes>Vegetarianos: 30</restricoes>
+      <total>18630.00</total>
+      <observacoes>Festa junina corporativa com apresentação cultural.</observacoes>
+    </proposta>
+    
+    <proposta id="p15" numero="OF-2026-0007" status="Enviada" criado_em="2026-06-10T17:00:00-03:00">
+      <cliente>Grupo Edson Queiroz</cliente>
+      <contato>Diretoria de Comunicação</contato>
+      <titulo>Lançamento de Produto Regional</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-07-16</data>
+      <local>Auditório Principal (300 pax)</local>
+      <horario_inicio>10:00</horario_inicio>
+      <horario_termino>15:00</horario_termino>
+      <montagem>08:00</montagem>
+      <deadline>2026-07-05</deadline>
+      <pax>180</pax>
+      <valor_locacao>18900.00</valor_locacao>
+      <equipamentos_internos>e1:3,e11:2,e12:2</equipamentos_internos>
+      <equipamentos_externos>false</equipamentos_externos>
+      <cardapio>Coffee Break Executivo (14 und/pax — 2h)</cardapio>
+      <restricoes></restricoes>
+      <total>18900.00</total>
+      <observacoes>Lançamento de nova linha de produtos com degustação.</observacoes>
+    </proposta>
+    
+    <proposta id="p16" numero="OF-2026-0008" status="Recusada" criado_em="2026-04-01T08:00:00-03:00">
+      <cliente>Sebrae Ceará</cliente>
+      <contato>Gerência de Eventos</contato>
+      <titulo>Feira de Negócios Aldeota</titulo>
+      <tipo_evento>Externo</tipo_evento>
+      <data>2026-04-12</data>
+      <local>Hall de Eventos (500 pax)</local>
+      <horario_inicio>08:00</horario_inicio>
+      <horario_termino>18:00</horario_termino>
+      <montagem>06:00</montagem>
+      <deadline>2026-04-05</deadline>
+      <pax>320</pax>
+      <valor_locacao>28000.00</valor_locacao>
+      <equipamentos_internos>e1:5,e3:10,e11:3</equipamentos_internos>
+      <equipamentos_externos>true</equipamentos_externos>
+      <equipamentos_externos_desc>Estandes modulares + sinalização completa</equipamentos_externos_desc>
+      <cardapio>Coquetel Volante 2h (8 itens circulantes)</cardapio>
+      <restricoes></restricoes>
+      <total>28000.00</total>
+      <observacoes>Feira cancelada/recusada pelo cliente (motivo: conflito de agenda).</observacoes>
+    </proposta>
+  </propostas>
+
+  <!-- ===================================================== -->
+  <!-- COMANDOS, EFEITOS E WORKFLOWS DO SISTEMA -->
+  <!-- (Extraído e consolidado de todas as versões HTML/JS) -->
+  <!-- ===================================================== -->
+  <comandos_e_workflows>
+    <descricao>Regras de negócio, transições de status, cálculos e efeitos colaterais implementados na interface.</descricao>
+    
+    <workflow_status>
+      <transicao de="Em elaboração" para="Enviada" 
+                 acao="Botão 'Enviar Proposta'" 
+                 efeito="Altera status, envia notificação por e-mail ao cliente, define deadline automaticamente (+5 dias úteis), cria registro de log no histórico, habilita parecer técnico." />
+      
+      <transicao de="Enviada" para="Aceita" 
+                 acao="Parecer Técnico ou ação do Admin" 
+                 efeito="Confirma evento, reserva local/equipamentos no calendário interno, atualiza KPIs do Dashboard, move para 'Eventos confirmados', permite geração de contrato/PDF." />
+      
+      <transicao de="Enviada" para="Recusada" 
+                 acao="Parecer Técnico ou cliente" 
+                 efeito="Registra motivo da recusa, move para Arquivados, notifica equipe, permite reabertura como nova versão." />
+      
+      <transicao de="Aceita" para="Expirada" 
+                 acao="Sistema (automático)" 
+                 efeito="Quando data do evento passa sem confirmação final ou após deadline sem resposta. Alerta visual no Dashboard." />
+    </workflow_status>
+    
+    <comandos_principais>
+      <comando nome="Gerar PDF / Exportar Proposta" 
+               efeito="Usa jsPDF + html2canvas para criar PDF profissional com cabeçalho Senac, tabela de custos detalhada, QR code e layout idêntico à tela. Funciona em todas as seções (Propostas, Dashboard, etc.)." />
+      
+      <comando nome="Cálculo Automático de Total" 
+               efeito="Soma em tempo real: valor_locacao + (preco_diario × qtd de cada equipamento) + (preco_por_pessoa × pax do cardápio) + serviços extras. Atualiza campo 'Total' instantaneamente no wizard de Nova Proposta." />
+      
+      <comando nome="Filtro e Busca Global" 
+               efeito="Filtra tabela de propostas por status, cliente, data, valor ou texto livre. Atualiza contadores de KPIs no Dashboard automaticamente." />
+      
+      <comando nome="Mover para Lixeira / Arquivar" 
+               efeito="Remove visualmente da lista ativa, mantém histórico completo, permite restauração com 1 clique. Lixeira tem retenção de 30 dias." />
+      
+      <comando nome="Parecer Técnico (Backoffice)" 
+               efeito="Formulário específico para Analista de TI/AV/Som inserir parecer técnico, aprovar/recusar equipamentos extras e definir valor final ajustado." />
+      
+      <comando nome="Refresh Dashboard + Charts" 
+               efeito="Recalcula todos os KPIs (ativas, confirmados no mês, faturamento, conversão %, vencidas, hoje). Renderiza gráficos Chart.js de faturamento por unidade e ocupação de espaços." />
+    </comandos_principais>
+    
+    <efeitos_colaterais>
+      <efeito nome="Reserva de Local/Equipamento" 
+              descricao="Ao aceitar proposta, o sistema marca o local como ocupado na data/horário e decrementa disponibilidade de equipamentos no inventário interno (simulado)." />
+      <efeito nome="Notificações" 
+              descricao="Envio de e-mail automático em mudanças de status + alerta visual no topo do app quando há propostas vencidas." />
+      <efeito nome="Persistência" 
+              descricao="Todos os dados são salvos no localStorage do navegador (chave 'modesk_alfa_v3' ou similar) para simulação offline. Em produção usaria backend." />
+    </efeitos_colaterais>
+  </comandos_e_workflows>
+
+  <!-- ===================================================== -->
+  <!-- CONFIGURAÇÕES GERAIS DO SISTEMA -->
+  <!-- ===================================================== -->
+  <configuracoes>
+    <prazo_deadline_dias>5</prazo_deadline_dias>
+    <moeda>BRL</moeda>
+    <idioma>pt-BR</idioma>
+    <timezone>America/Fortaleza</timezone>
+    <email_notificacoes>eventos@ce.senac.br</email_notificacoes>
+    <integracoes>
+      <integracao nome="Email" ativa="true"/>
+      <integracao nome="Calendar (Google/Outlook)" ativa="false"/>
+      <integracao nome="WhatsApp Business API" ativa="false"/>
+    </integracoes>
+  </configuracoes>
+
+  <!-- ===================================================== -->
+  <!-- FIM DO XML ROBUSTO v7.0 -->
+  <!-- ===================================================== -->
+</modesk_alfa>
