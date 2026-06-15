@@ -1,857 +1,1846 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MODESK ALFA v7 • Senac</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
-
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MoDesk ALFA v8.0 — Senac Aldeota</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
 <style>
-  body { font-family: 'Inter', system_ui, sans-serif; }
-  .font-display { font-family: 'Space Grotesk', system_ui, sans-serif; }
-
-  .modesk-card {
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-  }
-  .modesk-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  }
-
-  .nav-item {
-    transition: all 0.2s ease;
-  }
-  .nav-item.active {
-    background-color: #dbeafe;
-    color: #003366;
-    border-left: 4px solid #f97316;
-  }
-  .dark .nav-item.active {
-    background-color: #1e3a5f;
-    color: #60a5fa;
-  }
-
-  .page { display: none; }
-  .page.active { display: block; }
-
-  .modern-input {
-    transition: all 0.2s ease;
-  }
-  .modern-input:focus {
-    border-color: #003366;
-    box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.1);
-  }
-
-  .item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .item-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .status-badge {
-    font-size: 0.75rem;
-    padding: 4px 12px;
-    border-radius: 9999px;
-    font-weight: 600;
-  }
-
-  .icon-option {
-    padding: 12px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    cursor: pointer;
-    text-align: center;
-    transition: all 0.2s;
-  }
-  .icon-option:hover { border-color: #003366; }
-  .icon-option.selected {
-    border-color: #003366;
-    background-color: #dbeafe;
-  }
+:root {
+  --c-bg:#0d0f14;--c-surface:#141720;--c-surface2:#1a1e2e;--c-surface3:#1f2437;
+  --c-border:rgba(99,113,183,0.18);--c-border2:rgba(99,113,183,0.32);
+  --c-accent:#6366f1;--c-accent2:#818cf8;--c-accent3:#a5b4fc;
+  --c-cyan:#22d3ee;--c-green:#10b981;--c-amber:#f59e0b;--c-red:#ef4444;--c-pink:#ec4899;
+  --c-text:#e2e8f0;--c-text2:#94a3b8;--c-text3:#64748b;
+  --c-sidebar:240px;--c-topbar:60px;--radius:10px;--radius-lg:16px;--shadow:0 4px 24px rgba(0,0,0,0.4);
+}
+[data-theme="light"]{
+  --c-bg:#f1f5f9;--c-surface:#fff;--c-surface2:#f8fafc;--c-surface3:#f1f5f9;
+  --c-border:rgba(99,113,183,0.15);--c-border2:rgba(99,113,183,0.3);
+  --c-accent:#4f46e5;--c-accent2:#6366f1;--c-accent3:#818cf8;
+  --c-cyan:#0891b2;--c-green:#059669;--c-amber:#d97706;--c-red:#dc2626;--c-pink:#db2777;
+  --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;--shadow:0 4px 24px rgba(0,0,0,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--c-bg);color:var(--c-text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+a{color:var(--c-accent2);text-decoration:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+input,select,textarea{font-family:inherit;background:var(--c-surface3);border:1px solid var(--c-border);color:var(--c-text);border-radius:8px;padding:8px 12px;width:100%;font-size:14px;outline:none;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--c-accent)}
+label{font-size:13px;color:var(--c-text2);margin-bottom:4px;display:block}
+select option{background:var(--c-surface)}
+.app-shell{display:flex;height:100vh;overflow:hidden}
+.sidebar{width:var(--c-sidebar);background:var(--c-surface);border-right:1px solid var(--c-border);display:flex;flex-direction:column;transition:width .3s,transform .3s;z-index:100;flex-shrink:0}
+.sidebar.collapsed{width:60px}
+.sidebar-logo{padding:18px 16px 14px;border-bottom:1px solid var(--c-border);display:flex;align-items:center;gap:10px;min-height:var(--c-topbar)}
+.logo-mark{width:32px;height:32px;background:linear-gradient(135deg,var(--c-accent),var(--c-cyan));border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#fff;flex-shrink:0;letter-spacing:-1px}
+.logo-text{font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;opacity:1;transition:opacity .2s}
+.logo-sub{font-size:10px;color:var(--c-text3);display:block;letter-spacing:.5px}
+.sidebar.collapsed .logo-text{opacity:0;width:0}
+.sidebar-nav{flex:1;overflow-y:auto;padding:8px 0;scrollbar-width:thin;scrollbar-color:var(--c-border) transparent}
+.nav-section{padding:6px 12px 2px;font-size:10px;letter-spacing:1.2px;color:var(--c-text3);text-transform:uppercase;font-weight:600;white-space:nowrap;overflow:hidden}
+.sidebar.collapsed .nav-section{opacity:0}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 14px;margin:1px 8px;border-radius:8px;cursor:pointer;transition:background .15s;color:var(--c-text2);font-size:13.5px;white-space:nowrap;position:relative}
+.nav-item:hover{background:var(--c-surface2);color:var(--c-text)}
+.nav-item.active{background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(34,211,238,.1));color:var(--c-accent2)}
+.nav-item.active::before{content:'';position:absolute;left:0;top:20%;height:60%;width:3px;background:var(--c-accent);border-radius:0 3px 3px 0}
+.nav-icon{font-size:17px;flex-shrink:0;width:20px;text-align:center}
+.nav-label{flex:1;overflow:hidden;transition:opacity .2s}
+.sidebar.collapsed .nav-label{opacity:0;width:0}
+.nav-badge{background:var(--c-accent);color:#fff;font-size:10px;font-weight:700;padding:2px 6px;border-radius:20px;flex-shrink:0}
+.sidebar.collapsed .nav-badge{display:none}
+.sidebar-footer{padding:10px;border-top:1px solid var(--c-border)}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:var(--c-topbar);background:var(--c-surface);border-bottom:1px solid var(--c-border);display:flex;align-items:center;gap:12px;padding:0 20px;flex-shrink:0}
+.topbar-toggle{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:8px;color:var(--c-text2);font-size:18px;cursor:pointer;transition:background .15s}
+.topbar-toggle:hover{background:var(--c-surface2)}
+.page-title{font-size:15px;font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-actions{display:flex;align-items:center;gap:8px}
+.topbar-btn{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:8px;color:var(--c-text2);font-size:17px;cursor:pointer;transition:background .15s;position:relative}
+.topbar-btn:hover{background:var(--c-surface2);color:var(--c-text)}
+.badge-dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--c-red);border-radius:50%;border:2px solid var(--c-surface)}
+.avatar{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--c-accent),var(--c-pink));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#fff;cursor:pointer;flex-shrink:0}
+.theme-toggle{width:54px;height:28px;border-radius:14px;background:var(--c-surface3);border:1px solid var(--c-border);cursor:pointer;position:relative;transition:background .3s;flex-shrink:0;display:flex;align-items:center;padding:2px}
+.theme-toggle-ball{width:22px;height:22px;border-radius:50%;background:var(--c-accent);transition:transform .3s;display:flex;align-items:center;justify-content:center;font-size:13px;line-height:1}
+[data-theme="light"] .theme-toggle-ball{transform:translateX(26px)}
+.content{flex:1;overflow-y:auto;padding:24px;scrollbar-width:thin;scrollbar-color:var(--c-border) transparent}
+.view{display:none;animation:fadeIn .25s ease}
+.view.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:20px}
+.card-sm{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius);padding:16px}
+.grid-4{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:20px}
+.kpi{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:20px;position:relative;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.kpi-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
+.kpi-val{font-size:26px;font-weight:700;line-height:1}
+.kpi-label{font-size:12px;color:var(--c-text2);margin-top:4px}
+.kpi-delta{font-size:11px;font-weight:600;margin-top:8px;display:flex;align-items:center;gap:4px}
+.kpi-up{color:var(--c-green)}.kpi-down{color:var(--c-red)}
+.kpi::after{content:'';position:absolute;right:-20px;top:-20px;width:80px;height:80px;border-radius:50%;opacity:.08}
+.kpi-accent-purple::after{background:var(--c-accent)}
+.kpi-accent-cyan::after{background:var(--c-cyan)}
+.kpi-accent-green::after{background:var(--c-green)}
+.kpi-accent-amber::after{background:var(--c-amber)}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.section-title{font-size:16px;font-weight:600}
+.section-sub{font-size:13px;color:var(--c-text2);margin-top:2px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;border:1.5px solid transparent}
+.btn-primary{background:var(--c-accent);color:#fff;border-color:var(--c-accent)}
+.btn-primary:hover{background:var(--c-accent2);border-color:var(--c-accent2)}
+.btn-ghost{background:transparent;color:var(--c-text2);border-color:var(--c-border2)}
+.btn-ghost:hover{background:var(--c-surface2);color:var(--c-text)}
+.btn-danger{background:var(--c-red);color:#fff;border-color:var(--c-red)}
+.btn-success{background:var(--c-green);color:#fff;border-color:var(--c-green)}
+.btn-sm{padding:5px 11px;font-size:12px}
+.btn-icon{width:32px;height:32px;padding:0;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;font-size:15px}
+.table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--c-border)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--c-text3);background:var(--c-surface2);border-bottom:1px solid var(--c-border)}
+td{padding:11px 14px;border-bottom:1px solid var(--c-border);color:var(--c-text)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(99,102,241,.04)}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.3px}
+.badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
+.badge-green{background:rgba(16,185,129,.12);color:var(--c-green)}
+.badge-amber{background:rgba(245,158,11,.12);color:var(--c-amber)}
+.badge-red{background:rgba(239,68,68,.12);color:var(--c-red)}
+.badge-blue{background:rgba(99,102,241,.12);color:var(--c-accent2)}
+.badge-gray{background:var(--c-surface2);color:var(--c-text3)}
+.badge-cyan{background:rgba(34,211,238,.12);color:var(--c-cyan)}
+.toast-container{position:fixed;top:70px;right:20px;z-index:9999;display:flex;flex-direction:column;gap:8px;pointer-events:none}
+.toast{background:var(--c-surface);border:1px solid var(--c-border2);border-radius:10px;padding:12px 16px;font-size:13px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow);pointer-events:auto;transform:translateX(120%);transition:transform .3s;max-width:320px}
+.toast.show{transform:translateX(0)}
+.toast-icon{font-size:17px;flex-shrink:0}
+.toast-success{border-left:3px solid var(--c-green)}
+.toast-error{border-left:3px solid var(--c-red)}
+.toast-warn{border-left:3px solid var(--c-amber)}
+.toast-info{border-left:3px solid var(--c-accent)}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--c-surface);border:1px solid var(--c-border2);border-radius:var(--radius-lg);padding:28px;max-width:520px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5);animation:modalIn .25s ease;max-height:90vh;overflow-y:auto}
+@keyframes modalIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.modal-title{font-size:16px;font-weight:700}
+.modal-close{width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:6px;color:var(--c-text2);font-size:17px;cursor:pointer;transition:background .15s}
+.modal-close:hover{background:var(--c-surface2)}
+.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:4px}
+.wizard-steps{display:flex;align-items:flex-start;gap:0;margin-bottom:28px;overflow-x:auto;padding-bottom:4px}
+.w-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:60px;position:relative}
+.w-step-row{display:flex;align-items:center;width:100%}
+.w-step-dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--c-border2);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--c-text3);transition:all .3s;flex-shrink:0;background:var(--c-surface)}
+.w-step.active .w-step-dot{border-color:var(--c-accent);background:var(--c-accent);color:#fff}
+.w-step.done .w-step-dot{border-color:var(--c-green);background:var(--c-green);color:#fff}
+.w-step-line{flex:1;height:2px;background:var(--c-border)}
+.w-step.done .w-step-line{background:var(--c-green)}
+.w-step-label{font-size:10px;color:var(--c-text3);text-align:center;margin-top:4px;white-space:nowrap}
+.w-step.active .w-step-label{color:var(--c-accent2)}
+.w-step.done .w-step-label{color:var(--c-green)}
+.progress-bar{height:6px;background:var(--c-surface2);border-radius:3px;overflow:hidden;margin:8px 0}
+.progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--c-accent),var(--c-cyan));transition:width .4s}
+.chart-container{position:relative;height:200px}
+.list-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--c-border)}
+.list-item:last-child{border-bottom:none}
+.list-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.search-bar{display:flex;align-items:center;gap:10px;background:var(--c-surface3);border:1px solid var(--c-border);border-radius:9px;padding:8px 14px;flex:1;max-width:340px}
+.search-bar input{background:none;border:none;color:var(--c-text);font-size:13.5px;outline:none;width:100%}
+.search-bar input::placeholder{color:var(--c-text3)}
+.tag{display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;background:var(--c-surface3);color:var(--c-text2)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--c-border2);border-radius:3px}
+.empty{text-align:center;padding:40px 20px;color:var(--c-text3)}
+.empty-icon{font-size:40px;margin-bottom:12px;opacity:.4}
+.empty-title{font-size:14px;font-weight:600;color:var(--c-text2)}
+.empty-sub{font-size:12px;margin-top:4px}
+.check-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--c-border);cursor:pointer}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border-radius:5px;border:2px solid var(--c-border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.check-box.checked{background:var(--c-green);border-color:var(--c-green);color:#fff;font-size:11px}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:13px;cursor:pointer;transition:background .15s;color:var(--c-text2);position:relative}
+.cal-cell:hover{background:var(--c-surface2)}
+.cal-cell.today{background:rgba(99,102,241,.2);color:var(--c-accent2);font-weight:700}
+.cal-cell.has-event::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--c-accent)}
+.cal-cell.other-month{opacity:.3}
+.tabs{display:flex;gap:4px;background:var(--c-surface2);padding:4px;border-radius:10px;margin-bottom:20px;flex-wrap:wrap}
+.tab{padding:7px 16px;border-radius:7px;font-size:13px;font-weight:600;color:var(--c-text2);cursor:pointer;transition:all .2s}
+.tab.active{background:var(--c-surface);color:var(--c-text);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+.chip-group{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.chip{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;background:var(--c-surface3);border:1px solid var(--c-border);color:var(--c-text2);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px}
+.chip.selected{background:rgba(99,102,241,.15);border-color:var(--c-accent);color:var(--c-accent2)}
+.alert-item{display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:10px;margin-bottom:10px;border:1px solid var(--c-border)}
+.alert-orange{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3)}
+.alert-blue{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.3)}
+.alert-red{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
+.settings-layout{display:grid;grid-template-columns:200px 1fr;gap:20px}
+.settings-nav{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:8px;height:fit-content}
+.settings-nav-item{display:flex;align-items:center;gap:8px;padding:9px 12px;border-radius:8px;cursor:pointer;font-size:13px;color:var(--c-text2);transition:all .15s}
+.settings-nav-item:hover{background:var(--c-surface2);color:var(--c-text)}
+.settings-nav-item.active{background:rgba(99,102,241,.12);color:var(--c-accent2)}
+.settings-pane{display:none}.settings-pane.active{display:block}
+.item-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.equip-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:18px;transition:transform .2s,box-shadow .2s}
+.equip-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.food-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:18px;transition:transform .2s,box-shadow .2s}
+.food-card:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.login-screen{position:fixed;inset:0;background:var(--c-bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column;gap:24px}
+.login-card{background:var(--c-surface);border:1px solid var(--c-border2);border-radius:var(--radius-lg);padding:40px;width:360px;max-width:90vw}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo .logo-big{width:60px;height:60px;background:linear-gradient(135deg,var(--c-accent),var(--c-cyan));border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:24px;color:#fff;margin:0 auto 12px}
+.blink{animation:blink 1.2s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+@media print{
+  .sidebar,.topbar,.topbar-actions,.modal-overlay,.toast-container,.btn{display:none!important}
+  .content{padding:0!important}
+  .view.active{display:block!important}
+  body{background:#fff!important;color:#000!important}
+}
+.trash-item{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:8px;margin-bottom:8px}
+.oficio-badge{background:rgba(236,72,153,.12);color:var(--c-pink);border:1px solid rgba(236,72,153,.3);padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.profile-hero{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.08));border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px;display:flex;align-items:center;gap:20px;margin-bottom:20px}
+.profile-avatar-big{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--c-accent),var(--c-pink));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:#fff;flex-shrink:0;position:relative;cursor:pointer}
+.profile-avatar-cam{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;background:var(--c-cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid var(--c-surface)}
+@media(max-width:768px){
+  .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);z-index:200}
+  .sidebar.mobile-open{transform:translateX(0)}
+  .sidebar.collapsed{width:var(--c-sidebar);transform:translateX(-100%)}
+  .mobile-overlay{display:block}
+  .content{padding:16px}
+  .grid-4{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .settings-layout{grid-template-columns:1fr}
+}
 </style>
 </head>
-<body class="bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100">
+<body>
 
-<div id="app">
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="logo-big"><span class="blink">MO</span></div>
+      <div style="font-size:22px;font-weight:900;letter-spacing:-1px">MoDesk <span style="color:var(--c-accent)">ALFA</span></div>
+      <div style="font-size:12px;color:var(--c-text3);margin-top:4px">// EVENTOS · SENAC ALDEOTA v8.0</div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Usuário</label>
+      <input id="loginUser" placeholder="login" onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
+    <div class="form-group" style="margin-bottom:20px">
+      <label>Senha</label>
+      <input type="password" id="loginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="doLogin()">Entrar no Sistema</button>
+    <div style="margin-top:16px;text-align:center;font-size:12px;color:var(--c-text3)">MoDesk ALFA v8.0 · Senac Aldeota</div>
+  </div>
+</div>
 
-  <!-- LOGIN -->
-  <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#00112c] to-[#003366]">
-    <div class="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-2xl w-full max-w-md mx-4">
-      <div class="text-center mb-8">
-        <div class="w-16 h-16 bg-[#003366] rounded-2xl mx-auto flex items-center justify-center mb-4">
-          <span class="text-white text-3xl font-bold">M</span>
-        </div>
-        <h1 class="text-3xl font-bold font-display text-[#003366]">MODESK ALFA v7</h1>
-        <p class="text-slate-500 mt-1">Gestão Inteligente de Eventos • Senac</p>
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+<div class="mobile-overlay" id="mobileOverlay" onclick="closeSidebarMobile()" style="display:none"></div>
+
+<!-- MODAL: Proposta Wizard -->
+<div class="modal-overlay" id="modalProposta">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-header">
+      <span class="modal-title">✦ Nova Proposta Comercial</span>
+      <span class="modal-close" onclick="closeModal('modalProposta')">✕</span>
+    </div>
+    <div class="wizard-steps" id="wizardSteps">
+      <div class="w-step active" data-step="1">
+        <div class="w-step-row"><div class="w-step-dot">1</div><div class="w-step-line"></div></div>
+        <div class="w-step-label">Evento</div>
       </div>
-      
-      <div class="space-y-5">
-        <div>
-          <label class="block text-sm font-medium mb-1.5">E-mail</label>
-          <input id="login-email" type="email" value="gestor@ce.senac.br" class="modern-input w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-2xl">
-        </div>
-        <div>
-          <label class="block text-sm font-medium mb-1.5">Senha</label>
-          <input id="login-password" type="password" value="senac2026" class="modern-input w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-2xl">
-        </div>
-        <button onclick="handleLogin()" class="w-full bg-[#003366] hover:bg-[#002244] text-white font-semibold py-3.5 rounded-2xl transition-all">Entrar na Plataforma</button>
+      <div class="w-step" data-step="2">
+        <div class="w-step-row"><div class="w-step-dot">2</div><div class="w-step-line"></div></div>
+        <div class="w-step-label">Locação</div>
       </div>
+      <div class="w-step" data-step="3">
+        <div class="w-step-row"><div class="w-step-dot">3</div><div class="w-step-line"></div></div>
+        <div class="w-step-label">TI/AV</div>
+      </div>
+      <div class="w-step" data-step="4">
+        <div class="w-step-row"><div class="w-step-dot">4</div><div class="w-step-line"></div></div>
+        <div class="w-step-label">Alimentação</div>
+      </div>
+      <div class="w-step" data-step="5">
+        <div class="w-step-row"><div class="w-step-dot">5</div></div>
+        <div class="w-step-label">Revisão</div>
+      </div>
+    </div>
+    <div id="wizardContent"></div>
+    <div style="display:flex;justify-content:space-between;margin-top:24px">
+      <button class="btn btn-ghost" id="btnWizBack" onclick="wizardStep(-1)" style="display:none">← Voltar</button>
+      <button class="btn btn-primary" id="btnWizNext" onclick="wizardStep(1)" style="margin-left:auto">Próximo →</button>
     </div>
   </div>
+</div>
 
-  <!-- APP PRINCIPAL -->
-  <div id="main-app" class="hidden">
-    
-    <!-- TOPBAR -->
-    <div class="bg-white dark:bg-slate-800 border-b sticky top-0 z-50">
-      <div class="max-w-screen-2xl mx-auto px-6 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-x-4">
-          <button onclick="toggleSidebar()" class="lg:hidden p-2"><i class="ti ti-menu-2 text-2xl"></i></button>
-          <span class="font-display text-2xl font-bold text-[#003366]">MODESK <span class="text-[#f97316]">ALFA</span></span>
-        </div>
+<!-- MODAL: Nova OS -->
+<div class="modal-overlay" id="modalOS">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">📋 Nova Ordem de Serviço</span>
+      <span class="modal-close" onclick="closeModal('modalOS')">✕</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Proposta vinculada</label><select id="os_prop"></select></div>
+      <div class="form-group"><label>Tipo de Serviço</label><select id="os_tipo"><option>TI/AV</option><option>Limpeza</option><option>Segurança</option><option>Alimentação</option><option>Sonorização</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Responsável</label><input id="os_resp" placeholder="Nome do técnico/equipe" /></div>
+      <div class="form-group"><label>Data de Execução</label><input type="date" id="os_data" /></div>
+    </div>
+    <div class="form-group" style="margin-bottom:16px"><label>Observações</label><textarea id="os_obs" rows="3" placeholder="Detalhes e instruções especiais..."></textarea></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="btn btn-ghost" onclick="closeModal('modalOS')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveOS()">Criar OS</button>
+    </div>
+  </div>
+</div>
 
-        <div class="flex items-center gap-x-4">
-          <button onclick="toggleTheme()" class="p-2.5 rounded-2xl hover:bg-slate-100 dark:hover:bg-slate-700"><i class="ti ti-sun-moon text-xl"></i></button>
-          
-          <div class="flex items-center gap-x-3 pl-4 border-l">
-            <div class="text-right">
-              <div id="user-name" class="font-semibold text-sm"></div>
-              <div id="user-role" class="text-xs text-emerald-600 font-medium"></div>
-            </div>
-            <button onclick="logout()" class="px-4 py-2 text-sm bg-red-50 hover:bg-red-100 text-red-600 rounded-2xl flex items-center gap-x-2">
-              <i class="ti ti-logout"></i> <span class="hidden sm:inline">Sair</span>
-            </button>
-          </div>
+<!-- MODAL: Novo Cliente -->
+<div class="modal-overlay" id="modalCliente">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title">👤 Cadastrar Cliente</span>
+      <span class="modal-close" onclick="closeModal('modalCliente')">✕</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome / Empresa</label><input id="cli_nome" placeholder="Razão social ou nome" /></div>
+      <div class="form-group"><label>CNPJ / CPF</label><input id="cli_doc" placeholder="00.000.000/0001-00" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>E-mail</label><input id="cli_email" type="email" placeholder="contato@empresa.com" /></div>
+      <div class="form-group"><label>Telefone</label><input id="cli_tel" placeholder="(85) 99999-9999" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Responsável</label><input id="cli_resp" placeholder="Nome do responsável de contato" /></div>
+      <div class="form-group"><label>Segmento</label><select id="cli_seg"><option>Corporativo</option><option>Educação</option><option>Saúde</option><option>Governo</option><option>Outros</option></select></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modalCliente')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCliente()">Salvar Cliente</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Espaço -->
+<div class="modal-overlay" id="modalEspaco">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalEspacoTitle">🏛️ Novo Espaço</span>
+      <span class="modal-close" onclick="closeModal('modalEspaco')">✕</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome do Espaço</label><input id="esp_nome" placeholder="Ex: Auditório C" /></div>
+      <div class="form-group"><label>Capacidade (pessoas)</label><input type="number" id="esp_cap" placeholder="100" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Área</label><input id="esp_area" placeholder="Ex: 210 m²" /></div>
+      <div class="form-group"><label>Valor/Dia (R$)</label><input type="number" id="esp_valor" placeholder="2800" /></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label>Equipamentos Inclusos</label><input id="esp_equip" placeholder="Projetor, Som Estéreo..." /></div>
+    <div class="form-row">
+      <div class="form-group"><label>Status</label><select id="esp_status"><option>Disponível</option><option>Reservado</option><option>Manutenção</option></select></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modalEspaco')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveEspaco()">Salvar Espaço</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Item TI -->
+<div class="modal-overlay" id="modalTI">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalTITitle">💻 Novo Item TI/AV</span>
+      <span class="modal-close" onclick="closeModal('modalTI')">✕</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome do Equipamento</label><input id="ti_nome" placeholder="Ex: Projetor Epson 4K" /></div>
+      <div class="form-group"><label>Categoria</label><select id="ti_cat"><option>TI</option><option>AV</option><option>Câmera</option><option>Projeção</option><option>Áudio</option><option>Rede</option><option>Iluminação</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Quantidade Total</label><input type="number" id="ti_qtd" value="1" min="1" /></div>
+      <div class="form-group"><label>Patrimônio</label><input id="ti_pat" placeholder="PAT-0001" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Ícone (emoji)</label><input id="ti_icon" placeholder="💻" maxlength="4" /></div>
+      <div class="form-group"><label>Status</label><select id="ti_status"><option>Operacional</option><option>Manutenção</option><option>Offline</option></select></div>
+    </div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modalTI')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveTI()">Salvar Item</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Novo Cardápio -->
+<div class="modal-overlay" id="modalCardapio">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-title" id="modalCardapioTitle">🍽️ Novo Item de Alimentação</span>
+      <span class="modal-close" onclick="closeModal('modalCardapio')">✕</span>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome do Item</label><input id="card_nome" placeholder="Ex: Coffee Break Executivo" /></div>
+      <div class="form-group"><label>Categoria</label><select id="card_cat"><option>Pacote</option><option>Almoço</option><option>Avulso</option><option>Coquetel</option><option>Bebida</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Valor por pessoa (R$)</label><input type="number" id="card_val" placeholder="35" /></div>
+      <div class="form-group"><label>Ícone (emoji)</label><input id="card_icon" placeholder="☕" maxlength="4" /></div>
+    </div>
+    <div class="form-group" style="margin-bottom:14px"><label>Itens inclusos</label><input id="card_items" placeholder="Café, Leite, Suco, Frutas..." /></div>
+    <div class="form-group" style="margin-bottom:14px"><label>Alergênicos</label><input id="card_alerg" placeholder="Glúten, Lactose..." /></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modalCardapio')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveCardapio()">Salvar Item</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Auth Gestor -->
+<div class="modal-overlay" id="modalAuth">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header">
+      <span class="modal-title">🔒 Autenticação do Gestor</span>
+      <span class="modal-close" onclick="closeModal('modalAuth')">✕</span>
+    </div>
+    <p style="font-size:13px;color:var(--c-text2);margin-bottom:16px">Ação restrita. Confirme as credenciais do gestor:</p>
+    <div class="form-group" style="margin-bottom:10px"><label>Login</label><input id="authUser" placeholder="marciooliveira" /></div>
+    <div class="form-group" style="margin-bottom:16px"><label>Senha</label><input type="password" id="authInput" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkAuth()" /></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="btn btn-ghost" onclick="closeModal('modalAuth')">Cancelar</button>
+      <button class="btn btn-primary" onclick="checkAuth()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: Exportar com Layout -->
+<div class="modal-overlay" id="modalExportar">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title">📤 Exportar Documento</span>
+      <span class="modal-close" onclick="closeModal('modalExportar')">✕</span>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Empresa / Layout</label>
+      <select id="exportEmpresa">
+        <option value="">Sem layout institucional</option>
+        <option value="senac">Senac Aldeota</option>
+      </select>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Formato</label>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportFmt" value="pdf" checked="checked" /> PDF</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportFmt" value="excel" /> Excel</label>
+      </div>
+    </div>
+    <div id="exportContext" style="font-size:13px;color:var(--c-text2);padding:10px;background:var(--c-surface2);border-radius:8px;margin-bottom:16px"></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="btn btn-ghost" onclick="closeModal('modalExportar')">Cancelar</button>
+      <button class="btn btn-primary" onclick="doExport()">Exportar</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP SHELL -->
+<div class="app-shell" id="appShell" style="display:none">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-mark">MD</div>
+      <div class="logo-text">MoDesk ALFA<span class="logo-sub">SENAC ALDEOTA</span></div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">Operações</div>
+      <div class="nav-item active" onclick="goto('dashboard')"><span class="nav-icon">⊞</span><span class="nav-label">Dashboard</span></div>
+      <div class="nav-item" onclick="goto('propostas')"><span class="nav-icon">📄</span><span class="nav-label">Propostas</span><span class="nav-badge" id="badgePropostas">5</span></div>
+      <div class="nav-item" onclick="goto('ordens')"><span class="nav-icon">📋</span><span class="nav-label">Ordens de Serviço</span><span class="nav-badge" id="badgeOS">5</span></div>
+      <div class="nav-item" onclick="goto('calendario')"><span class="nav-icon">📅</span><span class="nav-label">Calendário</span></div>
+      <div class="nav-section">Cadastros</div>
+      <div class="nav-item" onclick="goto('clientes')"><span class="nav-icon">👥</span><span class="nav-label">Clientes</span></div>
+      <div class="nav-item" onclick="goto('espacos')"><span class="nav-icon">🏛️</span><span class="nav-label">Espaços</span></div>
+      <div class="nav-item" onclick="goto('estoque')"><span class="nav-icon">💻</span><span class="nav-label">Estoque TI/AV</span></div>
+      <div class="nav-item" onclick="goto('cardapio')"><span class="nav-icon">🍽️</span><span class="nav-label">Cardápio</span></div>
+      <div class="nav-section">Gestão</div>
+      <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon">🔔</span><span class="nav-label">Alertas</span></div>
+      <div class="nav-item" onclick="goto('parecer')"><span class="nav-icon">🔍</span><span class="nav-label">Parecer Técnico</span></div>
+      <div class="nav-item" onclick="goto('relatorios')"><span class="nav-icon">📊</span><span class="nav-label">Relatórios &amp; BI</span></div>
+      <div class="nav-item" onclick="goto('lixeira')"><span class="nav-icon">🗑️</span><span class="nav-label">Lixeira</span></div>
+      <div class="nav-item" onclick="goto('configuracoes')"><span class="nav-icon">⚙️</span><span class="nav-label">Configurações</span></div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="nav-item" style="margin:0;padding:8px 10px" onclick="goto('perfil')">
+        <div class="avatar" style="width:30px;height:30px;font-size:11px" id="sidebarAvatar">MO</div>
+        <div class="nav-label">
+          <div style="font-size:12px;font-weight:600" id="sidebarUserName">Marcio Oliveira</div>
+          <div style="font-size:10px;color:var(--c-text3)" id="sidebarUserRole">Gestor · Senac Aldeota</div>
         </div>
       </div>
     </div>
+  </aside>
 
-    <div class="max-w-screen-2xl mx-auto flex">
-      
-      <!-- SIDEBAR -->
-      <div id="sidebar" class="w-72 bg-white dark:bg-slate-800 border-r min-h-[calc(100vh-4rem)] p-5 hidden lg:block">
-        <div class="space-y-1 text-sm">
-          <div onclick="showPage('dashboard')" class="nav-item active flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-layout-dashboard text-xl"></i> Dashboard</div>
-          <div onclick="showPage('propostas')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-file-text text-xl"></i> Propostas</div>
-          <div onclick="showPage('locacoes')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-building text-xl"></i> Locais</div>
-          <div onclick="showPage('equipamentos')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-device-laptop text-xl"></i> Equipamentos</div>
-          <div onclick="showPage('cardapios')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-cookie text-xl"></i> Cardápios</div>
-          <div id="menu-usuarios" onclick="showPage('usuarios')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-users text-xl"></i> Permissões</div>
-          <div onclick="showPage('lixeira')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-trash text-xl"></i> Lixeira</div>
-          <div onclick="showPage('bi')" class="nav-item flex items-center gap-x-3 px-4 py-3 rounded-2xl cursor-pointer font-medium"><i class="ti ti-chart-bar text-xl"></i> Business Intelligence</div>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-toggle" onclick="toggleSidebar()">☰</div>
+      <div class="page-title" id="pageTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="search-bar" style="display:flex">
+          <span style="color:var(--c-text3);font-size:15px">🔍</span>
+          <input placeholder="Buscar eventos, clientes..." id="globalSearch" />
+        </div>
+        <div class="topbar-btn" onclick="goto('alertas')">🔔<div class="badge-dot"></div></div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
+          <div class="theme-toggle-ball" id="themeIcon">🌙</div>
+        </button>
+        <div class="avatar" id="topAvatar" onclick="goto('perfil')">MO</div>
+      </div>
+    </header>
+
+    <div class="content" id="content">
+
+      <!-- ===== DASHBOARD ===== -->
+      <div class="view active" id="view-dashboard">
+        <div class="section-header" style="margin-bottom:20px">
+          <div>
+            <div class="section-title" style="font-size:18px">Bom dia, <span id="greetUser">Marcio</span> 👋</div>
+            <div class="section-sub" id="greetDate">Carregando...</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('dashboard')">↓ Exportar</button>
+            <button class="btn btn-primary" onclick="openModal('modalProposta')">＋ Nova Proposta</button>
+          </div>
+        </div>
+        <div class="grid-4" style="margin-bottom:24px">
+          <div class="kpi kpi-accent-purple">
+            <div class="kpi-icon" style="background:rgba(99,102,241,.15);color:var(--c-accent2)">📄</div>
+            <div class="kpi-val" id="kpiFat">R$ 47,8K</div>
+            <div class="kpi-label">Faturamento do Mês</div>
+            <div class="kpi-delta kpi-up">↑ 12,4% vs mês anterior</div>
+          </div>
+          <div class="kpi kpi-accent-green">
+            <div class="kpi-icon" style="background:rgba(16,185,129,.15);color:var(--c-green)">✅</div>
+            <div class="kpi-val" id="kpiEventos">23</div>
+            <div class="kpi-label">Eventos Confirmados</div>
+            <div class="kpi-delta kpi-up">↑ 5 novos esta semana</div>
+          </div>
+          <div class="kpi kpi-accent-cyan">
+            <div class="kpi-icon" style="background:rgba(34,211,238,.15);color:var(--c-cyan)">⏳</div>
+            <div class="kpi-val" id="kpiPendentes">—</div>
+            <div class="kpi-label">Propostas Pendentes</div>
+            <div class="kpi-delta kpi-down">↓ aguardam aprovação</div>
+          </div>
+          <div class="kpi kpi-accent-amber">
+            <div class="kpi-icon" style="background:rgba(245,158,11,.15);color:var(--c-amber)">🏛️</div>
+            <div class="kpi-val">78%</div>
+            <div class="kpi-label">Ocupação dos Espaços</div>
+            <div class="kpi-delta kpi-up">↑ Alta demanda</div>
+          </div>
+        </div>
+        <div class="grid-2" style="margin-bottom:24px">
+          <div class="card">
+            <div class="section-header">
+              <div><div class="section-title">Faturamento — <span id="chartYear">2026</span></div><div class="section-sub">Receita mensal consolidada</div></div>
+              <select style="width:auto;font-size:12px;padding:5px 10px" onchange="updateFatChart(this.value)"><option>2026</option><option>2025</option></select>
+            </div>
+            <div class="chart-container"><canvas id="chartFat"></canvas></div>
+          </div>
+          <div class="card">
+            <div class="section-header"><div><div class="section-title">Status das Propostas</div><div class="section-sub">Distribuição por status</div></div></div>
+            <div class="chart-container" style="height:160px"><canvas id="chartStatus"></canvas></div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;justify-content:center" id="statusBadges"></div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="section-header"><div class="section-title">Próximos Eventos</div><button class="btn btn-ghost btn-sm" onclick="goto('calendario')">Ver todos</button></div>
+            <div id="proxEventos"></div>
+          </div>
+          <div class="card">
+            <div class="section-header"><div class="section-title">Ordens em Andamento</div><button class="btn btn-ghost btn-sm" onclick="goto('ordens')">Ver todas</button></div>
+            <div id="ordensAbertas"></div>
+          </div>
         </div>
       </div>
 
-      <!-- CONTEÚDO -->
-      <div class="flex-1 p-6 lg:p-8">
-
-        <!-- DASHBOARD -->
-        <div id="page-dashboard" class="page active">
-          <h1 class="text-4xl font-bold font-display mb-8">Visão Geral</h1>
-          
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><div class="text-sm text-slate-500">Faturamento Confirmado</div><div id="kpi-faturamento" class="text-4xl font-bold mt-1 text-emerald-600">R$ 0</div></div>
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><div class="text-sm text-slate-500">Propostas Aceitas</div><div id="kpi-aceitas" class="text-4xl font-bold mt-1">0</div></div>
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><div class="text-sm text-slate-500">Aguardando Pagamento</div><div id="kpi-pendentes" class="text-4xl font-bold mt-1 text-amber-600">0</div></div>
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><div class="text-sm text-slate-500">Prazos Vencidos</div><div id="kpi-vencidas" class="text-4xl font-bold mt-1 text-red-600">0</div></div>
+      <!-- ===== PROPOSTAS ===== -->
+      <div class="view" id="view-propostas">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Propostas Comerciais</div><div class="section-sub">Gerencie todas as propostas e contratos</div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('propostas')">↓ Exportar</button>
+            <button class="btn btn-primary" onclick="openModal('modalProposta')">＋ Nova Proposta</button>
           </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <div class="search-bar"><span style="color:var(--c-text3)">🔍</span><input id="searchPropostas" placeholder="Buscar por evento, cliente..." oninput="filterPropostas()" /></div>
+          <select id="filterStatusProp" style="width:auto;font-size:13px" onchange="filterPropostas()"><option value="">Todos os status</option><option>Confirmada</option><option>Pendente</option><option>Cancelada</option><option>Negociação</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nº</th><th>Evento</th><th>Cliente</th><th>Espaço</th><th>Data Evento</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
+            <tbody id="tbodyPropostas"></tbody>
+          </table>
+        </div>
+      </div>
 
-          <div id="alerts-container" class="mb-8"></div>
+      <!-- ===== ORDENS DE SERVIÇO ===== -->
+      <div class="view" id="view-ordens">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Ordens de Serviço</div><div class="section-sub">Monitoramento e gestão das OS ativas</div></div>
+          <button class="btn btn-primary" onclick="openModal('modalOS')">＋ Nova OS</button>
+        </div>
+        <div class="grid-4" style="margin-bottom:20px">
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="osAberta">18</div><div style="font-size:12px;color:var(--c-text2)">Abertas</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)">5</div><div style="font-size:12px;color:var(--c-text2)">Em Execução</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="osConcluida">42</div><div style="font-size:12px;color:var(--c-text2)">Concluídas</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-red)">2</div><div style="font-size:12px;color:var(--c-text2)">Pendentes</div></div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>OS#</th><th>Evento</th><th>Tipo</th><th>Responsável</th><th>Data</th><th>Status</th><th>Progresso</th><th>Ações</th></tr></thead>
+            <tbody id="tbodyOS"></tbody>
+          </table>
+        </div>
+      </div>
 
-          <div class="bg-white dark:bg-slate-800 rounded-3xl border p-6">
-            <h3 class="font-semibold mb-4">Agenda de Eventos</h3>
-            <table class="w-full text-sm">
-              <thead><tr class="text-left text-slate-500"><th class="py-3">Data</th><th>Evento</th><th>Cliente</th><th>Status</th><th>Financeiro</th></tr></thead>
-              <tbody id="dashboard-events" class="divide-y"></tbody>
+      <!-- ===== CALENDÁRIO ===== -->
+      <div class="view" id="view-calendario">
+        <div class="section-header" style="margin-bottom:20px">
+          <div><div class="section-title" style="font-size:18px">Calendário de Eventos</div><div class="section-sub">Visão mensal dos eventos agendados</div></div>
+          <div style="display:flex;gap:8px">
+            <button class="btn btn-ghost btn-sm" onclick="calPrev()">← Anterior</button>
+            <button class="btn btn-ghost btn-sm" id="calMonthLabel">Junho 2026</button>
+            <button class="btn btn-ghost btn-sm" onclick="calNext()">Próximo →</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="cal-grid" style="margin-bottom:8px">
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Dom</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Seg</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Ter</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Qua</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Qui</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Sex</div>
+            <div style="text-align:center;font-size:11px;font-weight:700;color:var(--c-text3);padding:6px 0">Sáb</div>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+        </div>
+        <div style="margin-top:20px">
+          <div class="section-title" style="margin-bottom:12px">Eventos do Mês</div>
+          <div id="calEventList"></div>
+        </div>
+      </div>
+
+      <!-- ===== CLIENTES ===== -->
+      <div class="view" id="view-clientes">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Clientes</div><div class="section-sub">Base de clientes e contatos</div></div>
+          <button class="btn btn-primary" onclick="openModal('modalCliente')">＋ Cadastrar Cliente</button>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <div class="search-bar"><span style="color:var(--c-text3)">🔍</span><input id="searchClientes" placeholder="Nome, CNPJ, e-mail..." oninput="renderClientes()" /></div>
+        </div>
+        <div class="grid-3" id="clienteGrid"></div>
+      </div>
+
+      <!-- ===== ESPAÇOS ===== -->
+      <div class="view" id="view-espacos">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Espaços &amp; Salas</div><div class="section-sub">Gerenciar salas, auditórios e áreas</div></div>
+          <button class="btn btn-primary" onclick="abrirNovoEspaco()">＋ Novo Espaço</button>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="espacoFiltros">
+          <div class="chip selected" onclick="filtrarEspaco(this,'')">Todos</div>
+          <div class="chip" onclick="filtrarEspaco(this,'Disponível')">✅ Disponível</div>
+          <div class="chip" onclick="filtrarEspaco(this,'Reservado')">📅 Reservado</div>
+          <div class="chip" onclick="filtrarEspaco(this,'Manutenção')">🔧 Manutenção</div>
+        </div>
+        <div class="grid-3" id="espacoGrid"></div>
+      </div>
+
+      <!-- ===== ESTOQUE TI/AV ===== -->
+      <div class="view" id="view-estoque">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Estoque TI / Audiovisual</div><div class="section-sub">Inventário de equipamentos</div></div>
+          <button class="btn btn-primary" onclick="abrirNovoTI()">＋ Novo Item</button>
+        </div>
+        <div class="grid-4" style="margin-bottom:20px">
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="tiTotal">0</div><div style="font-size:12px;color:var(--c-text2)">Itens Totais</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="tiDisp">0</div><div style="font-size:12px;color:var(--c-text2)">Disponíveis</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)" id="tiUso">0</div><div style="font-size:12px;color:var(--c-text2)">Em Uso</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-red)" id="tiManut">0</div><div style="font-size:12px;color:var(--c-text2)">Manutenção</div></div>
+        </div>
+        <div class="item-grid" id="estoqueGrid"></div>
+      </div>
+
+      <!-- ===== CARDÁPIO ===== -->
+      <div class="view" id="view-cardapio">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Cardápios &amp; Alimentação</div><div class="section-sub">Itens alimentares, menus e alergênicos</div></div>
+          <button class="btn btn-primary" onclick="abrirNovoCardapio()">＋ Novo Item</button>
+        </div>
+        <div style="margin-bottom:16px">
+          <div style="font-size:13px;color:var(--c-text2);margin-bottom:8px">Seleção Rápida para Proposta:</div>
+          <div class="chip-group" id="chipCardapio"></div>
+        </div>
+        <div class="item-grid" id="cardapioGrid"></div>
+        <div style="margin-top:24px">
+          <div class="section-title" style="margin-bottom:12px">Pedidos Recentes</div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Evento</th><th>Serviço</th><th>Pax</th><th>Valor Total</th><th>Status</th></tr></thead>
+              <tbody id="tbodyPedidos"></tbody>
             </table>
           </div>
         </div>
+      </div>
 
-        <!-- PROPOSTAS -->
-        <div id="page-propostas" class="page">
-          <div class="flex justify-between items-center mb-6">
-            <div><h1 class="text-3xl font-bold font-display">Propostas Comerciais</h1></div>
-            <button onclick="openProposalModal()" class="bg-[#003366] text-white px-6 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Nova Proposta</button>
+      <!-- ===== ALERTAS ===== -->
+      <div class="view" id="view-alertas">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">🔔 Central de Alertas</div><div class="section-sub">Pendências operacionais e falhas técnicas</div></div>
+          <button class="btn btn-ghost btn-sm" onclick="toast('Alertas marcados como lidos','success')">✓ Marcar todos como lidos</button>
+        </div>
+        <div id="alertasList">
+          <div class="alert-item alert-red">
+            <div style="font-size:22px">📷</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">Câmera Sony PXW-Z280 — offline desde 07/06</div>
+              <div style="font-size:12px;color:var(--c-text2);margin-top:4px">Equipamento não responde ao sistema. Acionar manutenção preventiva imediatamente.</div>
+              <div style="margin-top:8px"><span class="badge badge-red">Alta prioridade</span><span class="badge badge-gray" style="margin-left:6px">TI/AV</span></div>
+            </div>
           </div>
+          <div class="alert-item alert-orange">
+            <div style="font-size:22px">💻</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">Notebook Dell #PAT-007 — HD com falha</div>
+              <div style="font-size:12px;color:var(--c-text2);margin-top:4px">Diagnóstico indica falha no HD. Equipamento retirado de uso até substituição.</div>
+              <div style="margin-top:8px"><span class="badge badge-amber">Média prioridade</span><span class="badge badge-gray" style="margin-left:6px">TI</span></div>
+            </div>
+          </div>
+          <div class="alert-item alert-blue">
+            <div style="font-size:22px">📅</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">Feira de Negócios (15 Jun) — sem catering definido</div>
+              <div style="font-size:12px;color:var(--c-text2);margin-top:4px">Evento confirmado mas serviço de alimentação ainda não foi vinculado à proposta.</div>
+              <div style="margin-top:8px"><span class="badge badge-blue">Pendência</span><span class="badge badge-gray" style="margin-left:6px">Alimentação</span></div>
+            </div>
+          </div>
+          <div class="alert-item alert-orange">
+            <div style="font-size:22px">💰</div>
+            <div>
+              <div style="font-weight:700;font-size:14px">Proposta P002 — prazo de pagamento vence em 3 dias</div>
+              <div style="font-size:12px;color:var(--c-text2);margin-top:4px">Workshop Design UX (02 Nov). Deadline de pagamento: 18/10. Cliente não confirmou.</div>
+              <div style="margin-top:8px"><span class="badge badge-amber">Financeiro</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-          <!-- OCR -->
-          <div class="bg-white dark:bg-slate-800 border border-dashed border-[#003366]/40 rounded-3xl p-8 mb-8">
-            <h3 class="font-semibold mb-4 flex items-center gap-x-2"><i class="ti ti-file-upload"></i> Importação Inteligente (Excel / Texto)</h3>
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <div onclick="document.getElementById('ocr-file').click()" class="border border-slate-300 rounded-2xl p-8 text-center cursor-pointer hover:bg-slate-50">
-                  <i class="ti ti-upload text-4xl text-slate-400 mb-2"></i>
-                  <p class="font-medium">Enviar arquivo Excel ou TXT</p>
+      <!-- ===== PARECER TÉCNICO ===== -->
+      <div class="view" id="view-parecer">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">🔍 Parecer Técnico</div><div class="section-sub">Checklists de viabilidade por evento</div></div>
+          <div style="display:flex;gap:8px"><span class="badge badge-red">Acesso Restrito</span><button class="btn btn-ghost btn-sm" onclick="openExportModal('parecer')">📄 Exportar</button></div>
+        </div>
+        <div class="grid-2">
+          <div class="card"><div class="section-title" style="margin-bottom:16px">Checklist TI / AV</div><div id="checkTI"></div><button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="gerarParecerWA('TI/AV')">📲 WhatsApp</button></div>
+          <div class="card"><div class="section-title" style="margin-bottom:16px">Checklist Sonorização</div><div id="checkSom"></div><button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="gerarParecerWA('Som')">📲 WhatsApp</button></div>
+          <div class="card"><div class="section-title" style="margin-bottom:16px">Checklist Câmera / Foto</div><div id="checkCam"></div><button class="btn btn-primary btn-sm" style="margin-top:16px" onclick="gerarParecerWA('Câmera')">📲 WhatsApp</button></div>
+          <div class="card">
+            <div class="section-header"><div class="section-title">Resumo do Parecer</div></div>
+            <div id="parecerResumo" style="font-size:13px;color:var(--c-text2)">Preencha os checklists para gerar o parecer técnico.</div>
+            <button class="btn btn-primary" style="margin-top:16px;width:100%" onclick="openExportModal('parecer')">📄 Exportar Parecer PDF</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RELATÓRIOS ===== -->
+      <div class="view" id="view-relatorios">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">Relatórios &amp; Business Intelligence</div><div class="section-sub">Análise de desempenho, faturamento e conversão</div></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="relMes" style="width:auto;font-size:13px"><option>Junho 2026</option><option>Maio 2026</option><option>Abril 2026</option></select>
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('relatorios')">↓ Exportar</button>
+          </div>
+        </div>
+        <div class="tabs" id="biTabs">
+          <div class="tab active" onclick="biTab(this,'geral')">📊 Geral</div>
+          <div class="tab" onclick="biTab(this,'eventos')">📅 Eventos</div>
+          <div class="tab" onclick="biTab(this,'financeiro')">💰 Financeiro</div>
+          <div class="tab" onclick="biTab(this,'ti')">💻 TI &amp; AV</div>
+        </div>
+        <!-- Geral -->
+        <div class="tab-pane active" id="bi-geral">
+          <div class="grid-4" style="margin-bottom:24px">
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-green)">R$ 186K</div><div class="kpi-label">Receita Anual 2026</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-accent2)">68%</div><div class="kpi-label">Taxa de Conversão</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-cyan)">4,2★</div><div class="kpi-label">NPS Médio</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-amber)">R$ 8,1K</div><div class="kpi-label">Ticket Médio</div></div>
+          </div>
+          <div class="grid-2">
+            <div class="card"><div class="section-title" style="margin-bottom:14px">Receita por Espaço</div><div class="chart-container"><canvas id="chartEspaco"></canvas></div></div>
+            <div class="card"><div class="section-title" style="margin-bottom:14px">Top Clientes por Volume</div><div id="topClientes"></div></div>
+          </div>
+        </div>
+        <!-- Eventos -->
+        <div class="tab-pane" id="bi-eventos">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Evento</th><th>Proposta</th><th>Data</th><th>Participantes</th><th>Receita</th><th>Status</th></tr></thead>
+              <tbody id="biTbEventos"></tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Financeiro -->
+        <div class="tab-pane" id="bi-financeiro">
+          <div class="grid-4" style="margin-bottom:24px">
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-green)">R$ 186K</div><div class="kpi-label">Receita Bruta</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-red)">R$ 42K</div><div class="kpi-label">Custos Operacionais</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-accent2)">R$ 144K</div><div class="kpi-label">Receita Líquida</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-cyan)">77%</div><div class="kpi-label">Margem</div></div>
+          </div>
+          <div class="card"><div class="section-title" style="margin-bottom:14px">Evolução Financeira Mensal</div><div class="chart-container" style="height:240px"><canvas id="chartFinanceiro"></canvas></div></div>
+        </div>
+        <!-- TI -->
+        <div class="tab-pane" id="bi-ti">
+          <div class="grid-4" style="margin-bottom:24px">
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-green)">94%</div><div class="kpi-label">Uptime Equipamentos</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-amber)">12</div><div class="kpi-label">Chamados no Mês</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-cyan)">2,4h</div><div class="kpi-label">Tempo Médio Resolução</div></div>
+            <div class="kpi"><div class="kpi-val" style="color:var(--c-accent2)">87%</div><div class="kpi-label">Chamados no Prazo</div></div>
+          </div>
+          <div class="card"><div class="section-title" style="margin-bottom:14px">Uso de Equipamentos por Evento</div><div class="chart-container" style="height:220px"><canvas id="chartTI"></canvas></div></div>
+        </div>
+      </div>
+
+      <!-- ===== LIXEIRA ===== -->
+      <div class="view" id="view-lixeira">
+        <div class="section-header">
+          <div><div class="section-title" style="font-size:18px">🗑️ Lixeira</div><div class="section-sub">Registros removidos — exclusão permanente requer autenticação do gestor</div></div>
+          <button class="btn btn-danger btn-sm" onclick="limparLixeira()">🔒 Limpar Tudo</button>
+        </div>
+        <div id="lixeiraContent"></div>
+      </div>
+
+      <!-- ===== CONFIGURAÇÕES ===== -->
+      <div class="view" id="view-configuracoes">
+        <div class="section-header"><div><div class="section-title" style="font-size:18px">⚙️ Configurações</div><div class="section-sub">Identidade institucional, usuários e sistema</div></div></div>
+        <div class="settings-layout">
+          <div class="settings-nav">
+            <div class="settings-nav-item active" onclick="settingsTab(this,'geral')">🏢 Geral</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'timbrado')">📄 Papel Timbrado</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'logos')">🖼️ Logos &amp; Ícones</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'portfolio')">📷 Portfólio</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'usuarios')">👥 Usuários &amp; Perfis</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'ti_cfg')">💻 Itens TI</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'av_cfg')">📽️ Itens AV</div>
+          </div>
+          <div>
+            <!-- Geral -->
+            <div class="settings-pane active card" id="cfg-geral">
+              <div class="section-title" style="margin-bottom:20px">Configurações Gerais</div>
+              <div class="form-row">
+                <div class="form-group"><label>Nome da Unidade</label><input id="cfg_nome" value="Senac Aldeota" /></div>
+                <div class="form-group"><label>Endereço</label><input id="cfg_end" value="Desembargador Moreira, 1301 - Aldeota, Fortaleza-CE" /></div>
+              </div>
+              <div class="form-row">
+                <div class="form-group"><label>Telefone</label><input id="cfg_tel" value="(85) 3255-6800" /></div>
+                <div class="form-group"><label>CNPJ <span style="color:var(--c-text3)">(somente leitura)</span></label><input id="cfg_cnpj" value="03.648.344/0020-62" readonly="readonly" style="opacity:.6" /></div>
+              </div>
+              <div style="margin-bottom:20px">
+                <label>Tema Padrão</label>
+                <div style="display:flex;gap:10px;margin-top:8px">
+                  <button class="btn btn-ghost btn-sm" onclick="document.documentElement.setAttribute('data-theme','light');document.getElementById('themeIcon').textContent='☀️';toast('Tema Claro ativado','info')">☀️ Claro</button>
+                  <button class="btn btn-ghost btn-sm" onclick="document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeIcon').textContent='🌙';toast('Tema Escuro ativado','info')">🌙 Escuro</button>
                 </div>
-                <input type="file" id="ocr-file" class="hidden" accept=".xlsx,.xls,.txt" onchange="processOCRFile(this)">
               </div>
-              <div>
-                <textarea id="ocr-text" placeholder="Cole o texto do briefing aqui..." class="w-full h-28 p-4 border rounded-2xl text-sm font-mono"></textarea>
-                <button onclick="processOCRText()" class="mt-2 w-full bg-white border py-2.5 rounded-2xl text-sm font-semibold">Processar Texto</button>
+              <button class="btn btn-primary" onclick="salvarConfigGeral()">✓ Salvar</button>
+            </div>
+            <!-- Timbrado -->
+            <div class="settings-pane card" id="cfg-timbrado">
+              <div class="section-title" style="margin-bottom:8px">Papel Timbrado</div>
+              <div class="section-sub" style="margin-bottom:20px">Upload de timbrado para uso em propostas e relatórios (PNG/JPG com fundo transparente)</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="padding:16px;background:var(--c-surface2);border-radius:10px;border:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between">
+                  <div><div style="font-weight:600;font-size:14px">Senac Aldeota — Timbrado Corporativo</div><div style="font-size:12px;color:var(--c-text3);margin-top:2px">Ativo · Corporativo</div></div>
+                  <span class="badge badge-green">Ativo</span>
+                </div>
+              </div>
+              <div style="margin-top:16px">
+                <label>Upload novo timbrado (PNG/JPG, fundo transparente)</label>
+                <input type="file" id="uploadTimbrado" accept="image/*,application/pdf" style="margin-top:8px" onchange="uploadTimbrado(this)" />
+              </div>
+              <button class="btn btn-primary" style="margin-top:16px" onclick="toast('Timbrado salvo com sucesso','success')">Salvar</button>
+            </div>
+            <!-- Logos -->
+            <div class="settings-pane card" id="cfg-logos">
+              <div class="section-title" style="margin-bottom:8px">Logos &amp; Ícones</div>
+              <div class="section-sub" style="margin-bottom:16px">Repositório de logotipos institucionais. Imagens ficam disponíveis em documentos e cabeçalhos.</div>
+              <input type="file" accept="image/*" style="margin-bottom:16px" onchange="toast('Logo adicionado ao repositório','success')" />
+              <div style="display:flex;gap:12px;flex-wrap:wrap" id="logoGallery">
+                <div style="width:80px;height:80px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer" title="Senac Aldeota">🏫</div>
               </div>
             </div>
-          </div>
-
-          <div class="bg-white dark:bg-slate-800 rounded-3xl border overflow-hidden">
-            <div class="p-5 flex justify-between items-center border-b">
-              <span class="font-semibold">Todas as Propostas</span>
-              <div class="flex gap-x-2">
-                <button onclick="exportProposalsToExcel()" class="px-4 py-2 text-sm border rounded-2xl flex items-center gap-x-2"><i class="ti ti-download"></i> Excel</button>
-                <button onclick="exportProposalsToPDF()" class="px-4 py-2 text-sm border rounded-2xl flex items-center gap-x-2"><i class="ti ti-file-type-pdf"></i> PDF</button>
-              </div>
+            <!-- Portfolio -->
+            <div class="settings-pane card" id="cfg-portfolio">
+              <div class="section-title" style="margin-bottom:8px">Portfólio de Espaços</div>
+              <div class="section-sub" style="margin-bottom:16px">Associe fotos reais aos espaços físicos para enriquecer as propostas.</div>
+              <div class="form-group" style="margin-bottom:12px"><label>Espaço</label><select id="portEspaco"><option>Auditório A</option><option>Auditório B</option><option>Salão Mayú</option></select></div>
+              <input type="file" accept="image/*" style="margin-bottom:16px" onchange="toast('Foto adicionada ao portfólio','success')" />
+              <button class="btn btn-primary" onclick="toast('Portfólio atualizado','success')">Salvar</button>
             </div>
-            <table class="w-full text-sm">
-              <thead class="bg-slate-50"><tr><th class="px-6 py-4 text-left">Data</th><th>Evento</th><th>Cliente</th><th>Valor</th><th>Status</th><th>Financeiro</th><th class="w-16"></th></tr></thead>
-              <tbody id="proposals-table" class="divide-y"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- LOCAIS -->
-        <div id="page-locacoes" class="page">
-          <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold font-display">Locais de Locação</h1>
-            <div class="flex items-center gap-x-3">
-              <div class="flex border rounded-2xl overflow-hidden">
-                <button onclick="toggleViewMode('locacoes', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
-                <button onclick="toggleViewMode('locacoes', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
+            <!-- Usuários -->
+            <div class="settings-pane card" id="cfg-usuarios">
+              <div class="section-title" style="margin-bottom:16px">Usuários &amp; Acessos</div>
+              <div class="table-wrap" style="margin-bottom:16px">
+                <table>
+                  <thead><tr><th>Usuário</th><th>E-mail</th><th>Nível</th><th>Status</th></tr></thead>
+                  <tbody id="tbUsuarios"></tbody>
+                </table>
               </div>
-              <button onclick="openGenericModal('locacoes')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo Local</button>
+              <button class="btn btn-primary btn-sm" onclick="toast('Em breve: cadastro de novos usuários','info')">＋ Novo Usuário</button>
             </div>
-          </div>
-          <div id="locacoes-container" class="item-grid"></div>
-        </div>
-
-        <!-- EQUIPAMENTOS -->
-        <div id="page-equipamentos" class="page">
-          <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold font-display">Equipamentos</h1>
-            <div class="flex items-center gap-x-3">
-              <div class="flex border rounded-2xl overflow-hidden">
-                <button onclick="toggleViewMode('equipamentos', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
-                <button onclick="toggleViewMode('equipamentos', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
-              </div>
-              <button onclick="openGenericModal('equipamentos')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo</button>
+            <!-- TI config -->
+            <div class="settings-pane" id="cfg-ti_cfg">
+              <div class="section-header"><div class="section-title">Itens de TI</div><button class="btn btn-primary btn-sm" onclick="goto('estoque')">Ver Estoque TI/AV →</button></div>
+              <p style="font-size:13px;color:var(--c-text2)">Gerencie o inventário de TI diretamente na seção Estoque TI/AV.</p>
+            </div>
+            <!-- AV config -->
+            <div class="settings-pane" id="cfg-av_cfg">
+              <div class="section-header"><div class="section-title">Itens AV</div><button class="btn btn-primary btn-sm" onclick="goto('estoque')">Ver Estoque TI/AV →</button></div>
+              <p style="font-size:13px;color:var(--c-text2)">Gerencie o inventário de AV diretamente na seção Estoque TI/AV.</p>
             </div>
           </div>
-          <div id="equipamentos-container" class="item-grid"></div>
         </div>
+      </div>
 
-        <!-- CARDÁPIOS -->
-        <div id="page-cardapios" class="page">
-          <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold font-display">Cardápios</h1>
-            <div class="flex items-center gap-x-3">
-              <div class="flex border rounded-2xl overflow-hidden">
-                <button onclick="toggleViewMode('cardapios', 'grid')" class="px-4 py-2 text-sm bg-white border-r">Grid</button>
-                <button onclick="toggleViewMode('cardapios', 'list')" class="px-4 py-2 text-sm bg-white">Lista</button>
-              </div>
-              <button onclick="openGenericModal('cardapios')" class="bg-[#003366] text-white px-5 py-3 rounded-2xl flex items-center gap-x-2 font-semibold"><i class="ti ti-plus"></i> Novo</button>
+      <!-- ===== PERFIL ===== -->
+      <div class="view" id="view-perfil">
+        <div class="section-header"><div class="section-title" style="font-size:18px">👤 Meu Perfil</div></div>
+        <div class="profile-hero">
+          <div class="profile-avatar-big">MO<div class="profile-avatar-cam">📷</div></div>
+          <div>
+            <div style="font-size:20px;font-weight:700" id="profileName">Marcio Oliveira</div>
+            <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap">
+              <span class="badge badge-blue">Gestor</span>
+              <span class="badge badge-cyan">TI</span>
+              <span class="badge badge-green">AV</span>
             </div>
-          </div>
-          <div id="cardapios-container" class="item-grid"></div>
-        </div>
-
-        <!-- PERMISSÕES -->
-        <div id="page-usuarios" class="page">
-          <h1 class="text-3xl font-bold font-display mb-6">Controle de Permissões</h1>
-          <div class="bg-white dark:bg-slate-800 rounded-3xl border p-6">
-            <table class="w-full text-sm">
-              <thead><tr class="text-left text-slate-500"><th class="py-3">Nome</th><th>E-mail</th><th>Função</th><th>Locais</th><th>Equip.</th><th>Cardápios</th></tr></thead>
-              <tbody id="users-table" class="divide-y"></tbody>
-            </table>
+            <div style="font-size:12px;color:var(--c-text3);margin-top:8px">Senac Aldeota · Fortaleza-CE</div>
           </div>
         </div>
-
-        <!-- LIXEIRA -->
-        <div id="page-lixeira" class="page">
-          <h1 class="text-3xl font-bold font-display mb-6">Lixeira</h1>
-          <div class="bg-white dark:bg-slate-800 rounded-3xl border p-6">
-            <p class="text-sm text-slate-500 mb-4">Propostas excluídas (retenção de 30 dias)</p>
-            <table class="w-full text-sm">
-              <thead><tr><th class="py-3 text-left">Evento</th><th>Justificativa</th><th>Excluído em</th><th></th></tr></thead>
-              <tbody id="trash-table" class="divide-y"></tbody>
-            </table>
+        <div class="grid-2">
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px">Dados Pessoais</div>
+            <div class="form-group" style="margin-bottom:12px"><label>Nome Completo</label><input id="prf_nome" value="Marcio Oliveira" /></div>
+            <div class="form-group" style="margin-bottom:12px"><label>E-mail</label><input id="prf_email" value="marcio.oliveira@senac.ce" /></div>
+            <div class="form-group" style="margin-bottom:12px"><label>Telefone</label><input id="prf_tel" value="(85) 99999-9999" /></div>
+            <div class="form-group" style="margin-bottom:16px"><label>Matrícula <span style="color:var(--c-text3)">(somente leitura)</span></label><input value="SENAC-1001" readonly="readonly" style="opacity:.6" /></div>
+            <button class="btn btn-primary" onclick="toast('Dados atualizados','success')">Salvar Dados</button>
+          </div>
+          <div class="card">
+            <div class="section-title" style="margin-bottom:16px">🔒 Segurança</div>
+            <div class="form-group" style="margin-bottom:12px"><label>Senha Atual</label><input type="password" placeholder="••••••••" /></div>
+            <div class="form-group" style="margin-bottom:12px"><label>Nova Senha</label><input type="password" placeholder="••••••••" /></div>
+            <div class="form-group" style="margin-bottom:16px"><label>Confirmar Nova Senha</label><input type="password" placeholder="••••••••" /></div>
+            <button class="btn btn-danger" onclick="toast('Senha atualizada com sucesso','success')">🔒 Atualizar Senha</button>
           </div>
         </div>
-
-        <!-- BI -->
-        <div id="page-bi" class="page">
-          <h1 class="text-3xl font-bold font-display mb-6">Business Intelligence</h1>
-          <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><canvas id="chart-faturamento" height="130"></canvas></div>
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-3xl border"><canvas id="chart-status" height="130"></canvas></div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAIS -->
-
-<!-- Modal Proposta -->
-<div id="modal-proposal" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
-  <div class="bg-white dark:bg-slate-800 w-full max-w-lg mx-4 rounded-3xl p-8">
-    <h3 class="text-2xl font-bold mb-6">Nova Proposta</h3>
-    <div class="space-y-5">
-      <div><label class="text-sm font-medium">Nome do Evento</label><input id="p-nome" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-      <div><label class="text-sm font-medium">Cliente</label><input id="p-cliente" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="text-sm font-medium">Data do Evento</label><input type="date" id="p-data" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-        <div><label class="text-sm font-medium">Valor (R$)</label><input type="number" id="p-valor" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-      </div>
-    </div>
-    <div class="flex gap-x-3 mt-8">
-      <button onclick="closeModal('modal-proposal')" class="flex-1 py-3 border rounded-2xl font-semibold">Cancelar</button>
-      <button onclick="saveProposal()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl font-semibold">Salvar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Genérico Aprimorado -->
-<div id="modal-generic" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
-  <div class="bg-white dark:bg-slate-800 w-full max-w-md mx-4 rounded-3xl p-8">
-    <h3 id="modal-generic-title" class="text-2xl font-bold mb-6">Novo Item</h3>
-    
-    <input type="hidden" id="generic-type">
-    <input type="hidden" id="generic-id">
-
-    <div class="space-y-5">
-      <div><label class="text-sm font-medium">Nome</label><input id="generic-name" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-      <div><label class="text-sm font-medium">Preço Base (R$)</label><input type="number" id="generic-price" class="modern-input w-full border rounded-2xl px-4 py-3"></div>
-
-      <!-- Campos extras para Locais -->
-      <div id="extra-locais-fields" class="hidden space-y-4">
-        <div><label class="text-sm font-medium">Precisa de Montagem?</label>
-          <select id="generic-montagem" class="modern-input w-full border rounded-2xl px-4 py-3">
-            <option value="Não">Não</option>
-            <option value="Sim">Sim</option>
-          </select>
-        </div>
-        <div><label class="text-sm font-medium">Equipamentos Acoplados</label><input id="generic-equipamentos" class="modern-input w-full border rounded-2xl px-4 py-3" placeholder="Ex: Projetor, Som"></div>
       </div>
 
-      <!-- Upload de Foto -->
-      <div>
-        <label class="text-sm font-medium">Foto (opcional)</label>
-        <input type="file" id="generic-image" accept="image/*" class="w-full text-sm" onchange="previewGenericImage(this)">
-        <div id="generic-image-preview" class="mt-3 hidden"><img id="preview-img" class="w-24 h-24 object-cover rounded-2xl border"></div>
-      </div>
-
-      <!-- Seletor de Ícones -->
-      <div>
-        <label class="text-sm font-medium mb-2 block">Ícone</label>
-        <div class="grid grid-cols-6 gap-2" id="icon-selector">
-          <div class="icon-option" data-icon="ti-building-arch" onclick="selectIcon(this)"><i class="ti ti-building-arch text-2xl"></i></div>
-          <div class="icon-option" data-icon="ti-sofa" onclick="selectIcon(this)"><i class="ti ti-sofa text-2xl"></i></div>
-          <div class="icon-option" data-icon="ti-device-projector" onclick="selectIcon(this)"><i class="ti ti-device-projector text-2xl"></i></div>
-          <div class="icon-option" data-icon="ti-microphone" onclick="selectIcon(this)"><i class="ti ti-microphone text-2xl"></i></div>
-          <div class="icon-option" data-icon="ti-coffee" onclick="selectIcon(this)"><i class="ti ti-coffee text-2xl"></i></div>
-          <div class="icon-option" data-icon="ti-soup" onclick="selectIcon(this)"><i class="ti ti-soup text-2xl"></i></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex gap-x-3 mt-8">
-      <button onclick="closeModal('modal-generic')" class="flex-1 py-3 border rounded-2xl font-semibold">Cancelar</button>
-      <button onclick="saveGenericItem()" class="flex-1 py-3 bg-[#003366] text-white rounded-2xl font-semibold">Salvar</button>
-    </div>
-  </div>
-</div>
-
-<!-- Modal Lixeira (Justificativa) -->
-<div id="modal-trash" class="hidden fixed inset-0 bg-black/60 flex items-center justify-center z-[100]">
-  <div class="bg-white dark:bg-slate-800 w-full max-w-md mx-4 rounded-3xl p-8">
-    <h3 class="text-xl font-bold mb-4">Mover para Lixeira</h3>
-    <p class="text-sm text-slate-500 mb-4">Por favor, informe o motivo da exclusão:</p>
-    <textarea id="trash-justification" class="w-full border rounded-2xl p-4 h-24" placeholder="Ex: Cliente cancelou o evento"></textarea>
-    <div class="flex gap-x-3 mt-6">
-      <button onclick="closeModal('modal-trash')" class="flex-1 py-3 border rounded-2xl">Cancelar</button>
-      <button onclick="confirmMoveToTrash()" class="flex-1 py-3 bg-red-600 text-white rounded-2xl font-semibold">Mover para Lixeira</button>
-    </div>
-  </div>
-</div>
+    </div><!-- /content -->
+  </div><!-- /main -->
+</div><!-- /app-shell -->
 
 <script>
-// ==================== ESTADO ====================
+//<![CDATA[
+// ── CONSTANTS ─────────────────────────────────────────────────────
+const GESTOR_LOGIN = 'marciooliveira';
+const GESTOR_SENHA = 'Deadpool365*';
+const SISTEMA_SENHA = 'senac2025';
+let _authCallback = null;
+let currentView = 'dashboard';
+let wizardCurrentStep = 1;
+let calYear = 2026, calMonth = 5; // June 2026
+let editingIdx = {espaco:-1, ti:-1, cardapio:-1};
+let exportContext = '';
+let fatChart = null, statusChart = null;
 let currentUser = null;
-let isGestor = true;
-let currentPermissions = { locacoes: "edit", equipamentos: "edit", cardapios: "edit" };
 
-let proposals = [];
-let locacoes = [];
-let equipamentos = [];
-let cardapios = [];
-let users = [];
-let trash = [];
+// ── DATA ──────────────────────────────────────────────────────────
+let DATA = {
+  propostas: [
+    {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',valor:18500,status:'Confirmada',tipo:'normal'},
+    {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',valor:4200,status:'Pendente',tipo:'normal'},
+    {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',valor:32000,status:'Pendente',tipo:'oficio'},
+    {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',valor:8900,status:'Negociação',tipo:'normal'},
+    {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',valor:22000,status:'Confirmada',tipo:'normal'},
+  ],
+  ordens: [
+    {id:'OS001',evento:'Congresso de Tecnologia',tipo:'TI/AV',resp:'Carlos Matos',data:'2026-06-25',status:'Em Execução',prog:65},
+    {id:'OS002',evento:'Workshop Design UX/UI',tipo:'Sonorização',resp:'Fernanda Lima',data:'2026-07-02',status:'Aberta',prog:0},
+    {id:'OS003',evento:'Congresso de Tecnologia',tipo:'Limpeza',resp:'Equipe Beta',data:'2026-06-25',status:'Concluída',prog:100},
+    {id:'OS004',evento:'Conferência de Inovação',tipo:'TI/AV',resp:'Ricardo Souza',data:'2026-07-10',status:'Aberta',prog:10},
+    {id:'OS005',evento:'Seminário Saúde Mental',tipo:'Segurança',resp:'Marcos Dias',data:'2026-07-15',status:'Aberta',prog:5},
+  ],
+  clientes: [
+    {nome:'Unichristus',doc:'07.299.392/0001-77',email:'eventos@unichristus.edu.br',tel:'(85) 3309-3333',resp:'Ana Lima',seg:'Educação',eventos:12},
+    {nome:'SEBRAE-CE',doc:'03.281.227/0001-00',email:'eventos@sebrae.ce',tel:'(85) 3321-0000',resp:'Pedro Castro',seg:'Corporativo',eventos:8},
+    {nome:'Governo do Estado',doc:'06.523.628/0001-03',email:'eventos@ceara.gov.br',tel:'(85) 3101-5050',resp:'Dra. Mariana',seg:'Governo',eventos:5},
+    {nome:'ABRASEL',doc:'38.557.850/0001-10',email:'contato@abrasel.com.br',tel:'(85) 3251-2020',resp:'João Alves',seg:'Corporativo',eventos:3},
+    {nome:'AME-CE',doc:'07.140.900/0001-02',email:'eventos@ame-ce.org.br',tel:'(85) 3099-7000',resp:'Dr. Carlos',seg:'Saúde',eventos:6},
+  ],
+  espacos: [
+    {nome:'Auditório A',cap:200,area:'420 m²',equip:'Projetor 4K, Som 5.1, Iluminação Cênica',status:'Disponível',valor:4500},
+    {nome:'Auditório B',cap:100,area:'210 m²',equip:'Projetor Full HD, Som Estéreo',status:'Reservado',valor:2800},
+    {nome:'Salão Principal Mayú',cap:350,area:'680 m²',equip:'Sistema de Áudio Distribuído, Palco Modular',status:'Disponível',valor:7200},
+    {nome:'Sala Multiuso 1',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:850},
+    {nome:'Sala Multiuso 2',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Manutenção',valor:850},
+    {nome:'Área Externa',cap:500,area:'1200 m²',equip:'Infraestrutura Elétrica, Pontos de Água',status:'Disponível',valor:5500},
+  ],
+  estoque: [
+    {nome:'Câmera Sony PXW-Z280',cat:'Câmera',qtd:3,disponivel:2,icon:'📷',status:'Operacional',pat:'PAT-001'},
+    {nome:'Projetor Epson 4K 5000lm',cat:'Projeção',qtd:4,disponivel:3,icon:'📽️',status:'Operacional',pat:'PAT-002'},
+    {nome:'Mesa de Som 24 Canais',cat:'Áudio',qtd:2,disponivel:2,icon:'🎚️',status:'Operacional',pat:'PAT-003'},
+    {nome:'Microfone Shure SM58',cat:'Áudio',qtd:12,disponivel:10,icon:'🎤',status:'Operacional',pat:'PAT-004'},
+    {nome:'Notebook Dell i7',cat:'TI',qtd:8,disponivel:6,icon:'💻',status:'Manutenção',pat:'PAT-005'},
+    {nome:'Switch 24 Portas',cat:'Rede',qtd:3,disponivel:3,icon:'🔌',status:'Operacional',pat:'PAT-006'},
+  ],
+  cardapio: [
+    {nome:'Café da Manhã Senac',cat:'Pacote',val:35,items:'Café, Leite, Suco, Frutas, Pão, Manteiga',alerg:'Glúten, Lactose',icon:'☕'},
+    {nome:'Coffee Break Executivo',cat:'Pacote',val:28,items:'Café, Chá, Mini Pão de Queijo, Bolo, Frutas',alerg:'Glúten, Lactose',icon:'🧁'},
+    {nome:'Menu Executivo Mayú',cat:'Almoço',val:68,items:'Entrada, Prato Principal, Sobremesa, Bebida',alerg:'Verificar individualmente',icon:'🍽️'},
+    {nome:'Kit Hidratação',cat:'Avulso',val:8,items:'Água 500ml + Suco Natural',alerg:'Nenhum',icon:'💧'},
+    {nome:'Coquetel de Encerramento',cat:'Pacote',val:55,items:'Canapés, Finger Foods, Bebidas Não Alcoólicas',alerg:'Glúten',icon:'🥂'},
+  ],
+  lixeira: [],
+  propSequence: {2026: 5},
+  usuarios: [
+    {login:'marciooliveira',nome:'Marcio Oliveira',email:'marcio.oliveira@senac.ce',nivel:'Gestor',status:'Ativo'},
+    {login:'admin',nome:'Admin',email:'admin@senac.ce',nivel:'Operador',status:'Ativo'},
+  ]
+};
 
-let currentTheme = localStorage.getItem('theme') || 'light';
-let currentViewMode = { locacoes: 'grid', equipamentos: 'grid', cardapios: 'grid' };
-let currentTrashProposalId = null;
-let tempImageBase64 = "";
+// ── LOAD/SAVE ─────────────────────────────────────────────────────
+function loadFromStorage(){
+  try{var s=localStorage.getItem('modesk_v8');if(s){var d=JSON.parse(s);Object.keys(d).forEach(function(k){if(d[k]!==undefined)DATA[k]=d[k];});}
+  var t=localStorage.getItem('modesk_theme');if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('themeIcon').textContent=t==='light'?'☀️':'🌙';}}catch(e){}
+}
+function saveToStorage(){try{localStorage.setItem('modesk_v8',JSON.stringify(DATA));}catch(e){}}
 
-// ==================== INICIALIZAÇÃO ====================
-function initApp() {
-  loadData();
-  applyTheme();
-  document.getElementById('login-screen').classList.remove('hidden');
+// ── PROPOSAL NUMBER ───────────────────────────────────────────────
+function nextPropNum(){
+  var y=new Date().getFullYear();
+  if(!DATA.propSequence)DATA.propSequence={};
+  if(!DATA.propSequence[y])DATA.propSequence[y]=0;
+  DATA.propSequence[y]++;
+  return String(DATA.propSequence[y]).padStart(3,'0')+'/'+y;
+}
+function prazo15(dataEvento){
+  if(!dataEvento)return '—';
+  var d=new Date(dataEvento);d.setDate(d.getDate()-15);
+  return d.toLocaleDateString('pt-BR');
 }
 
-function loadData() {
-  proposals = JSON.parse(localStorage.getItem('modesk_proposals_v7')) || getSeedProposals();
-  locacoes = JSON.parse(localStorage.getItem('modesk_locacoes_v7')) || getSeedLocacoes();
-  equipamentos = JSON.parse(localStorage.getItem('modesk_equip_v7')) || getSeedEquipamentos();
-  cardapios = JSON.parse(localStorage.getItem('modesk_cardapios_v7')) || getSeedCardapios();
-  users = JSON.parse(localStorage.getItem('modesk_users_v7')) || getSeedUsers();
-  trash = JSON.parse(localStorage.getItem('modesk_trash_v7')) || [];
+// ── LOGIN ─────────────────────────────────────────────────────────
+function doLogin(){
+  var u=document.getElementById('loginUser').value.trim();
+  var p=document.getElementById('loginPass').value;
+  var found=DATA.usuarios.find(function(x){return x.login===u;});
+  if(found&&((u===GESTOR_LOGIN&&p===GESTOR_SENHA)||(u==='admin'&&p===SISTEMA_SENHA))){
+    currentUser=found;
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('appShell').style.display='flex';
+    document.getElementById('sidebarUserName').textContent=found.nome;
+    document.getElementById('sidebarUserRole').textContent=found.nivel+' · Senac Aldeota';
+    var initials=found.nome.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
+    document.getElementById('sidebarAvatar').textContent=initials;
+    document.getElementById('topAvatar').textContent=initials;
+    document.getElementById('greetUser').textContent=found.nome.split(' ')[0];
+    document.getElementById('profileName').textContent=found.nome;
+    initApp();
+    toast('Bem-vindo, '+found.nome+'!','success');
+  }else{toast('Credenciais inválidas','error');}
 }
 
-function saveData() {
-  localStorage.setItem('modesk_proposals_v7', JSON.stringify(proposals));
-  localStorage.setItem('modesk_locacoes_v7', JSON.stringify(locacoes));
-  localStorage.setItem('modesk_equip_v7', JSON.stringify(equipamentos));
-  localStorage.setItem('modesk_cardapios_v7', JSON.stringify(cardapios));
-  localStorage.setItem('modesk_users_v7', JSON.stringify(users));
-  localStorage.setItem('modesk_trash_v7', JSON.stringify(trash));
-}
-
-function getSeedProposals() { return []; }
-function getSeedLocacoes() { return []; }
-function getSeedEquipamentos() { return []; }
-function getSeedCardapios() { return []; }
-function getSeedUsers() {
-  return [
-    { id: 1, name: "Marcio Oliveira", email: "gestor@ce.senac.br", role: "Gestor", permissions: { locacoes: "edit", equipamentos: "edit", cardapios: "edit" } }
-  ];
-}
-
-function applyTheme() {
-  document.documentElement.classList.toggle('dark', currentTheme === 'dark');
-}
-
-// ==================== LOGIN ====================
-function handleLogin() {
-  const email = document.getElementById('login-email').value;
-  currentUser = { email, name: email.split('@')[0] };
-  isGestor = email.includes('gestor') || email.includes('admin');
-
-  document.getElementById('login-screen').classList.add('hidden');
-  document.getElementById('main-app').classList.remove('hidden');
-
-  document.getElementById('user-name').innerText = currentUser.name;
-  document.getElementById('user-role').innerText = isGestor ? 'Gestor' : 'Operador';
-
-  if (!isGestor) document.getElementById('menu-usuarios').classList.add('hidden');
-
-  showPage('dashboard');
-  renderAll();
-}
-
-function logout() { location.reload(); }
-
-// ==================== NAVEGAÇÃO ====================
-function showPage(page) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + page).classList.add('active');
-
-  if (page === 'dashboard') renderDashboard();
-  if (page === 'propostas') renderProposals();
-  if (page === 'locacoes') renderGeneric('locacoes');
-  if (page === 'equipamentos') renderGeneric('equipamentos');
-  if (page === 'cardapios') renderGeneric('cardapios');
-  if (page === 'usuarios') renderUsersTable();
-  if (page === 'lixeira') renderTrash();
-  if (page === 'bi') renderBICharts();
-}
-
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('hidden');
-}
-
-function toggleTheme() {
-  currentTheme = currentTheme === 'light' ? 'dark' : 'light';
-  applyTheme();
-  localStorage.setItem('theme', currentTheme);
-}
-
-// ==================== RENDERIZAÇÕES ====================
-function renderDashboard() {
-  const fat = proposals.filter(p => p.status === 'Aceita' && p.financeiro === 'Pago').reduce((s, p) => s + p.valor, 0);
-  document.getElementById('kpi-faturamento').innerText = 'R$ ' + fat.toLocaleString('pt-BR');
-  document.getElementById('kpi-aceitas').innerText = proposals.filter(p => p.status === 'Aceita').length;
-  document.getElementById('kpi-pendentes').innerText = proposals.filter(p => p.financeiro === 'Pendente').length;
-
-  const today = new Date();
-  const vencidas = proposals.filter(p => new Date(p.prazoConfirmacao) < today && p.status !== 'Aceita');
-  document.getElementById('kpi-vencidas').innerText = vencidas.length;
-
-  // Alertas
-  const alerts = document.getElementById('alerts-container');
-  alerts.innerHTML = '';
-  vencidas.forEach(p => {
-    alerts.innerHTML += `<div class="bg-red-50 border border-red-200 text-red-700 px-5 py-3 rounded-2xl mb-2 flex items-center gap-x-3"><i class="ti ti-alert-triangle"></i> <span>Proposta "${p.evento}" venceu o prazo!</span></div>`;
-  });
-
-  // Tabela
-  const tbody = document.getElementById('dashboard-events');
-  tbody.innerHTML = '';
-  proposals.slice(0, 5).forEach(p => {
-    tbody.innerHTML += `<tr><td class="py-3">\( {p.dataProgramada}</td><td> \){p.evento}</td><td class="text-slate-500">${p.cliente}</td><td><span class="status-badge \( {p.status === 'Aceita' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}"> \){p.status}</span></td></tr>`;
-  });
-}
-
-function renderProposals() {
-  const tbody = document.getElementById('proposals-table');
-  tbody.innerHTML = '';
-  proposals.forEach(p => {
-    tbody.innerHTML += `
-      <tr>
-        <td class="px-6 py-4">${p.dataProgramada}</td>
-        <td class="px-6 py-4 font-medium">${p.evento}</td>
-        <td class="px-6 py-4 text-slate-500">${p.cliente}</td>
-        <td class="px-6 py-4 font-semibold">R$ ${p.valor.toLocaleString('pt-BR')}</td>
-        <td class="px-6 py-4">
-          <select onchange="updateProposalStatus(${p.id}, this.value)" class="border rounded-xl px-3 py-1 text-sm">
-            <option value="Em Análise" ${p.status === 'Em Análise' ? 'selected' : ''}>Em Análise</option>
-            <option value="Aceita" ${p.status === 'Aceita' ? 'selected' : ''}>Aceita</option>
-            <option value="Recusada" ${p.status === 'Recusada' ? 'selected' : ''}>Recusada</option>
-          </select>
-        </td>
-        <td class="px-6 py-4">
-          <select onchange="updateProposalFinance(${p.id}, this.value)" class="border rounded-xl px-3 py-1 text-sm">
-            <option value="Pendente" ${p.financeiro === 'Pendente' ? 'selected' : ''}>Pendente</option>
-            <option value="Pago" ${p.financeiro === 'Pago' ? 'selected' : ''}>Pago</option>
-          </select>
-        </td>
-        <td class="px-6 py-4"><button onclick="moveToTrash(${p.id})" class="text-red-500"><i class="ti ti-trash"></i></button></td>
-      </tr>`;
-  });
-}
-
-function renderGeneric(type) {
-  const container = document.getElementById(type + '-container');
-  container.className = currentViewMode[type] === 'grid' ? 'item-grid' : 'item-list';
-  container.innerHTML = '';
-
-  let data = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
-
-  data.forEach(item => {
-    if (currentViewMode[type] === 'grid') {
-      container.innerHTML += `
-        <div class="modesk-card bg-white dark:bg-slate-800 border rounded-3xl p-5">
-          <div class="h-36 bg-slate-100 dark:bg-slate-700 rounded-2xl mb-4 flex items-center justify-center overflow-hidden">
-            \( {item.image ? `<img src=" \){item.image}" class="w-full h-full object-cover">` : `<i class="ti ${item.icon || 'ti-box'} text-6xl text-slate-300"></i>`}
-          </div>
-          <div class="font-semibold">${item.name}</div>
-          <div class="text-emerald-600 font-bold">R$ ${item.price}</div>
-          <div class="flex gap-x-2 mt-4">
-            <button onclick="editGenericItem('${type}', ${item.id})" class="flex-1 text-sm py-2 border rounded-2xl">Editar</button>
-            <button onclick="deleteGenericItem('${type}', ${item.id})" class="flex-1 text-sm py-2 border border-red-200 text-red-600 rounded-2xl">Excluir</button>
-          </div>
-        </div>`;
-    } else {
-      container.innerHTML += `
-        <div class="bg-white dark:bg-slate-800 border rounded-2xl p-4 flex items-center justify-between">
-          <div class="flex items-center gap-x-4">
-            <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center"><i class="ti ${item.icon || 'ti-box'} text-3xl"></i></div>
-            <div><div class="font-semibold">\( {item.name}</div><div class="text-emerald-600">R \) ${item.price}</div></div>
-          </div>
-          <div class="flex gap-x-2">
-            <button onclick="editGenericItem('${type}', ${item.id})" class="px-4 py-2 text-sm border rounded-2xl">Editar</button>
-            <button onclick="deleteGenericItem('${type}', ${item.id})" class="px-4 py-2 text-sm border border-red-200 text-red-600 rounded-2xl">Excluir</button>
-          </div>
-        </div>`;
-    }
-  });
-}
-
-function toggleViewMode(type, mode) {
-  currentViewMode[type] = mode;
-  renderGeneric(type);
-}
-
-function renderUsersTable() {
-  const tbody = document.getElementById('users-table');
-  tbody.innerHTML = '';
-  users.forEach(u => {
-    tbody.innerHTML += `
-      <tr>
-        <td class="py-4">${u.name}</td>
-        <td class="py-4 text-sm text-slate-500">${u.email}</td>
-        <td><span class="px-3 py-1 text-xs rounded-full bg-emerald-100 text-emerald-700">${u.role}</span></td>
-        <td>${createPermissionSelect(u, 'locacoes')}</td>
-        <td>${createPermissionSelect(u, 'equipamentos')}</td>
-        <td>${createPermissionSelect(u, 'cardapios')}</td>
-      </tr>`;
-  });
-}
-
-function createPermissionSelect(user, module) {
-  const val = user.permissions?.[module] || 'view';
-  return `<select onchange="updateUserPermission(\( {user.id}, ' \){module}', this.value)" class="text-sm border rounded-xl px-2 py-1"><option value="view" ${val==='view'?'selected':''}>Visualizar</option><option value="edit" ${val==='edit'?'selected':''}>Editar</option></select>`;
-}
-
-function renderTrash() {
-  const tbody = document.getElementById('trash-table');
-  tbody.innerHTML = '';
-  trash.forEach((item, index) => {
-    tbody.innerHTML += `
-      <tr>
-        <td class="py-3">${item.evento}</td>
-        <td class="py-3 text-sm text-slate-500">${item.justification}</td>
-        <td class="py-3 text-xs">${new Date(item.deletedAt).toLocaleDateString()}</td>
-        <td><button onclick="restoreFromTrash(${index})" class="text-emerald-600 text-sm">Restaurar</button></td>
-      </tr>`;
-  });
-}
-
-// ==================== PROPOSTAS ====================
-function openProposalModal() {
-  document.getElementById('modal-proposal').classList.remove('hidden');
-  document.getElementById('modal-proposal').classList.add('flex');
-}
-
-function saveProposal() {
-  const data = document.getElementById('p-data').value;
-  const obj = {
-    id: Date.now(),
-    dataProgramada: data,
-    evento: document.getElementById('p-nome').value,
-    cliente: document.getElementById('p-cliente').value,
-    valor: parseFloat(document.getElementById('p-valor').value) || 0,
-    status: "Em Análise",
-    financeiro: "Pendente",
-    prazoConfirmacao: new Date(new Date(data).setDate(new Date(data).getDate() - 15)).toISOString().split('T')[0]
-  };
-  proposals.unshift(obj);
-  saveData();
-  closeModal('modal-proposal');
-  renderProposals();
+// ── INIT ──────────────────────────────────────────────────────────
+function initApp(){
+  var n=new Date();
+  var dias=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  var meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  document.getElementById('greetDate').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()]+' de '+n.getFullYear();
   renderDashboard();
+  renderPropostas();
+  renderOS();
+  renderClientes();
+  renderEspacos();
+  renderEstoque();
+  renderCardapio();
+  renderParecer();
+  renderRelatorios();
+  renderCalendario();
+  renderLixeira();
+  renderUsuarios();
+  initWizard();
+  updateBadges();
 }
 
-function updateProposalStatus(id, status) {
-  const p = proposals.find(x => x.id == id);
-  if (status === 'Aceita' && p.financeiro !== 'Pago') {
-    alert('Só é possível marcar como Aceita quando o financeiro estiver como PAGO.');
-    renderProposals();
+function updateBadges(){
+  document.getElementById('badgePropostas').textContent=DATA.propostas.length;
+  document.getElementById('badgeOS').textContent=DATA.ordens.filter(function(o){return o.status!=='Concluída';}).length;
+  var pend=DATA.propostas.filter(function(p){return p.status==='Pendente';}).length;
+  document.getElementById('kpiPendentes').textContent=pend;
+  document.getElementById('kpiEventos').textContent=DATA.propostas.filter(function(p){return p.status==='Confirmada';}).length;
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────
+var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Ordens de Serviço',
+  calendario:'Calendário de Eventos',clientes:'Clientes',espacos:'Espaços & Salas',
+  estoque:'Estoque TI/AV',cardapio:'Cardápios',alertas:'Central de Alertas',
+  parecer:'Parecer Técnico',relatorios:'Relatórios & BI',lixeira:'Lixeira',
+  configuracoes:'Configurações',perfil:'Meu Perfil'};
+
+function goto(view){
+  if(view==='parecer'&&!sessionStorage.getItem('authed_parecer')){
+    _authCallback=function(){sessionStorage.setItem('authed_parecer','1');gotoUnlocked('parecer');};
+    openModal('modalAuth');return;
+  }
+  gotoUnlocked(view);
+}
+function gotoUnlocked(view){
+  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
+  document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});
+  var el=document.getElementById('view-'+view);
+  if(el)el.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(n){if(n.getAttribute('onclick')&&n.getAttribute('onclick').indexOf("'"+view+"'")>=0)n.classList.add('active');});
+  document.getElementById('pageTitle').textContent=titles[view]||view;
+  currentView=view;
+  if(window.innerWidth<768)closeSidebarMobile();
+  if(view==='relatorios')setTimeout(function(){initBICharts();renderBITables();},150);
+}
+
+// ── SIDEBAR ───────────────────────────────────────────────────────
+function toggleSidebar(){
+  var sb=document.getElementById('sidebar'),ov=document.getElementById('mobileOverlay');
+  if(window.innerWidth<768){sb.classList.toggle('mobile-open');ov.style.display=sb.classList.contains('mobile-open')?'block':'none';}
+  else sb.classList.toggle('collapsed');
+}
+function closeSidebarMobile(){document.getElementById('sidebar').classList.remove('mobile-open');document.getElementById('mobileOverlay').style.display='none';}
+
+// ── THEME ─────────────────────────────────────────────────────────
+function toggleTheme(){
+  var html=document.documentElement,isDark=html.getAttribute('data-theme')==='dark';
+  var newTheme=isDark?'light':'dark';
+  html.setAttribute('data-theme',newTheme);
+  document.getElementById('themeIcon').textContent=isDark?'☀️':'🌙';
+  localStorage.setItem('modesk_theme',newTheme);
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────
+function toast(msg,type){
+  type=type||'success';
+  var icons={success:'✅',error:'❌',warn:'⚠️',info:'ℹ️'};
+  var div=document.createElement('div');
+  div.className='toast toast-'+type;
+  div.innerHTML='<span class="toast-icon">'+(icons[type]||'ℹ️')+'</span><span>'+msg+'</span>';
+  document.getElementById('toastContainer').appendChild(div);
+  requestAnimationFrame(function(){setTimeout(function(){div.classList.add('show');},10);});
+  setTimeout(function(){div.classList.remove('show');setTimeout(function(){div.remove();},400);},3200);
+}
+
+// ── MODALS ────────────────────────────────────────────────────────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.addEventListener('click',function(e){if(e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');});
+
+// ── AUTH ──────────────────────────────────────────────────────────
+function checkAuth(){
+  var u=document.getElementById('authUser').value.trim();
+  var v=document.getElementById('authInput').value;
+  if((u===GESTOR_LOGIN&&v===GESTOR_SENHA)||(v===SISTEMA_SENHA)){
+    closeModal('modalAuth');toast('Acesso autorizado','success');
+    if(_authCallback){_authCallback();_authCallback=null;}
+  }else{toast('Credenciais inválidas','error');document.getElementById('authInput').value='';}
+}
+
+// ── EXPORT ────────────────────────────────────────────────────────
+function openExportModal(ctx){
+  exportContext=ctx;
+  var labels={dashboard:'Dashboard KPIs e gráficos',propostas:'Lista de Propostas Comerciais',relatorios:'Relatório BI',parecer:'Parecer Técnico'};
+  document.getElementById('exportContext').textContent='Documento: '+(labels[ctx]||ctx);
+  openModal('modalExportar');
+}
+
+function doExport(){
+  var empresa=document.getElementById('exportEmpresa').value;
+  var fmt=document.querySelector('input[name="exportFmt"]:checked').value;
+  closeModal('modalExportar');
+  if(fmt==='excel'){exportExcel();}else{exportPDF(empresa);}
+}
+
+function exportExcel(){
+  var wb=XLSX.utils.book_new();
+  var data,headers;
+  if(exportContext==='propostas'){
+    headers=['Nº','Evento','Cliente','Espaço','Data','Prazo Pgto','Valor','Status','Tipo'];
+    data=DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,p.espaco,formatDate(p.data),prazo15(p.data),p.valor,p.status,p.tipo==='oficio'?'Ofício FECOMERIO':'Normal'];});
+  }else if(exportContext==='relatorios'||exportContext==='dashboard'){
+    headers=['Evento','Proposta','Data','Valor','Status'];
+    data=DATA.propostas.map(function(p){return [p.evento,p.num,formatDate(p.data),p.valor,p.status];});
+  }else{
+    headers=['Item','Valor'];data=[['Exportação',new Date().toLocaleDateString('pt-BR')]];
+  }
+  var ws=XLSX.utils.aoa_to_sheet([headers].concat(data));
+  var colWidths=headers.map(function(h){return {wch:Math.max(h.length,16)};});
+  ws['!cols']=colWidths;
+  XLSX.utils.book_append_sheet(wb,ws,'MoDesk');
+  XLSX.writeFile(wb,'MoDesk_'+exportContext+'_'+Date.now()+'.xlsx');
+  toast('Excel exportado com sucesso!','success');
+}
+
+function exportPDF(empresa){
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var pageW=doc.internal.pageSize.getWidth();
+  if(empresa==='senac'){
+    doc.setFillColor(99,102,241);
+    doc.rect(0,0,pageW,20,'F');
+    doc.setTextColor(255,255,255);
+    doc.setFontSize(14);doc.setFont('helvetica','bold');
+    doc.text('SENAC ALDEOTA',14,12);
+    doc.setFontSize(9);doc.setFont('helvetica','normal');
+    doc.text('Desembargador Moreira, 1301 · Aldeota, Fortaleza-CE · (85) 3255-6800',14,17);
+    doc.setTextColor(30,41,59);
+    doc.setFontSize(11);doc.setFont('helvetica','bold');
+    doc.text('MoDesk ALFA v8.0 — '+exportContext.toUpperCase(),14,28);
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
+    doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR')+' '+new Date().toLocaleTimeString('pt-BR'),14,33);
+  }else{
+    doc.setFontSize(16);doc.setFont('helvetica','bold');doc.setTextColor(99,102,241);
+    doc.text('MoDesk ALFA v8.0',14,16);
+    doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
+    doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR'),14,22);
+  }
+  var startY=empresa==='senac'?40:30;
+  if(exportContext==='propostas'){
+    doc.autoTable({
+      startY:startY,
+      head:[['Nº','Evento','Cliente','Data','Prazo Pgto','Valor (R$)','Status']],
+      body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),prazo15(p.data),fmtMoney(p.valor),p.status];}),
+      styles:{fontSize:9,cellPadding:4},
+      headStyles:{fillColor:[99,102,241],textColor:255,fontStyle:'bold'},
+      alternateRowStyles:{fillColor:[248,250,252]},
+    });
+  }else if(exportContext==='dashboard'||exportContext==='relatorios'){
+    doc.autoTable({
+      startY:startY,
+      head:[['Evento','Proposta','Data','Valor (R$)','Status']],
+      body:DATA.propostas.map(function(p){return [p.evento,p.num,formatDate(p.data),fmtMoney(p.valor),p.status];}),
+      styles:{fontSize:9,cellPadding:4},
+      headStyles:{fillColor:[99,102,241],textColor:255,fontStyle:'bold'},
+    });
+  }else if(exportContext==='parecer'){
+    doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
+    doc.text('PARECER TÉCNICO — '+new Date().toLocaleDateString('pt-BR'),14,startY);
+    var items=['TI/AV','Sonorização','Câmera/Foto'];
+    var y=startY+10;
+    items.forEach(function(item){
+      doc.setFontSize(10);doc.setFont('helvetica','bold');doc.text('Área: '+item,14,y);y+=8;
+      doc.setFont('helvetica','normal');doc.setFontSize(9);doc.setTextColor(100,116,139);
+      doc.text('Verificado pela equipe técnica do Senac Aldeota.',14,y);y+=10;
+    });
+  }
+  var pageCount=doc.internal.getNumberOfPages();
+  for(var i=1;i<=pageCount;i++){
+    doc.setPage(i);doc.setFontSize(8);doc.setTextColor(148,163,184);
+    doc.text('MoDesk ALFA v8.0 · Senac Aldeota · Página '+i+'/'+pageCount,14,doc.internal.pageSize.getHeight()-8);
+  }
+  doc.save('MoDesk_'+exportContext+'_'+Date.now()+'.pdf');
+  toast('PDF exportado com sucesso!','success');
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────
+function renderDashboard(){
+  var pe=document.getElementById('proxEventos');
+  pe.innerHTML=DATA.propostas.slice(0,4).map(function(e){return '<div class="list-item"><div class="list-icon" style="background:rgba(99,102,241,.12)">📅</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+e.evento+'</div><div style="font-size:12px;color:var(--c-text2)">'+e.espaco+' · '+formatDate(e.data)+'</div><div style="font-size:11px;color:var(--c-amber)">Prazo pgto: '+prazo15(e.data)+'</div></div><span class="badge '+statusBadge(e.status)+'">'+e.status+'</span></div>';}).join('');
+  var oa=document.getElementById('ordensAbertas');
+  oa.innerHTML=DATA.ordens.filter(function(o){return o.status!=='Concluída';}).slice(0,4).map(function(o){return '<div class="list-item"><div class="list-icon" style="background:rgba(34,211,238,.1)">📋</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+o.id+' — '+o.tipo+'</div><div style="font-size:12px;color:var(--c-text2)">'+o.evento+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+o.prog+'%"></div></div></div><span class="badge '+statusBadge(o.status)+'">'+o.status+'</span></div>';}).join('');
+  setTimeout(function(){initChartFat();initChartStatus();},100);
+}
+
+function initChartFat(){
+  var ctx=document.getElementById('chartFat');if(!ctx)return;
+  if(fatChart){fatChart.destroy();}
+  fatChart=new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+      datasets:[{label:'Faturamento',data:[22000,18500,31000,27000,35000,47800,0,0,0,0,0,0],backgroundColor:'rgba(99,102,241,0.7)',borderRadius:6,borderSkipped:false},
+        {label:'Meta',data:[30000,30000,30000,30000,30000,45000,45000,45000,45000,45000,45000,45000],type:'line',borderColor:'rgba(34,211,238,0.7)',backgroundColor:'transparent',pointRadius:3,tension:.4}]
+    },
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11}}},
+        y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11},callback:function(v){return 'R$'+(v/1000).toFixed(0)+'K';}}}}}
+  });
+}
+
+function updateFatChart(year){document.getElementById('chartYear').textContent=year;initChartFat();}
+
+function initChartStatus(){
+  var ctx=document.getElementById('chartStatus');if(!ctx)return;
+  if(statusChart){statusChart.destroy();}
+  var counts={Confirmada:0,Pendente:0,'Negociação':0,Cancelada:0};
+  DATA.propostas.forEach(function(p){if(counts[p.status]!==undefined)counts[p.status]++;});
+  statusChart=new Chart(ctx,{
+    type:'doughnut',
+    data:{labels:Object.keys(counts),datasets:[{data:Object.values(counts),backgroundColor:['#10b981','#f59e0b','#6366f1','#ef4444'],borderWidth:0,hoverOffset:4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},cutout:'72%'}
+  });
+  var sb=document.getElementById('statusBadges');
+  var colors={Confirmada:'badge-green',Pendente:'badge-amber','Negociação':'badge-blue',Cancelada:'badge-red'};
+  sb.innerHTML=Object.entries(counts).map(function(kv){return '<span class="badge '+colors[kv[0]]+'">'+kv[0]+': '+kv[1]+'</span>';}).join('');
+}
+
+// ── PROPOSTAS ─────────────────────────────────────────────────────
+function renderPropostas(list){
+  var src=list||DATA.propostas;
+  var tb=document.getElementById('tbodyPropostas');
+  if(!src.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';return;}
+  tb.innerHTML=src.map(function(p){
+    var idx=DATA.propostas.indexOf(p);
+    return '<tr><td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span></td><td>'+p.evento+'</td><td>'+p.cliente+'</td><td><span class="tag">'+p.espaco+'</span></td><td>'+formatDate(p.data)+'</td><td style="color:var(--c-amber);font-size:12px">'+prazo15(p.data)+'</td><td style="font-weight:600;color:var(--c-green)">'+fmtMoney(p.valor)+'</td><td><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></td><td>'+(p.tipo==='oficio'?'<span class="oficio-badge">Ofício FECOMERIO</span>':'<span class="tag">Normal</span>')+'</td><td><div style="display:flex;gap:4px"><button class="btn btn-ghost btn-icon btn-sm" title="Exportar PDF" onclick="exportContext=\'propostas\';exportPDF(\'senac\')">📄</button><button class="btn btn-ghost btn-icon btn-sm" title="WhatsApp" onclick="gerarPropostaWA('+idx+')">📲</button>'+(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirProposta('+idx+')">🗑️</button>':'')+'</div></td></tr>';
+  }).join('');
+}
+
+function filterPropostas(){
+  var q=document.getElementById('searchPropostas').value.toLowerCase();
+  var st=document.getElementById('filterStatusProp').value;
+  var f=DATA.propostas.filter(function(p){
+    var match=!q||(p.evento+p.cliente+p.num).toLowerCase().indexOf(q)>=0;
+    var stMatch=!st||p.status===st;
+    return match&&stMatch;
+  });
+  renderPropostas(f);
+}
+
+function excluirProposta(idx){
+  DATA.lixeira.push({tipo:'Proposta',item:DATA.propostas[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.propostas.splice(idx,1);
+  saveToStorage();renderPropostas();renderLixeira();updateBadges();
+  toast('Proposta movida para Lixeira','warn');
+}
+
+function gerarPropostaWA(idx){
+  var p=DATA.propostas[idx];
+  var msg=encodeURIComponent('*Proposta '+p.num+' — MoDesk ALFA v8.0*\n\nEvento: '+p.evento+'\nCliente: '+p.cliente+'\nEspaço: '+p.espaco+'\nData: '+formatDate(p.data)+'\nValor: '+fmtMoney(p.valor)+'\nPrazo de pagamento: '+prazo15(p.data)+'\n\n_Senac Aldeota · (85) 3255-6800_');
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+
+// ── ORDENS DE SERVIÇO ─────────────────────────────────────────────
+function renderOS(){
+  var tb=document.getElementById('tbodyOS');
+  tb.innerHTML=DATA.ordens.map(function(o,i){
+    return '<tr><td><span style="font-weight:700;color:var(--c-cyan)">'+o.id+'</span></td><td>'+o.evento+'</td><td><span class="tag">'+o.tipo+'</span></td><td>'+o.resp+'</td><td>'+formatDate(o.data)+'</td><td><span class="badge '+statusBadge(o.status)+'">'+o.status+'</span></td><td style="min-width:120px"><div class="progress-bar"><div class="progress-fill" style="width:'+o.prog+'%"></div></div><div style="font-size:11px;color:var(--c-text3);margin-top:2px">'+o.prog+'%</div></td><td><div style="display:flex;gap:4px"><button class="btn btn-ghost btn-icon btn-sm" onclick="toast(\'OS '+o.id+' atualizada\',\'info\')">✏️</button><button class="btn btn-ghost btn-icon btn-sm" onclick="toast(\'PDF OS '+o.id+' gerado\',\'success\')">📄</button>'+(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirOS('+i+')">🗑️</button>':'')+'</div></td></tr>';
+  }).join('');
+}
+
+function excluirOS(idx){
+  DATA.lixeira.push({tipo:'OS',item:DATA.ordens[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.ordens.splice(idx,1);saveToStorage();renderOS();renderLixeira();updateBadges();
+  toast('OS movida para Lixeira','warn');
+}
+
+function saveOS(){
+  var prop=document.getElementById('os_prop').value;
+  var tipo=document.getElementById('os_tipo').value;
+  var resp=document.getElementById('os_resp').value||'—';
+  var data=document.getElementById('os_data').value;
+  var n=DATA.ordens.length+1;
+  DATA.ordens.push({id:'OS'+String(n).padStart(3,'0'),evento:prop,tipo:tipo,resp:resp,data:data||new Date().toISOString().split('T')[0],status:'Aberta',prog:0});
+  saveToStorage();renderOS();closeModal('modalOS');updateBadges();
+  toast('Ordem de Serviço criada','success');
+}
+
+// ── CLIENTES ──────────────────────────────────────────────────────
+function renderClientes(){
+  var q=(document.getElementById('searchClientes')?document.getElementById('searchClientes').value:'').toLowerCase();
+  var src=DATA.clientes.filter(function(c){return !q||(c.nome+c.email+c.doc).toLowerCase().indexOf(q)>=0;});
+  var g=document.getElementById('clienteGrid');
+  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div class="empty-title">Nenhum cliente encontrado</div></div>';return;}
+  g.innerHTML=src.map(function(c){
+    var idx=DATA.clientes.indexOf(c);
+    return '<div class="card" style="cursor:pointer;transition:transform .2s" onmouseenter="this.style.transform=\'translateY(-3px)\'" onmouseleave="this.style.transform=\'\'"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:42px;height:42px;border-radius:10px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div><div><div style="font-weight:700;font-size:14px">'+c.nome+'</div><span class="badge badge-blue" style="font-size:10px">'+c.seg+'</span></div></div><div style="font-size:12px;color:var(--c-text2);display:flex;flex-direction:column;gap:5px"><div>📧 '+c.email+'</div><div>📞 '+c.tel+'</div><div>👤 '+c.resp+'</div><div>📄 '+c.doc+'</div></div><div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center"><div style="font-size:12px;color:var(--c-text3)">'+c.eventos+' eventos</div><div style="display:flex;gap:6px">'+(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCliente('+idx+')">🗑️</button>':'')+'<button class="btn btn-primary btn-sm" onclick="toast(\'Nova proposta para '+c.nome+'\',\'info\')">+ Proposta</button></div></div></div>';
+  }).join('');
+}
+
+function saveCliente(){
+  var nome=document.getElementById('cli_nome').value;
+  if(!nome){toast('Informe o nome','error');return;}
+  DATA.clientes.push({nome:nome,doc:document.getElementById('cli_doc').value,email:document.getElementById('cli_email').value,tel:document.getElementById('cli_tel').value,resp:document.getElementById('cli_resp').value,seg:document.getElementById('cli_seg').value,eventos:0});
+  saveToStorage();renderClientes();closeModal('modalCliente');toast('Cliente cadastrado','success');
+}
+
+function excluirCliente(idx){
+  DATA.lixeira.push({tipo:'Cliente',item:DATA.clientes[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.clientes.splice(idx,1);saveToStorage();renderClientes();renderLixeira();toast('Cliente movido para Lixeira','warn');
+}
+
+// ── ESPAÇOS ───────────────────────────────────────────────────────
+var espacoFiltro='';
+function filtrarEspaco(el,f){
+  espacoFiltro=f;
+  document.querySelectorAll('#espacoFiltros .chip').forEach(function(c){c.classList.remove('selected');});
+  el.classList.add('selected');
+  renderEspacos();
+}
+
+function renderEspacos(){
+  var icons=['🏛️','🏟️','💫','🏢','🏢','🌿'];
+  var src=espacoFiltro?DATA.espacos.filter(function(e){return e.status===espacoFiltro;}):DATA.espacos;
+  var g=document.getElementById('espacoGrid');
+  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">🏛️</div><div class="empty-title">Nenhum espaço encontrado</div></div>';return;}
+  g.innerHTML=src.map(function(e){
+    var idx=DATA.espacos.indexOf(e);
+    return '<div class="card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px"><div style="font-size:28px">'+(icons[idx]||'🏛️')+'</div><span class="badge '+(e.status==='Disponível'?'badge-green':e.status==='Reservado'?'badge-amber':'badge-red')+'">'+e.status+'</span></div><div style="font-weight:700;font-size:15px;margin-bottom:6px">'+e.nome+'</div><div style="font-size:12px;color:var(--c-text2);display:flex;flex-direction:column;gap:4px;margin-bottom:12px"><div>👥 Cap.: '+e.cap+' pessoas</div><div>📐 '+e.area+'</div><div>🔧 '+e.equip+'</div></div><div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--c-border)"><div style="font-weight:700;color:var(--c-green)">'+fmtMoney(e.valor)+'<span style="font-size:11px;color:var(--c-text3)">/dia</span></div><div style="display:flex;gap:6px">'+(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="editarEspaco('+idx+')">✏️</button><button class="btn btn-ghost btn-icon btn-sm" onclick="excluirEspaco('+idx+')">🗑️</button>':'')+'<button class="btn btn-primary btn-sm" onclick="toast(\''+e.nome+' reservado\',\'info\')">Reservar</button></div></div></div>';
+  }).join('');
+}
+
+function abrirNovoEspaco(){
+  editingIdx.espaco=-1;
+  document.getElementById('modalEspacoTitle').textContent='🏛️ Novo Espaço';
+  ['esp_nome','esp_cap','esp_area','esp_valor','esp_equip'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('esp_status').value='Disponível';
+  openModal('modalEspaco');
+}
+
+function editarEspaco(idx){
+  editingIdx.espaco=idx;
+  var e=DATA.espacos[idx];
+  document.getElementById('modalEspacoTitle').textContent='✏️ Editar Espaço';
+  document.getElementById('esp_nome').value=e.nome;
+  document.getElementById('esp_cap').value=e.cap;
+  document.getElementById('esp_area').value=e.area;
+  document.getElementById('esp_valor').value=e.valor;
+  document.getElementById('esp_equip').value=e.equip;
+  document.getElementById('esp_status').value=e.status;
+  openModal('modalEspaco');
+}
+
+function saveEspaco(){
+  var nome=document.getElementById('esp_nome').value;
+  if(!nome){toast('Informe o nome do espaço','error');return;}
+  var obj={nome:nome,cap:parseInt(document.getElementById('esp_cap').value)||0,area:document.getElementById('esp_area').value,valor:parseFloat(document.getElementById('esp_valor').value)||0,equip:document.getElementById('esp_equip').value,status:document.getElementById('esp_status').value};
+  if(editingIdx.espaco>=0){DATA.espacos[editingIdx.espaco]=obj;toast('Espaço atualizado','success');}
+  else{DATA.espacos.push(obj);toast('Espaço cadastrado','success');}
+  saveToStorage();renderEspacos();closeModal('modalEspaco');
+}
+
+function excluirEspaco(idx){
+  DATA.lixeira.push({tipo:'Espaço',item:DATA.espacos[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.espacos.splice(idx,1);saveToStorage();renderEspacos();renderLixeira();toast('Espaço movido para Lixeira','warn');
+}
+
+// ── ESTOQUE TI ────────────────────────────────────────────────────
+function renderEstoque(){
+  var g=document.getElementById('estoqueGrid');
+  var total=DATA.estoque.reduce(function(a,e){return a+e.qtd;},0);
+  var disp=DATA.estoque.reduce(function(a,e){return a+e.disponivel;},0);
+  var uso=DATA.estoque.reduce(function(a,e){return a+(e.qtd-e.disponivel);},0);
+  var manut=DATA.estoque.filter(function(e){return e.status==='Manutenção';}).length;
+  document.getElementById('tiTotal').textContent=total;
+  document.getElementById('tiDisp').textContent=disp;
+  document.getElementById('tiUso').textContent=uso;
+  document.getElementById('tiManut').textContent=manut;
+  g.innerHTML=DATA.estoque.map(function(e,i){
+    return '<div class="equip-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px"><div style="display:flex;align-items:center;gap:10px"><div style="font-size:32px">'+e.icon+'</div><div><div style="font-weight:700;font-size:13.5px;line-height:1.3">'+e.nome+'</div><div style="display:flex;gap:4px;margin-top:4px"><span class="tag">'+e.cat+'</span><span class="badge '+(e.status==='Operacional'?'badge-green':e.status==='Manutenção'?'badge-amber':'badge-red')+'" style="font-size:10px">'+e.status+'</span></div></div></div>'+(currentUser&&currentUser.nivel==='Gestor'?'<div style="display:flex;gap:4px"><button class="btn btn-ghost btn-icon btn-sm" onclick="editarTI('+i+')" title="Editar">✏️</button><button class="btn btn-ghost btn-icon btn-sm" onclick="excluirTI('+i+')" title="Excluir">🗑️</button></div>':'')+'</div><div style="font-size:11px;color:var(--c-text3);margin-bottom:10px">Patrimônio: '+(e.pat||'—')+'</div><div style="display:flex;gap:16px;margin-bottom:10px;justify-content:space-between"><div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--c-cyan)">'+e.qtd+'</div><div style="font-size:10px;color:var(--c-text3)">Total</div></div><div style="text-align:center"><div style="font-size:20px;font-weight:700;color:'+(e.disponivel>0?'var(--c-green)':'var(--c-red)')+'">'+e.disponivel+'</div><div style="font-size:10px;color:var(--c-text3)">Disponível</div></div><div style="text-align:center"><div style="font-size:20px;font-weight:700;color:var(--c-amber)">'+(e.qtd-e.disponivel)+'</div><div style="font-size:10px;color:var(--c-text3)">Em Uso</div></div></div><div class="progress-bar"><div class="progress-fill" style="width:'+Math.round((e.disponivel/Math.max(e.qtd,1))*100)+'%;background:'+(e.disponivel/e.qtd>0.5?'linear-gradient(90deg,var(--c-green),var(--c-cyan))':'linear-gradient(90deg,var(--c-red),var(--c-amber))')+'"></div></div></div>';
+  }).join('');
+}
+
+function abrirNovoTI(){
+  editingIdx.ti=-1;
+  document.getElementById('modalTITitle').textContent='💻 Novo Item TI/AV';
+  ['ti_nome','ti_pat','ti_icon'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('ti_qtd').value=1;
+  document.getElementById('ti_cat').value='TI';
+  document.getElementById('ti_status').value='Operacional';
+  openModal('modalTI');
+}
+
+function editarTI(idx){
+  editingIdx.ti=idx;
+  var e=DATA.estoque[idx];
+  document.getElementById('modalTITitle').textContent='✏️ Editar Item TI/AV';
+  document.getElementById('ti_nome').value=e.nome;
+  document.getElementById('ti_qtd').value=e.qtd;
+  document.getElementById('ti_cat').value=e.cat;
+  document.getElementById('ti_icon').value=e.icon;
+  document.getElementById('ti_pat').value=e.pat||'';
+  document.getElementById('ti_status').value=e.status;
+  openModal('modalTI');
+}
+
+function saveTI(){
+  var nome=document.getElementById('ti_nome').value;
+  if(!nome){toast('Informe o nome do equipamento','error');return;}
+  var qtd=parseInt(document.getElementById('ti_qtd').value)||1;
+  var obj={nome:nome,cat:document.getElementById('ti_cat').value,qtd:qtd,disponivel:qtd,icon:document.getElementById('ti_icon').value||'📦',status:document.getElementById('ti_status').value,pat:document.getElementById('ti_pat').value};
+  if(editingIdx.ti>=0){obj.disponivel=DATA.estoque[editingIdx.ti].disponivel;DATA.estoque[editingIdx.ti]=obj;toast('Item atualizado','success');}
+  else{DATA.estoque.push(obj);toast('Item cadastrado','success');}
+  saveToStorage();renderEstoque();closeModal('modalTI');
+}
+
+function excluirTI(idx){
+  DATA.lixeira.push({tipo:'Item TI/AV',item:DATA.estoque[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.estoque.splice(idx,1);saveToStorage();renderEstoque();renderLixeira();toast('Item movido para Lixeira','warn');
+}
+
+// ── CARDÁPIO ──────────────────────────────────────────────────────
+function renderCardapio(){
+  var g=document.getElementById('cardapioGrid');
+  g.innerHTML=DATA.cardapio.map(function(c,i){
+    return '<div class="food-card"><div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px"><div style="font-size:32px">'+c.icon+'</div><div style="display:flex;gap:4px;align-items:center"><span class="badge badge-blue">'+c.cat+'</span>'+(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCardapio('+i+')" title="Editar">✏️</button><button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCardapio('+i+')" title="Excluir">🗑️</button>':'')+'</div></div><div style="font-weight:700;font-size:15px;margin-bottom:6px">'+c.nome+'</div><div style="font-size:12px;color:var(--c-text2);margin-bottom:6px">📋 '+c.items+'</div><div style="font-size:11px;padding:4px 8px;border-radius:6px;background:rgba(245,158,11,.1);color:var(--c-amber);margin-bottom:12px">⚠️ Alergênicos: '+c.alerg+'</div><div style="display:flex;justify-content:space-between;align-items:center"><div style="font-size:18px;font-weight:700;color:var(--c-green)">'+fmtMoney(c.val)+'<span style="font-size:11px;color:var(--c-text3)">/pax</span></div><button class="btn btn-primary btn-sm" onclick="toast(\''+c.nome+' adicionado à seleção\',\'success\')">+ Selecionar</button></div></div>';
+  }).join('');
+  var chips=document.getElementById('chipCardapio');
+  chips.innerHTML=DATA.cardapio.map(function(c){return '<div class="chip" onclick="this.classList.toggle(\'selected\');toast(\''+c.nome+' \'+(this.classList.contains(\'selected\')?\'selecionado\':\'removido\'),\'info\')">'+c.icon+' '+c.nome+'</div>';}).join('');
+  var tb=document.getElementById('tbodyPedidos');
+  var pedidos=DATA.propostas.slice(0,4).map(function(p){return {evento:p.evento,serv:DATA.cardapio[Math.floor(Math.random()*DATA.cardapio.length)].nome,pax:Math.floor(Math.random()*100+20),status:p.status==='Confirmada'?'Confirmado':'Aguardando'};});
+  tb.innerHTML=pedidos.map(function(p){return '<tr><td>'+p.evento+'</td><td>'+p.serv+'</td><td>'+p.pax+'</td><td style="color:var(--c-green)">'+fmtMoney(p.pax*28)+'</td><td><span class="badge '+(p.status==='Confirmado'?'badge-green':'badge-amber')+'">'+p.status+'</span></td></tr>';}).join('');
+}
+
+function abrirNovoCardapio(){
+  editingIdx.cardapio=-1;
+  document.getElementById('modalCardapioTitle').textContent='🍽️ Novo Item de Alimentação';
+  ['card_nome','card_val','card_items','card_alerg','card_icon'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('card_cat').value='Pacote';
+  openModal('modalCardapio');
+}
+
+function editarCardapio(idx){
+  editingIdx.cardapio=idx;
+  var c=DATA.cardapio[idx];
+  document.getElementById('modalCardapioTitle').textContent='✏️ Editar Item';
+  document.getElementById('card_nome').value=c.nome;
+  document.getElementById('card_val').value=c.val;
+  document.getElementById('card_items').value=c.items;
+  document.getElementById('card_alerg').value=c.alerg;
+  document.getElementById('card_icon').value=c.icon;
+  document.getElementById('card_cat').value=c.cat;
+  openModal('modalCardapio');
+}
+
+function saveCardapio(){
+  var nome=document.getElementById('card_nome').value;
+  if(!nome){toast('Informe o nome do item','error');return;}
+  var obj={nome:nome,cat:document.getElementById('card_cat').value,val:parseFloat(document.getElementById('card_val').value)||0,items:document.getElementById('card_items').value,alerg:document.getElementById('card_alerg').value,icon:document.getElementById('card_icon').value||'🍽️'};
+  if(editingIdx.cardapio>=0){DATA.cardapio[editingIdx.cardapio]=obj;toast('Item atualizado','success');}
+  else{DATA.cardapio.push(obj);toast('Item cadastrado','success');}
+  saveToStorage();renderCardapio();closeModal('modalCardapio');
+}
+
+function excluirCardapio(idx){
+  DATA.lixeira.push({tipo:'Cardápio',item:DATA.cardapio[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.cardapio.splice(idx,1);saveToStorage();renderCardapio();renderLixeira();toast('Item movido para Lixeira','warn');
+}
+
+// ── PARECER TÉCNICO ───────────────────────────────────────────────
+function renderParecer(){
+  var tiItems=['Laptop de Apresentação configurado','Cabo HDMI testado','Projetor calibrado','Internet 50Mbps disponível','Backup (pendrive) preparado','Sistema de votação testado'];
+  var somItems=['Mesa de som configurada','Microfones com bateria nova','Monitor de palco testado','Equalizador ajustado','Cabo de DI disponível','Volume de palco calibrado'];
+  var camItems=['Câmeras com bateria carregada','Cartões de memória formatados','Tripés montados e nivelados','Iluminação do palco verificada','Câmera backup pronta','Plano de cobertura definido'];
+  function renderCheck(id,items){
+    var el=document.getElementById(id);if(!el)return;
+    el.innerHTML=items.map(function(item){return '<div class="check-item" onclick="toggleCheck(this)"><div class="check-box">✓</div><span style="font-size:13px">'+item+'</span></div>';}).join('');
+    el.querySelectorAll('.check-box').forEach(function(b){b.style.color='transparent';});
+  }
+  renderCheck('checkTI',tiItems);renderCheck('checkSom',somItems);renderCheck('checkCam',camItems);
+}
+
+function toggleCheck(el){
+  var box=el.querySelector('.check-box');
+  box.classList.toggle('checked');
+  box.style.color=box.classList.contains('checked')?'white':'transparent';
+  updateParecerResumo();
+}
+
+function updateParecerResumo(){
+  var total=document.querySelectorAll('.check-box').length;
+  var done=document.querySelectorAll('.check-box.checked').length;
+  var pct=Math.round((done/total)*100);
+  document.getElementById('parecerResumo').innerHTML='<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>Verificados</span><strong>'+done+'/'+total+'</strong></div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%"></div></div></div><div style="font-size:13px;color:'+(pct===100?'var(--c-green)':pct>=60?'var(--c-amber)':'var(--c-red)')+'">'+( pct===100?'✅ Evento APROVADO':pct>=60?'⚠️ Revisar pendências':'❌ Checklist insuficiente')+'</div>';
+}
+
+function gerarParecerWA(tipo){
+  var msg=encodeURIComponent('*Parecer Técnico — MoDesk ALFA v8.0*\nÁrea: '+tipo+'\nData: '+new Date().toLocaleDateString('pt-BR')+'\n\n_Senac Aldeota · (85) 3255-6800_');
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+
+// ── RELATÓRIOS BI ─────────────────────────────────────────────────
+function renderRelatorios(){}
+
+function biTab(el,id){
+  document.querySelectorAll('.tabs .tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.tab-pane').forEach(function(p){p.classList.remove('active');});
+  el.classList.add('active');
+  document.getElementById('bi-'+id).classList.add('active');
+  setTimeout(function(){initBICharts();},100);
+}
+
+var biCharts={};
+function initBICharts(){
+  var espCtx=document.getElementById('chartEspaco');
+  if(espCtx&&!biCharts.espaco){
+    biCharts.espaco=new Chart(espCtx,{
+      type:'bar',
+      data:{labels:['Auditório A','Salão Mayú','Auditório B','Sala 1','Área Ext.'],
+        datasets:[{label:'Receita',data:[68000,52000,31000,12000,23000],backgroundColor:['#6366f1','#22d3ee','#10b981','#f59e0b','#ec4899'],borderRadius:8,borderSkipped:false}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+        scales:{x:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11}}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11},callback:function(v){return 'R$'+(v/1000)+'K';}}}}}
+    });
+  }
+  var finCtx=document.getElementById('chartFinanceiro');
+  if(finCtx&&!biCharts.fin){
+    biCharts.fin=new Chart(finCtx,{
+      type:'line',
+      data:{labels:['Jan','Fev','Mar','Abr','Mai','Jun'],
+        datasets:[{label:'Receita',data:[22000,18500,31000,27000,35000,47800],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,.08)',fill:true,tension:.4},
+          {label:'Custos',data:[8000,7000,10000,9000,11000,12000],borderColor:'#ef4444',backgroundColor:'transparent',tension:.4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:11}}}},
+        scales:{x:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b'}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',callback:function(v){return 'R$'+(v/1000)+'K';}}}}}
+    });
+  }
+  var tiCtx=document.getElementById('chartTI');
+  if(tiCtx&&!biCharts.ti){
+    biCharts.ti=new Chart(tiCtx,{
+      type:'doughnut',
+      data:{labels:DATA.estoque.map(function(e){return e.nome.substring(0,20);}),
+        datasets:[{data:DATA.estoque.map(function(e){return e.qtd-e.disponivel;}),backgroundColor:['#6366f1','#22d3ee','#10b981','#f59e0b','#ec4899','#818cf8'],borderWidth:0}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:10}}}}}
+    });
+  }
+  var tc=document.getElementById('topClientes');
+  if(tc&&!tc.dataset.rendered){
+    tc.dataset.rendered='1';
+    tc.innerHTML=DATA.clientes.map(function(c,i){return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><div style="width:24px;height:24px;border-radius:50%;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--c-accent2)">'+(i+1)+'</div><div style="flex:1"><div style="font-size:13px;font-weight:600">'+c.nome+'</div><div class="progress-bar" style="margin:4px 0"><div class="progress-fill" style="width:'+(100-(i*15))+'%"></div></div></div><div style="font-size:13px;font-weight:700;color:var(--c-green)">'+fmtMoney([68000,52000,31000,23000,18000][i]||5000)+'</div></div>';}).join('');
+  }
+}
+
+function renderBITables(){
+  var tb=document.getElementById('biTbEventos');
+  if(tb) tb.innerHTML=DATA.propostas.map(function(p){return '<tr><td>'+p.evento+'</td><td>'+p.num+'</td><td>'+formatDate(p.data)+'</td><td>'+Math.floor(Math.random()*200+50)+'</td><td style="color:var(--c-green)">'+fmtMoney(p.valor)+'</td><td><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></td></tr>';}).join('');
+}
+
+// ── CALENDÁRIO ────────────────────────────────────────────────────
+var calMonthNames=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function renderCalendario(){
+  var grid=document.getElementById('calGrid');
+  var label=document.getElementById('calMonthLabel');
+  label.textContent=calMonthNames[calMonth]+' '+calYear;
+  var firstDay=new Date(calYear,calMonth,1).getDay();
+  var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  var prevDays=new Date(calYear,calMonth,0).getDate();
+  var eventDays=DATA.propostas.filter(function(p){var d=new Date(p.data);return d.getFullYear()===calYear&&d.getMonth()===calMonth;}).map(function(p){return new Date(p.data).getDate();});
+  var cells='';
+  for(var i=firstDay-1;i>=0;i--)cells+='<div class="cal-cell other-month">'+(prevDays-i)+'</div>';
+  var today=new Date(),isThisMonth=today.getFullYear()===calYear&&today.getMonth()===calMonth;
+  for(var d=1;d<=daysInMonth;d++){
+    var isToday=isThisMonth&&today.getDate()===d;
+    var hasEv=eventDays.indexOf(d)>=0;
+    cells+='<div class="cal-cell'+(isToday?' today':'')+(hasEv?' has-event':'')+'" onclick="calClick('+d+')">'+d+'</div>';
+  }
+  var after=1;
+  while((firstDay+daysInMonth+after-1)%7!==0)cells+='<div class="cal-cell other-month">'+after+'</div>',after++;
+  grid.innerHTML=cells;
+  var evList=document.getElementById('calEventList');
+  var evMonth=DATA.propostas.filter(function(p){var d=new Date(p.data);return d.getFullYear()===calYear&&d.getMonth()===calMonth;});
+  evList.innerHTML=evMonth.length?evMonth.map(function(e){return '<div class="list-item"><div class="list-icon" style="background:rgba(99,102,241,.12)">📅</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+e.evento+'</div><div style="font-size:12px;color:var(--c-text2)">'+e.espaco+' · '+formatDate(e.data)+'</div></div><span class="badge '+statusBadge(e.status)+'">'+e.status+'</span></div>';}).join(''):'<div class="empty"><div class="empty-icon">📅</div><div class="empty-title">Nenhum evento este mês</div></div>';
+}
+function calPrev(){if(calMonth===0){calMonth=11;calYear--;}else calMonth--;renderCalendario();}
+function calNext(){if(calMonth===11){calMonth=0;calYear++;}else calMonth++;renderCalendario();}
+function calClick(d){
+  var evs=DATA.propostas.filter(function(p){var dt=new Date(p.data);return dt.getFullYear()===calYear&&dt.getMonth()===calMonth&&dt.getDate()===d;});
+  toast(evs.length?(evs.length+' evento(s) em '+d+'/'+(calMonth+1)+'/'+calYear+':'+evs.map(function(e){return ' '+e.evento;}).join(',')):'Sem eventos em '+d+'/'+(calMonth+1)+'/'+calYear,'info');
+}
+
+// ── LIXEIRA ───────────────────────────────────────────────────────
+function renderLixeira(){
+  var el=document.getElementById('lixeiraContent');
+  if(!DATA.lixeira||!DATA.lixeira.length){
+    el.innerHTML='<div class="empty"><div class="empty-icon">🗑️</div><div class="empty-title">Lixeira vazia</div><div class="empty-sub">Registros excluídos aparecerão aqui</div></div>';
     return;
   }
-  p.status = status;
-  saveData();
-  renderProposals();
-  renderDashboard();
+  el.innerHTML=DATA.lixeira.map(function(item,i){return '<div class="trash-item"><div><div style="font-weight:600;font-size:13.5px">'+item.tipo+': '+(item.item.nome||item.item.evento||item.item.id||'Item')+'</div><div style="font-size:12px;color:var(--c-text3)">Excluído em '+item.data+'</div></div><div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm" onclick="restaurarItem('+i+')">↩ Restaurar</button><button class="btn btn-danger btn-sm" onclick="excluirPermanente('+i+')">🗑️ Excluir</button></div></div>';}).join('');
 }
 
-function updateProposalFinance(id, finance) {
-  const p = proposals.find(x => x.id == id);
-  if (p) p.financeiro = finance;
-  saveData();
-  renderProposals();
-  renderDashboard();
+function restaurarItem(idx){
+  var item=DATA.lixeira[idx];
+  if(item.tipo==='Proposta')DATA.propostas.push(item.item);
+  else if(item.tipo==='Cliente')DATA.clientes.push(item.item);
+  else if(item.tipo==='Espaço')DATA.espacos.push(item.item);
+  else if(item.tipo==='Item TI/AV')DATA.estoque.push(item.item);
+  else if(item.tipo==='Cardápio')DATA.cardapio.push(item.item);
+  else if(item.tipo==='OS')DATA.ordens.push(item.item);
+  DATA.lixeira.splice(idx,1);
+  saveToStorage();renderLixeira();
+  [renderPropostas,renderClientes,renderEspacos,renderEstoque,renderCardapio,renderOS].forEach(function(f){try{f();}catch(e){}});
+  updateBadges();toast('Item restaurado','success');
 }
 
-function moveToTrash(id) {
-  currentTrashProposalId = id;
-  document.getElementById('modal-trash').classList.remove('hidden');
-  document.getElementById('modal-trash').classList.add('flex');
+function excluirPermanente(idx){
+  _authCallback=function(){DATA.lixeira.splice(idx,1);saveToStorage();renderLixeira();toast('Item excluído permanentemente','warn');};
+  openModal('modalAuth');
 }
 
-function confirmMoveToTrash() {
-  const justification = document.getElementById('trash-justification').value || "Sem justificativa";
-  const p = proposals.find(x => x.id == currentTrashProposalId);
-  if (p) {
-    trash.unshift({ ...p, justification, deletedAt: new Date() });
-    proposals = proposals.filter(x => x.id != currentTrashProposalId);
-    saveData();
-    closeModal('modal-trash');
-    document.getElementById('trash-justification').value = '';
-    renderProposals();
-    renderDashboard();
-  }
+function limparLixeira(){
+  _authCallback=function(){DATA.lixeira=[];saveToStorage();renderLixeira();toast('Lixeira limpa','warn');};
+  openModal('modalAuth');
 }
 
-function restoreFromTrash(index) {
-  const item = trash[index];
-  proposals.unshift(item);
-  trash.splice(index, 1);
-  saveData();
-  renderTrash();
-  renderProposals();
+// ── CONFIGURAÇÕES ─────────────────────────────────────────────────
+function settingsTab(el,id){
+  document.querySelectorAll('.settings-nav-item').forEach(function(i){i.classList.remove('active');});
+  document.querySelectorAll('.settings-pane').forEach(function(p){p.classList.remove('active');});
+  el.classList.add('active');
+  var pane=document.getElementById('cfg-'+id);
+  if(pane)pane.classList.add('active');
 }
 
-// ==================== CRUD GENÉRICO ====================
-let selectedIcon = "ti-box";
-
-function openGenericModal(type) {
-  document.getElementById('modal-generic').classList.remove('hidden');
-  document.getElementById('modal-generic').classList.add('flex');
-  document.getElementById('generic-type').value = type;
-  document.getElementById('generic-id').value = '';
-  document.getElementById('modal-generic-title').innerText = `Novo ${type}`;
-  document.getElementById('extra-locais-fields').classList.toggle('hidden', type !== 'locacoes');
-  tempImageBase64 = "";
-  document.getElementById('generic-image-preview').classList.add('hidden');
+function salvarConfigGeral(){
+  toast('Configurações salvas com sucesso','success');
+  saveToStorage();
 }
 
-function previewGenericImage(input) {
-  const file = input.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = e => {
-    tempImageBase64 = e.target.result;
-    document.getElementById('preview-img').src = tempImageBase64;
-    document.getElementById('generic-image-preview').classList.remove('hidden');
-  };
-  reader.readAsDataURL(file);
+function uploadTimbrado(input){
+  if(input.files[0]){toast('Timbrado "'+input.files[0].name+'" carregado. Clique em Salvar.','info');}
 }
 
-function selectIcon(element) {
-  document.querySelectorAll('#icon-selector .icon-option').forEach(el => el.classList.remove('selected'));
-  element.classList.add('selected');
-  selectedIcon = element.getAttribute('data-icon');
+function renderUsuarios(){
+  var tb=document.getElementById('tbUsuarios');
+  if(!tb)return;
+  tb.innerHTML=DATA.usuarios.map(function(u){return '<tr><td style="font-weight:600">'+u.nome+'</td><td>'+u.email+'</td><td><span class="badge badge-blue">'+u.nivel+'</span></td><td><span class="badge '+(u.status==='Ativo'?'badge-green':'badge-gray')+'">'+u.status+'</span></td></tr>';}).join('');
 }
 
-function saveGenericItem() {
-  const type = document.getElementById('generic-type').value;
-  const id = document.getElementById('generic-id').value;
-  const name = document.getElementById('generic-name').value;
-  const price = parseFloat(document.getElementById('generic-price').value) || 0;
+// ── WIZARD ────────────────────────────────────────────────────────
+var wizardStepsData=[
+  {label:'Evento',html:function(){return '<div class="form-row"><div class="form-group"><label>Nome do Evento</label><input id="w_evento" placeholder="Ex: Congresso de Tecnologia 2026" /></div><div class="form-group"><label>Cliente</label><select id="w_cliente"><option>Selecione...</option>'+DATA.clientes.map(function(c){return '<option>'+c.nome+'</option>';}).join('')+'</select></div></div><div class="form-row"><div class="form-group"><label>Data do Evento</label><input type="date" id="w_data" /></div><div class="form-group"><label>Horário</label><input type="time" id="w_hora" value="08:00" /></div></div><div class="form-row"><div class="form-group"><label>Nº de Participantes</label><input type="number" id="w_pax" placeholder="100" /></div><div class="form-group"><label>Tipo de Evento</label><select id="w_tipo"><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Festival</option></select></div></div><div class="form-group"><label>Tipo de Proposta</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="normal" checked="checked" /> Normal</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="oficio" /> 📋 Ofício FECOMERIO (desconto)</label></div></div>';}},
+  {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal</label><select id="w_espaco"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' (cap.'+e.cap+')</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1" /></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--c-text)"><input type="checkbox" /> '+s+'</label>';}).join('')+'</div></div>';}},
+  {label:'TI/AV',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os equipamentos necessários:</p>'+DATA.estoque.map(function(e){return '<label style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--c-border);cursor:pointer;font-size:13.5px;color:var(--c-text)"><div style="display:flex;align-items:center;gap:8px"><input type="checkbox" /> '+e.icon+' '+e.nome+'</div><div style="display:flex;align-items:center;gap:8px"><span style="font-size:11px;color:var(--c-text3)">'+e.disponivel+' disp.</span><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:60px;padding:4px 8px;font-size:12px" /></div></label>';}).join('');}},
+  {label:'Alimentação',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Escolha os serviços de alimentação:</p>'+DATA.cardapio.map(function(c){return '<label style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--c-border);cursor:pointer;font-size:13.5px;color:var(--c-text)"><div style="display:flex;align-items:center;gap:8px"><input type="checkbox" /> '+c.icon+' '+c.nome+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green)">'+fmtMoney(c.val)+'/pax</div></label>';}).join('')+'<div style="margin-top:16px;padding:12px;border-radius:8px;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.3)"><div style="font-size:12px;font-weight:700;color:var(--c-amber)">⚠️ Obrigações RDC 216/2004</div><div style="font-size:12px;color:var(--c-text2);margin-top:4px">O cliente será informado sobre alergênicos e boas práticas de manipulação conforme legislação vigente.</div></div>';}},
+  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span style="font-weight:600" id="rev_vloc">R$ 0,00</span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span style="font-weight:600" id="rev_vav">R$ 0,00</span></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span style="font-weight:600" id="rev_vfood">R$ 0,00</span></div><div style="display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">R$ 0,00</span></div></div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);font-size:12px;color:var(--c-text2)">✅ Ao confirmar, a proposta será salva e uma OS será gerada automaticamente. Prazo para devolutiva e pagamento: 15 dias antes do evento.</div>';}}
+];
 
-  let list = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
+function initWizard(){wizardCurrentStep=1;renderWizardStep(1);}
 
-  const newItem = {
-    id: id || Date.now(),
-    name,
-    price,
-    image: tempImageBase64,
-    icon: selectedIcon
-  };
-
-  if (type === 'locacoes') {
-    newItem.precisa_montar = document.getElementById('generic-montagem').value;
-    newItem.equipamentos_acoplados = document.getElementById('generic-equipamentos').value;
-  }
-
-  if (id) {
-    const index = list.findIndex(x => x.id == id);
-    list[index] = newItem;
-  } else {
-    list.unshift(newItem);
-  }
-
-  saveData();
-  closeModal('modal-generic');
-  renderGeneric(type);
-}
-
-function editGenericItem(type, id) {
-  let list = type === 'locacoes' ? locacoes : type === 'equipamentos' ? equipamentos : cardapios;
-  const item = list.find(x => x.id == id);
-  if (!item) return;
-
-  openGenericModal(type);
-  document.getElementById('generic-id').value = id;
-  document.getElementById('generic-name').value = item.name;
-  document.getElementById('generic-price').value = item.price;
-  selectedIcon = item.icon || "ti-box";
-
-  if (type === 'locacoes') {
-    document.getElementById('generic-montagem').value = item.precisa_montar || 'Não';
-    document.getElementById('generic-equipamentos').value = item.equipamentos_acoplados || '';
-  }
-
-  if (item.image) {
-    tempImageBase64 = item.image;
-    document.getElementById('preview-img').src = item.image;
-    document.getElementById('generic-image-preview').classList.remove('hidden');
-  }
-}
-
-function deleteGenericItem(type, id) {
-  if (!confirm('Excluir este item?')) return;
-  if (type === 'locacoes') locacoes = locacoes.filter(x => x.id != id);
-  if (type === 'equipamentos') equipamentos = equipamentos.filter(x => x.id != id);
-  if (type === 'cardapios') cardapios = cardapios.filter(x => x.id != id);
-  saveData();
-  renderGeneric(type);
-}
-
-// ==================== PERMISSÕES ====================
-function updateUserPermission(userId, module, value) {
-  const user = users.find(u => u.id == userId);
-  if (user) {
-    if (!user.permissions) user.permissions = {};
-    user.permissions[module] = value;
-    saveData();
-  }
-}
-
-// ==================== EXPORTAÇÕES ====================
-function exportProposalsToExcel() {
-  const ws = XLSX.utils.json_to_sheet(proposals);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Propostas");
-  XLSX.writeFile(wb, "MODESK_Propostas.xlsx");
-}
-
-function exportProposalsToPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF();
-  doc.text("MODESK ALFA - Relatório de Propostas", 14, 20);
-  let y = 30;
-  proposals.forEach(p => {
-    doc.text(`${p.dataProgramada} | ${p.evento} | \( {p.cliente} | R \) ${p.valor}`, 14, y);
-    y += 10;
-    if (y > 280) { doc.addPage(); y = 20; }
+function renderWizardStep(step){
+  var wc=document.getElementById('wizardContent');
+  wc.innerHTML='<div>'+wizardStepsData[step-1].html()+'</div>';
+  document.querySelectorAll('.w-step').forEach(function(el,i){
+    el.classList.remove('active','done');
+    if(i+1<step)el.classList.add('done');
+    else if(i+1===step)el.classList.add('active');
   });
-  doc.save("Propostas_MODESK.pdf");
+  document.getElementById('btnWizBack').style.display=step>1?'inline-flex':'none';
+  document.getElementById('btnWizNext').textContent=step===5?'✅ Confirmar Proposta':'Próximo →';
+  if(step===5){
+    setTimeout(function(){
+      var num=nextPropNumPreview();
+      var evt=document.getElementById('w_evento')?document.getElementById('w_evento').value:'—';
+      var cli=document.getElementById('w_cliente')?document.getElementById('w_cliente').value:'—';
+      var dat=document.getElementById('w_data')?document.getElementById('w_data').value:'';
+      var esp=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'—';
+      var tipo=document.querySelector('input[name="w_propTipo"]:checked')?document.querySelector('input[name="w_propTipo"]:checked').value:'normal';
+      if(document.getElementById('rev_num'))document.getElementById('rev_num').textContent=num;
+      if(document.getElementById('rev_evento'))document.getElementById('rev_evento').textContent=evt;
+      if(document.getElementById('rev_cliente'))document.getElementById('rev_cliente').textContent=cli;
+      if(document.getElementById('rev_data'))document.getElementById('rev_data').textContent=formatDate(dat)||'—';
+      if(document.getElementById('rev_espaco'))document.getElementById('rev_espaco').textContent=esp;
+      if(document.getElementById('rev_prazo'))document.getElementById('rev_prazo').textContent=prazo15(dat);
+      if(document.getElementById('rev_tipo'))document.getElementById('rev_tipo').textContent=tipo==='oficio'?'Ofício FECOMERIO':'Normal';
+      var espObj=DATA.espacos.find(function(e){return e.nome===esp;})||{valor:4500};
+      var vloc=espObj.valor;
+      document.getElementById('rev_vloc').textContent=fmtMoney(vloc);
+      document.getElementById('rev_vav').textContent=fmtMoney(1200);
+      document.getElementById('rev_vfood').textContent=fmtMoney(2800);
+      document.getElementById('rev_total').textContent=fmtMoney(vloc+1200+2800);
+    },50);
+  }
 }
 
-function renderBICharts() {
-  // Gráficos simples
-  new Chart(document.getElementById('chart-faturamento'), {
-    type: 'line',
-    data: { labels: proposals.map(p => p.dataProgramada), datasets: [{ label: 'Valor', data: proposals.map(p => p.valor), borderColor: '#003366' }] }
-  });
-  const aceitas = proposals.filter(p => p.status === 'Aceita').length;
-  new Chart(document.getElementById('chart-status'), {
-    type: 'doughnut',
-    data: { labels: ['Aceitas', 'Outras'], datasets: [{ data: [aceitas, proposals.length - aceitas], backgroundColor: ['#10b981', '#f59e0b'] }] }
-  });
+function nextPropNumPreview(){
+  var y=new Date().getFullYear();
+  var next=(DATA.propSequence?DATA.propSequence[y]||0:0)+1;
+  return String(next).padStart(3,'0')+'/'+y;
 }
 
-function renderAll() {
-  renderDashboard();
-  renderProposals();
+function wizardStep(dir){
+  var next=wizardCurrentStep+dir;
+  if(next<1||next>5)return;
+  if(dir>0&&wizardCurrentStep===5){
+    var num=nextPropNum();
+    var espNome=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'A definir';
+    var espObj=DATA.espacos.find(function(e){return e.nome===espNome;})||{valor:4500};
+    var dataEv=document.getElementById('w_data')?document.getElementById('w_data').value:new Date().toISOString().split('T')[0];
+    var tipo=document.querySelector('input[name="w_propTipo"]:checked')?document.querySelector('input[name="w_propTipo"]:checked').value:'normal';
+    var novaProp={
+      id:'P'+String(DATA.propostas.length+1).padStart(3,'0'),
+      num:num,
+      evento:document.getElementById('w_evento')?document.getElementById('w_evento').value:'Novo Evento',
+      cliente:document.getElementById('w_cliente')?document.getElementById('w_cliente').value:'Cliente',
+      espaco:espNome,
+      data:dataEv,
+      valor:espObj.valor+1200+2800,
+      status:'Pendente',
+      tipo:tipo
+    };
+    DATA.propostas.push(novaProp);
+    var osN=DATA.ordens.length+1;
+    DATA.ordens.push({id:'OS'+String(osN).padStart(3,'0'),evento:novaProp.evento,tipo:'TI/AV',resp:'A definir',data:dataEv,status:'Aberta',prog:0});
+    saveToStorage();renderPropostas();renderOS();updateBadges();
+    closeModal('modalProposta');
+    toast('🎉 Proposta '+num+' criada! OS gerada automaticamente.','success');
+    initWizard();
+    populateOSProp();
+    return;
+  }
+  wizardCurrentStep=next;
+  renderWizardStep(next);
 }
 
-function closeModal(id) {
-  document.getElementById(id).classList.remove('flex');
-  document.getElementById(id).classList.add('hidden');
+function populateOSProp(){
+  var sel=document.getElementById('os_prop');
+  if(!sel)return;
+  sel.innerHTML=DATA.propostas.map(function(p){return '<option value="'+p.evento+'">'+p.num+' — '+p.evento+'</option>';}).join('');
 }
 
-// ==================== INICIALIZAR ====================
-window.onload = function() {
-  initApp();
+// ── HELPERS ───────────────────────────────────────────────────────
+function fmtMoney(v){return 'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2});}
+function formatDate(d){if(!d)return '—';var parts=d.split('-');return parts[2]+'/'+parts[1]+'/'+parts[0];}
+function statusBadge(s){
+  var m={Confirmada:'badge-green',Pendente:'badge-amber',Cancelada:'badge-red','Negociação':'badge-blue','Em Execução':'badge-cyan',Aberta:'badge-amber',Concluída:'badge-green'};
+  return m[s]||'badge-gray';
+}
+
+// ── BOOT ──────────────────────────────────────────────────────────
+window.onload=function(){
+  loadFromStorage();
+  populateOSProp();
+  setTimeout(function(){var el=document.getElementById('loginUser');if(el)el.focus();},100);
 };
+//]]>
 </script>
-
 </body>
 </html>
