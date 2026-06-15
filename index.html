@@ -424,6 +424,13 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <div class="form-group"><label>Responsável</label><input id="cli_resp" placeholder="Nome do responsável"/></div>
       <div class="form-group"><label>Segmento</label><select id="cli_seg"><option>Corporativo</option><option>Educação</option><option>Saúde</option><option>Governo</option><option>Outros</option></select></div>
     </div>
+    <div class="form-group" style="margin-bottom:14px">
+  <label>Logo da Empresa</label>
+  <input type="file" id="cli_logo" accept="image/*" onchange="previewCliLogo(this)"/>
+  <div id="cli_logo_preview" style="margin-top:8px;display:none">
+    <img id="cli_logo_img" style="max-height:80px;max-width:200px;object-fit:contain;border-radius:8px;border:1px solid var(--c-border)"/>
+  </div>
+</div>
     <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
       <button class="btn btn-ghost" onclick="closeModal('modalCliente')">Cancelar</button>
       <button class="btn btn-primary" onclick="saveCliente()">Salvar Cliente</button>
@@ -627,25 +634,37 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div class="kpi kpi-accent-cyan"><div class="kpi-icon" style="background:rgba(34,211,238,.15);color:var(--c-cyan)">⏳</div><div class="kpi-val" id="kpiPendentes">0</div><div class="kpi-label">Propostas Pendentes</div><div class="kpi-delta kpi-down">↓ aguardam aprovação</div></div>
           <div class="kpi kpi-accent-amber"><div class="kpi-icon" style="background:rgba(245,158,11,.15);color:var(--c-amber)">🏛️</div><div class="kpi-val">78%</div><div class="kpi-label">Ocupação dos Espaços</div><div class="kpi-delta kpi-up">↑ Alta demanda</div></div>
         </div>
-        <div class="grid-2" style="margin-bottom:24px">
-          <div class="card">
-            <div class="section-header">
-              <div><div class="section-title">Faturamento — <span id="chartYear">2026</span></div><div class="section-sub">Receita mensal consolidada</div></div>
-              <select style="width:auto;font-size:12px;padding:5px 10px" onchange="updateFatChart(this.value)"><option>2026</option><option>2025</option></select>
-            </div>
-            <div class="chart-container"><canvas id="chartFat"></canvas></div>
-          </div>
-          <div class="card">
-            <div class="section-header"><div><div class="section-title">Status das Propostas</div></div></div>
-            <div class="chart-container" style="height:160px"><canvas id="chartStatus"></canvas></div>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;justify-content:center" id="statusBadges"></div>
-          </div>
-        </div>
-        <div class="grid-2">
-          <div class="card"><div class="section-header"><div class="section-title">Próximos Eventos</div><button class="btn btn-ghost btn-sm" onclick="goto('calendario')">Ver todos</button></div><div id="proxEventos"></div></div>
-          <div class="card"><div class="section-header"><div class="section-title">Ordens em Andamento</div><button class="btn btn-ghost btn-sm" onclick="goto('ordens')">Ver todas</button></div><div id="ordensAbertas"></div></div>
-        </div>
-      </div>
+       <!-- Histórico de Eventos -->
+<div class="card" style="margin-top:24px">
+  <div class="section-header">
+    <div>
+      <div class="section-title">📊 Histórico de Eventos</div>
+      <div class="section-sub">Todos os eventos por período</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <input type="date" id="histDe" style="width:auto;font-size:12px;padding:6px 10px"/>
+      <span style="color:var(--c-text3);font-size:13px">até</span>
+      <input type="date" id="histAte" style="width:auto;font-size:12px;padding:6px 10px"/>
+      <button class="btn btn-primary btn-sm" onclick="renderHistorico()">Filtrar</button>
+      <button class="btn btn-ghost btn-sm" onclick="document.getElementById('histDe').value='';document.getElementById('histAte').value='';renderHistorico()">Limpar</button>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Nº</th><th>Evento</th><th>Cliente</th><th>Espaço</th>
+          <th>Data Evento</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tbodyHistorico"></tbody>
+    </table>
+  </div>
+  <div style="display:flex;justify-content:flex-end;gap:16px;padding:12px 0 0;border-top:1px solid var(--c-border);margin-top:12px">
+    <span style="font-size:13px;color:var(--c-text2)">Total do período:</span>
+    <span style="font-size:15px;font-weight:700;color:var(--c-green)" id="histTotal">R$ 0,00</span>
+  </div>
+</div>
 
       <!-- PROPOSTAS -->
       <div class="view" id="view-propostas">
@@ -1422,14 +1441,22 @@ function renderDashboard(){
   oa.innerHTML=DATA.ordens.filter(function(o){return o.status!=='Concluída';}).slice(0,4).map(function(o){
     return '<div class="list-item"><div class="list-icon" style="background:rgba(34,211,238,.1)">📋</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+o.id+' — '+o.tipo+'</div><div style="font-size:12px;color:var(--c-text2)">'+o.evento+'</div><div class="progress-bar"><div class="progress-fill" style="width:'+o.prog+'%"></div></div></div><span class="badge '+statusBadge(o.status)+'">'+o.status+'</span></div>';
   }).join('');
-  setTimeout(function(){initChartFat();initChartStatus();},100);
+  
+  setTimeout(function(){
+    initChartFat();
+    initChartStatus();
+    renderHistorico(); // Gatilho do novo Histórico
+  },100);
 }
+
 function initChartFat(){
   var ctx=document.getElementById('chartFat');if(!ctx)return;
   if(fatChart)fatChart.destroy();
   fatChart=new Chart(ctx,{type:'bar',data:{labels:['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],datasets:[{label:'Faturamento',data:[22000,18500,31000,27000,35000,47800,0,0,0,0,0,0],backgroundColor:'rgba(99,102,241,0.7)',borderRadius:6,borderSkipped:false},{label:'Meta',data:[30000,30000,30000,30000,30000,45000,45000,45000,45000,45000,45000,45000],type:'line',borderColor:'rgba(34,211,238,0.7)',backgroundColor:'transparent',pointRadius:3,tension:.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11}}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{color:'#64748b',font:{size:11},callback:function(v){return 'R$'+(v/1000).toFixed(0)+'K';}}}}}});
 }
+
 function updateFatChart(year){document.getElementById('chartYear').textContent=year;initChartFat();}
+
 function initChartStatus(){
   var ctx=document.getElementById('chartStatus');if(!ctx)return;
   if(statusChart)statusChart.destroy();
@@ -1441,14 +1468,58 @@ function initChartStatus(){
   sb.innerHTML=Object.entries(counts).map(function(kv){return '<span class="badge '+colors[kv[0]]+'">'+kv[0]+': '+kv[1]+'</span>';}).join('');
 }
 
+function renderHistorico(){
+  var de = document.getElementById('histDe') ? document.getElementById('histDe').value : '';
+  var ate = document.getElementById('histAte') ? document.getElementById('histAte').value : '';
+  var src = DATA.propostas.filter(function(p){
+    if(!p.data) return true;
+    if(de && p.data < de) return false;
+    if(ate && p.data > ate) return false;
+    return true;
+  });
+  var tb = document.getElementById('tbodyHistorico');
+  if(!tb) return;
+  if(!src.length){
+    tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--c-text3);padding:20px">Nenhum evento no período</td></tr>';
+    document.getElementById('histTotal').textContent = fmtMoney(0);
+    return;
+  }
+  tb.innerHTML = src.map(function(p){
+    return '<tr>'
+      +'<td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span></td>'
+      +'<td>'+p.evento+'</td>'
+      +'<td>'+p.cliente+'</td>'
+      +'<td><span class="tag">'+p.espaco+'</span></td>'
+      +'<td>'+formatDate(p.data)+'</td>'
+      +'<td style="color:var(--c-amber);font-size:12px">'+prazo15(p.data)+'</td>'
+      +'<td style="font-weight:600;color:var(--c-green)">'+fmtMoney(p.valor)+'</td>'
+      +'<td><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></td>'
+      +'</tr>';
+  }).join('');
+  var total = src.reduce(function(a,p){ return a + (p.valor||0); }, 0);
+  document.getElementById('histTotal').textContent = fmtMoney(total);
+}
+
+Sem problemas! Aqui está o bloco de código completo e corrigido, com a ordenação na renderPropostas e o aviso no salvarEditProposta. Pode substituir todo esse bloco no seu script:
+
+JavaScript
 // ── PROPOSTAS ─────────────────────────────────────────────────────
 function renderPropostas(list){
-  var src=list||DATA.propostas;
-  var tb=document.getElementById('tbodyPropostas');
-  if(!src.length){tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';return;}
-  tb.innerHTML=src.map(function(p){
-    var idx=DATA.propostas.indexOf(p);
-    var venc=isPrazoVencido(p);
+  // Ordenação crescente pelo número da proposta (num)
+  var src = (list || DATA.propostas).slice().sort(function(a, b){
+    return (a.num || '').localeCompare(b.num || '');
+  });
+  
+  var tb = document.getElementById('tbodyPropostas');
+  if(!src.length){
+    tb.innerHTML='<tr><td colspan="10" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';
+    return;
+  }
+  
+  tb.innerHTML = src.map(function(p){
+    // IMPORTANTE: Buscamos o índice original no array DATA.propostas para as ações funcionarem
+    var idx = DATA.propostas.indexOf(p);
+    var venc = isPrazoVencido(p);
     return '<tr style="'+(venc?'background:rgba(239,68,68,.05)':'')+'">'
       +'<td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span></td>'
       +'<td>'+p.evento+'</td>'
@@ -1468,30 +1539,33 @@ function renderPropostas(list){
       +'</tr>';
   }).join('');
 }
+
 function filterPropostas(){
-  var q=document.getElementById('searchPropostas').value.toLowerCase();
-  var st=document.getElementById('filterStatusProp').value;
-  var mes=document.getElementById('filterMesProp').value;
-  var f=DATA.propostas.filter(function(p){
-    var match=!q||(p.evento+p.cliente+p.num).toLowerCase().indexOf(q)>=0;
-    var stMatch=!st||p.status===st;
-    var mesMatch=mes===''||new Date(p.data+'T00:00:00').getMonth()===parseInt(mes);
-    return match&&stMatch&&mesMatch;
+  var q = document.getElementById('searchPropostas').value.toLowerCase();
+  var st = document.getElementById('filterStatusProp').value;
+  var mes = document.getElementById('filterMesProp').value;
+  var f = DATA.propostas.filter(function(p){
+    var match = !q || (p.evento + p.cliente + p.num).toLowerCase().indexOf(q) >= 0;
+    var stMatch = !st || p.status === st;
+    var mesMatch = mes === '' || new Date(p.data + 'T00:00:00').getMonth() === parseInt(mes);
+    return match && stMatch && mesMatch;
   });
   renderPropostas(f);
 }
+
 function abrirEditProposta(idx){
-  var p=DATA.propostas[idx];
-  document.getElementById('ep_idx').value=idx;
-  document.getElementById('ep_evento').value=p.evento;
-  document.getElementById('ep_cliente').value=p.cliente;
-  document.getElementById('ep_espaco').value=p.espaco;
-  document.getElementById('ep_data').value=p.data;
-  document.getElementById('ep_valor').value=p.valor;
-  document.getElementById('ep_status').value=p.status;
-  document.getElementById('ep_tipo').value=p.tipo;
+  var p = DATA.propostas[idx];
+  document.getElementById('ep_idx').value = idx;
+  document.getElementById('ep_evento').value = p.evento;
+  document.getElementById('ep_cliente').value = p.cliente;
+  document.getElementById('ep_espaco').value = p.espaco;
+  document.getElementById('ep_data').value = p.data;
+  document.getElementById('ep_valor').value = p.valor;
+  document.getElementById('ep_status').value = p.status;
+  document.getElementById('ep_tipo').value = p.tipo;
   openModal('modalEditProposta');
 }
+
 function salvarEditProposta(){
   var idx=parseInt(document.getElementById('ep_idx').value);
   DATA.propostas[idx].evento=document.getElementById('ep_evento').value;
@@ -1501,17 +1575,31 @@ function salvarEditProposta(){
   DATA.propostas[idx].valor=parseFloat(document.getElementById('ep_valor').value)||0;
   DATA.propostas[idx].status=document.getElementById('ep_status').value;
   DATA.propostas[idx].tipo=document.getElementById('ep_tipo').value;
-  saveToStorage();renderPropostas();updateBadges();checkPrazosVencidos();
-  closeModal('modalEditProposta');toast('Proposta atualizada!','success');
+  
+  saveToStorage();
+  renderPropostas();
+  updateBadges();
+  checkPrazosVencidos();
+  closeModal('modalEditProposta');
+  
+  // Gerar novo PDF automaticamente após salvar edição
+  toast('Proposta atualizada! Clique em 📄 para gerar novo PDF.', 'info');
 }
+
 function excluirProposta(idx){
   DATA.lixeira.push({tipo:'Proposta',item:DATA.propostas[idx],data:new Date().toLocaleDateString('pt-BR')});
-  DATA.propostas.splice(idx,1);saveToStorage();renderPropostas();renderLixeira();updateBadges();checkPrazosVencidos();
+  DATA.propostas.splice(idx,1);
+  saveToStorage();
+  renderPropostas();
+  renderLixeira();
+  updateBadges();
+  checkPrazosVencidos();
   toast('Proposta movida para Lixeira','warn');
 }
+
 function gerarPropostaWA(idx){
-  var p=DATA.propostas[idx];
-  var msg=encodeURIComponent('*Proposta '+p.num+' — MoDesk ALFA v9.0*\n\nEvento: '+p.evento+'\nCliente: '+p.cliente+'\nEspaço: '+p.espaco+'\nData: '+formatDate(p.data)+'\nValor: '+fmtMoney(p.valor)+'\nPrazo de pagamento: '+prazo15(p.data)+'\n\n_Senac Aldeota · (85) 3255-6800_');
+  var p = DATA.propostas[idx];
+  var msg = encodeURIComponent('*Proposta '+p.num+' — MoDesk ALFA v9.0*\n\nEvento: '+p.evento+'\nCliente: '+p.cliente+'\nEspaço: '+p.espaco+'\nData: '+formatDate(p.data)+'\nValor: '+fmtMoney(p.valor)+'\nPrazo de pagamento: '+prazo15(p.data)+'\n\n_Senac Aldeota · (85) 3255-6800_');
   window.open('https://wa.me/?text='+msg,'_blank');
 }
 
@@ -1644,55 +1732,78 @@ function abrirNovoCliente(){
   openModal('modalCliente');
 }
 function editarCliente(idx){
-  var c=DATA.clientes[idx];
-  document.getElementById('modalClienteTitle').textContent='✏️ Editar Cliente';
-  document.getElementById('cli_idx').value=idx;
-  document.getElementById('cli_nome').value=c.nome;
-  document.getElementById('cli_doc').value=c.doc;
-  document.getElementById('cli_email').value=c.email;
-  document.getElementById('cli_tel').value=c.tel;
-  document.getElementById('cli_resp').value=c.resp;
-  document.getElementById('cli_seg').value=c.seg;
+  var c = DATA.clientes[idx];
+  document.getElementById('modalClienteTitle').textContent = '✏️ Editar Cliente';
+  document.getElementById('cli_idx').value = idx;
+  document.getElementById('cli_nome').value = c.nome;
+  document.getElementById('cli_doc').value = c.doc;
+  document.getElementById('cli_email').value = c.email;
+  document.getElementById('cli_tel').value = c.tel;
+  document.getElementById('cli_resp').value = c.resp;
+  document.getElementById('cli_seg').value = c.seg;
+
+  // --- COLE O PASSO E AQUI: ---
+  var prev = document.getElementById('cli_logo_preview');
+  var img = document.getElementById('cli_logo_img');
+  if(c.logo){ 
+    prev.style.display = 'block'; 
+    img.src = c.logo; 
+  } else { 
+    prev.style.display = 'none'; 
+    img.src = ''; // Limpa o campo caso não tenha logo
+  }
+  // ----------------------------
+
   openModal('modalCliente');
 }
 function renderClientes(){
-  var q=(document.getElementById('searchClientes')?document.getElementById('searchClientes').value:'').toLowerCase();
-  var src=DATA.clientes.filter(function(c){return !q||(c.nome+c.email+c.doc).toLowerCase().indexOf(q)>=0;});
-  var g=document.getElementById('clienteGrid');
-  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">👥</div><div class="empty-title">Nenhum cliente encontrado</div></div>';return;}
-  if(clienteView==='grid'){
-    g.innerHTML='<div class="grid-3">'+src.map(function(c){
-      var idx=DATA.clientes.indexOf(c);
+  var q = (document.getElementById('searchClientes') ? document.getElementById('searchClientes').value : '').toLowerCase();
+  var src = DATA.clientes.filter(function(c){ return !q || (c.nome + c.email + c.doc).toLowerCase().indexOf(q) >= 0; });
+  var g = document.getElementById('clienteGrid');
+  
+  if(!src.length){
+    g.innerHTML = '<div class="empty"><div class="empty-icon">👥</div><div class="empty-title">Nenhum cliente encontrado</div></div>';
+    return;
+  }
+
+  if(clienteView === 'grid'){
+    g.innerHTML = '<div class="grid-3">' + src.map(function(c){
+      var idx = DATA.clientes.indexOf(c);
       return '<div class="card" style="transition:transform .2s" onmouseenter="this.style.transform=\'translateY(-3px)\'" onmouseleave="this.style.transform=\'\'">'
-        +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">'
-        +'<div style="width:42px;height:42px;border-radius:10px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div>'
-        +'<div><div style="font-weight:700;font-size:14px">'+c.nome+'</div><span class="badge badge-blue" style="font-size:10px">'+c.seg+'</span></div></div>'
-        +'<div style="font-size:12px;color:var(--c-text2);display:flex;flex-direction:column;gap:5px"><div>📧 '+c.email+'</div><div>📞 '+c.tel+'</div><div>👤 '+c.resp+'</div><div>📄 '+c.doc+'</div></div>'
-        +'<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center">'
-        +'<div style="font-size:12px;color:var(--c-text3)">'+c.eventos+' eventos</div>'
-        +'<div style="display:flex;gap:6px">'
-        +'<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCliente('+idx+')" title="Editar">✏️</button>'
-        +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCliente('+idx+')">🗑️</button>':'')
-        +'<button class="btn btn-primary btn-sm" onclick="iniciarPropostaParaCliente(\''+c.nome+'\')">+ Proposta</button>'
-        +'</div></div></div>';
-    }).join('')+'</div>';
-  }else{
-    g.innerHTML='<div class="card" style="padding:0"><div class="table-wrap" style="border:none">'+src.map(function(c){
-      var idx=DATA.clientes.indexOf(c);
+        + '<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">'
+        + (c.logo 
+            ? '<img src="'+c.logo+'" style="width:42px;height:42px;border-radius:10px;object-fit:contain;background:var(--c-surface2);flex-shrink:0"/>'
+            : '<div style="width:42px;height:42px;border-radius:10px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div>')
+        + '<div><div style="font-weight:700;font-size:14px">'+c.nome+'</div><span class="badge badge-blue" style="font-size:10px">'+c.seg+'</span></div></div>'
+        + '<div style="font-size:12px;color:var(--c-text2);display:flex;flex-direction:column;gap:5px"><div>📧 '+c.email+'</div><div>📞 '+c.tel+'</div><div>👤 '+c.resp+'</div><div>📄 '+c.doc+'</div></div>'
+        + '<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center">'
+        + '<div style="font-size:12px;color:var(--c-text3)">'+c.eventos+' eventos</div>'
+        + '<div style="display:flex;gap:6px">'
+        + '<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCliente('+idx+')" title="Editar">✏️</button>'
+        + (currentUser && currentUser.nivel === 'Gestor' ? '<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCliente('+idx+')">🗑️</button>' : '')
+        + '<button class="btn btn-primary btn-sm" onclick="iniciarPropostaParaCliente(\''+c.nome+'\')">+ Proposta</button>'
+        + '</div></div></div>';
+    }).join('') + '</div>';
+  } else {
+    // Este é o único bloco ELSE, contendo a visualização de lista com logos:
+    g.innerHTML = '<div class="card" style="padding:0"><div class="table-wrap" style="border:none">' + src.map(function(c){
+      var idx = DATA.clientes.indexOf(c);
       return '<div class="cliente-list-item">'
-        +'<div style="width:38px;height:38px;border-radius:9px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div>'
-        +'<div style="flex:1;min-width:0">'
-        +'<div style="font-weight:700;font-size:13.5px">'+c.nome+'</div>'
-        +'<div style="font-size:12px;color:var(--c-text2)">'+c.email+' · '+c.tel+'</div>'
-        +'</div>'
-        +'<span class="badge badge-blue">'+c.seg+'</span>'
-        +'<div style="font-size:12px;color:var(--c-text3);min-width:60px;text-align:center">'+c.eventos+' eventos</div>'
-        +'<div style="display:flex;gap:4px">'
-        +'<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCliente('+idx+')">✏️</button>'
-        +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCliente('+idx+')">🗑️</button>':'')
-        +'<button class="btn btn-primary btn-sm" onclick="iniciarPropostaParaCliente(\''+c.nome+'\')">+ Proposta</button>'
-        +'</div></div>';
-    }).join('')+'</div></div>';
+        + (c.logo 
+            ? '<img src="'+c.logo+'" style="width:38px;height:38px;border-radius:9px;object-fit:contain;background:var(--c-surface2);flex-shrink:0"/>'
+            : '<div style="width:38px;height:38px;border-radius:9px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div>')
+        + '<div style="flex:1;min-width:0">'
+        + '<div style="font-weight:700;font-size:13.5px">'+c.nome+'</div>'
+        + '<div style="font-size:12px;color:var(--c-text2)">'+c.email+' · '+c.tel+'</div>'
+        + '</div>'
+        + '<span class="badge badge-blue">'+c.seg+'</span>'
+        + '<div style="font-size:12px;color:var(--c-text3);min-width:60px;text-align:center">'+c.eventos+' eventos</div>'
+        + '<div style="display:flex;gap:4px">'
+        + '<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCliente('+idx+')">✏️</button>'
+        + (currentUser && currentUser.nivel === 'Gestor' ? '<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCliente('+idx+')">🗑️</button>' : '')
+        + '<button class="btn btn-primary btn-sm" onclick="iniciarPropostaParaCliente(\''+c.nome+'\')">+ Proposta</button>'
+        + '</div></div>';
+    }).join('') + '</div></div>';
   }
 }
 function iniciarPropostaParaCliente(nome){
@@ -1706,13 +1817,41 @@ function iniciarPropostaParaCliente(nome){
   },200);
 }
 function saveCliente(){
-  var nome=document.getElementById('cli_nome').value;
+  var nome = document.getElementById('cli_nome').value;
   if(!nome){toast('Informe o nome','error');return;}
-  var idx=parseInt(document.getElementById('cli_idx').value);
-  var obj={nome:nome,doc:document.getElementById('cli_doc').value,email:document.getElementById('cli_email').value,tel:document.getElementById('cli_tel').value,resp:document.getElementById('cli_resp').value,seg:document.getElementById('cli_seg').value,eventos:0};
-  if(idx>=0){obj.eventos=DATA.clientes[idx].eventos;DATA.clientes[idx]=obj;toast('Cliente atualizado','success');}
-  else{DATA.clientes.push(obj);toast('Cliente cadastrado','success');}
-  saveToStorage();renderClientes();closeModal('modalCliente');
+  
+  var idx = parseInt(document.getElementById('cli_idx').value);
+  
+  // --- AQUI ENTRA O PASSO C ---
+  // 1. Captura o logo existente ou o novo
+  var logoSrc = (idx >= 0) ? DATA.clientes[idx].logo : null;
+  var liInput = document.getElementById('cli_logo');
+  if(liInput.files && liInput.files[0]) logoSrc = document.getElementById('cli_logo_img').src;
+
+  // 2. Cria o objeto incluindo o logo
+  var obj = {
+    nome: nome,
+    doc: document.getElementById('cli_doc').value,
+    email: document.getElementById('cli_email').value,
+    tel: document.getElementById('cli_tel').value,
+    resp: document.getElementById('cli_resp').value,
+    seg: document.getElementById('cli_seg').value,
+    logo: logoSrc, // <--- O logo foi adicionado aqui no objeto
+    eventos: (idx >= 0) ? DATA.clientes[idx].eventos : 0
+  };
+  // ----------------------------
+
+  if(idx >= 0){ 
+    DATA.clientes[idx] = obj; 
+    toast('Cliente atualizado','success'); 
+  } else { 
+    DATA.clientes.push(obj); 
+    toast('Cliente cadastrado','success'); 
+  }
+  
+  saveToStorage(); 
+  renderClientes(); 
+  closeModal('modalCliente');
 }
 function excluirCliente(idx){
   DATA.lixeira.push({tipo:'Cliente',item:DATA.clientes[idx],data:new Date().toLocaleDateString('pt-BR')});
@@ -2267,7 +2406,8 @@ function cadastrarUsuario(){
 var wizardStepsData=[
   {label:'Evento',html:function(){return '<div class="form-row"><div class="form-group"><label>Nome do Evento</label><input id="w_evento" placeholder="Ex: Congresso de Tecnologia 2026"/></div><div class="form-group"><label>Cliente</label><select id="w_cliente"><option>Selecione...</option>'+DATA.clientes.map(function(c){return '<option>'+c.nome+'</option>';}).join('')+'</select></div></div><div class="form-row"><div class="form-group"><label>Data do Evento</label><input type="date" id="w_data"/></div><div class="form-group"><label>Horário</label><input type="time" id="w_hora" value="08:00"/></div></div><div class="form-row"><div class="form-group"><label>Nº de Participantes</label><input type="number" id="w_pax" placeholder="100"/></div><div class="form-group"><label>Tipo de Evento</label><select id="w_tipo"><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Festival</option></select></div></div><div class="form-group"><label>Tipo de Proposta</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="normal" checked/> Normal</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="oficio"/> 📋 Ofício FECOMERIO</label></div></div>';}},
   {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal</label><select id="w_espaco"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--c-text)"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
-  {label:'TI/AV',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os equipamentos necessários:</p><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
+  {label:'TI/AV',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os equipamentos necessários:</p><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div>'<div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div>'
++'<div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+ '+fmtMoney(e.valor||0)+'/unit</div>'<div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
   {label:'Alimentação',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os serviços de alimentação:</p><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+')">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
   {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente. Alertas de prazo vencido serão exibidos no sistema.</div>';}}
 ];
@@ -2312,29 +2452,75 @@ function renderWizardStep(step){
     },60);
   }
 }
-function nextPropNumPreview(){var y=new Date().getFullYear();var next=((DATA.propSequence&&DATA.propSequence[y])||0)+1;return String(next).padStart(3,'0')+'/'+y;}
-function wizardStep(dir){
-  var next=wizardCurrentStep+dir;
-  if(next<1||next>5)return;
-  if(dir>0&&wizardCurrentStep===5){
-    var espNome=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'A definir';
-    var espObj=DATA.espacos.find(function(e){return e.nome===espNome;})||{valor:4500};
-    var dataEv=document.getElementById('w_data')?document.getElementById('w_data').value:new Date().toISOString().split('T')[0];
-    var dias=parseInt(document.getElementById('w_dias')?document.getElementById('w_dias').value:1)||1;
-    var tipo=document.querySelector('input[name="w_propTipo"]:checked')?document.querySelector('input[name="w_propTipo"]:checked').value:'normal';
-    var num=nextPropNum();
-    var novaProp={id:'P'+String(DATA.propostas.length+1).padStart(3,'0'),num:num,evento:document.getElementById('w_evento')?document.getElementById('w_evento').value:'Novo Evento',cliente:document.getElementById('w_cliente')?document.getElementById('w_cliente').value:'Cliente',espaco:espNome,data:dataEv,valor:espObj.valor*dias+1200+2800,status:'Pendente',tipo:tipo};
+// Exibe o número da próxima proposta sem incrementar o contador oficial
+function nextPropNumPreview() {
+  var y = new Date().getFullYear();
+  var next = ((DATA.propSequence && DATA.propSequence[y]) || 0) + 1;
+  return String(next).padStart(3, '0') + '/' + y;
+}
+
+// Lógica de avanço do Wizard com a geração do número oficial apenas no passo final
+function wizardStep(dir) {
+  var next = wizardCurrentStep + dir;
+  if (next < 1 || next > 5) return;
+
+  // Quando o usuário clica em "Confirmar" no passo 5
+  if (dir > 0 && wizardCurrentStep === 5) {
+    var espNome = document.getElementById('w_espaco') ? document.getElementById('w_espaco').value : 'A definir';
+    var espObj = DATA.espacos.find(function(e) { return e.nome === espNome; }) || { valor: 4500 };
+    var dataEv = document.getElementById('w_data') ? document.getElementById('w_data').value : new Date().toISOString().split('T')[0];
+    var dias = parseInt(document.getElementById('w_dias') ? document.getElementById('w_dias').value : 1) || 1;
+    var tipo = document.querySelector('input[name="w_propTipo"]:checked') ? document.querySelector('input[name="w_propTipo"]:checked').value : 'normal';
+
+    // O número oficial só é gerado aqui, usando a função que incrementa e salva
+    var num = nextPropNum();
+
+    var novaProp = {
+      id: 'P' + String(DATA.propostas.length + 1).padStart(3, '0'),
+      num: num,
+      evento: document.getElementById('w_evento') ? document.getElementById('w_evento').value : 'Novo Evento',
+      cliente: document.getElementById('w_cliente') ? document.getElementById('w_cliente').value : 'Cliente',
+      espaco: espNome,
+      data: dataEv,
+      valor: espObj.valor * dias + 1200 + 2800,
+      status: 'Pendente',
+      tipo: tipo
+    };
+
     DATA.propostas.push(novaProp);
-    var osN=DATA.ordens.length+1;
-    DATA.ordens.push({id:'OS'+String(osN).padStart(3,'0'),evento:novaProp.evento,tipo:'TI/AV',resp:'A definir',data:dataEv,status:'Aberta',prog:0,prio:'Normal',obs:'Criada automaticamente a partir da proposta '+num});
-    saveToStorage();renderPropostas();renderOS();updateBadges();checkPrazosVencidos();renderAlertas();
+
+    // Geração automática da OS
+    var osN = DATA.ordens.length + 1;
+    DATA.ordens.push({
+      id: 'OS' + String(osN).padStart(3, '0'),
+      evento: novaProp.evento,
+      tipo: 'TI/AV',
+      resp: 'A definir',
+      data: dataEv,
+      status: 'Aberta',
+      prog: 0,
+      prio: 'Normal',
+      obs: 'Criada automaticamente a partir da proposta ' + num
+    });
+
+    saveToStorage();
+    renderPropostas();
+    renderOS();
+    updateBadges();
+    checkPrazosVencidos();
+    renderAlertas();
     closeModal('modalProposta');
-    toast('🎉 Proposta '+num+' criada com status Pendente! OS gerada automaticamente.','success');
-    setTimeout(function(){checkPrazosVencidos();},300);
-    initWizard();populateOSProp();
+    
+    toast('🎉 Proposta ' + num + ' criada com status Pendente! OS gerada automaticamente.', 'success');
+    
+    setTimeout(function() { checkPrazosVencidos(); }, 300);
+    initWizard();
+    populateOSProp();
     return;
   }
-  wizardCurrentStep=next;renderWizardStep(next);
+
+  wizardCurrentStep = next;
+  renderWizardStep(next);
 }
 function populateOSProp(){
   var sel=document.getElementById('os_prop');
@@ -2353,6 +2539,17 @@ window.onload=function(){
   populateOSProp();
   setTimeout(function(){var el=document.getElementById('loginUser');if(el)el.focus();},100);
 };
+function previewCliLogo(input){
+  if(input.files&&input.files[0]){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      document.getElementById('cli_logo_preview').style.display='block';
+      document.getElementById('cli_logo_img').src=e.target.result;
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+                                 
 </script>
 </body>
 </html>
