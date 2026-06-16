@@ -448,7 +448,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
     </div>
     <div class="form-row">
       <div class="form-group"><label>Valor Total (R$)</label><input type="number" id="ep_valor"/></div>
-      <div class="form-group"><label>Status</label><select id="ep_status"><option>Pendente</option><option>Confirmada</option><option>Negociação</option><option>Cancelada</option></select></div>
+      <div class="form-group"><label>Status</label><select id="ep_status"><option>Pendente</option><option>Aprovada</option><option>Confirmada</option><option>Negociação</option><option>Cancelada</option></select></div>
     </div>
     <div class="form-group" style="margin-bottom:14px"><label>Tipo</label><select id="ep_tipo"><option value="normal">Normal</option><option value="oficio">Ofício FECOMERIO</option></select></div>
     <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
@@ -2540,9 +2540,14 @@ function salvarEditProposta(){
   DATA.propostas[idx].espaco=document.getElementById('ep_espaco').value;
   DATA.propostas[idx].data=document.getElementById('ep_data').value;
   DATA.propostas[idx].valor=parseFloat(document.getElementById('ep_valor').value)||0;
-  DATA.propostas[idx].status=document.getElementById('ep_status').value;
+  var novoStatus=document.getElementById('ep_status').value;
+  var statusAnterior=DATA.propostas[idx].status;
+  DATA.propostas[idx].status=novoStatus;
   DATA.propostas[idx].tipo=document.getElementById('ep_tipo').value;
-  saveToStorage();renderPropostas();updateBadges();checkPrazosVencidos();
+  if((novoStatus==='Aprovada'||novoStatus==='Confirmada')&&statusAnterior!==novoStatus){
+    gerarOSdaProposta(DATA.propostas[idx],novoStatus==='Aprovada'?'aprovacao':'pagamento');
+  }
+  saveToStorage();renderPropostas();renderOS();updateBadges();checkPrazosVencidos();
   closeModal('modalEditProposta');toast('Proposta atualizada!','success');
 }
 function excluirProposta(idx){
@@ -2553,13 +2558,151 @@ function excluirProposta(idx){
 function gerarPropostaWA(){toast('WhatsApp removido desta versão','info');}
 
 // ── OS ────────────────────────────────────────────────────────────
+// Destinatários padrão para envio automático da OS (Outlook institucional Senac)
+var OS_DESTINATARIOS_PADRAO=[
+  'chefia.producao@senac-ce.com.br',
+  'cafe.escola@senac-ce.com.br',
+  'mayu@senac-ce.com.br',
+  'empresaescola@senac-ce.com.br',
+  'adm.empresaescola@senac-ce.com.br',
+  'gerencia.empresaescola@senac-ce.com.br'
+];
+function getOSDestinatarios(){
+  if(!DATA.osConfig)DATA.osConfig={destinatarios:OS_DESTINATARIOS_PADRAO.slice()};
+  if(!DATA.osConfig.destinatarios||!DATA.osConfig.destinatarios.length)DATA.osConfig.destinatarios=OS_DESTINATARIOS_PADRAO.slice();
+  return DATA.osConfig.destinatarios;
+}
+function calcHoraFim(hora,ocupacao){
+  if(!hora)return '';
+  var m=/^(\d{1,2}):(\d{2})/.exec(hora);if(!m)return '';
+  var horas=parseInt((ocupacao||'04h').replace(/\D/g,''))||4;
+  var d=new Date(2000,0,1,parseInt(m[1]),parseInt(m[2]));
+  d.setHours(d.getHours()+horas);
+  return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+function gerarOSdaProposta(p,gatilho){
+  if(!p)return null;
+  // Evita duplicar OS para a mesma proposta
+  var existente=(DATA.ordens||[]).find(function(o){return o.propostaNum===p.num;});
+  if(existente){existente.gatilho=gatilho||existente.gatilho;return existente;}
+  var cli=(DATA.clientes||[]).find(function(c){return c.nome===p.cliente;})||{};
+  var esp=(DATA.espacos||[]).find(function(e){return e.nome===p.espaco;})||{};
+  var equipsContratados=(p.equipamentos||[]).map(function(e){return (e.qtd?e.qtd+'x ':'')+e.nome;});
+  var equipsEspaco=(esp.equipIncl||[]).slice();
+  var cardapio=(p.alimentacao||[]).map(function(a){return a.nome||a;});
+  var insumos=[];
+  (p.alimentacao||[]).forEach(function(a){
+    var nm=a.nome||a;
+    var card=(DATA.cardapio||[]).find(function(c){return c.nome===nm;});
+    if(card&&card.items)insumos.push(nm+': '+card.items);
+  });
+  var horaFim=calcHoraFim(p.hora,p.ocupacao);
+  var n=DATA.ordens.length+1;
+  var os={
+    id:'OS'+String(n).padStart(3,'0'),
+    propostaNum:p.num,
+    propostaId:p.id,
+    evento:p.evento,
+    tipo:'Execução de Evento',
+    resp:'Chefia de Produção',
+    data:p.data,
+    horaInicio:p.hora||'',
+    horaFim:horaFim,
+    local:p.espaco||'',
+    status:'Aberta',prog:0,prio:'Normal',
+    // Solicitante
+    cliente:p.cliente||'',
+    cnpj:p.cnpj||cli.cnpj||'',
+    responsavelCliente:cli.contato||cli.responsavel||'',
+    telefone:cli.telefone||'',
+    email:cli.email||'',
+    // Operacional
+    participantes:p.pax||p.participantes||'',
+    cardapio:cardapio,
+    insumos:insumos,
+    infoAdicional:p.infoTecnica||p.observacoes||'',
+    necessidades:p.necessidades||'',
+    // Infraestrutura
+    equipamentosContratados:equipsContratados,
+    equipamentosEspaco:equipsEspaco,
+    materiaisApoio:p.materiaisApoio||'',
+    horarioMontagem:p.horarioMontagem||'',
+    horarioDesmontagem:p.horarioDesmontagem||'',
+    locacao:p.locacao||(esp.tipo||''),
+    // Auditoria
+    gatilho:gatilho||'manual',
+    geradaEm:new Date().toISOString(),
+    geradaPor:(currentUser&&currentUser.nome)||'Sistema',
+    enviadaEm:null,
+    obs:'Gerada automaticamente a partir da proposta '+p.num+' ('+(gatilho||'manual')+')'
+  };
+  DATA.ordens.push(os);
+  saveToStorage();
+  try{renderOS();updateBadges();}catch(e){}
+  toast('📋 OS '+os.id+' gerada para a proposta '+p.num,'success');
+  return os;
+}
+function abrirEnviarOS(idx){
+  var o=DATA.ordens[idx];if(!o)return;
+  var dests=getOSDestinatarios();
+  var custom=prompt('Destinatários (separados por vírgula).\nA OS será enviada via Outlook institucional.',dests.join(', '));
+  if(custom===null)return;
+  var lista=custom.split(',').map(function(s){return s.trim();}).filter(Boolean);
+  if(!lista.length){toast('Informe ao menos um destinatário','error');return;}
+  DATA.osConfig=DATA.osConfig||{};DATA.osConfig.destinatarios=lista;
+  var subj='[OS '+o.id+'] '+o.evento+' — '+formatDate(o.data);
+  var lines=[];
+  lines.push('ORDEM DE SERVIÇO '+o.id);
+  if(o.propostaNum)lines.push('Proposta vinculada: '+o.propostaNum);
+  lines.push('');
+  lines.push('— Identificação do Evento —');
+  lines.push('Evento: '+o.evento);
+  lines.push('Data: '+formatDate(o.data));
+  lines.push('Horário: '+(o.horaInicio||'—')+' às '+(o.horaFim||'—'));
+  lines.push('Local: '+(o.local||'—'));
+  lines.push('');
+  lines.push('— Solicitante —');
+  lines.push('Cliente: '+(o.cliente||'—'));
+  if(o.cnpj)lines.push('CNPJ: '+o.cnpj);
+  lines.push('Responsável: '+(o.responsavelCliente||'—'));
+  lines.push('Telefone: '+(o.telefone||'—'));
+  lines.push('E-mail: '+(o.email||'—'));
+  lines.push('');
+  lines.push('— Operacional —');
+  lines.push('Participantes: '+(o.participantes||'—'));
+  lines.push('Cardápio: '+((o.cardapio||[]).join(' | ')||'—'));
+  if((o.insumos||[]).length){lines.push('Insumos:');o.insumos.forEach(function(i){lines.push('  • '+i);});}
+  if(o.infoAdicional)lines.push('Informações adicionais: '+o.infoAdicional);
+  if(o.necessidades)lines.push('Necessidades específicas: '+o.necessidades);
+  lines.push('');
+  lines.push('— Infraestrutura & Montagem —');
+  lines.push('Equipamentos contratados: '+((o.equipamentosContratados||[]).join(', ')||'—'));
+  if((o.equipamentosEspaco||[]).length)lines.push('Equipamentos do espaço: '+o.equipamentosEspaco.join(', '));
+  if(o.materiaisApoio)lines.push('Materiais de apoio: '+o.materiaisApoio);
+  lines.push('Montagem: '+(o.horarioMontagem||'a definir'));
+  lines.push('Desmontagem: '+(o.horarioDesmontagem||'a definir'));
+  if(o.locacao)lines.push('Locação/estrutura: '+o.locacao);
+  lines.push('');
+  lines.push('— Responsável interno —');
+  lines.push((o.resp||'Chefia de Produção'));
+  lines.push('');
+  lines.push('Esta OS é de caráter interno e foi gerada automaticamente após '+(o.gatilho==='pagamento'?'a confirmação do pagamento':'a aprovação')+' da proposta '+o.propostaNum+'.');
+  var body=lines.join('\r\n');
+  var url='mailto:'+encodeURIComponent(lista.join(','))+'?subject='+encodeURIComponent(subj)+'&body='+encodeURIComponent(body);
+  o.enviadaEm=new Date().toISOString();
+  o.enviadaPara=lista.slice();
+  saveToStorage();renderOS();
+  window.location.href=url;
+  toast('Abrindo Outlook para envio da OS '+o.id+'...','info');
+}
 function renderOS(){
   var tb=document.getElementById('tbodyOS');
   tb.innerHTML=DATA.ordens.map(function(o,i){
     var prioBadge=o.prio==='Urgente'?'badge-red':o.prio==='Alta'?'badge-amber':'badge-gray';
+    var enviada=o.enviadaEm?'<span title="Enviada em '+formatDate(o.enviadaEm.split('T')[0])+'" style="color:var(--c-green);font-size:11px;margin-left:6px">✉ enviada</span>':'';
     return '<tr>'
       +'<td><span style="font-weight:700;color:var(--c-cyan)">'+o.id+'</span></td>'
-      +'<td style="max-width:160px"><div style="font-size:13px;font-weight:600">'+o.evento+'</div></td>'
+      +'<td style="max-width:200px"><div style="font-size:13px;font-weight:600">'+o.evento+'</div>'+(o.propostaNum?'<div style="font-size:11px;color:var(--c-text3)">Proposta '+o.propostaNum+'</div>':'')+enviada+'</td>'
       +'<td><span class="tag">'+o.tipo+'</span></td>'
       +'<td>'+o.resp+'</td>'
       +'<td>'+formatDate(o.data)+'</td>'
@@ -2568,6 +2711,7 @@ function renderOS(){
       +'<td style="min-width:120px"><div class="progress-bar"><div class="progress-fill" style="width:'+o.prog+'%"></div></div><div style="font-size:11px;color:var(--c-text3);margin-top:2px">'+o.prog+'%</div></td>'
       +'<td><div style="display:flex;gap:4px">'
         +'<button class="btn btn-ghost btn-icon btn-sm" onclick="abrirEditOS('+i+')" title="Editar">✏️</button>'
+        +'<button class="btn btn-ghost btn-icon btn-sm" onclick="abrirEnviarOS('+i+')" title="Enviar por e-mail (Outlook)">📧</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" onclick="exportOSpdf('+i+')" title="PDF">📄</button>'
         +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirOS('+i+')" title="Excluir">🗑️</button>':'')
       +'</div></td>'
@@ -2757,8 +2901,44 @@ function exportOSpdf(idx){
   var doc=new jsPDF({orientation:orientation,unit:'mm',format:'a4'});
   var startY=buildPDFHeader(doc,'senac');
   doc.setFontSize(14);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
-  doc.text('ORDEM DE SERVIÇO '+o.id,14,startY+8);
-  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:[['Evento',o.evento],['Tipo',o.tipo],['Responsável',o.resp],['Data',formatDate(o.data)],['Status',o.status],['Progresso',o.prog+'%'],['Observações',o.obs||'—']],styles:{fontSize:11,cellPadding:6},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'}});
+  doc.text('ORDEM DE SERVIÇO '+o.id+(o.propostaNum?'  ·  Proposta '+o.propostaNum:''),14,startY+8);
+  doc.setFontSize(9);doc.setFont('helvetica','italic');doc.setTextColor(100,116,139);
+  doc.text('Documento interno — comunicação de execução do evento',14,startY+14);
+  var section=function(title,rows,y){
+    doc.autoTable({startY:y,head:[[title,'']],body:rows,styles:{fontSize:10,cellPadding:4},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},columnStyles:{0:{cellWidth:55,fontStyle:'bold'}}});
+    return doc.lastAutoTable.finalY+4;
+  };
+  var y=startY+18;
+  y=section('Identificação do Evento',[
+    ['Nº OS',o.id],['Proposta vinculada',o.propostaNum||'—'],['Nome do evento',o.evento||'—'],
+    ['Data',formatDate(o.data)],['Início',o.horaInicio||'—'],['Término',o.horaFim||'—'],['Local',o.local||'—']
+  ],y);
+  y=section('Dados do Solicitante',[
+    ['Cliente/Instituição',o.cliente||'—'],['CNPJ',o.cnpj||'—'],['Responsável',o.responsavelCliente||'—'],
+    ['Telefone',o.telefone||'—'],['E-mail',o.email||'—']
+  ],y);
+  y=section('Informações Operacionais',[
+    ['Participantes',String(o.participantes||'—')],
+    ['Cardápio contratado',(o.cardapio||[]).join(' · ')||'—'],
+    ['Insumos para produção',(o.insumos||[]).join('\n')||'—'],
+    ['Informações adicionais',o.infoAdicional||'—'],
+    ['Necessidades específicas',o.necessidades||'—']
+  ],y);
+  y=section('Infraestrutura & Montagem',[
+    ['Equipamentos contratados',(o.equipamentosContratados||[]).join(', ')||'—'],
+    ['Equipamentos do espaço',(o.equipamentosEspaco||[]).join(', ')||'—'],
+    ['Materiais de apoio',o.materiaisApoio||'—'],
+    ['Horário de montagem',o.horarioMontagem||'a definir'],
+    ['Horário de desmontagem',o.horarioDesmontagem||'a definir'],
+    ['Locação/estrutura',o.locacao||'—']
+  ],y);
+  section('Execução Interna',[
+    ['Responsável interno',o.resp||'—'],['Status',o.status],['Progresso',o.prog+'%'],
+    ['Gerada em',o.geradaEm?formatDate(o.geradaEm.split('T')[0]):'—'],
+    ['Gerada por',o.geradaPor||'—'],
+    ['Destinatários e-mail',(o.enviadaPara||getOSDestinatarios()).join(', ')],
+    ['Observações',o.obs||'—']
+  ],y);
   addPDFPageFooter(doc);
   doc.save('OS_'+o.id+'.pdf');
   toast('PDF da OS gerado!','success');
@@ -4226,12 +4406,10 @@ function wizardStep(dir){
     novaProp.num=num;
     novaProp.createdAt=new Date().toISOString();
     DATA.propostas.push(novaProp);
-    var osN=DATA.ordens.length+1;
-    DATA.ordens.push({id:'OS'+String(osN).padStart(3,'0'),evento:novaProp.evento,tipo:'TI/AV',resp:'A definir',data:novaProp.data,status:'Aberta',prog:0,prio:'Normal',obs:'Criada automaticamente a partir da proposta '+num});
     saveToStorage();
     closeModal('modalProposta');
     renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
-    toast('🎉 Proposta '+num+' salva na lista! OS gerada automaticamente.','success');
+    toast('🎉 Proposta '+num+' salva! A OS será gerada automaticamente após a aprovação ou pagamento.','success');
     setTimeout(function(){checkPrazosVencidos();},300);
     resetWizardDraft();initWizard();populateOSProp();
     return;
@@ -4506,9 +4684,10 @@ function confirmarPagamentoSalvar(){
   if(!obs){alert('Informe uma justificativa/observação do pagamento');return;}
   p.status='Confirmada';
   p.confirmacao={data:data,forma:forma,obs:obs,por:(currentUser&&currentUser.nome)||'Sistema',em:new Date().toISOString()};
-  saveToStorage();renderPropostas();renderPropostaCards();updateBadges();checkPrazosVencidos();
+  var os=gerarOSdaProposta(p,'pagamento');
+  saveToStorage();renderPropostas();renderPropostaCards();updateBadges();checkPrazosVencidos();renderOS();
   closeModal('modalConfirmarPgto');
-  toast('Pagamento confirmado · status atualizado para Confirmada','success');
+  toast('Pagamento confirmado · OS '+(os?os.id:'')+' gerada automaticamente','success');
 }
 
 // ── IMPORTAÇÃO DE PROPOSTAS (PDF/Word/Excel) ──────────────────────
