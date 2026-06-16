@@ -38,7 +38,7 @@ if(window.moDeskOnFirebaseReady)window.moDeskOnFirebaseReady();
     :root{
   --c-bg:#f4f6f9;--c-surface:#ffffff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
   --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
-  --c-accent:#004b8e;--c-accent2:#003a70;--c-accent3:#2e6caa;
+  --c-accent:#005CAB;--c-accent2:#003a70;--c-accent3:#2e6caa;
   --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
   --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;
   --c-sidebar:240px;--c-topbar:72px;--radius:10px;--radius-lg:16px;--shadow:0 4px 24px rgba(0,51,102,0.08);
@@ -54,7 +54,7 @@ if(window.moDeskOnFirebaseReady)window.moDeskOnFirebaseReady();
 [data-theme="light"]{
   --c-bg:#f4f6f9;--c-surface:#fff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
   --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
-  --c-accent:#004b8e;--c-accent2:#003a70;--c-accent3:#2e6caa;
+  --c-accent:#005CAB;--c-accent2:#003a70;--c-accent3:#2e6caa;
   --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
   --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;--shadow:0 4px 24px rgba(0,51,102,0.08);
 }
@@ -129,7 +129,7 @@ input[type="checkbox"],input[type="radio"]{width:auto;cursor:pointer}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;border:1.5px solid transparent}
 .btn-primary{background:var(--c-accent);color:#fff;border-color:var(--c-accent)}
 .btn-primary:hover{background:var(--c-accent2);border-color:var(--c-accent2)}
-.btn-accent{background:var(--c-amber);color:#004b8e;border-color:var(--c-amber);font-weight:700}
+.btn-accent{background:var(--c-amber);color:#005CAB;border-color:var(--c-amber);font-weight:700}
 .btn-accent:hover{filter:brightness(1.05)}
 .btn-ghost{background:transparent;color:var(--c-text2);border-color:var(--c-border2)}
 .btn-ghost:hover{background:var(--c-surface2);color:var(--c-text)}
@@ -317,7 +317,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
 .check-status-btn.ok{background:var(--c-green);border-color:var(--c-green);color:#fff}
 .check-status-btn.fail{background:var(--c-red);border-color:var(--c-red);color:#fff}
 /* Timbrado institucional */
-.timbrado-bar{background:linear-gradient(180deg,#004b8e 0%,#003a70 100%);border-bottom:3px solid var(--c-amber);padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:52px}
+.timbrado-bar{background:linear-gradient(180deg,#005CAB 0%,#003a70 100%);border-bottom:3px solid var(--c-amber);padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:52px}
 .timbrado-brands{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.4px}
 .timbrado-brands span{padding:4px 10px;border:1px solid rgba(255,255,255,.25);border-radius:6px;background:rgba(255,255,255,.08)}
 .timbrado-unit{margin-left:auto;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
@@ -564,6 +564,11 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <div class="form-group"><label>Valor/Dia (R$)</label><input type="number" id="esp_valor" placeholder="2800"/></div>
     </div>
     <div class="form-group" style="margin-bottom:14px"><label>Equipamentos Inclusos</label><input id="esp_equip" placeholder="Projetor, Som Estéreo..."/></div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Equipamentos vinculados (já cobertos pelo valor do espaço)</label>
+      <select id="esp_equipIncl" multiple size="6" style="min-height:120px"></select>
+      <div style="font-size:11px;color:var(--c-text3);margin-top:4px">Segure Ctrl/Cmd para selecionar múltiplos. Esses itens NÃO aparecerão na lista de equipamentos da proposta quando este espaço for escolhido (valores já inclusos no aluguel).</div>
+    </div>
     <div class="form-row">
       <div class="form-group"><label>Status</label><select id="esp_status"><option>Disponível</option><option>Reservado</option><option>Manutenção</option></select></div>
     </div>
@@ -730,7 +735,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <div class="nav-item" onclick="goto('estoque')"><span class="nav-icon">💻</span><span class="nav-label">Estoque TI/AV</span></div>
       <div class="nav-item" onclick="goto('cardapio')"><span class="nav-icon">🍽️</span><span class="nav-label">Cardápio</span></div>
       <div class="nav-section">Gestão</div>
-      <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon">🔔</span><span class="nav-label">Alertas</span></div>
+      <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon" id="sidebarBellIcon">🔔</span><span class="nav-label">Alertas</span></div>
       <div class="nav-item" onclick="requireGestor(function(){goto('parecer');})"><span class="nav-icon">🔍</span><span class="nav-label">Parecer Técnico</span></div>
       <div class="nav-item" onclick="goto('relatorios')"><span class="nav-icon">📊</span><span class="nav-label">Relatórios &amp; BI</span></div>
       <div class="nav-item" onclick="goto('lixeira')"><span class="nav-icon">🗑️</span><span class="nav-label">Lixeira</span></div>
@@ -762,7 +767,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
           <span style="color:var(--c-text3);font-size:15px">🔍</span>
           <input placeholder="Buscar eventos, clientes..." id="globalSearch"/>
         </div>
-        <div class="topbar-btn" onclick="goto('alertas')">🔔<div class="badge-dot"></div></div>
+        <div class="topbar-btn" id="topbarBell" onclick="goto('alertas')">🔔<div class="badge-dot" id="topbarBellDot"></div></div>
         <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"><div class="theme-toggle-ball" id="themeIcon">☀️</div></button>
         <div class="avatar" id="topAvatar" onclick="goto('perfil')">MO</div>
       </div>
@@ -1355,7 +1360,7 @@ let _firebaseSyncing=false;
 let _firebaseUnsub=null;
 
 // ── DATA ──────────────────────────────────────────────────────────
-let DATA={portfolio:[],
+let DATA={portfolio:[],oficios:[],
   propostas:[
     {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
     {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
@@ -1406,6 +1411,10 @@ let DATA={portfolio:[],
     {nome:'Menu Executivo Mayú',cat:'Almoço',val:68,items:'Entrada, Prato Principal, Sobremesa, Bebida',alerg:'Verificar individualmente',icon:'🍽️',foto:null},
     {nome:'Kit Hidratação',cat:'Avulso',val:8,items:'Água 500ml + Suco Natural',alerg:'Nenhum',icon:'💧',foto:null},
     {nome:'Coquetel de Encerramento',cat:'Pacote',val:55,items:'Canapés, Finger Foods, Bebidas Não Alcoólicas',alerg:'Glúten',icon:'🥂',foto:null},
+    {nome:'Taxa de Rolha (por garrafa)',cat:'Bebida',val:45,items:'Cobrada por garrafa trazida pelo cliente. Valor integral — sem desconto de ofício.',alerg:'Álcool',icon:'🍾',foto:null,noDesconto:true},
+    {nome:'Pacote Bebidas Não Alcoólicas — Básico (2h)',cat:'Bebida',val:30,items:'Água com e sem gás, suco 2 sabores, refrigerante (Coca-Cola e Guaraná). 3ª h R$45 (+50%) · 4ª h R$52,50 (+25%).',alerg:'Nenhum',icon:'🥤',foto:null,noDesconto:true},
+    {nome:'Pacote Bebidas Alcoólicas — Básico (2h)',cat:'Bebida',val:89,items:'Vinho tinto, vinho branco, long neck + água, suco e refrigerante. 3ª h R$133,50 (+50%) · 4ª h R$155,75 (+25%).',alerg:'Álcool',icon:'🍷',foto:null,noDesconto:true},
+    {nome:'Pacote Bebidas Alcoólicas — Completo (2h)',cat:'Bebida',val:135,items:'Whisky, cachaça, long neck, vinho branco, vinho tinto, espumante + água, suco e refrigerante. 3ª h R$202,50 (+50%) · 4ª h R$236,75 (+25%).',alerg:'Álcool',icon:'🥃',foto:null,noDesconto:true},
   ],
   lixeira:[],
   propSequence:{2026:5},
@@ -1474,6 +1483,7 @@ function loadFromStorage(){
       if(!p.areaTecnica)p.areaTecnica='interna';
       if(!p.equipamentos)p.equipamentos=[];
     });
+    if(!DATA.oficios)DATA.oficios=[];
     ensureGestor();
     loadAssets();
     var t=localStorage.getItem('modesk_theme');
@@ -1742,11 +1752,19 @@ function updateBadges(){
 function checkPrazosVencidos(){
   var vencidos=DATA.propostas.filter(isPrazoVencido);
   var el=document.getElementById('alertaPrazoVencido');
+  var bell=document.getElementById('sidebarBellIcon');
+  var dot=document.getElementById('topbarBellDot');
+  var bellBtn=document.getElementById('topbarBell');
   if(vencidos.length>0){
-    el.style.display='flex';
-    el.textContent='🚨 ATENÇÃO: '+vencidos.length+' proposta(s) com prazo de pagamento VENCIDO! Clique para ver →';
+    if(el){el.style.display='flex';el.textContent='🚨 ATENÇÃO: '+vencidos.length+' proposta(s) com prazo de pagamento VENCIDO! Clique para ver →';}
+    if(bell)bell.classList.add('blink');
+    if(dot)dot.classList.add('blink');
+    if(bellBtn)bellBtn.classList.add('blink');
   }else{
-    el.style.display='none';
+    if(el)el.style.display='none';
+    if(bell)bell.classList.remove('blink');
+    if(dot)dot.classList.remove('blink');
+    if(bellBtn)bellBtn.classList.remove('blink');
   }
 }
 
@@ -1826,6 +1844,17 @@ function openModal(id){
 function closeModal(id){
   document.getElementById(id).classList.remove('open');
   if(id==='modalProposta'){editingPropostaIdx=-1;resetWizardDraft();}
+  // If user cancels a sub-modal opened from the wizard, restore button label and re-render the wizard step so data is preserved
+  if(['modalCliente','modalEspaco','modalTI','modalCardapio'].indexOf(id)>=0){
+    var note=document.querySelector('#'+id+' .wiz-back-note');if(note)note.remove();
+    var btns=document.querySelectorAll('#'+id+' .btn-primary');
+    var btn=btns[btns.length-1];
+    if(btn&&btn.dataset._origLabel){btn.textContent=btn.dataset._origLabel;delete btn.dataset._origLabel;}
+    if(typeof wizReturnAfterSave!=='undefined'&&wizReturnAfterSave!=null){
+      var step=wizReturnAfterSave;wizReturnAfterSave=null;
+      setTimeout(function(){try{renderWizardStep(step);}catch(e){}},60);
+    }
+  }
 }
 document.addEventListener('click',function(e){if(e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');});
 
@@ -1960,11 +1989,11 @@ function exportPDF(empresa,orientation){
   if(exportCtxStr==='propostas'){
     doc.autoTable({startY:Y,head:[['Nº','Evento','Cliente','Data','Área Téc.','Prazo Pgto','Valor (R$)','Status']],
       body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),formatAreaTecnica(p,true),prazo15(p.data),fmtMoney(p.valor),p.status];}),
-      styles:{fontSize:8,cellPadding:3},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
+      theme:'grid',styles:{fontSize:8,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold',lineColor:[0,92,171],lineWidth:0.2},alternateRowStyles:{fillColor:[248,250,252]}});
   }else if(exportCtxStr==='dashboard'||exportCtxStr==='relatorios'){
     doc.autoTable({startY:Y,head:[['Evento','Proposta','Data','Valor (R$)','Status']],
       body:DATA.propostas.map(function(p){return [p.evento,p.num,formatDate(p.data),fmtMoney(p.valor),p.status];}),
-      styles:{fontSize:9,cellPadding:4},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'}});
+      theme:'grid',styles:{fontSize:9,cellPadding:4,lineColor:[0,92,171],lineWidth:0.2},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold',lineColor:[0,92,171],lineWidth:0.2}});
   }else if(exportCtxStr==='parecer'){
     doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
     doc.text('PARECER TÉCNICO — '+new Date().toLocaleDateString('pt-BR'),14,Y);
@@ -2026,9 +2055,9 @@ function exportarPropostaSenacPDF(p,empresa){
   doc.text('PROPOSTA SENAC ALDEOTA – '+p.num,marginX,startY+12);
   // Faixa "INFORMAÇÕES DO CLIENTE"
   doc.setFillColor(0,51,102);
-  doc.rect(pageW/2,startY+8,pageW/2-marginX,6,'F');
+  doc.rect(marginX,startY+8,pageW-marginX*2,6,'F');
   doc.setTextColor(255,255,255);doc.setFontSize(10);
-  doc.text('INFORMAÇÕES DO CLIENTE',pageW-marginX-2,startY+12.5,{align:'right'});
+  doc.text('INFORMAÇÕES DO CLIENTE',marginX+2,startY+12.5,{align:'left'});
   // Bloco cliente
   var Y=startY+22;
   doc.setTextColor(30,41,59);doc.setFontSize(10);doc.setFont('helvetica','bold');
@@ -2072,21 +2101,31 @@ function exportarPropostaSenacPDF(p,empresa){
     startY:Y,
     head:[['Espaço / Serviço','Quantidade','Valor','Valor total']],
     body:rows.length?rows:[['—','—','—','—']],
-    styles:{fontSize:9,cellPadding:3,textColor:[30,41,59],lineColor:[0,75,142],lineWidth:0.1},
-    headStyles:{fillColor:[245,245,245],textColor:[0,75,142],fontStyle:'bold',halign:'center'},
+    styles:{fontSize:9,cellPadding:3,textColor:[30,41,59],lineColor:[0,92,171],lineWidth:0.1},
+    headStyles:{fillColor:[245,245,245],textColor:[0,92,171],fontStyle:'bold',halign:'center'},
     columnStyles:{0:{cellWidth:90},1:{halign:'center',cellWidth:25},2:{halign:'right',cellWidth:30},3:{halign:'right',cellWidth:30}},
     margin:{left:marginX,right:marginX}
   });
   Y=doc.lastAutoTable.finalY;
   // Total
   var hasOficio=p.tipo==='oficio';
-  var subTotal=p.valor||0;
-  var totalRows=[[{content:'Valor Total',styles:{fontStyle:'bold',halign:'right'}},'','',{content:fmtMoney(subTotal),styles:{fontStyle:'bold',halign:'right'}}]];
-  if(hasOficio){
-    var comDesc=subTotal*0.8;
-    totalRows.push([{content:'Total com desconto – 20% (Ofício FECOMERIO)',styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}},'','',{content:fmtMoney(comDesc),styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}}]);
+  var subBruto=p.valorBruto||p.valor||0;
+  var subFinal=p.valor||0;
+  var totalRows=[[{content:'Subtotal',styles:{fontStyle:'bold',halign:'right'}},'','',{content:fmtMoney(subBruto),styles:{fontStyle:'bold',halign:'right'}}]];
+  if(hasOficio&&p.oficio){
+    var desc=Math.max(subBruto-subFinal,0);
+    var pct=p.oficio.percent||(subBruto?(desc/subBruto*100):0);
+    var bebTotal=calcBebidasTotal(p.alimentacao,p.pax);
+    var label='Desconto Ofício '+(p.oficio.num?p.oficio.num+' ':'')+'('+(p.oficio.fornecedor||'Fecomércio')+') – '+(Math.round(pct*10)/10)+'%'+(bebTotal>0?'  *':'');
+    totalRows.push([{content:label,styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}},'','',{content:'- '+fmtMoney(desc),styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}}]);
+    if(bebTotal>0){
+      totalRows.push([{content:'* Serviço de bebidas '+fmtMoney(bebTotal)+' mantido pelo valor integral (não recebe desconto Fecomércio).',colSpan:4,styles:{fontSize:8,fontStyle:'italic',halign:'left',textColor:[120,53,15],fillColor:[254,243,199]}}]);
+    }
+    totalRows.push([{content:'Valor Final com Desconto',styles:{fontStyle:'bold',halign:'right',textColor:[0,92,171]}},'','',{content:fmtMoney(subFinal),styles:{fontStyle:'bold',halign:'right',textColor:[0,92,171]}}]);
+  }else{
+    totalRows.push([{content:'Valor Total',styles:{fontStyle:'bold',halign:'right'}},'','',{content:fmtMoney(subFinal),styles:{fontStyle:'bold',halign:'right'}}]);
   }
-  doc.autoTable({startY:Y,body:totalRows,styles:{fontSize:10,cellPadding:3,lineColor:[0,75,142],lineWidth:0.1},
+  doc.autoTable({startY:Y,body:totalRows,styles:{fontSize:10,cellPadding:3,lineColor:[0,92,171],lineWidth:0.1},
     columnStyles:{0:{cellWidth:90},1:{cellWidth:25},2:{cellWidth:30},3:{cellWidth:30}},margin:{left:marginX,right:marginX}});
   Y=doc.lastAutoTable.finalY+6;
   // Bloco ORIENTAÇÕES
@@ -2095,7 +2134,7 @@ function exportarPropostaSenacPDF(p,empresa){
     doc.setDrawColor(0,51,102);doc.setLineWidth(0.3);doc.line(marginX,Y,pageW-marginX,Y);Y+=1;
     doc.setFillColor(245,245,245);doc.rect(marginX,Y,pageW-marginX*2,6,'F');
     doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
-    doc.text(label,pageW-marginX-2,Y+4.2,{align:'right'});
+    doc.text(label,marginX+2,Y+4.2,{align:'left'});
     Y+=8;doc.setFont('helvetica','normal');doc.setTextColor(30,41,59);doc.setFontSize(9);
   }
   function bullets(arr){
@@ -2163,9 +2202,9 @@ function exportarPropostaSenacPDF(p,empresa){
   // Aprovação
   if(Y>pageH-50){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=40;}
   Y+=4;
-  doc.setFillColor(0,51,102);doc.rect(pageW/2,Y,pageW/2-marginX,6,'F');
+  doc.setFillColor(0,51,102);doc.rect(marginX,Y,pageW-marginX*2,6,'F');
   doc.setTextColor(255,255,255);doc.setFontSize(10);doc.setFont('helvetica','bold');
-  doc.text('APROVAÇÃO',pageW-marginX-2,Y+4.2,{align:'right'});
+  doc.text('APROVAÇÃO',marginX+2,Y+4.2,{align:'left'});
   Y+=10;doc.setTextColor(30,41,59);doc.setFont('helvetica','normal');doc.setFontSize(9);
   doc.text('Aprovamos a proposta '+p.num+' e autorizamos a execução do que nela está especificado.',marginX,Y);Y+=8;
   doc.text('Fortaleza, _______ de _______________ de '+hoje.getFullYear()+'.',pageW/2,Y,{align:'center'});Y+=14;
@@ -2226,7 +2265,7 @@ function exportPropostaAtual(fmt){
     }
     bodyRows.push(['Valor Total',fmtMoney(p.valor)],['Status',p.status]);
     doc.autoTable({startY:startY+(p.tipo==='oficio'?20:18),head:[['Campo','Informação']],body:bodyRows,
-      styles:{fontSize:10,cellPadding:5,textColor:[30,41,59]},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
+      styles:{fontSize:10,cellPadding:5,textColor:[30,41,59]},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},
       alternateRowStyles:{fillColor:[248,250,252]},margin:{left:14,right:14}});
     var Y2=doc.lastAutoTable.finalY+12;
     doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(80,80,80);
@@ -2328,7 +2367,11 @@ function initChartStatus(filteredList){
 
 // ── PROPOSTAS ─────────────────────────────────────────────────────
 function renderPropostas(list){
-  var src=list||DATA.propostas;
+  var src=(list||DATA.propostas).slice().sort(function(a,b){
+    var ta=a.createdAt?new Date(a.createdAt).getTime():new Date((a.data||'1970-01-01')+'T'+(a.hora||'00:00')).getTime();
+    var tb=b.createdAt?new Date(b.createdAt).getTime():new Date((b.data||'1970-01-01')+'T'+(b.hora||'00:00')).getTime();
+    return tb-ta;
+  });
   var tb=document.getElementById('tbodyPropostas');
   if(!src.length){tb.innerHTML='<tr><td colspan="14" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';return;}
   tb.innerHTML=src.map(function(p){
@@ -2571,7 +2614,7 @@ function exportOSpdf(idx){
   var startY=buildPDFHeader(doc,'senac');
   doc.setFontSize(14);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
   doc.text('ORDEM DE SERVIÇO '+o.id,14,startY+8);
-  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:[['Evento',o.evento],['Tipo',o.tipo],['Responsável',o.resp],['Data',formatDate(o.data)],['Status',o.status],['Progresso',o.prog+'%'],['Observações',o.obs||'—']],styles:{fontSize:11,cellPadding:6},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'}});
+  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:[['Evento',o.evento],['Tipo',o.tipo],['Responsável',o.resp],['Data',formatDate(o.data)],['Status',o.status],['Progresso',o.prog+'%'],['Observações',o.obs||'—']],styles:{fontSize:11,cellPadding:6},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'}});
   addPDFPageFooter(doc);
   doc.save('OS_'+o.id+'.pdf');
   toast('PDF da OS gerado!','success');
@@ -2683,7 +2726,9 @@ function saveCliente(){
   var obj={nome:nome,doc:document.getElementById('cli_doc').value,email:document.getElementById('cli_email').value,tel:document.getElementById('cli_tel').value,resp:document.getElementById('cli_resp').value,seg:document.getElementById('cli_seg').value,eventos:0,logo:logoSrc};
   if(idx>=0){obj.eventos=DATA.clientes[idx].eventos;DATA.clientes[idx]=obj;toast('Cliente atualizado','success');}
   else{DATA.clientes.push(obj);toast('Cliente cadastrado','success');}
-  saveToStorage();renderClientes();closeModal('modalCliente');
+  saveToStorage();renderClientes();
+  if(returnToWizard(nome,'cliente')){closeModal('modalCliente');return;}
+  closeModal('modalCliente');
 }
 function excluirCliente(idx){
   DATA.lixeira.push({tipo:'Cliente',item:DATA.clientes[idx],data:new Date().toLocaleDateString('pt-BR')});
@@ -2743,6 +2788,7 @@ function abrirNovoEspaco(){
   ['esp_nome','esp_cap','esp_area','esp_valor','esp_equip'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('esp_status').value='Disponível';
   document.getElementById('esp_foto_preview').style.display='none';
+  populateEspacoEquipIncl([]);
   openModal('modalEspaco');
 }
 function editarEspaco(idx){
@@ -2757,6 +2803,7 @@ function editarEspaco(idx){
   document.getElementById('esp_status').value=e.status;
   if(e.foto){document.getElementById('esp_foto_preview').style.display='block';document.getElementById('esp_foto_img').src=e.foto;}
   else document.getElementById('esp_foto_preview').style.display='none';
+  populateEspacoEquipIncl(e.equipIncl||[]);
   openModal('modalEspaco');
 }
 function saveEspaco(){
@@ -2765,10 +2812,23 @@ function saveEspaco(){
   var fotoInput=document.getElementById('esp_foto');
   var fotoSrc=editingIdx.espaco>=0?DATA.espacos[editingIdx.espaco].foto:null;
   if(fotoInput.files&&fotoInput.files[0]){fotoSrc=document.getElementById('esp_foto_img').src||fotoSrc;}
-  var obj={nome:nome,cap:parseInt(document.getElementById('esp_cap').value)||0,area:document.getElementById('esp_area').value,valor:parseFloat(document.getElementById('esp_valor').value)||0,equip:document.getElementById('esp_equip').value,status:document.getElementById('esp_status').value,foto:fotoSrc};
+  var inclSel=document.getElementById('esp_equipIncl');
+  var equipIncl=inclSel?Array.from(inclSel.selectedOptions).map(function(o){return o.value;}):[];
+  var obj={nome:nome,cap:parseInt(document.getElementById('esp_cap').value)||0,area:document.getElementById('esp_area').value,valor:parseFloat(document.getElementById('esp_valor').value)||0,equip:document.getElementById('esp_equip').value,status:document.getElementById('esp_status').value,foto:fotoSrc,equipIncl:equipIncl};
   if(editingIdx.espaco>=0){DATA.espacos[editingIdx.espaco]=obj;toast('Espaço atualizado','success');}
   else{DATA.espacos.push(obj);toast('Espaço cadastrado','success');}
-  saveToStorage();renderEspacos();closeModal('modalEspaco');
+  saveToStorage();renderEspacos();
+  if(returnToWizard(nome,'espaco')){closeModal('modalEspaco');return;}
+  closeModal('modalEspaco');
+}
+function populateEspacoEquipIncl(selected){
+  var sel=document.getElementById('esp_equipIncl');
+  if(!sel)return;
+  selected=selected||[];
+  sel.innerHTML=(DATA.estoque||[]).map(function(e){
+    var s=selected.indexOf(e.nome)>=0?' selected':'';
+    return '<option value="'+e.nome+'"'+s+'>'+(e.icon||'📦')+' '+e.nome+(e.modelo?' — '+e.modelo:'')+'</option>';
+  }).join('');
 }
 function excluirEspaco(idx){
   DATA.lixeira.push({tipo:'Espaço',item:DATA.espacos[idx],data:new Date().toLocaleDateString('pt-BR')});
@@ -2846,7 +2906,9 @@ function saveTI(){
   var obj={nome:nome,modelo:document.getElementById('ti_modelo').value,cat:document.getElementById('ti_cat').value,qtd:qtd,disponivel:qtd,icon:document.getElementById('ti_icon').value||'📦',status:document.getElementById('ti_status').value,pat:document.getElementById('ti_pat').value,foto:fotoSrc,valor:parseFloat(document.getElementById('ti_valor').value)||0};
   if(editingIdx.ti>=0){obj.disponivel=DATA.estoque[editingIdx.ti].disponivel;DATA.estoque[editingIdx.ti]=obj;toast('Item atualizado','success');}
   else{DATA.estoque.push(obj);toast('Item cadastrado','success');}
-  saveToStorage();renderEstoque();closeModal('modalTI');
+  saveToStorage();renderEstoque();
+  if(returnToWizard(nome,'ti')){closeModal('modalTI');return;}
+  closeModal('modalTI');
 }
 function excluirTI(idx){
   DATA.lixeira.push({tipo:'Item TI/AV',item:DATA.estoque[idx],data:new Date().toLocaleDateString('pt-BR')});
@@ -2922,7 +2984,9 @@ function saveCardapio(){
   var obj={nome:nome,cat:document.getElementById('card_cat').value,val:parseFloat(document.getElementById('card_val').value)||0,items:document.getElementById('card_items').value,alerg:document.getElementById('card_alerg').value,icon:document.getElementById('card_icon').value||'🍽️',foto:fotoSrc};
   if(editingIdx.cardapio>=0){DATA.cardapio[editingIdx.cardapio]=obj;toast('Item atualizado','success');}
   else{DATA.cardapio.push(obj);toast('Item cadastrado','success');}
-  saveToStorage();renderCardapio();closeModal('modalCardapio');
+  saveToStorage();renderCardapio();
+  if(returnToWizard(nome,'cardapio')){closeModal('modalCardapio');return;}
+  closeModal('modalCardapio');
 }
 function excluirCardapio(idx){
   DATA.lixeira.push({tipo:'Cardápio',item:DATA.cardapio[idx],data:new Date().toLocaleDateString('pt-BR')});
@@ -3491,7 +3555,7 @@ function cardapioBrand(c){
   var isMayu=cat.indexOf('almoço')>=0||cat.indexOf('almoco')>=0||cat.indexOf('jantar')>=0||cat.indexOf('coquetel')>=0||nome.indexOf('almoço')>=0||nome.indexOf('jantar')>=0||nome.indexOf('coquetel')>=0;
   if(isCafe)return {nome:'Café Senac',logo:LOGO_CAFE_URL,primary:'#5a2d1a',primaryRgb:[90,45,26],secondary:'#c08a5e',bg:'#fdf6ee'};
   if(isMayu)return {nome:'Restaurante-Escola Mayú',logo:LOGO_MAYU_URL,primary:'#1f3d20',primaryRgb:[31,61,32],secondary:'#f3ead5',bg:'#fbf8f1'};
-  return {nome:'Senac Aldeota',logo:LOGO_SENAC_URL,primary:'#004b8e',primaryRgb:[0,75,142],secondary:'#FF9900',bg:'#f5faff'};
+  return {nome:'Senac Aldeota',logo:LOGO_SENAC_URL,primary:'#005CAB',primaryRgb:[0,92,171],secondary:'#FF9900',bg:'#f5faff'};
 }
 function openCardapioDetalhe(idx){
   _currentCardapioIdx=idx;
@@ -3543,8 +3607,8 @@ function exportEspacosPDF(empresa,orientation){
   doc.autoTable({startY:startY+18,
     head:[['Espaço','Capacidade','Área','Equipamentos','Status','Valor/dia (R$)']],
     body:DATA.espacos.map(function(e){return [e.nome,e.cap+' pax',e.area,e.equip,e.status,fmtMoney(e.valor)];}),
-    styles:{fontSize:9,cellPadding:3,lineColor:[220,228,240],lineWidth:0.2},
-    headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
+    theme:'grid',styles:{fontSize:9,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},
+    headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},
     alternateRowStyles:{fillColor:[245,250,255]}});
   addPDFPageFooter(doc);
   doc.save('Senac_Aldeota_espacos_'+Date.now()+'.pdf');
@@ -3561,8 +3625,8 @@ function exportCardapioListPDF(empresa,orientation){
   doc.autoTable({startY:startY+18,
     head:[['Item','Categoria','Composição','Alergênicos','Valor/pax (R$)']],
     body:DATA.cardapio.map(function(c){return [c.nome,c.cat,c.items,c.alerg,fmtMoney(c.val)];}),
-    styles:{fontSize:9,cellPadding:3,lineColor:[220,228,240],lineWidth:0.2},
-    headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
+    theme:'grid',styles:{fontSize:9,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},
+    headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},
     alternateRowStyles:{fillColor:[245,250,255]},
     columnStyles:{2:{cellWidth:'auto'}}});
   addPDFPageFooter(doc);
@@ -3653,10 +3717,23 @@ function exportCardapioUnicoPDF(empresa,orientation){
 
 // ── WIZARD ────────────────────────────────────────────────────────
 var wizardStepsData=[
-  {label:'Evento',html:function(){return '<div class="form-row"><div class="form-group"><label>Nome do Evento</label><input id="w_evento" placeholder="Ex: Congresso de Tecnologia 2026"/></div><div class="form-group"><label>Cliente</label><select id="w_cliente"><option>Selecione...</option>'+DATA.clientes.map(function(c){return '<option>'+c.nome+'</option>';}).join('')+'</select></div></div><div class="form-row"><div class="form-group"><label>Data do Evento</label><input type="date" id="w_data"/></div><div class="form-group"><label>Horário</label><input type="time" id="w_hora" value="08:00"/></div></div><div class="form-row"><div class="form-group"><label>Nº de Participantes</label><input type="number" id="w_pax" placeholder="100"/></div><div class="form-group"><label>Tipo de Evento</label><select id="w_tipo"><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Festival</option></select></div></div><div class="form-group"><label>Tipo de Proposta</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="normal" checked/> Normal</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="oficio"/> 📋 Ofício FECOMERIO</label></div></div>';}},
-  {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal</label><select id="w_espaco"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--c-text)"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
-  {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa (fornecedor terceiro)</label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><p style="font-size:13px;color:var(--c-text2);margin-bottom:8px">Selecione os equipamentos necessários:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'equip-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'equip-select-grid\',\'list\')">☰ Lista</button></div><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
-  {label:'Alimentação',html:function(){return '<div class="alimt-toggle"><span>O evento terá serviço de alimentação?</span><label><input type="radio" name="w_temAlim" value="sim" onchange="toggleAlimSection(true)"'+(wizardDraft.temAlimentacao?' checked':'')+'/> Sim</label><label><input type="radio" name="w_temAlim" value="nao" onchange="toggleAlimSection(false)"'+(!wizardDraft.temAlimentacao?' checked':'')+'/> Não</label></div><div id="w_alimSection" style="display:'+(wizardDraft.temAlimentacao?'block':'none')+'"><p style="font-size:12px;color:var(--c-text2);margin-bottom:6px">Selecione um ou mais itens. Para itens servidos várias vezes no dia (ex: coffee de manhã e tarde), informe o nº de vezes:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'food-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'food-select-grid\',\'list\')">☰ Lista</button></div><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+',event)">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><div class="food-vezes-row" onclick="event.stopPropagation()"><label>Vezes/dia:</label><input type="number" min="1" max="10" value="1" id="food_vezes_'+i+'"/><span style="font-size:10px;color:var(--c-text3)">(manhã/tarde…)</span></div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
+  {label:'Evento',html:function(){
+    var oficiosOpts=(DATA.oficios||[]).map(function(o,i){return '<option value="'+i+'">'+(o.num||('Ofício '+(i+1)))+' — '+(o.percent||0)+'%'+(o.fornecedor?' · '+o.fornecedor:'')+'</option>';}).join('');
+    return '<div class="form-row"><div class="form-group"><label>Nome do Evento</label><input id="w_evento" placeholder="Ex: Congresso de Tecnologia 2026"/></div><div class="form-group"><label>Cliente <button type="button" class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px;margin-left:6px" onclick="wizSubModal(\'cliente\')">＋ Novo cliente</button></label><select id="w_cliente"><option>Selecione...</option>'+DATA.clientes.map(function(c){return '<option>'+c.nome+'</option>';}).join('')+'</select></div></div><div class="form-row"><div class="form-group"><label>Data do Evento</label><input type="date" id="w_data"/></div><div class="form-group"><label>Horário</label><input type="time" id="w_hora" value="08:00"/></div></div><div class="form-row"><div class="form-group"><label>Nº de Participantes</label><input type="number" id="w_pax" placeholder="100"/></div><div class="form-group"><label>Tipo de Evento</label><select id="w_tipo"><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Festival</option></select></div></div><div class="form-group"><label>Tipo de Proposta</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="normal" checked onchange="toggleOficioBlock()"/> Normal</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="oficio" onchange="toggleOficioBlock()"/> 📋 Ofício FECOMERIO</label></div></div>'
+      +'<div id="w_oficioBlock" style="display:none;background:rgba(0,92,171,.06);border:1px solid rgba(0,92,171,.25);border-radius:10px;padding:14px;margin-top:10px">'
+      +'<div style="font-weight:700;color:#005CAB;margin-bottom:10px">📋 Ofício Fecomércio</div>'
+      +'<div class="form-row"><div class="form-group"><label>Vincular ofício existente</label><select id="w_oficioSel" onchange="aplicarOficioSelecionado()"><option value="">— Novo / Não vincular —</option>'+oficiosOpts+'</select></div><div class="form-group"><label>Nº do Ofício</label><input id="w_oficioNum" placeholder="Ex: 045/2026"/></div></div>'
+      +'<div class="form-row"><div class="form-group"><label>Fornecedor / Órgão</label><input id="w_oficioForn" placeholder="Ex: Fecomércio CE"/></div><div class="form-group"><label>Data do Ofício</label><input type="date" id="w_oficioData"/></div></div>'
+      +'<div class="form-row"><div class="form-group"><label>% de Desconto <span style="color:var(--c-text3);font-size:11px">(auto-detectado do PDF)</span></label><input type="number" id="w_oficioPct" min="0" max="100" step="0.1" placeholder="20"/></div><div class="form-group"><label>Valor de Desconto (R$) <span style="color:var(--c-text3);font-size:11px">(opcional)</span></label><input type="number" id="w_oficioVal" min="0" step="0.01" placeholder="0,00"/></div></div>'
+      +'<div class="form-group"><label>Documento do Ofício (PDF)</label><input type="file" id="w_oficioFile" accept="application/pdf" onchange="detectarDescontoOficio(this)"/><div id="w_oficioFileInfo" style="font-size:12px;color:var(--c-text3);margin-top:6px"></div></div>'
+      +'<div class="form-group"><label>Observações</label><textarea id="w_oficioObs" rows="2" placeholder="Justificativa, condições especiais..."></textarea></div>'
+      +'<label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--c-text2);margin-top:6px"><input type="checkbox" id="w_oficioSalvar" checked/> Salvar este ofício na biblioteca para reutilização</label>'
+      +'<div style="margin-top:10px;padding:10px 12px;border-radius:8px;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);font-size:12px;color:var(--c-text)"><strong style="color:var(--c-amber)">⚠️ Atenção:</strong> O <strong>Pacote de Serviço de Bebidas</strong> (taxa de rolha, pacotes alcoólicos e não-alcoólicos) <u>não recebe desconto do ofício Fecomércio</u>. Mesmo inserido na proposta, seu valor é mantido <strong>integral</strong>. O desconto será aplicado somente sobre os demais itens (locação, equipamentos e alimentação não-bebida).</div>'
+      +'</div>';
+  }},
+  {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal <button type="button" class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px;margin-left:6px" onclick="wizSubModal(\'espaco\')">＋ Novo espaço</button></label><select id="w_espaco" onchange="wizardDraft.espaco=this.value"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:8px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--c-text);background:var(--c-surface2);border:1px solid var(--c-border);border-radius:8px;padding:10px 12px"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
+  {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa (fornecedor terceiro)</label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px"><p style="font-size:13px;color:var(--c-text2);margin:0">Selecione os equipamentos necessários:</p><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'ti\')">＋ Novo equipamento</button></div>'+renderEquipInclNotice()+'<div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'equip-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'equip-select-grid\',\'list\')">☰ Lista</button></div><div class="equip-select-grid">'+wizFilteredEstoque().map(function(e,_i){var i=e._origIdx;return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
+  {label:'Alimentação',html:function(){return '<div class="alimt-toggle"><span>O evento terá serviço de alimentação?</span><label><input type="radio" name="w_temAlim" value="sim" onchange="toggleAlimSection(true)"'+(wizardDraft.temAlimentacao?' checked':'')+'/> Sim</label><label><input type="radio" name="w_temAlim" value="nao" onchange="toggleAlimSection(false)"'+(!wizardDraft.temAlimentacao?' checked':'')+'/> Não</label></div><div id="w_alimSection" style="display:'+(wizardDraft.temAlimentacao?'block':'none')+'"><div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'cardapio\')">＋ Novo item de alimentação</button></div><p style="font-size:12px;color:var(--c-text2);margin-bottom:6px">Selecione um ou mais itens. Para itens servidos várias vezes no dia (ex: coffee de manhã e tarde), informe o nº de vezes:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'food-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'food-select-grid\',\'list\')">☰ Lista</button></div><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+',event)">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><div class="food-vezes-row" onclick="event.stopPropagation()"><label>Vezes/dia:</label><input type="number" min="1" max="10" value="1" id="food_vezes_'+i+'"/><span style="font-size:10px;color:var(--c-text3)">(manhã/tarde…)</span></div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
   {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="background:var(--c-surface2);border-radius:10px;padding:12px;margin-bottom:12px"><div style="font-weight:600;font-size:13px;margin-bottom:8px">💳 Pagamento</div><label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px"><input type="checkbox" id="w_incDB" checked/> Incluir dados bancários na proposta</label><label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="w_incQR" checked/> Incluir QR Code PIX na proposta</label></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar Preview do PDF</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
 ];
 function resetWizardDraft(){
@@ -3680,6 +3757,29 @@ function saveWizardStepData(step){
     wizardDraft.tipoEvento=document.getElementById('w_tipo')?document.getElementById('w_tipo').value:'Congresso';
     var pt=document.querySelector('input[name="w_propTipo"]:checked');
     wizardDraft.propTipo=pt?pt.value:'normal';
+    if(wizardDraft.propTipo==='oficio'){
+      var ofc={
+        num:(document.getElementById('w_oficioNum')||{}).value||'',
+        fornecedor:(document.getElementById('w_oficioForn')||{}).value||'Fecomércio CE',
+        data:(document.getElementById('w_oficioData')||{}).value||'',
+        percent:parseFloat((document.getElementById('w_oficioPct')||{}).value)||0,
+        valor:parseFloat((document.getElementById('w_oficioVal')||{}).value)||0,
+        obs:(document.getElementById('w_oficioObs')||{}).value||'',
+        arquivo:(wizardDraft.oficio&&wizardDraft.oficio.arquivo)||'',
+        arquivoNome:(wizardDraft.oficio&&wizardDraft.oficio.arquivoNome)||''
+      };
+      wizardDraft.oficio=ofc;
+      var saveChk=document.getElementById('w_oficioSalvar');
+      if(saveChk&&saveChk.checked&&(ofc.num||ofc.percent||ofc.valor)){
+        if(!DATA.oficios)DATA.oficios=[];
+        var existsIdx=DATA.oficios.findIndex(function(o){return o.num&&o.num===ofc.num;});
+        if(existsIdx>=0)DATA.oficios[existsIdx]=Object.assign({},DATA.oficios[existsIdx],ofc);
+        else DATA.oficios.push(Object.assign({createdAt:new Date().toISOString()},ofc));
+        try{saveToStorage();}catch(e){}
+      }
+    }else{
+      wizardDraft.oficio=null;
+    }
   }else if(step===2){
     wizardDraft.espaco=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'';
     wizardDraft.periodo=document.getElementById('w_periodo')?document.getElementById('w_periodo').value:'Diária Completa';
@@ -3723,6 +3823,19 @@ function restoreWizardStepData(step){
     if(document.getElementById('w_tipo'))document.getElementById('w_tipo').value=d.tipoEvento||'Congresso';
     var pt=document.querySelector('input[name="w_propTipo"][value="'+(d.propTipo||'normal')+'"]');
     if(pt)pt.checked=true;
+    toggleOficioBlock();
+    if(d.oficio){
+      var of=d.oficio;
+      ['Num','Forn','Data','Pct','Val','Obs'].forEach(function(k){
+        var map={Num:'num',Forn:'fornecedor',Data:'data',Pct:'percent',Val:'valor',Obs:'obs'};
+        var el=document.getElementById('w_oficio'+k);
+        if(el&&of[map[k]]!=null)el.value=of[map[k]];
+      });
+      if(of.arquivoNome){
+        var info=document.getElementById('w_oficioFileInfo');
+        if(info)info.innerHTML='📎 '+of.arquivoNome;
+      }
+    }
   }else if(step===2){
     if(document.getElementById('w_espaco'))document.getElementById('w_espaco').value=d.espaco||'Selecione...';
     if(document.getElementById('w_periodo'))document.getElementById('w_periodo').value=d.periodo||'Diária Completa';
@@ -3762,22 +3875,45 @@ function calcEquipTotal(equipamentos,dias){
   dias=dias||1;
   return (equipamentos||[]).reduce(function(sum,eq){return sum+(eq.qtd*(eq.valor||0)*dias);},0);
 }
+function isBebidaItem(f){return !!(f&&(f.noDesconto===true||f.cat==='Bebida'));}
 function calcFoodTotal(alimentacao,pax){
   pax=parseInt(pax)||0;
   return (alimentacao||[]).reduce(function(sum,f){return sum+(f.val*pax*(f.vezes||1));},0);
 }
+function calcBebidasTotal(alimentacao,pax){
+  pax=parseInt(pax)||0;
+  return (alimentacao||[]).filter(isBebidaItem).reduce(function(sum,f){return sum+(f.val*pax*(f.vezes||1));},0);
+}
+function hasBebidas(alimentacao){return (alimentacao||[]).some(isBebidaItem);}
 function calcLocacaoTotal(espaco,dias){
   var espObj=DATA.espacos.find(function(e){return e.nome===espaco;})||{valor:0};
   return (espObj.valor||0)*(dias||1);
 }
+function calcOficioDesconto(oficio,subtotal){
+  if(!oficio)return 0;
+  var pct=parseFloat(oficio.percent)||0;
+  var val=parseFloat(oficio.valor)||0;
+  var byPct=subtotal*(pct/100);
+  return Math.max(byPct,val);
+}
 function calcProposalTotal(draft){
   var dias=draft.dias||1;
-  return calcLocacaoTotal(draft.espaco,dias)+calcEquipTotal(draft.equipamentos,dias)+calcFoodTotal(draft.alimentacao,draft.pax);
+  var sub=calcLocacaoTotal(draft.espaco,dias)+calcEquipTotal(draft.equipamentos,dias)+calcFoodTotal(draft.alimentacao,draft.pax);
+  if(draft.propTipo==='oficio'&&draft.oficio){
+    // Pacote de bebidas NÃO recebe desconto — valor integral é mantido
+    var bebidas=calcBebidasTotal(draft.alimentacao,draft.pax);
+    var base=Math.max(0,sub-bebidas);
+    var desc=calcOficioDesconto(draft.oficio,base);
+    return Math.max(0,sub-desc);
+  }
+  return sub;
 }
 function buildProposalFromDraft(draft,total,statusOverride){
+  var dias=draft.dias||1;
+  var subtotal=calcLocacaoTotal(draft.espaco,dias)+calcEquipTotal(draft.equipamentos,dias)+calcFoodTotal(draft.alimentacao,draft.pax);
   return {
     evento:draft.evento||'Novo Evento',cliente:draft.cliente||'Cliente',espaco:draft.espaco||'A definir',
-    data:draft.data||new Date().toISOString().split('T')[0],valor:total,tipo:draft.propTipo||'normal',
+    data:draft.data||new Date().toISOString().split('T')[0],valor:total,valorBruto:subtotal,tipo:draft.propTipo||'normal',
     hora:draft.hora,pax:draft.pax,tipoEvento:draft.tipoEvento,periodo:draft.periodo,dias:draft.dias,
     servicos:draft.servicos.slice(),equipamentos:draft.equipamentos.slice(),alimentacao:draft.alimentacao.slice(),
     areaTecnica:draft.areaTecnica||'interna',formatoEvento:draft.formatoEvento||draft.tipoEvento||'Congresso',
@@ -3785,8 +3921,66 @@ function buildProposalFromDraft(draft,total,statusOverride){
     infoTecnica:draft.infoTecnica||'',
     incluirDadosBanc:draft.incluirDadosBanc!==false,
     incluirQR:draft.incluirQR!==false,
+    oficio:draft.propTipo==='oficio'&&draft.oficio?Object.assign({},draft.oficio):null,
     status:statusOverride||'Pendente'
   };
+}
+function toggleOficioBlock(){
+  var blk=document.getElementById('w_oficioBlock');
+  if(!blk)return;
+  var pt=document.querySelector('input[name="w_propTipo"]:checked');
+  blk.style.display=(pt&&pt.value==='oficio')?'block':'none';
+}
+function aplicarOficioSelecionado(){
+  var sel=document.getElementById('w_oficioSel');
+  if(!sel||!sel.value)return;
+  var o=(DATA.oficios||[])[parseInt(sel.value)];
+  if(!o)return;
+  var map={w_oficioNum:o.num,w_oficioForn:o.fornecedor,w_oficioData:o.data,w_oficioPct:o.percent,w_oficioVal:o.valor,w_oficioObs:o.obs};
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el&&map[id]!=null)el.value=map[id];});
+  var info=document.getElementById('w_oficioFileInfo');
+  if(info&&o.arquivoNome)info.innerHTML='📎 '+o.arquivoNome+' (do ofício vinculado)';
+  if(!wizardDraft.oficio)wizardDraft.oficio={};
+  wizardDraft.oficio.arquivo=o.arquivo||'';
+  wizardDraft.oficio.arquivoNome=o.arquivoNome||'';
+  toast('Ofício '+(o.num||'')+' vinculado','success');
+}
+function detectarDescontoOficio(input){
+  if(!input.files||!input.files[0])return;
+  var f=input.files[0];
+  var info=document.getElementById('w_oficioFileInfo');
+  if(info)info.innerHTML='📎 '+f.name+' · <span style="color:var(--c-text3)">analisando...</span>';
+  // Auto-detect from filename (e.g. "oficio-20pct.pdf" or "desconto-15%.pdf")
+  var m=f.name.match(/(\d{1,2}(?:[.,]\d{1,2})?)\s*(?:%|pct|porcento)/i);
+  if(m){
+    var pct=parseFloat(m[1].replace(',','.'));
+    var pctEl=document.getElementById('w_oficioPct');
+    if(pctEl&&!pctEl.value)pctEl.value=pct;
+    if(info)info.innerHTML='📎 '+f.name+' · <span style="color:var(--c-green)">desconto detectado: '+pct+'%</span> (ajustável)';
+  }
+  // Try to read PDF as text for further detection
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var data=e.target.result;
+    if(!wizardDraft.oficio)wizardDraft.oficio={};
+    wizardDraft.oficio.arquivo=data;
+    wizardDraft.oficio.arquivoNome=f.name;
+    // Best-effort text scan: extract printable ASCII from raw PDF
+    try{
+      var raw=atob(data.split(',')[1]||'');
+      var txt=raw.replace(/[^\x20-\x7E\n]/g,' ');
+      var m2=txt.match(/desconto[^0-9]{0,40}(\d{1,2}(?:[.,]\d{1,2})?)\s*%/i)||txt.match(/(\d{1,2}(?:[.,]\d{1,2})?)\s*%[^0-9]{0,30}desconto/i);
+      if(m2){
+        var p2=parseFloat(m2[1].replace(',','.'));
+        var pe=document.getElementById('w_oficioPct');
+        if(pe&&!pe.value)pe.value=p2;
+        if(info)info.innerHTML='📎 '+f.name+' · <span style="color:var(--c-green)">desconto detectado no PDF: '+p2+'%</span> (ajustável)';
+      }else if(!m&&info){
+        info.innerHTML='📎 '+f.name+' · <span style="color:var(--c-amber)">desconto não detectado automaticamente — informe manualmente</span>';
+      }
+    }catch(err){}
+  };
+  reader.readAsDataURL(f);
 }
 function toggleEquipCard(card,idx){
   card.classList.toggle('selected');
@@ -3886,24 +4080,71 @@ function wizardStep(dir){
     var novaProp=buildProposalFromDraft(draft,total,'Pendente');
     novaProp.id='P'+String(DATA.propostas.length+1).padStart(3,'0');
     novaProp.num=num;
-    var goAhead=confirm('Cadastro finalizado!\n\nDeseja gerar o PDF da proposta '+num+' agora?\n(Recomendado antes de fechar)');
+    novaProp.createdAt=new Date().toISOString();
     DATA.propostas.push(novaProp);
     var osN=DATA.ordens.length+1;
     DATA.ordens.push({id:'OS'+String(osN).padStart(3,'0'),evento:novaProp.evento,tipo:'TI/AV',resp:'A definir',data:novaProp.data,status:'Aberta',prog:0,prio:'Normal',obs:'Criada automaticamente a partir da proposta '+num});
-    saveToStorage();renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
-    if(goAhead){
-      var newIdx=DATA.propostas.length-1;
-      exportPropostaIdx=newIdx;
-      exportarPropostaSenacPDF(novaProp,(document.getElementById('wizTimbrado')||{}).value||'senac');
-    }
+    saveToStorage();
     closeModal('modalProposta');
-    toast('🎉 Proposta '+num+' criada! OS gerada automaticamente.','success');
+    renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
+    toast('🎉 Proposta '+num+' salva na lista! OS gerada automaticamente.','success');
     setTimeout(function(){checkPrazosVencidos();},300);
     resetWizardDraft();initWizard();populateOSProp();
     return;
   }
   wizardCurrentStep=next;renderWizardStep(next);
 }
+var wizReturnAfterSave=null;
+function wizSubModal(kind){
+  try{saveWizardStepData(wizardCurrentStep);}catch(e){}
+  wizReturnAfterSave=wizardCurrentStep;
+  if(kind==='cliente')abrirNovoCliente();
+  else if(kind==='espaco')abrirNovoEspaco();
+  else if(kind==='ti')abrirNovoTI();
+  else if(kind==='cardapio')abrirNovoCardapio();
+  setTimeout(function(){
+    var map={cliente:'modalCliente',espaco:'modalEspaco',ti:'modalTI',cardapio:'modalCardapio'};
+    var modalId=map[kind];if(!modalId)return;
+    var btns=document.querySelectorAll('#'+modalId+' .btn-primary');
+    var btn=btns[btns.length-1];
+    if(btn){btn.dataset._origLabel=btn.textContent;btn.textContent='💾 Salvar e voltar à proposta';}
+    var foot=btn?btn.parentElement:null;
+    if(foot&&!foot.querySelector('.wiz-back-note')){
+      var span=document.createElement('div');
+      span.className='wiz-back-note';
+      span.style.cssText='font-size:11px;color:var(--c-text3);margin-right:auto;align-self:center';
+      span.textContent='↩ Você está cadastrando a partir do wizard de proposta. Seus dados serão preservados.';
+      foot.insertBefore(span,foot.firstChild);
+    }
+  },60);
+}
+function returnToWizard(newName,kind){
+  if(wizReturnAfterSave==null)return false;
+  var step=wizReturnAfterSave;wizReturnAfterSave=null;
+  if(kind==='cliente'&&newName)wizardDraft.cliente=newName;
+  else if(kind==='espaco'&&newName)wizardDraft.espaco=newName;
+  setTimeout(function(){renderWizardStep(step);toast('Voltou ao cadastro da proposta — dados preservados','success');},80);
+  return true;
+}
+function wizFilteredEstoque(){
+  var espNome=wizardDraft.espaco;
+  var esp=(DATA.espacos||[]).find(function(e){return e.nome===espNome;});
+  var incl=(esp&&esp.equipIncl)||[];
+  var out=[];
+  (DATA.estoque||[]).forEach(function(e,i){
+    if(incl.indexOf(e.nome)>=0)return;
+    var c=Object.assign({},e);c._origIdx=i;out.push(c);
+  });
+  return out;
+}
+function renderEquipInclNotice(){
+  var espNome=wizardDraft.espaco;
+  var esp=(DATA.espacos||[]).find(function(e){return e.nome===espNome;});
+  var incl=(esp&&esp.equipIncl)||[];
+  if(!incl.length)return '';
+  return '<div style="padding:10px 12px;border-radius:8px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);font-size:12px;color:var(--c-text2);margin-bottom:10px"><strong style="color:var(--c-green)">✓ Inclusos no aluguel de '+espNome+':</strong> '+incl.join(', ')+' <span style="color:var(--c-text3)">(não cobrados separadamente)</span></div>';
+}
+
 function populateOSProp(){
   var sel=document.getElementById('os_prop');
   if(!sel)return;
@@ -4015,7 +4256,7 @@ function exportPDFWithOrientation(orientation){
   doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR')+' · Orientação: '+(orientation==='landscape'?'Paisagem':'Retrato'),14,startY+12);
   doc.autoTable({startY:startY+18,head:[['Nº','Evento','Cliente','Data','Espaço','Valor (R$)','Status']],
     body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),p.espaco,fmtMoney(p.valor),p.status];}),
-    styles:{fontSize:9,cellPadding:3},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
+    theme:'grid',styles:{fontSize:9,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold',lineColor:[0,92,171],lineWidth:0.2},alternateRowStyles:{fillColor:[248,250,252]}});
   addPDFPageFooter(doc);
   doc.save('Dashboard_Senac_'+orientation+'_'+Date.now()+'.pdf');
   toast('PDF '+(orientation==='landscape'?'paisagem':'retrato')+' exportado!','success');
@@ -4050,7 +4291,7 @@ function exportWizardPreviewPDF(){
   exportarPropostaSenacPDF(p,empresa);
 }
 function initFavicon(){
-  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#004b8e"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#005CAB"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
   var href='data:image/svg+xml,'+encodeURIComponent(svg);
   var link=document.getElementById('favicon');
   if(link)link.href=href;
@@ -4299,9 +4540,10 @@ function salvarImportProposta(){
     equipamentos:[],
     alimentacao:(function(){var v=(document.getElementById('imp_alim').value||'').trim();return v?[{nome:v,qtd:parseInt(document.getElementById('imp_pax').value,10)||0}]:[];})(),
     importado:true,
-    arqOrigem:_importedData&&_importedData.nomeArq||''
+    arqOrigem:_importedData&&_importedData.nomeArq||'',
+    createdAt:new Date().toISOString()
   };
-  DATA.propostas.unshift(nova);
+  DATA.propostas.push(nova);
   saveToStorage();renderPropostas();renderPropostaCards();updateBadges();
   closeModal('modalImportProposta');
   toast('Proposta importada com sucesso!','success');
@@ -4325,7 +4567,7 @@ function importarListaEventos(){
     var m=dRaw.match(/(\d{2})\/(\d{2})\/(\d{4})/);
     if(m){data=m[3]+'-'+m[2]+'-'+m[1];}else if(/^\d{4}-\d{2}-\d{2}/.test(dRaw)){data=dRaw.substring(0,10);}
     if(!data)return;
-    DATA.propostas.unshift({
+    DATA.propostas.push({
       id:'IMP'+Date.now()+'_'+inseridos,
       num:nextPropNumPreview(),
       evento:ev,
@@ -4335,7 +4577,8 @@ function importarListaEventos(){
       valor:iVal>=0?parseFloat((r[iVal]||'').toString().replace(/[^\d,.-]/g,'').replace(',','.'))||0:0,
       status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Importado',
       musicaAoVivo:false,equipamentos:[],alimentacao:[],importado:true,
-      arqOrigem:_importedData.nomeArq||''
+      arqOrigem:_importedData.nomeArq||'',
+      createdAt:new Date().toISOString()
     });
     inseridos++;
   });
