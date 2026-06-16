@@ -4645,7 +4645,10 @@ function validateWizardStep(step){
 }
 function wizardStep(dir){
   var next=wizardCurrentStep+dir;
-  if(next<1||next>5)return;
+  // FIX: no passo 5 com dir>0 (Salvar/Confirmar), next=6 — não retorne aqui;
+  // deixe o bloco "if(dir>0&&wizardCurrentStep===5)" abaixo executar.
+  if(next<1)return;
+  if(next>5&&!(dir>0&&wizardCurrentStep===5))return;
   if(dir>0){
     saveWizardStepData(wizardCurrentStep);
     var errs=validateWizardStep(wizardCurrentStep);
