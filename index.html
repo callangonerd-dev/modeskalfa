@@ -1910,17 +1910,18 @@ var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Cadas
 
 function goto(view){
   if(view==='parecer'&&!sessionStorage.getItem('authed_parecer')){
-    _authCallback=function(){sessionStorage.setItem('authed_parecer','1');gotoUnlocked('parecer');};
-    openModal('modalAuth');return;
+    if(currentUser&&currentUser.nivel==='Gestor'){
+      sessionStorage.setItem('authed_parecer','1');
+    }else{
+      _authCallback=function(){sessionStorage.setItem('authed_parecer','1');gotoUnlocked('parecer');};
+      openModal('modalAuth');return;
+    }
   }
-  if(view==='configuracoes'&&!sessionStorage.getItem('authed_configuracoes')){
-    _authCallback=function(){
-      if(currentUser&&currentUser.nivel==='Gestor'){
-        sessionStorage.setItem('authed_configuracoes','1');
-        gotoUnlocked('configuracoes');
-      }else toast('Acesso restrito ao Gestor','error');
-    };
-    openModal('modalAuth');return;
+  if(view==='configuracoes'){
+    if(!currentUser||currentUser.nivel!=='Gestor'){
+      toast('Acesso restrito ao Gestor','error');return;
+    }
+    sessionStorage.setItem('authed_configuracoes','1');
   }
   gotoUnlocked(view);
 }
