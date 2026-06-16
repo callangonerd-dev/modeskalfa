@@ -334,6 +334,8 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
 /* Confirmação de pagamento */
 .payment-confirm-btn{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:none;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:4px;box-shadow:0 2px 8px rgba(5,150,105,.25)}
 .payment-confirm-btn:hover{filter:brightness(1.08)}
+.btn-icon.btn-confirm-pgto{background:linear-gradient(135deg,#059669,#10b981);color:#fff;border:1px solid rgba(16,185,129,.45);box-shadow:0 2px 8px rgba(5,150,105,.28)}
+.btn-icon.btn-confirm-pgto:hover{filter:brightness(1.1);transform:translateY(-1px)}
 .deadline-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;letter-spacing:.3px}
 .deadline-ok{background:rgba(16,185,129,.12);color:var(--c-green)}
 .deadline-warn{background:rgba(245,158,11,.15);color:var(--c-amber)}
@@ -1468,13 +1470,13 @@ let _firebaseUnsub=null;
 // ── DATA ──────────────────────────────────────────────────────────
 let DATA={portfolio:[],oficios:[],
   propostas:[
-    {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
-    {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
-    {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',hora:'09:00',valor:32000,status:'Pendente',tipo:'oficio',areaTecnica:'interna',formatoEvento:'Palestra',musicaAoVivo:false,ocupacao:'08h',valorBase:7200,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],docUrl:''},
-    {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:'07.299.392/0001-77',equipamentos:[],docUrl:''},
-    {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:'03.281.227/0001-00',equipamentos:[],docUrl:''},
-    {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',hora:'08:30',valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,ocupacao:'08h',valorBase:1300,equipamentos:[]},
-    {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',hora:'10:00',valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,ocupacao:'08h',valorBase:5500,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
+    {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',pax:350,valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
+    {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',pax:40,valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
+    {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',hora:'09:00',pax:220,valor:32000,status:'Pendente',tipo:'oficio',areaTecnica:'interna',formatoEvento:'Palestra',musicaAoVivo:false,ocupacao:'08h',valorBase:7200,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],docUrl:''},
+    {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',pax:18,valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:'07.299.392/0001-77',equipamentos:[],docUrl:''},
+    {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',pax:180,valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:'03.281.227/0001-00',equipamentos:[],docUrl:''},
+    {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',hora:'08:30',pax:120,valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,ocupacao:'08h',valorBase:1300,equipamentos:[]},
+    {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',hora:'10:00',pax:500,valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,ocupacao:'08h',valorBase:5500,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
   ],
   ordens:[
     {id:'OS001',evento:'Congresso de Tecnologia',tipo:'TI/AV',resp:'Carlos Matos',data:'2026-06-25',status:'Em Execução',prog:65,prio:'Alta',obs:''},
@@ -1599,7 +1601,7 @@ function saveAssetsLocal(){
 }
 function loadFromStorage(){
   try{
-    var s=localStorage.getItem('modesk_v9');
+    var s=localStorage.getItem('modesk_v10')||localStorage.getItem('modesk_v9');
     if(s){var d=JSON.parse(s);Object.keys(d).forEach(function(k){if(d[k]!==undefined)DATA[k]=d[k];});}
     DATA.estoque.forEach(function(e){if(e.valor===undefined)e.valor=0;});
     DATA.clientes.forEach(function(c){if(c.logo===undefined)c.logo=null;});
@@ -1609,6 +1611,8 @@ function loadFromStorage(){
       if(!p.servicosAdicionais)p.servicosAdicionais=[];
       if(!p.origem)p.origem=p.importado?'importado':'manual';
       if(!p.updatedAt)p.updatedAt=p.createdAt||new Date().toISOString();
+      if(!p.hora)p.hora='08:00';
+      if(p.pax===undefined||p.pax===null||p.pax==='')p.pax=parseInt(p.participantes,10)||p.valorBase&&Math.max(20,Math.round((p.valorBase||0)/50))||50;
     });
     if(!DATA.oficios)DATA.oficios=[];
     if(!DATA.servicosAdicionais)DATA.servicosAdicionais=[];
@@ -1620,7 +1624,7 @@ function loadFromStorage(){
   }catch(e){}
 }
 function saveToStorage(){
-  try{localStorage.setItem('modesk_v9',JSON.stringify(DATA));pushFirebase();}catch(e){}
+  try{localStorage.setItem('modesk_v10',JSON.stringify(DATA));localStorage.removeItem('modesk_v9');pushFirebase();}catch(e){}
 }
 function pushFirebase(){
   if(_firebaseSyncing||!window.moDeskFirebaseReady||!window.moDeskFirebasePush)return;
@@ -1653,7 +1657,7 @@ function applyFirebaseRemote(remote){
   }finally{_firebaseSyncing=false;}
 }
 function saveToStorageWithoutFirebase(){
-  try{localStorage.setItem('modesk_v9',JSON.stringify(DATA));localStorage.setItem('modesk_assets',JSON.stringify(ASSETS));}catch(e){}
+  try{localStorage.setItem('modesk_v10',JSON.stringify(DATA));localStorage.setItem('modesk_assets',JSON.stringify(ASSETS));}catch(e){}
 }
 function initFirebaseSync(){
   function start(){
@@ -2531,7 +2535,7 @@ function renderPropostas(list){
       +'<td><div style="display:flex;gap:4px;flex-wrap:wrap">'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Acessar/Exportar Proposta" onclick="verProposta('+idx+')" style="color:var(--c-cyan)">📄</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Editar" onclick="abrirEditProposta('+idx+')">✏️</button>'
-        +(p.status!=='Confirmada'&&p.status!=='Cancelada'?'<button class="payment-confirm-btn" title="Confirmar pagamento" onclick="abrirConfirmarPagamento('+idx+')">💵 Confirmar</button>':'')
+        +(p.status!=='Confirmada'&&p.status!=='Cancelada'?'<button class="btn btn-icon btn-sm btn-confirm-pgto" title="Confirmar pagamento" onclick="abrirConfirmarPagamento('+idx+')">💵</button>':'')
         +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirProposta('+idx+')">🗑️</button>':'')
       +'</div></td>'
       +'</tr>';
