@@ -522,6 +522,32 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
   </div>
 </div>
 
+<!-- MODAL: Cadastro de Ofício FECOMÉRCIO -->
+<div class="modal-overlay" id="modalOficioCad">
+  <div class="modal">
+    <div class="modal-header"><span class="modal-title" id="modalOficioCadTitle">📜 Novo Ofício FECOMÉRCIO</span><span class="modal-close" onclick="closeModal('modalOficioCad')">✕</span></div>
+    <input type="hidden" id="ofc_idx" value="-1"/>
+    <div class="form-row">
+      <div class="form-group"><label>Nº do Ofício</label><input id="ofc_num" placeholder="Ex: 045/2026"/></div>
+      <div class="form-group"><label>Data do Ofício</label><input type="date" id="ofc_data"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Fornecedor / Órgão</label><input id="ofc_forn" placeholder="Ex: Fecomércio CE" value="Fecomércio CE"/></div>
+      <div class="form-group"><label>% de Desconto</label><input type="number" id="ofc_pct" min="0" max="100" step="0.1" placeholder="20"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Valor de Desconto (R$) <span style="color:var(--c-text3);font-size:11px">(opcional)</span></label><input type="number" id="ofc_val" min="0" step="0.01" placeholder="0,00"/></div>
+      <div class="form-group"><label>Documento (PDF)</label><input type="file" id="ofc_file" accept="application/pdf"/><div id="ofc_fileInfo" style="font-size:11px;color:var(--c-text3);margin-top:4px"></div></div>
+    </div>
+    <div class="form-group" style="margin-bottom:16px"><label>Observações</label><textarea id="ofc_obs" rows="3" placeholder="Justificativa, condições especiais..."></textarea></div>
+    <div style="padding:10px 12px;border-radius:8px;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);font-size:12px;color:var(--c-text);margin-bottom:14px"><strong style="color:var(--c-amber)">⚠️ Atenção:</strong> O Pacote de Serviço de Bebidas não recebe desconto do ofício Fecomércio. O desconto será aplicado somente sobre locação, equipamentos e alimentação não-bebida.</div>
+    <div style="display:flex;justify-content:flex-end;gap:10px">
+      <button class="btn btn-ghost" onclick="closeModal('modalOficioCad')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveOficioCad()">💾 Salvar Ofício</button>
+    </div>
+  </div>
+</div>
+
 <!-- MODAL: Novo Cliente -->
 <div class="modal-overlay" id="modalCliente">
   <div class="modal">
@@ -727,7 +753,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <div class="nav-section">Operações</div>
       <div class="nav-item active" onclick="goto('dashboard')"><span class="nav-icon">⊞</span><span class="nav-label">Dashboard</span></div>
       <div class="nav-item" onclick="goto('propostas')"><span class="nav-icon">📄</span><span class="nav-label">Propostas</span><span class="nav-badge" id="badgePropostas">0</span></div>
-      <div class="nav-item" onclick="goto('ordens')"><span class="nav-icon">📋</span><span class="nav-label">Ordens de Serviço</span><span class="nav-badge" id="badgeOS">0</span></div>
+      <div class="nav-item" onclick="goto('ordens')"><span class="nav-icon">📜</span><span class="nav-label">Ofícios FECOMÉRCIO</span><span class="nav-badge" id="badgeOficios">0</span></div>
       <div class="nav-item" onclick="goto('calendario')"><span class="nav-icon">📅</span><span class="nav-label">Calendário</span></div>
       <div class="nav-section">Cadastros</div>
       <div class="nav-item" onclick="goto('clientes')"><span class="nav-icon">👥</span><span class="nav-label">Clientes</span></div>
@@ -826,7 +852,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
         </div>
         <div class="grid-2">
           <div class="card"><div class="section-header"><div class="section-title">Próximos Eventos</div><button class="btn btn-ghost btn-sm" onclick="goto('calendario')">Ver todos</button></div><div id="proxEventos"></div></div>
-          <div class="card"><div class="section-header"><div class="section-title">Ordens em Andamento</div><button class="btn btn-ghost btn-sm" onclick="goto('ordens')">Ver todas</button></div><div id="ordensAbertas"></div></div>
+          <div class="card"><div class="section-header"><div class="section-title">Ordens em Andamento</div><button class="btn btn-ghost btn-sm" onclick="goto('propostas')">Ver todas</button></div><div id="ordensAbertas"></div></div>
         </div>
       </div>
 
@@ -864,33 +890,55 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
             <tbody id="tbodyPropostas"></tbody>
           </table>
         </div></div>
+
+        <!-- MONITORAMENTO E GESTÃO DE OS (movido de Ordens de Serviço) -->
+        <div style="margin-top:28px;padding-top:20px;border-top:1px solid var(--c-border)">
+          <div class="section-header">
+            <div><div class="section-title" style="font-size:16px">📋 Monitoramento &amp; Gestão de OS</div><div class="section-sub">Ordens de Serviço ativas vinculadas às propostas</div></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-ghost btn-sm" id="osViewBtn" onclick="toggleOSView()">📊 Kanban</button>
+              <button class="btn btn-primary btn-sm" onclick="openModal('modalOS')">＋ Nova OS</button>
+            </div>
+          </div>
+          <div class="grid-4" style="margin-bottom:20px">
+            <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="osAberta">0</div><div style="font-size:12px;color:var(--c-text2)">Abertas</div></div>
+            <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)" id="osExec">0</div><div style="font-size:12px;color:var(--c-text2)">Em Execução</div></div>
+            <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="osConcluida">0</div><div style="font-size:12px;color:var(--c-text2)">Concluídas</div></div>
+            <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-red)" id="osPendente">0</div><div style="font-size:12px;color:var(--c-text2)">Pendentes</div></div>
+          </div>
+          <div id="osTableView">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>OS#</th><th>Evento</th><th>Tipo</th><th>Responsável</th><th>Data</th><th>Prioridade</th><th>Status</th><th>Progresso</th><th>Ações</th></tr></thead>
+                <tbody id="tbodyOS"></tbody>
+              </table>
+            </div>
+          </div>
+          <div id="osKanbanView" style="display:none">
+            <div class="os-kanban" id="osKanban"></div>
+          </div>
+        </div>
       </div>
 
-      <!-- ORDENS DE SERVIÇO -->
+      <!-- CADASTRO DE OFÍCIO FECOMÉRCIO -->
       <div class="view" id="view-ordens">
         <div class="section-header">
-          <div><div class="section-title" style="font-size:18px">Ordens de Serviço</div><div class="section-sub">Monitoramento e gestão das OS ativas</div></div>
+          <div><div class="section-title" style="font-size:18px">📜 Cadastro de Ofício FECOMÉRCIO</div><div class="section-sub">Biblioteca de ofícios para vincular às propostas com desconto</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-ghost btn-sm" id="osViewBtn" onclick="toggleOSView()">📊 Kanban</button>
-            <button class="btn btn-primary" onclick="openModal('modalOS')">＋ Nova OS</button>
+            <button class="btn btn-primary" onclick="abrirNovoOficio()">＋ Novo Ofício</button>
           </div>
         </div>
         <div class="grid-4" style="margin-bottom:20px">
-          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="osAberta">0</div><div style="font-size:12px;color:var(--c-text2)">Abertas</div></div>
-          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)" id="osExec">0</div><div style="font-size:12px;color:var(--c-text2)">Em Execução</div></div>
-          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="osConcluida">0</div><div style="font-size:12px;color:var(--c-text2)">Concluídas</div></div>
-          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-red)" id="osPendente">0</div><div style="font-size:12px;color:var(--c-text2)">Pendentes</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-pink)" id="ofTotal">0</div><div style="font-size:12px;color:var(--c-text2)">Ofícios cadastrados</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="ofVinculados">0</div><div style="font-size:12px;color:var(--c-text2)">Vinculados a propostas</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)" id="ofMediaPct">0%</div><div style="font-size:12px;color:var(--c-text2)">% médio de desconto</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="ofComArquivo">0</div><div style="font-size:12px;color:var(--c-text2)">Com PDF anexado</div></div>
         </div>
-        <div id="osTableView">
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>OS#</th><th>Evento</th><th>Tipo</th><th>Responsável</th><th>Data</th><th>Prioridade</th><th>Status</th><th>Progresso</th><th>Ações</th></tr></thead>
-              <tbody id="tbodyOS"></tbody>
-            </table>
-          </div>
-        </div>
-        <div id="osKanbanView" style="display:none">
-          <div class="os-kanban" id="osKanban"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Nº Ofício</th><th>Fornecedor / Órgão</th><th>Data</th><th>% Desconto</th><th>Valor (R$)</th><th>Arquivo</th><th>Observações</th><th>Vínculos</th><th>Ações</th></tr></thead>
+            <tbody id="tbodyOficios"></tbody>
+          </table>
         </div>
       </div>
 
@@ -1518,7 +1566,7 @@ function applyFirebaseRemote(remote){
     ensureGestor();
     saveToStorageWithoutFirebase();
     if(currentUser){
-      renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderClientes();renderEspacos();
+      renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderOficios();renderClientes();renderEspacos();
       renderEstoque();renderCardapio();renderCalendario();updateBadges();checkPrazosVencidos();
       updateTimbradoList();populateExportTimbradoSelects();
     }
@@ -1732,7 +1780,7 @@ function initApp(){
   var dias=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
   var meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
   document.getElementById('greetDate').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()]+' de '+n.getFullYear();
-  renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderClientes();renderEspacos();
+  renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderOficios();renderClientes();renderEspacos();
   renderEstoque();renderCardapio();renderParecer();renderCalendario();renderLixeira();
   renderUsuarios();renderAlertas();initWizard();updateBadges();populateOSProp();
   populatePortEspaco();updateTimbradoList();populateExportTimbradoSelects();checkPrazosVencidos();
@@ -1743,7 +1791,8 @@ function initApp(){
 
 function updateBadges(){
   document.getElementById('badgePropostas').textContent=DATA.propostas.length;
-  document.getElementById('badgeOS').textContent=DATA.ordens.filter(function(o){return o.status!=='Concluída';}).length;
+  var bof=document.getElementById('badgeOficios');
+  if(bof)bof.textContent=(DATA.oficios||[]).length;
   if(currentView==='dashboard'){renderDashboard();return;}
   document.getElementById('kpiPendentes').textContent=DATA.propostas.filter(function(p){return p.status==='Pendente';}).length;
   document.getElementById('kpiEventos').textContent=DATA.propostas.filter(function(p){return p.status==='Confirmada';}).length;
@@ -1769,7 +1818,7 @@ function checkPrazosVencidos(){
 }
 
 // ── NAVIGATION ────────────────────────────────────────────────────
-var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Ordens de Serviço',
+var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Cadastro de Ofício FECOMÉRCIO',
   calendario:'Calendário de Eventos',clientes:'Clientes',espacos:'Espaços & Salas',
   estoque:'Estoque TI/AV',cardapio:'Cardápios',alertas:'Central de Alertas',
   parecer:'Parecer Técnico',relatorios:'Relatórios & BI',lixeira:'Lixeira',
@@ -2604,6 +2653,101 @@ function saveOS(){
   DATA.ordens.push({id:'OS'+String(n).padStart(3,'0'),evento:prop,tipo:tipo,resp:resp,data:data||new Date().toISOString().split('T')[0],status:'Aberta',prog:0,prio:prio,obs:obs});
   saveToStorage();renderOS();closeModal('modalOS');updateBadges();toast('OS criada!','success');
 }
+
+// ── OFÍCIOS FECOMÉRCIO ───────────────────────────────────────────
+function renderOficios(){
+  var tb=document.getElementById('tbodyOficios');
+  if(!tb)return;
+  var list=DATA.oficios||[];
+  if(list.length===0){
+    tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--c-text3);padding:24px">Nenhum ofício cadastrado. Clique em "＋ Novo Ofício" para começar.</td></tr>';
+  }else{
+    tb.innerHTML=list.map(function(o,i){
+      var vinc=(DATA.propostas||[]).filter(function(p){return p.tipo==='oficio'&&p.oficio&&p.oficio.num===o.num;}).length;
+      var arquivo=o.arquivoNome?'<span class="tag" title="'+o.arquivoNome+'">📎 PDF</span>':'<span style="color:var(--c-text3);font-size:11px">—</span>';
+      return '<tr>'
+        +'<td><span style="font-weight:700;color:var(--c-pink)">'+(o.num||('Ofício '+(i+1)))+'</span></td>'
+        +'<td>'+(o.fornecedor||'—')+'</td>'
+        +'<td>'+(o.data?formatDate(o.data):'—')+'</td>'
+        +'<td><strong>'+(o.percent||0)+'%</strong></td>'
+        +'<td>'+(o.valor?fmtMoney(o.valor):'—')+'</td>'
+        +'<td>'+arquivo+'</td>'
+        +'<td style="max-width:200px;font-size:12px;color:var(--c-text2)">'+(o.obs||'—')+'</td>'
+        +'<td><span class="badge '+(vinc>0?'badge-green':'badge-gray')+'">'+vinc+'</span></td>'
+        +'<td><div style="display:flex;gap:4px">'
+          +'<button class="btn btn-ghost btn-icon btn-sm" onclick="abrirEditOficio('+i+')" title="Editar">✏️</button>'
+          +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirOficio('+i+')" title="Excluir">🗑️</button>':'')
+        +'</div></td>'
+        +'</tr>';
+    }).join('');
+  }
+  var elT=document.getElementById('ofTotal');if(elT)elT.textContent=list.length;
+  var vincTotal=(DATA.propostas||[]).filter(function(p){return p.tipo==='oficio'&&p.oficio&&p.oficio.num;}).length;
+  var elV=document.getElementById('ofVinculados');if(elV)elV.textContent=vincTotal;
+  var media=list.length?Math.round(list.reduce(function(s,o){return s+(parseFloat(o.percent)||0);},0)/list.length*10)/10:0;
+  var elM=document.getElementById('ofMediaPct');if(elM)elM.textContent=media+'%';
+  var comArq=list.filter(function(o){return o.arquivoNome;}).length;
+  var elA=document.getElementById('ofComArquivo');if(elA)elA.textContent=comArq;
+}
+function abrirNovoOficio(){
+  document.getElementById('ofc_idx').value='-1';
+  document.getElementById('modalOficioCadTitle').textContent='📜 Novo Ofício FECOMÉRCIO';
+  ['num','data','pct','val','obs'].forEach(function(k){var el=document.getElementById('ofc_'+k);if(el)el.value='';});
+  document.getElementById('ofc_forn').value='Fecomércio CE';
+  var fi=document.getElementById('ofc_fileInfo');if(fi)fi.textContent='';
+  var ff=document.getElementById('ofc_file');if(ff)ff.value='';
+  openModal('modalOficioCad');
+}
+function abrirEditOficio(idx){
+  var o=(DATA.oficios||[])[idx];if(!o)return;
+  document.getElementById('ofc_idx').value=idx;
+  document.getElementById('modalOficioCadTitle').textContent='✏️ Editar Ofício '+(o.num||'');
+  document.getElementById('ofc_num').value=o.num||'';
+  document.getElementById('ofc_data').value=o.data||'';
+  document.getElementById('ofc_forn').value=o.fornecedor||'Fecomércio CE';
+  document.getElementById('ofc_pct').value=o.percent||'';
+  document.getElementById('ofc_val').value=o.valor||'';
+  document.getElementById('ofc_obs').value=o.obs||'';
+  var fi=document.getElementById('ofc_fileInfo');if(fi)fi.textContent=o.arquivoNome?('📎 '+o.arquivoNome):'';
+  openModal('modalOficioCad');
+}
+function saveOficioCad(){
+  var idx=parseInt(document.getElementById('ofc_idx').value);
+  var num=document.getElementById('ofc_num').value.trim();
+  if(!num){toast('Informe o número do ofício','error');return;}
+  var ofc={
+    num:num,
+    data:document.getElementById('ofc_data').value||'',
+    fornecedor:document.getElementById('ofc_forn').value.trim()||'Fecomércio CE',
+    percent:parseFloat(document.getElementById('ofc_pct').value)||0,
+    valor:parseFloat(document.getElementById('ofc_val').value)||0,
+    obs:document.getElementById('ofc_obs').value||''
+  };
+  if(!DATA.oficios)DATA.oficios=[];
+  var fileInput=document.getElementById('ofc_file');
+  var doSave=function(){
+    if(idx>=0){
+      ofc.arquivo=ofc.arquivo||DATA.oficios[idx].arquivo||'';
+      ofc.arquivoNome=ofc.arquivoNome||DATA.oficios[idx].arquivoNome||'';
+      DATA.oficios[idx]=Object.assign({},DATA.oficios[idx],ofc);
+    }else{
+      DATA.oficios.push(Object.assign({createdAt:new Date().toISOString()},ofc));
+    }
+    saveToStorage();renderOficios();updateBadges();closeModal('modalOficioCad');
+    toast(idx>=0?'Ofício atualizado!':'Ofício cadastrado!','success');
+  };
+  if(fileInput&&fileInput.files&&fileInput.files[0]){
+    var f=fileInput.files[0];var r=new FileReader();
+    r.onload=function(ev){ofc.arquivo=ev.target.result;ofc.arquivoNome=f.name;doSave();};
+    r.readAsDataURL(f);
+  }else doSave();
+}
+function excluirOficio(idx){
+  if(!confirm('Excluir este ofício? Propostas vinculadas manterão a cópia do desconto.'))return;
+  DATA.lixeira.push({tipo:'Ofício',item:DATA.oficios[idx],data:new Date().toLocaleDateString('pt-BR')});
+  DATA.oficios.splice(idx,1);saveToStorage();renderOficios();updateBadges();
+  toast('Ofício movido para Lixeira','warn');
+}
 function exportOSpdf(idx){
   var o=DATA.ordens[idx];
   var ori=prompt('Orientação do PDF?\n\nDigite "R" para Retrato (padrão) ou "P" para Paisagem:','R');
@@ -3235,7 +3379,7 @@ function restaurarItem(idx){
   else if(item.tipo==='Cardápio')DATA.cardapio.push(item.item);
   else if(item.tipo==='OS')DATA.ordens.push(item.item);
   DATA.lixeira.splice(idx,1);saveToStorage();renderLixeira();
-  [renderPropostas,renderClientes,renderEspacos,renderEstoque,renderCardapio,renderOS].forEach(function(f){try{f();}catch(e){}});
+  [renderPropostas,renderClientes,renderEspacos,renderEstoque,renderCardapio,renderOS,renderOficios].forEach(function(f){try{f();}catch(e){}});
   updateBadges();checkPrazosVencidos();toast('Item restaurado','success');
 }
 function excluirPermanente(idx){_authCallback=function(){DATA.lixeira.splice(idx,1);saveToStorage();renderLixeira();toast('Item excluído permanentemente','warn');};openModal('modalAuth');}
