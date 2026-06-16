@@ -701,6 +701,35 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
   </div>
 </div>
 
+<!-- MODAL: Serviço Adicional -->
+<div class="modal-overlay" id="modalServicoAdic">
+  <div class="modal" style="max-width:720px">
+    <div class="modal-header"><span class="modal-title" id="modalServAdicTitle">🧰 Novo Serviço Adicional</span><span class="modal-close" onclick="closeModal('modalServicoAdic')">✕</span></div>
+    <div class="form-row">
+      <div class="form-group"><label>Nome do Serviço <span style="color:var(--c-red)">*</span></label><input id="sad_nome" placeholder="Ex: Recepcionista Bilíngue"/></div>
+      <div class="form-group"><label>Categoria <span style="color:var(--c-red)">*</span></label><select id="sad_cat"><option>Operacional</option><option>Operação de Evento</option><option>Audiovisual</option><option>Ambientação</option><option>Infraestrutura</option><option>Tecnologia</option><option>Outros</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Valor Unitário (R$) <span style="color:var(--c-red)">*</span></label><input type="number" step="0.01" id="sad_valor" placeholder="0,00"/></div>
+      <div class="form-group"><label>Unidade de Cobrança <span style="color:var(--c-red)">*</span></label><select id="sad_unidade"><option>unidade</option><option>hora</option><option>diária</option><option>evento</option><option>pessoa</option><option>metro</option><option>metro²</option><option>km</option></select></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Status</label><select id="sad_status"><option>Ativo</option><option>Inativo</option></select></div>
+      <div class="form-group"><label>Ícone (emoji)</label><input id="sad_icon" placeholder="🧰" maxlength="4"/></div>
+    </div>
+    <div class="form-group" style="margin-bottom:12px"><label>Descrição Detalhada <span style="color:var(--c-red)">*</span></label><textarea id="sad_desc" rows="2" placeholder="Escopo, entregáveis, condições..."></textarea></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Responsável pela Execução</label><input id="sad_resp" placeholder="Ex: Equipe Senac · Fornecedor X"/></div>
+    <div class="form-group" style="margin-bottom:14px"><label>Observações Operacionais</label><textarea id="sad_obs" rows="2" placeholder="Pré-requisitos, limites, exceções..."></textarea></div>
+    <div id="sad_audit" style="font-size:11px;color:var(--c-text3);margin-bottom:10px"></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('modalServicoAdic')">Cancelar</button>
+      <button class="btn btn-primary" onclick="saveServicoAdic()">💾 Salvar Serviço</button>
+    </div>
+  </div>
+</div>
+
+
+
 <!-- MODAL: Exportar -->
 <div class="modal-overlay" id="modalExportar">
   <div class="modal" style="max-width:420px">
@@ -760,6 +789,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <div class="nav-item" onclick="goto('espacos')"><span class="nav-icon">🏛️</span><span class="nav-label">Espaços</span></div>
       <div class="nav-item" onclick="goto('estoque')"><span class="nav-icon">💻</span><span class="nav-label">Estoque TI/AV</span></div>
       <div class="nav-item" onclick="goto('cardapio')"><span class="nav-icon">🍽️</span><span class="nav-label">Cardápio</span></div>
+      <div class="nav-item" onclick="goto('servicosAdic')"><span class="nav-icon">🧰</span><span class="nav-label">Serviços Adicionais</span></div>
       <div class="nav-section">Gestão</div>
       <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon" id="sidebarBellIcon">🔔</span><span class="nav-label">Alertas</span></div>
       <div class="nav-item" onclick="requireGestor(function(){goto('parecer');})"><span class="nav-icon">🔍</span><span class="nav-label">Parecer Técnico</span></div>
@@ -1045,6 +1075,34 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
           <div class="table-wrap"><table><thead><tr><th>Evento</th><th>Serviço</th><th>Pax</th><th>Valor Total</th><th>Status</th></tr></thead><tbody id="tbodyPedidos"></tbody></table></div>
         </div>
       </div>
+
+      <!-- SERVIÇOS ADICIONAIS -->
+      <div class="view" id="view-servicosAdic">
+        <div class="section-header">
+          <div>
+            <div class="section-title" style="font-size:18px">🧰 Serviços Adicionais</div>
+            <div class="section-sub">Catálogo único de serviços comercializáveis. Toda inclusão na proposta é feita exclusivamente a partir deste cadastro.</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <input id="servAdicSearch" placeholder="🔍 buscar..." style="padding:6px 10px;border:1px solid var(--c-border);border-radius:8px;font-size:13px" oninput="renderServicosAdic()"/>
+            <select id="servAdicFiltroStatus" onchange="renderServicosAdic()" style="padding:6px 10px;border:1px solid var(--c-border);border-radius:8px;font-size:13px">
+              <option value="">Todos os status</option><option>Ativo</option><option>Inativo</option>
+            </select>
+            <button class="btn btn-primary" onclick="abrirNovoServicoAdic()">＋ Novo Serviço</button>
+          </div>
+        </div>
+        <div class="grid-4" style="margin-bottom:20px">
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="sadTotal">0</div><div style="font-size:12px;color:var(--c-text2)">Total cadastrados</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-cyan)" id="sadAtivos">0</div><div style="font-size:12px;color:var(--c-text2)">Ativos</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-amber)" id="sadInativos">0</div><div style="font-size:12px;color:var(--c-text2)">Inativos</div></div>
+          <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-accent)" id="sadCats">0</div><div style="font-size:12px;color:var(--c-text2)">Categorias</div></div>
+        </div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Serviço</th><th>Categoria</th><th>Valor</th><th>Unidade</th><th>Responsável</th><th>Status</th><th>Atualizado</th><th></th></tr></thead>
+          <tbody id="tbodyServAdic"></tbody>
+        </table></div>
+      </div>
+
 
       <!-- ALERTAS -->
       <div class="view" id="view-alertas">
@@ -1390,7 +1448,7 @@ let _authCallback = null;
 let currentView = 'dashboard';
 let wizardCurrentStep=1;
 let calYear=2026,calMonth=5;
-let editingIdx={espaco:-1,ti:-1,cardapio:-1};
+let editingIdx={espaco:-1,ti:-1,cardapio:-1,servicoAdic:-1};
 let editingPropostaIdx=-1;
 let wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,infoTecnica:'',temAlimentacao:false,incluirDadosBanc:true,incluirQR:true};
 let exportCtxStr='';
@@ -1464,6 +1522,24 @@ let DATA={portfolio:[],oficios:[],
     {nome:'Pacote Bebidas Alcoólicas — Básico (2h)',cat:'Bebida',val:89,items:'Vinho tinto, vinho branco, long neck + água, suco e refrigerante. 3ª h R$133,50 (+50%) · 4ª h R$155,75 (+25%).',alerg:'Álcool',icon:'🍷',foto:null,noDesconto:true},
     {nome:'Pacote Bebidas Alcoólicas — Completo (2h)',cat:'Bebida',val:135,items:'Whisky, cachaça, long neck, vinho branco, vinho tinto, espumante + água, suco e refrigerante. 3ª h R$202,50 (+50%) · 4ª h R$236,75 (+25%).',alerg:'Álcool',icon:'🥃',foto:null,noDesconto:true},
   ],
+  servicosAdicionais:[
+    {nome:'Limpeza Pós-Evento',cat:'Operacional',valor:350,unidade:'diária',status:'Ativo',resp:'Equipe Operacional Senac',desc:'Limpeza completa do espaço após o término do evento (varrição, recolhimento, pano úmido, banheiros).',obs:'Mínimo 2 colaboradores. Para eventos com alimentação adicionar 1 colaborador extra.',icon:'🧹',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Segurança Patrimonial',cat:'Operacional',valor:60,unidade:'hora',status:'Ativo',resp:'Empresa terceirizada credenciada',desc:'Vigilante desarmado, uniformizado, com rádio comunicador.',obs:'Mínimo 4h. Acima de 200 pax considerar 2 vigilantes simultâneos.',icon:'🛡️',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Brigadista de Incêndio',cat:'Operacional',valor:80,unidade:'hora',status:'Ativo',resp:'Brigadista certificado',desc:'Profissional habilitado conforme NR-23 e exigências do Corpo de Bombeiros.',obs:'Obrigatório em eventos acima de 100 pessoas e em eventos com público em pé.',icon:'🚒',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Mestre de Cerimônias',cat:'Operação de Evento',valor:1500,unidade:'evento',status:'Ativo',resp:'Profissional contratado',desc:'Apresentação, condução do evento, scripts, leitura de protocolos institucionais.',obs:'Briefing obrigatório com 48h de antecedência.',icon:'🎙️',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Recepcionista Bilíngue',cat:'Operação de Evento',valor:250,unidade:'diária',status:'Ativo',resp:'Equipe Senac / Fornecedor',desc:'Credenciamento, recepção, apoio ao público. Uniformizada.',obs:'Sugerido 1 recepcionista a cada 50 participantes.',icon:'💁',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Serviço de Valet',cat:'Operação de Evento',valor:90,unidade:'hora',status:'Ativo',resp:'Empresa credenciada',desc:'Manobristas uniformizados com seguro contra terceiros.',obs:'Necessário acordo prévio com administração do shopping/condomínio.',icon:'🚗',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Tradução Simultânea (cabine + 2 intérpretes)',cat:'Operação de Evento',valor:850,unidade:'hora',status:'Ativo',resp:'Empresa credenciada',desc:'Cabine acústica, transmissor, headsets, 2 intérpretes profissionais (par de idioma a confirmar).',obs:'Mínimo 4h de contratação. Briefing técnico obrigatório.',icon:'🎧',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Filmagem Profissional',cat:'Audiovisual',valor:1800,unidade:'diária',status:'Ativo',resp:'Equipe de produção contratada',desc:'Cinegrafista + 1 câmera 4K + edição básica de até 5 min.',obs:'Edição estendida cobrada à parte.',icon:'🎥',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Fotografia Profissional',cat:'Audiovisual',valor:1200,unidade:'diária',status:'Ativo',resp:'Fotógrafo contratado',desc:'Cobertura completa, 200+ fotos tratadas, entrega em até 5 dias.',obs:'Inclui galeria online compartilhável.',icon:'📷',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Transmissão Online (Streaming)',cat:'Audiovisual',valor:2200,unidade:'evento',status:'Ativo',resp:'Equipe técnica Senac + fornecedor',desc:'Captação, mixagem A/V e transmissão para YouTube/Meet/Teams. Inclui chat moderado.',obs:'Confirmar largura de banda do espaço com 72h de antecedência.',icon:'📡',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Decoração Temática',cat:'Ambientação',valor:2500,unidade:'evento',status:'Ativo',resp:'Equipe de cenografia',desc:'Painel de fundo, mesas decorativas, arranjos florais conforme briefing.',obs:'Aprovação de layout pelo cliente em até 7 dias antes do evento.',icon:'🌸',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Sinalização Interna Personalizada',cat:'Ambientação',valor:450,unidade:'evento',status:'Ativo',resp:'Produção gráfica Senac',desc:'Placas direcionais, totem de boas-vindas, identificação de salas.',obs:'Arte enviada pelo cliente em formato vetorial.',icon:'🪧',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Banner Impresso',cat:'Ambientação',valor:95,unidade:'metro',status:'Ativo',resp:'Gráfica parceira',desc:'Impressão em lona 440g, acabamento com ilhós ou bastão.',obs:'Prazo de produção 48h após aprovação de arte.',icon:'🖼️',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Apoio Logístico',cat:'Operacional',valor:220,unidade:'pessoa',status:'Ativo',resp:'Equipe Senac',desc:'Apoio para montagem, carregamento e organização durante o evento.',obs:'Carga horária de 8h por pessoa.',icon:'📦',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Gerador de Energia 60 kVA',cat:'Infraestrutura',valor:1450,unidade:'diária',status:'Ativo',resp:'Locadora parceira',desc:'Locação + entrega + operador. Cobertura para evento de até 8h.',obs:'Combustível incluso. Horas adicionais R$ 180,00/h.',icon:'⚡',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+    {nome:'Climatização Extra',cat:'Infraestrutura',valor:600,unidade:'diária',status:'Ativo',resp:'Equipe técnica Senac',desc:'Aluguel de ventiladores industriais ou ar-condicionado portátil para reforço.',obs:'Indicado para áreas externas ou eventos com >150 pax.',icon:'❄️',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
+  ],
   lixeira:[],
   propSequence:{2026:5},
   usuarios:[
@@ -1530,8 +1606,12 @@ function loadFromStorage(){
     DATA.propostas.forEach(function(p){
       if(!p.areaTecnica)p.areaTecnica='interna';
       if(!p.equipamentos)p.equipamentos=[];
+      if(!p.servicosAdicionais)p.servicosAdicionais=[];
+      if(!p.origem)p.origem=p.importado?'importado':'manual';
+      if(!p.updatedAt)p.updatedAt=p.createdAt||new Date().toISOString();
     });
     if(!DATA.oficios)DATA.oficios=[];
+    if(!DATA.servicosAdicionais)DATA.servicosAdicionais=[];
     ensureGestor();
     loadAssets();
     var t=localStorage.getItem('modesk_theme');
@@ -1567,7 +1647,7 @@ function applyFirebaseRemote(remote){
     saveToStorageWithoutFirebase();
     if(currentUser){
       renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderOficios();renderClientes();renderEspacos();
-      renderEstoque();renderCardapio();renderCalendario();updateBadges();checkPrazosVencidos();
+      renderEstoque();renderCardapio();renderServicosAdic();renderCalendario();updateBadges();checkPrazosVencidos();
       updateTimbradoList();populateExportTimbradoSelects();
     }
   }finally{_firebaseSyncing=false;}
@@ -1781,7 +1861,7 @@ function initApp(){
   var meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
   document.getElementById('greetDate').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()]+' de '+n.getFullYear();
   renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderOficios();renderClientes();renderEspacos();
-  renderEstoque();renderCardapio();renderParecer();renderCalendario();renderLixeira();
+  renderEstoque();renderCardapio();renderServicosAdic();renderParecer();renderCalendario();renderLixeira();
   renderUsuarios();renderAlertas();initWizard();updateBadges();populateOSProp();
   populatePortEspaco();updateTimbradoList();populateExportTimbradoSelects();checkPrazosVencidos();
   // populate parecer events
@@ -1820,7 +1900,7 @@ function checkPrazosVencidos(){
 // ── NAVIGATION ────────────────────────────────────────────────────
 var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Cadastro de Ofício FECOMÉRCIO',
   calendario:'Calendário de Eventos',clientes:'Clientes',espacos:'Espaços & Salas',
-  estoque:'Estoque TI/AV',cardapio:'Cardápios',alertas:'Central de Alertas',
+  estoque:'Estoque TI/AV',cardapio:'Cardápios',servicosAdic:'Serviços Adicionais',alertas:'Central de Alertas',
   parecer:'Parecer Técnico',relatorios:'Relatórios & BI',lixeira:'Lixeira',
   configuracoes:'Configurações',perfil:'Meu Perfil'};
 
@@ -2435,7 +2515,7 @@ function renderPropostas(list){
     var alimTxt=alimArr.length?alimArr.map(function(a){return (a&&(a.nome||a.titulo||a.item))||a;}).filter(Boolean).join(', '):'—';
     var alimCell=alimArr.length?'<span class="badge badge-cyan" title="'+alimTxt.replace(/"/g,'&quot;')+'">'+alimArr.length+' item(ns)</span>':'<span style="color:var(--c-text3)">—</span>';
     return '<tr style="'+(venc?'background:rgba(239,68,68,.05)':'')+'">'
-      +'<td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span></td>'
+      +'<td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span>'+(p.origem==='importado'||p.importado?' <span class="badge badge-amber" title="Origem: Importado de '+(p.arqOrigem||'arquivo externo')+'" style="font-size:9px">📥 IMP</span>':' <span class="badge badge-blue" title="Cadastro manual no sistema" style="font-size:9px">✍ MAN</span>')+'</td>'
       +'<td>'+p.evento+'</td>'
       +'<td>'+p.cliente+'</td>'
       +'<td><span class="tag">'+p.espaco+'</span></td>'
@@ -3317,6 +3397,130 @@ function excluirCardapio(idx){
   DATA.cardapio.splice(idx,1);saveToStorage();renderCardapio();renderLixeira();toast('Item movido para Lixeira','warn');
 }
 
+// ── SERVIÇOS ADICIONAIS (CATÁLOGO) ────────────────────────────────
+function isGestor(){return currentUser&&currentUser.nivel==='Gestor';}
+function fmtUnidade(u){return u||'unidade';}
+function ativosServAdic(){return (DATA.servicosAdicionais||[]).filter(function(s){return s.status==='Ativo';});}
+function renderServicosAdic(){
+  if(!DATA.servicosAdicionais)DATA.servicosAdicionais=[];
+  var arr=DATA.servicosAdicionais.slice();
+  var qEl=document.getElementById('servAdicSearch');var stEl=document.getElementById('servAdicFiltroStatus');
+  var q=qEl?qEl.value.toLowerCase():'';var st=stEl?stEl.value:'';
+  if(q)arr=arr.filter(function(s){return ((s.nome||'')+(s.cat||'')+(s.resp||'')+(s.desc||'')).toLowerCase().indexOf(q)>=0;});
+  if(st)arr=arr.filter(function(s){return s.status===st;});
+  var tot=document.getElementById('sadTotal');if(tot)tot.textContent=DATA.servicosAdicionais.length;
+  var at=document.getElementById('sadAtivos');if(at)at.textContent=DATA.servicosAdicionais.filter(function(s){return s.status==='Ativo';}).length;
+  var ia=document.getElementById('sadInativos');if(ia)ia.textContent=DATA.servicosAdicionais.filter(function(s){return s.status==='Inativo';}).length;
+  var cs=document.getElementById('sadCats');if(cs){var sset={};DATA.servicosAdicionais.forEach(function(s){sset[s.cat||'Outros']=1;});cs.textContent=Object.keys(sset).length;}
+  var tb=document.getElementById('tbodyServAdic');if(!tb)return;
+  if(!arr.length){tb.innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--c-text3);padding:20px">Nenhum serviço cadastrado. Clique em <strong>＋ Novo Serviço</strong> para começar.</td></tr>';return;}
+  tb.innerHTML=arr.map(function(s){
+    var realIdx=DATA.servicosAdicionais.indexOf(s);
+    var stColor=s.status==='Ativo'?'badge-green':'badge-red';
+    var upd=s.updatedAt?new Date(s.updatedAt).toLocaleDateString('pt-BR'):'—';
+    return '<tr>'
+      +'<td><div style="display:flex;align-items:center;gap:8px"><span style="font-size:18px">'+(s.icon||'🧰')+'</span><div><div style="font-weight:600">'+(s.nome||'—')+'</div><div style="font-size:11px;color:var(--c-text3);max-width:340px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+(s.desc||'')+'</div></div></div></td>'
+      +'<td><span class="badge badge-blue">'+(s.cat||'—')+'</span></td>'
+      +'<td style="color:var(--c-green);font-weight:700">'+fmtMoney(s.valor||0)+'</td>'
+      +'<td><span class="tag">/'+fmtUnidade(s.unidade)+'</span></td>'
+      +'<td style="font-size:12px;color:var(--c-text2)">'+(s.resp||'—')+'</td>'
+      +'<td><span class="badge '+stColor+'">'+(s.status||'Ativo')+'</span></td>'
+      +'<td style="font-size:11px;color:var(--c-text3)">'+upd+'</td>'
+      +'<td><div style="display:flex;gap:4px">'
+        +'<button class="btn btn-ghost btn-icon btn-sm" title="Editar" onclick="editarServicoAdic('+realIdx+')">✏️</button>'
+        +(isGestor()?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirServicoAdic('+realIdx+')">🗑️</button>':'')
+      +'</div></td>'
+      +'</tr>';
+  }).join('');
+}
+function _sadResetForm(){
+  ['sad_nome','sad_valor','sad_desc','sad_resp','sad_obs','sad_icon'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  document.getElementById('sad_cat').value='Operacional';
+  document.getElementById('sad_unidade').value='unidade';
+  document.getElementById('sad_status').value='Ativo';
+  document.getElementById('sad_audit').textContent='';
+}
+function abrirNovoServicoAdic(){
+  editingIdx.servicoAdic=-1;
+  document.getElementById('modalServAdicTitle').textContent='🧰 Novo Serviço Adicional';
+  _sadResetForm();
+  openModal('modalServicoAdic');
+}
+function editarServicoAdic(idx){
+  var s=DATA.servicosAdicionais[idx];if(!s)return;
+  editingIdx.servicoAdic=idx;
+  document.getElementById('modalServAdicTitle').textContent='✏️ Editar Serviço — '+(s.nome||'');
+  document.getElementById('sad_nome').value=s.nome||'';
+  document.getElementById('sad_cat').value=s.cat||'Operacional';
+  document.getElementById('sad_valor').value=s.valor||0;
+  document.getElementById('sad_unidade').value=s.unidade||'unidade';
+  document.getElementById('sad_status').value=s.status||'Ativo';
+  document.getElementById('sad_icon').value=s.icon||'';
+  document.getElementById('sad_desc').value=s.desc||'';
+  document.getElementById('sad_resp').value=s.resp||'';
+  document.getElementById('sad_obs').value=s.obs||'';
+  var cr=s.createdAt?new Date(s.createdAt).toLocaleString('pt-BR'):'—';
+  var up=s.updatedAt?new Date(s.updatedAt).toLocaleString('pt-BR'):'—';
+  document.getElementById('sad_audit').textContent='Criado em '+cr+' · Última atualização '+up;
+  openModal('modalServicoAdic');
+}
+function saveServicoAdic(){
+  var nome=document.getElementById('sad_nome').value.trim();
+  var valor=parseFloat(document.getElementById('sad_valor').value)||0;
+  var desc=document.getElementById('sad_desc').value.trim();
+  if(!nome){toast('Informe o nome do serviço','error');return;}
+  if(!desc){toast('Informe uma descrição detalhada','error');return;}
+  if(valor<=0){toast('Informe um valor unitário válido (> 0)','error');return;}
+  var now=new Date().toISOString();
+  var obj={
+    nome:nome,
+    cat:document.getElementById('sad_cat').value,
+    valor:valor,
+    unidade:document.getElementById('sad_unidade').value,
+    status:document.getElementById('sad_status').value,
+    icon:document.getElementById('sad_icon').value||'🧰',
+    desc:desc,
+    resp:document.getElementById('sad_resp').value.trim(),
+    obs:document.getElementById('sad_obs').value.trim(),
+    updatedAt:now
+  };
+  if(editingIdx.servicoAdic>=0){
+    var atual=DATA.servicosAdicionais[editingIdx.servicoAdic]||{};
+    obj.createdAt=atual.createdAt||now;
+    DATA.servicosAdicionais[editingIdx.servicoAdic]=obj;
+    toast('Serviço atualizado','success');
+  }else{
+    obj.createdAt=now;
+    DATA.servicosAdicionais.push(obj);
+    toast('Serviço cadastrado','success');
+  }
+  saveToStorage();
+  renderServicosAdic();
+  closeModal('modalServicoAdic');
+  if(currentView==='propostas'||document.getElementById('w_servicosAdicGrid')){try{renderWizardStep(wizardCurrentStep);}catch(e){}}
+}
+function excluirServicoAdic(idx){
+  if(!isGestor()){toast('Apenas Gestor pode excluir serviços','error');return;}
+  var s=DATA.servicosAdicionais[idx];if(!s)return;
+  if(!confirm('Excluir o serviço "'+s.nome+'"? Ele será movido para a Lixeira.'))return;
+  DATA.lixeira.push({tipo:'Serviço Adicional',item:s,data:new Date().toLocaleDateString('pt-BR')});
+  DATA.servicosAdicionais.splice(idx,1);saveToStorage();renderServicosAdic();renderLixeira();
+  toast('Serviço movido para Lixeira','warn');
+}
+// helpers usados pelo wizard
+function getServicoAdicByNome(n){return (DATA.servicosAdicionais||[]).find(function(s){return s.nome===n;});}
+function calcServicosAdicTotal(servicosAdicionais,dias){
+  dias=dias||1;
+  return (servicosAdicionais||[]).reduce(function(sum,sa){
+    var qtd=parseInt(sa.qtd)||1;
+    var val=parseFloat(sa.valor)||0;
+    var mult=(sa.unidade==='diária')?dias:1;
+    return sum+(qtd*val*mult);
+  },0);
+}
+
+
+
 // ── ALERTAS ───────────────────────────────────────────────────────
 function renderAlertas(){
   var el=document.getElementById('alertasList');
@@ -4055,7 +4259,28 @@ var wizardStepsData=[
       +'<div style="margin-top:10px;padding:10px 12px;border-radius:8px;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);font-size:12px;color:var(--c-text)"><strong style="color:var(--c-amber)">⚠️ Atenção:</strong> O <strong>Pacote de Serviço de Bebidas</strong> (taxa de rolha, pacotes alcoólicos e não-alcoólicos) <u>não recebe desconto do ofício Fecomércio</u>. Mesmo inserido na proposta, seu valor é mantido <strong>integral</strong>. O desconto será aplicado somente sobre os demais itens (locação, equipamentos e alimentação não-bebida).</div>'
       +'</div>';
   }},
-  {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal <button type="button" class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px;margin-left:6px" onclick="wizSubModal(\'espaco\')">＋ Novo espaço</button></label><select id="w_espaco" onchange="wizardDraft.espaco=this.value"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:8px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;color:var(--c-text);background:var(--c-surface2);border:1px solid var(--c-border);border-radius:8px;padding:10px 12px"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
+  {label:'Locação',html:function(){
+    var ativos=ativosServAdic();
+    var podeCadastrar=isGestor();
+    var servHtml;
+    if(!ativos.length){
+      servHtml='<div style="padding:14px;border-radius:10px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.3);font-size:12px;color:var(--c-text2)">⚠️ Nenhum serviço adicional cadastrado. '+(podeCadastrar?'Cadastre o primeiro serviço para habilitar a seleção.':'Solicite ao Gestor que cadastre os serviços disponíveis.')+'</div>';
+    }else{
+      servHtml='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin-top:8px">'+ativos.map(function(s,i){
+        return '<div class="equip-select-card" data-sad-idx="'+i+'" onclick="toggleSadCard(this,'+i+')">'
+          +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:22px">'+(s.icon||'🧰')+'</span><div style="flex:1"><div style="font-weight:600;font-size:13px">'+s.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+(s.cat||'')+'</div></div></div>'
+          +'<div style="font-size:11px;color:var(--c-text2);min-height:30px">'+(s.desc||'').slice(0,90)+((s.desc||'').length>90?'…':'')+'</div>'
+          +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px"><span style="font-size:13px;font-weight:700;color:var(--c-green)">'+fmtMoney(s.valor||0)+'<span style="font-size:10px;color:var(--c-text3)">/'+fmtUnidade(s.unidade)+'</span></span>'
+          +'<div style="display:flex;align-items:center;gap:4px" onclick="event.stopPropagation()"><label style="font-size:10px;color:var(--c-text3)">Qtd</label><input type="number" value="1" min="1" id="sad_qtd_'+i+'" style="width:55px;padding:3px 6px;font-size:12px"/></div></div>'
+          +'<input type="checkbox" style="display:none" class="sad_chk" id="sad_chk_'+i+'"/></div>';
+      }).join('')+'</div>';
+    }
+    var btnCad=podeCadastrar?'<button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="abrirNovoServicoAdic()">＋ Cadastrar novo serviço</button>':'<span style="font-size:11px;color:var(--c-text3)">Apenas o Gestor pode cadastrar novos serviços.</span>';
+    return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal <button type="button" class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px;margin-left:6px" onclick="wizSubModal(\'espaco\')">＋ Novo espaço</button></label><select id="w_espaco" onchange="wizardDraft.espaco=this.value"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div>'
+      +'<div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div>'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;flex-wrap:wrap"><label style="margin:0">Serviços Adicionais <span style="font-size:11px;color:var(--c-text3);font-weight:400">(seleção exclusiva pelo catálogo)</span></label>'+btnCad+'</div>'
+      +'<div id="w_servicosAdicGrid">'+servHtml+'</div>';
+  }},
   {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa (fornecedor terceiro)</label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px"><p style="font-size:13px;color:var(--c-text2);margin:0">Selecione os equipamentos necessários:</p><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'ti\')">＋ Novo equipamento</button></div>'+renderEquipInclNotice()+'<div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'equip-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'equip-select-grid\',\'list\')">☰ Lista</button></div><div class="equip-select-grid">'+wizFilteredEstoque().map(function(e,_i){var i=e._origIdx;return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
   {label:'Alimentação',html:function(){return '<div class="alimt-toggle"><span>O evento terá serviço de alimentação?</span><label><input type="radio" name="w_temAlim" value="sim" onchange="toggleAlimSection(true)"'+(wizardDraft.temAlimentacao?' checked':'')+'/> Sim</label><label><input type="radio" name="w_temAlim" value="nao" onchange="toggleAlimSection(false)"'+(!wizardDraft.temAlimentacao?' checked':'')+'/> Não</label></div><div id="w_alimSection" style="display:'+(wizardDraft.temAlimentacao?'block':'none')+'"><div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'cardapio\')">＋ Novo item de alimentação</button></div><p style="font-size:12px;color:var(--c-text2);margin-bottom:6px">Selecione um ou mais itens. Para itens servidos várias vezes no dia (ex: coffee de manhã e tarde), informe o nº de vezes:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'food-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'food-select-grid\',\'list\')">☰ Lista</button></div><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+',event)">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><div class="food-vezes-row" onclick="event.stopPropagation()"><label>Vezes/dia:</label><input type="number" min="1" max="10" value="1" id="food_vezes_'+i+'"/><span style="font-size:10px;color:var(--c-text3)">(manhã/tarde…)</span></div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
   {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="background:var(--c-surface2);border-radius:10px;padding:12px;margin-bottom:12px"><div style="font-weight:600;font-size:13px;margin-bottom:8px">💳 Pagamento</div><label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px"><input type="checkbox" id="w_incDB" checked/> Incluir dados bancários na proposta</label><label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="w_incQR" checked/> Incluir QR Code PIX na proposta</label></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar Preview do PDF</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
@@ -4108,8 +4333,18 @@ function saveWizardStepData(step){
     wizardDraft.espaco=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'';
     wizardDraft.periodo=document.getElementById('w_periodo')?document.getElementById('w_periodo').value:'Diária Completa';
     wizardDraft.dias=parseInt(document.getElementById('w_dias')?document.getElementById('w_dias').value:1)||1;
-    wizardDraft.servicos=[];
-    document.querySelectorAll('.w_servico:checked').forEach(function(ch){wizardDraft.servicos.push(ch.parentElement.textContent.trim());});
+    wizardDraft.servicosAdicionais=[];
+    var _ativos=ativosServAdic();
+    _ativos.forEach(function(s,i){
+      var chk=document.getElementById('sad_chk_'+i);
+      if(chk&&chk.checked){
+        var qtdEl=document.getElementById('sad_qtd_'+i);
+        var qtd=Math.max(1,parseInt(qtdEl&&qtdEl.value)||1);
+        wizardDraft.servicosAdicionais.push({nome:s.nome,cat:s.cat,unidade:s.unidade,valor:s.valor||0,qtd:qtd,resp:s.resp||'',icon:s.icon||'🧰'});
+      }
+    });
+    // mantém o array legado "servicos" sincronizado para compatibilidade
+    wizardDraft.servicos=wizardDraft.servicosAdicionais.map(function(s){return s.nome;});
   }else if(step===3){
     var ar=document.querySelector('input[name="w_areaTec"]:checked');
     wizardDraft.areaTecnica=ar?ar.value:'interna';
@@ -4164,8 +4399,12 @@ function restoreWizardStepData(step){
     if(document.getElementById('w_espaco'))document.getElementById('w_espaco').value=d.espaco||'Selecione...';
     if(document.getElementById('w_periodo'))document.getElementById('w_periodo').value=d.periodo||'Diária Completa';
     if(document.getElementById('w_dias'))document.getElementById('w_dias').value=d.dias||1;
-    document.querySelectorAll('.w_servico').forEach(function(ch){
-      ch.checked=d.servicos.indexOf(ch.parentElement.textContent.trim())>=0;
+    var _ativos2=ativosServAdic();
+    (d.servicosAdicionais||[]).forEach(function(sa){
+      var i=_ativos2.findIndex(function(x){return x.nome===sa.nome;});
+      if(i<0)return;
+      var chk=document.getElementById('sad_chk_'+i);
+      if(chk){chk.checked=true;chk.parentElement.classList.add('selected');var q=document.getElementById('sad_qtd_'+i);if(q)q.value=sa.qtd||1;}
     });
   }else if(step===3){
     var ar=document.querySelector('input[name="w_areaTec"][value="'+(d.areaTecnica||'interna')+'"]');
@@ -4222,7 +4461,10 @@ function calcOficioDesconto(oficio,subtotal){
 }
 function calcProposalTotal(draft){
   var dias=draft.dias||1;
-  var sub=calcLocacaoTotal(draft.espaco,dias)+calcEquipTotal(draft.equipamentos,dias)+calcFoodTotal(draft.alimentacao,draft.pax);
+  var sub=calcLocacaoTotal(draft.espaco,dias)
+    +calcEquipTotal(draft.equipamentos,dias)
+    +calcFoodTotal(draft.alimentacao,draft.pax)
+    +calcServicosAdicTotal(draft.servicosAdicionais,dias);
   if(draft.propTipo==='oficio'&&draft.oficio){
     // Pacote de bebidas NÃO recebe desconto — valor integral é mantido
     var bebidas=calcBebidasTotal(draft.alimentacao,draft.pax);
@@ -4234,20 +4476,34 @@ function calcProposalTotal(draft){
 }
 function buildProposalFromDraft(draft,total,statusOverride){
   var dias=draft.dias||1;
-  var subtotal=calcLocacaoTotal(draft.espaco,dias)+calcEquipTotal(draft.equipamentos,dias)+calcFoodTotal(draft.alimentacao,draft.pax);
+  var subtotal=calcLocacaoTotal(draft.espaco,dias)
+    +calcEquipTotal(draft.equipamentos,dias)
+    +calcFoodTotal(draft.alimentacao,draft.pax)
+    +calcServicosAdicTotal(draft.servicosAdicionais,dias);
+  var nowIso=new Date().toISOString();
   return {
     evento:draft.evento||'Novo Evento',cliente:draft.cliente||'Cliente',espaco:draft.espaco||'A definir',
     data:draft.data||new Date().toISOString().split('T')[0],valor:total,valorBruto:subtotal,tipo:draft.propTipo||'normal',
     hora:draft.hora,pax:draft.pax,tipoEvento:draft.tipoEvento,periodo:draft.periodo,dias:draft.dias,
-    servicos:draft.servicos.slice(),equipamentos:draft.equipamentos.slice(),alimentacao:draft.alimentacao.slice(),
+    servicos:(draft.servicos||[]).slice(),
+    servicosAdicionais:(draft.servicosAdicionais||[]).slice(),
+    equipamentos:draft.equipamentos.slice(),alimentacao:draft.alimentacao.slice(),
     areaTecnica:draft.areaTecnica||'interna',formatoEvento:draft.formatoEvento||draft.tipoEvento||'Congresso',
     musicaAoVivo:!!draft.musicaAoVivo,
     infoTecnica:draft.infoTecnica||'',
     incluirDadosBanc:draft.incluirDadosBanc!==false,
     incluirQR:draft.incluirQR!==false,
     oficio:draft.propTipo==='oficio'&&draft.oficio?Object.assign({},draft.oficio):null,
-    status:statusOverride||'Pendente'
+    status:statusOverride||'Pendente',
+    origem:'manual',
+    updatedAt:nowIso
   };
+}
+// alterna seleção de cartão de serviço adicional no wizard
+function toggleSadCard(card,idx){
+  card.classList.toggle('selected');
+  var chk=document.getElementById('sad_chk_'+idx);
+  if(chk)chk.checked=card.classList.contains('selected');
 }
 function toggleOficioBlock(){
   var blk=document.getElementById('w_oficioBlock');
@@ -4346,10 +4602,21 @@ function renderWizardStep(step){
       var vloc=calcLocacaoTotal(d.espaco,d.dias);
       var vav=calcEquipTotal(d.equipamentos,d.dias);
       var vfood=calcFoodTotal(d.alimentacao,d.pax);
+      var vsad=calcServicosAdicTotal(d.servicosAdicionais,d.dias);
       if(document.getElementById('rev_vloc'))document.getElementById('rev_vloc').textContent=fmtMoney(vloc);
       if(document.getElementById('rev_vav'))document.getElementById('rev_vav').textContent=fmtMoney(vav);
       if(document.getElementById('rev_vfood'))document.getElementById('rev_vfood').textContent=fmtMoney(vfood);
-      if(document.getElementById('rev_total'))document.getElementById('rev_total').textContent=fmtMoney(vloc+vav+vfood);
+      // adiciona/atualiza linha "Serviços Adicionais" no resumo
+      var revArea=document.getElementById('rev_vfood');
+      if(revArea&&revArea.parentElement&&!document.getElementById('rev_vsad')){
+        var row=document.createElement('div');
+        row.style.cssText='display:flex;justify-content:space-between;margin-bottom:12px';
+        row.innerHTML='<span style="font-size:13px;color:var(--c-text2)">Serviços Adicionais</span><span id="rev_vsad">—</span>';
+        revArea.parentElement.insertBefore(row,revArea.parentElement.querySelector('div[style*="border-top"]'));
+      }
+      var rsa=document.getElementById('rev_vsad');if(rsa)rsa.textContent=fmtMoney(vsad);
+      var totFinal=calcProposalTotal(d);
+      if(document.getElementById('rev_total'))document.getElementById('rev_total').textContent=fmtMoney(totFinal);
     },60);
   }
 }
@@ -4384,6 +4651,17 @@ function wizardStep(dir){
     }
   }
   if(dir>0&&wizardCurrentStep===5){
+    // ✅ Confirmar Proposta: revalidar TODAS as etapas antes de salvar
+    var stepLabels=['Evento','Locação','TI/AV','Alimentação'];
+    for(var st=1;st<=4;st++){
+      var stErrs=validateWizardStep(st);
+      if(stErrs.length){
+        alert('⚠️ Não é possível confirmar a proposta. A etapa "'+stepLabels[st-1]+'" está incompleta:\n\n• '+stErrs.join('\n• ')+'\n\nVocê será levado de volta a essa etapa.');
+        toast('Etapa "'+stepLabels[st-1]+'" incompleta — corrija antes de confirmar','error');
+        wizardCurrentStep=st;renderWizardStep(st);
+        return;
+      }
+    }
     var dbEl=document.getElementById('w_incDB');var qrEl=document.getElementById('w_incQR');
     if(dbEl)wizardDraft.incluirDadosBanc=dbEl.checked;
     if(qrEl)wizardDraft.incluirQR=qrEl.checked;
@@ -4392,7 +4670,7 @@ function wizardStep(dir){
     if(editingPropostaIdx>=0){
       var p=DATA.propostas[editingPropostaIdx];
       var updated=buildProposalFromDraft(draft,total,p.status);
-      updated.id=p.id;updated.num=p.num;
+      updated.id=p.id;updated.num=p.num;updated.origem=p.origem||updated.origem;updated.createdAt=p.createdAt||updated.createdAt;updated.importado=!!p.importado;updated.arqOrigem=p.arqOrigem||'';
       DATA.propostas[editingPropostaIdx]=updated;
       saveToStorage();renderPropostas();renderDashboard();updateBadges();checkPrazosVencidos();
       closeModal('modalProposta');
@@ -4845,31 +5123,46 @@ function salvarImportProposta(){
   var cliente=document.getElementById('imp_cliente').value.trim();
   var data=document.getElementById('imp_data').value;
   if(!evento||!cliente||!data){alert('Preencha pelo menos Evento, Cliente e Data');return;}
+  var nowIso=new Date().toISOString();
+  var valor=parseFloat(document.getElementById('imp_valor').value)||0;
+  // converte para o MESMO modelo interno do cadastro manual
   var nova={
     id:'IMP'+Date.now(),
-    num:num||nextPropNumPreview(),
+    num:num||nextPropNum(),
     evento:evento,
     cliente:cliente,
     espaco:document.getElementById('imp_espaco').value.trim()||'A definir',
     data:data,
     hora:document.getElementById('imp_hora').value||'08:00',
     pax:document.getElementById('imp_pax').value||'',
-    valor:parseFloat(document.getElementById('imp_valor').value)||0,
+    tipoEvento:'Importado',
+    periodo:'Diária Completa',
+    dias:1,
+    valor:valor,
+    valorBruto:valor,
     status:document.getElementById('imp_status').value,
     tipo:'normal',
     areaTecnica:'interna',
     formatoEvento:'Importado',
     musicaAoVivo:false,
+    infoTecnica:'',
+    servicos:[],
+    servicosAdicionais:[],
     equipamentos:[],
     alimentacao:(function(){var v=(document.getElementById('imp_alim').value||'').trim();return v?[{nome:v,qtd:parseInt(document.getElementById('imp_pax').value,10)||0}]:[];})(),
+    incluirDadosBanc:true,
+    incluirQR:true,
+    oficio:null,
     importado:true,
+    origem:'importado',
     arqOrigem:_importedData&&_importedData.nomeArq||'',
-    createdAt:new Date().toISOString()
+    createdAt:nowIso,
+    updatedAt:nowIso
   };
   DATA.propostas.push(nova);
-  saveToStorage();renderPropostas();renderPropostaCards();updateBadges();
+  saveToStorage();renderPropostas();renderPropostaCards();updateBadges();checkPrazosVencidos();renderDashboard();renderAlertas();
   closeModal('modalImportProposta');
-  toast('Proposta importada com sucesso!','success');
+  toast('Proposta '+nova.num+' importada e inserida na lista detalhada','success');
 }
 function importarListaEventos(){
   if(!_importedData||!_importedData.multi)return;
