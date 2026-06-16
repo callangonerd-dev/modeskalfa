@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>MoDesk ALFA v9.0 — Senac Aldeota</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
+<title>Senac Aldeota — Eventos & Propostas</title>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.6.0/jspdf.plugin.autotable.min.js"></script>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import{getFirestore,doc,setDoc,onSnapshot,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
@@ -32,21 +32,29 @@ window.moDeskFirebaseListen=function(cb){
 window.moDeskFirebaseReady=true;
 if(window.moDeskOnFirebaseReady)window.moDeskOnFirebaseReady();
 </script>
-<style>
-:root{
-  --c-bg:#0d0f14;--c-surface:#141720;--c-surface2:#1a1e2e;--c-surface3:#1f2437;
+  <style>
+    :root{
+  --c-bg:#f4f6f9;--c-surface:#ffffff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
+  --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
+  --c-accent:#003366;--c-accent2:#004080;--c-accent3:#336699;
+  --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
+  --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;
+  --c-sidebar:240px;--c-topbar:72px;--radius:10px;--radius-lg:16px;--shadow:0 4px 24px rgba(0,51,102,0.08);
+}
+[data-theme="dark"]{
+  --c-bg:#0d1117;--c-surface:#141720;--c-surface2:#1a1e2e;--c-surface3:#1f2437;
   --c-border:rgba(99,113,183,0.18);--c-border2:rgba(99,113,183,0.32);
   --c-accent:#6366f1;--c-accent2:#818cf8;--c-accent3:#a5b4fc;
   --c-cyan:#22d3ee;--c-green:#10b981;--c-amber:#f59e0b;--c-red:#ef4444;--c-pink:#ec4899;
   --c-text:#e2e8f0;--c-text2:#94a3b8;--c-text3:#64748b;
-  --c-sidebar:240px;--c-topbar:60px;--radius:10px;--radius-lg:16px;--shadow:0 2px 12px rgba(0,0,0,0.25);
+  --shadow:0 2px 12px rgba(0,0,0,0.25);
 }
 [data-theme="light"]{
-  --c-bg:#f1f5f9;--c-surface:#fff;--c-surface2:#f8fafc;--c-surface3:#f1f5f9;
-  --c-border:rgba(99,113,183,0.15);--c-border2:rgba(99,113,183,0.3);
-  --c-accent:#4f46e5;--c-accent2:#6366f1;--c-accent3:#818cf8;
-  --c-cyan:#0891b2;--c-green:#059669;--c-amber:#d97706;--c-red:#dc2626;--c-pink:#db2777;
-  --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;--shadow:0 4px 24px rgba(0,0,0,0.08);
+  --c-bg:#f4f6f9;--c-surface:#fff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
+  --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
+  --c-accent:#003366;--c-accent2:#004080;--c-accent3:#336699;
+  --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
+  --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;--shadow:0 4px 24px rgba(0,51,102,0.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--c-bg);color:var(--c-text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
@@ -119,6 +127,8 @@ input[type="checkbox"],input[type="radio"]{width:auto;cursor:pointer}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;border:1.5px solid transparent}
 .btn-primary{background:var(--c-accent);color:#fff;border-color:var(--c-accent)}
 .btn-primary:hover{background:var(--c-accent2);border-color:var(--c-accent2)}
+.btn-accent{background:var(--c-amber);color:#003366;border-color:var(--c-amber);font-weight:700}
+.btn-accent:hover{filter:brightness(1.05)}
 .btn-ghost{background:transparent;color:var(--c-text2);border-color:var(--c-border2)}
 .btn-ghost:hover{background:var(--c-surface2);color:var(--c-text)}
 .btn-danger{background:var(--c-red);color:#fff;border-color:var(--c-red)}
@@ -277,11 +287,51 @@ tr:hover td{background:rgba(99,102,241,.04)}
 .check-status-btn{width:24px;height:24px;border-radius:6px;border:2px solid var(--c-border2);display:flex;align-items:center;justify-content:center;font-size:12px;color:transparent;flex-shrink:0;transition:all .2s;cursor:pointer}
 .check-status-btn.ok{background:var(--c-green);border-color:var(--c-green);color:#fff}
 .check-status-btn.fail{background:var(--c-red);border-color:var(--c-red);color:#fff}
+/* Timbrado institucional */
+.timbrado-bar{background:linear-gradient(180deg,#003366 0%,#004080 100%);border-bottom:3px solid var(--c-amber);padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:52px}
+.timbrado-brands{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.4px}
+.timbrado-brands span{padding:4px 10px;border:1px solid rgba(255,255,255,.25);border-radius:6px;background:rgba(255,255,255,.08)}
+.timbrado-unit{margin-left:auto;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
+/* Upload moderno */
+.file-upload{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px dashed var(--c-border2);border-radius:10px;background:var(--c-surface2);cursor:pointer;transition:border .2s,background .2s;margin-top:8px}
+.file-upload:hover{border-color:var(--c-accent);background:var(--c-surface3)}
+.file-upload input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.file-upload-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,51,102,.1);color:var(--c-accent);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.file-upload-text{flex:1;min-width:0}
+.file-upload-label{font-size:13px;font-weight:600;color:var(--c-text)}
+.file-upload-name{font-size:11px;color:var(--c-text3);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.file-upload-hint{font-size:10px;color:var(--c-text3);margin-top:2px}
+.file-preview-doc{padding:12px;background:var(--c-surface3);border-radius:8px;font-size:12px;color:var(--c-text2)}
+/* Cards de propostas */
+.proposta-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.proposta-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:18px;border-top:4px solid var(--c-amber);box-shadow:var(--shadow);transition:transform .2s,box-shadow .2s}
+.proposta-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,51,102,.12)}
+.proposta-card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.proposta-num{font-size:11px;font-weight:700;color:var(--c-accent);letter-spacing:.3px}
+.proposta-card-title{font-size:15px;font-weight:700;margin-bottom:10px;line-height:1.35;color:var(--c-text)}
+.proposta-card-client{font-size:13px;color:var(--c-text2);margin-bottom:12px}
+.proposta-cnpj{font-size:11px;color:var(--c-text3);margin-top:4px}
+.proposta-card-infra{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px;background:var(--c-surface2);border-radius:8px;margin-bottom:14px;font-size:11px}
+.proposta-card-infra span{display:block;color:var(--c-text3);margin-bottom:2px}
+.proposta-card-infra strong{font-size:12px;color:var(--c-text)}
+.proposta-valor{color:var(--c-green)!important}
+.proposta-card-footer{display:flex;justify-content:flex-end}
+/* Calendário enriquecido */
+.cal-cell{min-height:72px;flex-direction:column;align-items:stretch;padding:4px;overflow:hidden}
+.cal-day-num{align-self:flex-end;font-size:12px;font-weight:600;padding:2px 4px}
+.cal-events{margin-top:2px;display:flex;flex-direction:column;gap:2px;width:100%}
+.cal-event-pill{background:rgba(0,51,102,.1);border-left:2px solid var(--c-amber);border-radius:4px;padding:2px 4px;font-size:9px;line-height:1.2;text-align:left}
+.cal-event-time{color:var(--c-accent);font-weight:700;display:block}
+.cal-event-name{font-weight:600;color:var(--c-text);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal-event-client{color:var(--c-text3);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal-event-more{font-size:9px;color:var(--c-text3);text-align:center}
 @media print{
-  .sidebar,.topbar,.topbar-actions,.modal-overlay,.toast-container,.btn{display:none!important}
+  .sidebar,.topbar,.topbar-actions,.timbrado-bar,.modal-overlay,.toast-container,.btn,.login-screen,.alert-prazo-vencido{display:none!important}
   .content{padding:0!important}
   .view.active{display:block!important}
   body{background:#fff!important;color:#000!important}
+  .app-shell{display:block!important;height:auto!important}
+  .main{display:block!important}
 }
 @media(max-width:768px){
   .sidebar{position:fixed;left:0;top:0;bottom:0;transform:translateX(-100%);z-index:200}
@@ -293,7 +343,12 @@ tr:hover td{background:rgba(99,102,241,.04)}
   .grid-2{grid-template-columns:1fr}
   .settings-layout{grid-template-columns:1fr}
 }
-</style>
+
+    
+    </style
+<link rel="stylesheet" href="style.css"/>
+<link rel="icon" id="favicon" type="image/svg+xml" href=""/>
+<link rel="apple-touch-icon" id="apple-touch-icon" href=""/>
 </head>
 <body>
 
@@ -623,6 +678,12 @@ tr:hover td{background:rgba(99,102,241,.04)}
   </aside>
 
   <div class="main">
+    <div class="timbrado-bar">
+      <div class="timbrado-brands">
+        <span>FECOMÉRCIO CE</span><span>Sesc</span><span>Senac</span><span>IPDC</span>
+      </div>
+      <div class="timbrado-unit">Senac Aldeota · Fortaleza-CE</div>
+    </div>
     <header class="topbar">
       <div class="topbar-toggle" onclick="toggleSidebar()">☰</div>
       <div class="page-title" id="pageTitle">Dashboard</div>
@@ -632,7 +693,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <input placeholder="Buscar eventos, clientes..." id="globalSearch"/>
         </div>
         <div class="topbar-btn" onclick="goto('alertas')">🔔<div class="badge-dot"></div></div>
-        <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"><div class="theme-toggle-ball" id="themeIcon">🌙</div></button>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema"><div class="theme-toggle-ball" id="themeIcon">☀️</div></button>
         <div class="avatar" id="topAvatar" onclick="goto('perfil')">MO</div>
       </div>
     </header>
@@ -714,6 +775,9 @@ tr:hover td{background:rgba(99,102,241,.04)}
             <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
           </select>
         </div>
+        <div class="section-title" style="margin-bottom:12px">Visão em Cards</div>
+        <div class="proposta-cards-grid" id="propostaCardsGrid"></div>
+        <div class="section-title" style="margin-bottom:12px;margin-top:8px">Lista Detalhada</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Nº</th><th>Evento</th><th>Cliente</th><th>Espaço</th><th>Data Evento</th><th>Área Técnica</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
@@ -982,16 +1046,36 @@ tr:hover td{background:rgba(99,102,241,.04)}
               <button class="btn btn-primary" onclick="salvarConfigGeral()">✓ Salvar</button>
             </div>
             <div class="settings-pane card" id="cfg-timbrado">
-              <div class="section-title" style="margin-bottom:8px">Papel Timbrado</div>
-              <div class="section-sub" style="margin-bottom:16px">Upload de timbrado, logo e rodapé para fundo dos PDFs (PNG/JPG)</div>
+              <div class="section-title" style="margin-bottom:8px">Layout Timbrado — Impressão</div>
+              <div class="section-sub" style="margin-bottom:16px">Gerencie papel timbrado, layout e rodapé. Impressão sem referências internas do sistema.</div>
               <div id="timbradoList" style="margin-bottom:16px"></div>
               <div id="timbradoHistorico" style="margin-bottom:16px"></div>
-              <label>Papel timbrado (plano de fundo A4)</label>
-              <input type="file" id="uploadTimbrado" accept="image/*" style="margin-top:8px" onchange="uploadAssetFn(this,'timbrado')"/>
+              <label>Papel timbrado (PDF, Word, JPG ou PNG — fundo A4)</label>
+              <div class="file-upload" data-for="uploadTimbrado" onclick="triggerFileInput('uploadTimbrado')">
+                <input type="file" id="uploadTimbrado" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,image/*,application/pdf" onchange="uploadAssetFn(this,'timbrado')"/>
+                <div class="file-upload-icon">📄</div>
+                <div class="file-upload-text"><div class="file-upload-label">Selecionar papel timbrado</div><div class="file-upload-name">Nenhum arquivo selecionado</div><div class="file-upload-hint">PDF · DOC · DOCX · JPG · PNG</div></div>
+              </div>
               <div id="timbradoPreview" style="margin-top:12px"></div>
               <div class="form-row" style="margin-top:14px">
-                <div class="form-group"><label>Logo (cabeçalho PDF)</label><input type="file" id="uploadLogo" accept="image/*" onchange="uploadAssetFn(this,'logo')"/><div id="logoPreview" style="margin-top:8px"></div></div>
-                <div class="form-group"><label>Rodapé (PDF)</label><input type="file" id="uploadRodape" accept="image/*" onchange="uploadAssetFn(this,'rodape')"/><div id="rodapePreview" style="margin-top:8px"></div></div>
+                <div class="form-group">
+                  <label>Layout Timbrado (cabeçalho — JPG ou PNG)</label>
+                  <div class="file-upload" data-for="uploadLogo" onclick="triggerFileInput('uploadLogo')">
+                    <input type="file" id="uploadLogo" accept=".jpg,.jpeg,.png,image/jpeg,image/png" onchange="uploadAssetFn(this,'logo')"/>
+                    <div class="file-upload-icon">🖼️</div>
+                    <div class="file-upload-text"><div class="file-upload-label">Selecionar layout</div><div class="file-upload-name">Nenhum arquivo selecionado</div></div>
+                  </div>
+                  <div id="logoPreview" style="margin-top:8px"></div>
+                </div>
+                <div class="form-group">
+                  <label>Rodapé (JPG ou PNG)</label>
+                  <div class="file-upload" data-for="uploadRodape" onclick="triggerFileInput('uploadRodape')">
+                    <input type="file" id="uploadRodape" accept=".jpg,.jpeg,.png,image/jpeg,image/png" onchange="uploadAssetFn(this,'rodape')"/>
+                    <div class="file-upload-icon">📎</div>
+                    <div class="file-upload-text"><div class="file-upload-label">Selecionar rodapé</div><div class="file-upload-name">Nenhum arquivo selecionado</div></div>
+                  </div>
+                  <div id="rodapePreview" style="margin-top:8px"></div>
+                </div>
               </div>
               <button class="btn btn-primary" style="margin-top:16px" onclick="salvarAssets()">💾 Salvar e registrar no histórico</button>
             </div>
@@ -1069,8 +1153,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
   </div>
 </div>
 
-<script>
-// ── CONSTANTS ─────────────────────────────────────────────────────
+<script defer src="script.js">// ── CONSTANTS ─────────────────────────────────────────────────────
 const GESTOR_LOGIN='marciooliveira';
 const GESTOR_SENHA='Deadpool365*';
 let _authCallback=null;
@@ -1097,11 +1180,13 @@ let _firebaseUnsub=null;
 // ── DATA ──────────────────────────────────────────────────────────
 let DATA={
   propostas:[
-    {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}]},
-    {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,equipamentos:[{nome:'Notebook Dell i7',qtd:2}]},
-    {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',valor:32000,status:'Pendente',tipo:'oficio',areaTecnica:'interna',formatoEvento:'Palestra',musicaAoVivo:false,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:1},{nome:'Microfone Shure SM58',qtd:4}]},
-    {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,equipamentos:[]},
-    {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
+    {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
+    {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
+    {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',hora:'09:00',valor:32000,status:'Pendente',tipo:'oficio',areaTecnica:'interna',formatoEvento:'Palestra',musicaAoVivo:false,ocupacao:'08h',valorBase:7200,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],docUrl:''},
+    {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:'07.299.392/0001-77',equipamentos:[],docUrl:''},
+    {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:'03.281.227/0001-00',equipamentos:[],docUrl:''},
+    {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',hora:'08:30',valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,ocupacao:'08h',valorBase:1300,equipamentos:[]},
+    {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',hora:'10:00',valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,ocupacao:'08h',valorBase:5500,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
   ],
   ordens:[
     {id:'OS001',evento:'Congresso de Tecnologia',tipo:'TI/AV',resp:'Carlos Matos',data:'2026-06-25',status:'Em Execução',prog:65,prio:'Alta',obs:''},
@@ -1112,13 +1197,18 @@ let DATA={
   ],
   clientes:[
     {nome:'Unichristus',doc:'07.299.392/0001-77',email:'eventos@unichristus.edu.br',tel:'(85) 3309-3333',resp:'Ana Lima',seg:'Educação',eventos:12,logo:null},
+    {nome:'Porter Group S.A.',doc:'07.299.392/0001-77',email:'contato@porter.com.br',tel:'(85) 3000-0000',resp:'Diretoria',seg:'Corporativo',eventos:4,logo:null},
+    {nome:'Hotel a Jato Operadora Turística LTDA',doc:'03.281.227/0001-00',email:'eventos@hotelajato.com.br',tel:'(85) 3200-0000',resp:'Catherine Silva',seg:'Corporativo',eventos:2,logo:null},
     {nome:'SEBRAE-CE',doc:'03.281.227/0001-00',email:'eventos@sebrae.ce',tel:'(85) 3321-0000',resp:'Pedro Castro',seg:'Corporativo',eventos:8,logo:null},
     {nome:'Governo do Estado',doc:'06.523.628/0001-03',email:'eventos@ceara.gov.br',tel:'(85) 3101-5050',resp:'Dra. Mariana',seg:'Governo',eventos:5,logo:null},
     {nome:'ABRASEL',doc:'38.557.850/0001-10',email:'contato@abrasel.com.br',tel:'(85) 3251-2020',resp:'João Alves',seg:'Corporativo',eventos:3,logo:null},
     {nome:'AME-CE',doc:'07.140.900/0001-02',email:'eventos@ame-ce.org.br',tel:'(85) 3099-7000',resp:'Dr. Carlos',seg:'Saúde',eventos:6,logo:null},
   ],
   espacos:[
-    {nome:'Auditório A',cap:200,area:'420 m²',equip:'Projetor 4K, Som 5.1, Iluminação Cênica',status:'Disponível',valor:4500,foto:null},
+    {nome:'Auditório A',cap:174,area:'420 m²',equip:'Projetor 4K, Som 5.1, Iluminação Cênica',status:'Disponível',valor:1300,foto:null},
+    {nome:'Cozinha Experience Chef Mayú',cap:60,area:'180 m²',equip:'Cozinha profissional, Ilha gastronômica',status:'Disponível',valor:1768,foto:null},
+    {nome:'Lab Google',cap:30,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:300,foto:null},
+    {nome:'Lab Multiuso',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:400,foto:null},
     {nome:'Auditório B',cap:100,area:'210 m²',equip:'Projetor Full HD, Som Estéreo',status:'Reservado',valor:2800,foto:null},
     {nome:'Salão Principal Mayú',cap:350,area:'680 m²',equip:'Sistema de Áudio Distribuído, Palco Modular',status:'Disponível',valor:7200,foto:null},
     {nome:'Sala Multiuso 1',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:850,foto:null},
@@ -1178,6 +1268,7 @@ function loadFromStorage(){
     loadAssets();
     var t=localStorage.getItem('modesk_theme');
     if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('themeIcon').textContent=t==='light'?'☀️':'🌙';}
+    else{document.documentElement.setAttribute('data-theme','light');document.getElementById('themeIcon').textContent='☀️';}
   }catch(e){}
 }
 function saveToStorage(){
@@ -1206,7 +1297,7 @@ function applyFirebaseRemote(remote){
     }
     saveToStorageWithoutFirebase();
     if(currentUser){
-      renderDashboard();renderPropostas();renderOS();renderClientes();renderEspacos();
+      renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderClientes();renderEspacos();
       renderEstoque();renderCardapio();renderCalendario();updateBadges();checkPrazosVencidos();
       updateTimbradoList();populateExportTimbradoSelects();
     }
@@ -1222,6 +1313,7 @@ function initFirebaseSync(){
         var localTs=localStorage.getItem('modesk_fb_ts')||'';
         if(!localTs||remote.updatedAt>localTs)applyFirebaseRemote(remote);
       }
+      if(!currentUser)restoreSession();
     });
     if(_firebaseUnsub)_firebaseUnsub();
     _firebaseUnsub=window.moDeskFirebaseListen(function(remote,meta){
@@ -1284,29 +1376,43 @@ function applyUserSession(found){
   document.getElementById('profileBadge').textContent=found.nivel;
   initApp();
 }
-function saveSession(login){
-  try{localStorage.setItem('modesk_session',JSON.stringify({login:login,since:Date.now()}));}catch(e){}
+function saveSession(user){
+  var payload={login:user.login,nome:user.nome,nivel:user.nivel,email:user.email||'',since:Date.now()};
+  try{
+    localStorage.setItem('modesk_session',JSON.stringify(payload));
+    sessionStorage.setItem('modesk_session',JSON.stringify(payload));
+  }catch(e){}
 }
 function clearSession(){
-  try{localStorage.removeItem('modesk_session');sessionStorage.removeItem('authed_parecer');}catch(e){}
+  try{
+    localStorage.removeItem('modesk_session');
+    sessionStorage.removeItem('modesk_session');
+    sessionStorage.removeItem('authed_parecer');
+  }catch(e){}
 }
 function restoreSession(){
   try{
-    var s=localStorage.getItem('modesk_session');
+    var s=localStorage.getItem('modesk_session')||sessionStorage.getItem('modesk_session');
     if(!s)return false;
     var sess=JSON.parse(s);
     var found=DATA.usuarios.find(function(x){return x.login===sess.login&&x.status==='Ativo';});
-    if(found){applyUserSession(found);return true;}
-    clearSession();
+    if(!found&&sess.login&&sess.nome){
+      found={login:sess.login,nome:sess.nome,nivel:sess.nivel||'Operador',email:sess.email||'',status:'Ativo',senha:''};
+    }
+    if(found){
+      applyUserSession(found);
+      if(sess.login)saveSession(found);
+      return true;
+    }
   }catch(e){}
   return false;
 }
 function doLogin(){
   var u=document.getElementById('loginUser').value.trim();
   var p=document.getElementById('loginPass').value;
-  var found=DATA.usuarios.find(function(x){return x.login===u&&x.senha===p;});
+  var found=DATA.usuarios.find(function(x){return x.login===u&&x.senha===p&&x.status==='Ativo';});
   if(found){
-    saveSession(found.login);
+    saveSession(found);
     applyUserSession(found);
     toast('Bem-vindo, '+found.nome.split(' ')[0]+'!','success');
   }else{toast('Credenciais inválidas','error');}
@@ -1326,7 +1432,7 @@ function initApp(){
   var dias=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
   var meses=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
   document.getElementById('greetDate').textContent=dias[n.getDay()]+', '+n.getDate()+' de '+meses[n.getMonth()]+' de '+n.getFullYear();
-  renderDashboard();renderPropostas();renderOS();renderClientes();renderEspacos();
+  renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderClientes();renderEspacos();
   renderEstoque();renderCardapio();renderParecer();renderCalendario();renderLixeira();
   renderUsuarios();renderAlertas();initWizard();updateBadges();populateOSProp();
   populatePortEspaco();updateTimbradoList();populateExportTimbradoSelects();checkPrazosVencidos();
@@ -1491,7 +1597,7 @@ function applyPageBranding(doc,empresa){
   var timbrado=useSenac?getActiveAsset('timbrado'):null;
   var logo=useSenac?getActiveAsset('logo'):null;
   var rodape=useSenac?getActiveAsset('rodape'):null;
-  if(timbrado&&timbrado.dataUrl){
+  if(timbrado&&timbrado.dataUrl&&timbrado.fileType!=='pdf'&&timbrado.fileType!=='word'){
     try{doc.addImage(timbrado.dataUrl,detectImageFormat(timbrado.dataUrl),0,0,pageW,pageH,undefined,'FAST');}catch(e){}
   }else if(useSenac){
     doc.setFillColor(0,51,102);
@@ -1518,8 +1624,8 @@ function addPDFPageFooter(doc){
   for(var i=1;i<=pc;i++){
     doc.setPage(i);
     if(!getActiveAsset('rodape')){
-      doc.setFontSize(8);doc.setTextColor(100,116,139);
-      doc.text(cfgNome+' · MoDesk ALFA v9.0 · Página '+i+'/'+pc,pageW/2,pageH-8,{align:'center'});
+      doc.setFontSize(8);doc.setTextColor(0,51,102);
+      doc.text(cfgNome+' · Página '+i+' de '+pc,pageW/2,pageH-8,{align:'center'});
     }
   }
 }
@@ -1528,8 +1634,8 @@ function exportPDF(empresa){
   var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
   var pageW=doc.internal.pageSize.getWidth();
   var startY=buildPDFHeader(doc,empresa);
-  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
-  doc.text('MoDesk ALFA v9.0 — '+exportCtxStr.toUpperCase(),14,startY+6);
+  doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
+  doc.text(exportCtxStr.toUpperCase(),14,startY+6);
   doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
   doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR'),14,startY+12);
   var Y=startY+18;
@@ -1620,7 +1726,7 @@ function exportPropostaAtual(fmt){
     var Y2=doc.lastAutoTable.finalY+12;
     doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(80,80,80);
     doc.text('Condições: pagamento até 15 dias antes do evento. Proposta válida conforme disponibilidade.',14,Y2);
-    doc.text('Documento gerado pelo MoDesk ALFA v9.0 · Senac Aldeota',14,Y2+6);
+    doc.text('Senac Aldeota — Comercial de Eventos',14,Y2+6);
     if(cliente&&cliente.doc){
       doc.setDrawColor(0,51,102);doc.line(20,Y2+22,90,Y2+22);
       doc.text('Assinatura do Cliente',20,Y2+27);
@@ -1751,12 +1857,48 @@ function filterPropostas(){
   var st=document.getElementById('filterStatusProp').value;
   var mes=document.getElementById('filterMesProp').value;
   var f=DATA.propostas.filter(function(p){
-    var match=!q||(p.evento+p.cliente+p.num).toLowerCase().indexOf(q)>=0;
+    var match=!q||(p.evento+p.cliente+p.num+(p.espaco||'')+(p.cnpj||'')).toLowerCase().indexOf(q)>=0;
     var stMatch=!st||p.status===st;
     var mesMatch=mes===''||new Date(p.data+'T00:00:00').getMonth()===parseInt(mes);
     return match&&stMatch&&mesMatch;
   });
   renderPropostas(f);
+  renderPropostaCards(f);
+}
+function getClienteCnpj(p){
+  if(p.cnpj)return p.cnpj;
+  var c=DATA.clientes.find(function(x){return x.nome===p.cliente;});
+  return c?c.doc:'';
+}
+function renderPropostaCards(list){
+  var grid=document.getElementById('propostaCardsGrid');
+  if(!grid)return;
+  var src=list||DATA.propostas;
+  if(!src.length){grid.innerHTML='<div class="empty"><div class="empty-icon">📄</div><div class="empty-title">Nenhuma proposta encontrada</div></div>';return;}
+  grid.innerHTML=src.map(function(p){
+    var idx=DATA.propostas.indexOf(p);
+    var cnpj=getClienteCnpj(p);
+    var docBtn=p.docUrl?'<a class="btn btn-primary btn-sm" href="'+p.docUrl+'" target="_blank" rel="noopener">Visualizar Documento</a>'
+      :'<button class="btn btn-primary btn-sm" onclick="verProposta('+idx+')">Visualizar Documento</button>';
+    return '<article class="proposta-card">'
+      +'<div class="proposta-card-header"><span class="proposta-num">Proposta '+p.num+'</span><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></div>'
+      +'<h3 class="proposta-card-title">'+p.evento+'</h3>'
+      +'<div class="proposta-card-client"><strong>'+p.cliente+'</strong>'+(cnpj?'<div class="proposta-cnpj">CNPJ '+cnpj+'</div>':'')+'</div>'
+      +'<div class="proposta-card-infra">'
+      +'<div><span>Espaço</span><strong>'+(p.espaco||'—')+'</strong></div>'
+      +'<div><span>Ocupação</span><strong>'+(p.ocupacao||p.periodo||'—')+'</strong></div>'
+      +'<div><span>Valor Base</span><strong class="proposta-valor">'+fmtMoney(p.valorBase||p.valor)+'</strong></div>'
+      +'</div>'
+      +'<div class="proposta-card-footer">'+docBtn+'</div>'
+      +'</article>';
+  }).join('');
+}
+function filterPropostaCardsGlobal(q){
+  q=(q||'').toLowerCase();
+  var f=!q?DATA.propostas:DATA.propostas.filter(function(p){
+    return (p.evento+p.cliente+p.num+p.espaco+(p.cnpj||'')).toLowerCase().indexOf(q)>=0;
+  });
+  renderPropostaCards(f);
 }
 function abrirEditProposta(idx){
   editingPropostaIdx=idx;
@@ -2419,27 +2561,48 @@ function renderCalendario(){
   var firstDay=new Date(calYear,calMonth,1).getDay();
   var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
   var prevDays=new Date(calYear,calMonth,0).getDate();
-  var eventDays=DATA.propostas.filter(function(p){var d=new Date(p.data+'T00:00:00');return d.getFullYear()===calYear&&d.getMonth()===calMonth;}).map(function(p){return new Date(p.data+'T00:00:00').getDate();});
+  var eventsByDay={};
+  DATA.propostas.forEach(function(p){
+    if(!p.data)return;
+    var d=new Date(p.data+'T00:00:00');
+    if(d.getFullYear()===calYear&&d.getMonth()===calMonth){
+      var day=d.getDate();
+      if(!eventsByDay[day])eventsByDay[day]=[];
+      eventsByDay[day].push(p);
+    }
+  });
   var cells='';
   for(var i=firstDay-1;i>=0;i--)cells+='<div class="cal-cell other-month">'+(prevDays-i)+'</div>';
   var today=new Date(),isThisMonth=today.getFullYear()===calYear&&today.getMonth()===calMonth;
   for(var d=1;d<=daysInMonth;d++){
     var isToday=isThisMonth&&today.getDate()===d;
-    var hasEv=eventDays.indexOf(d)>=0;
-    cells+='<div class="cal-cell'+(isToday?' today':'')+(hasEv?' has-event':'')+'" onclick="calClick('+d+')">'+d+'</div>';
+    var dayEvents=eventsByDay[d]||[];
+    var hasEv=dayEvents.length>0;
+    var tip=dayEvents.map(function(e){return e.evento+' · '+e.cliente+(e.hora?' · '+e.hora:'');}).join(' | ');
+    cells+='<div class="cal-cell'+(isToday?' today':'')+(hasEv?' has-event':'')+'" onclick="calClick('+d+')" title="'+tip.replace(/"/g,'&quot;')+'">'
+      +'<span class="cal-day-num">'+d+'</span>'
+      +(hasEv?'<div class="cal-events">'+dayEvents.slice(0,2).map(function(e){
+        return '<div class="cal-event-pill"><span class="cal-event-time">'+(e.hora||'—')+'</span><span class="cal-event-name">'+e.evento+'</span><span class="cal-event-client">'+e.cliente+'</span></div>';
+      }).join('')+(dayEvents.length>2?'<div class="cal-event-more">+'+(dayEvents.length-2)+'</div>':'')+'</div>':'')
+      +'</div>';
   }
   var after=1;
   while((firstDay+daysInMonth+after-1)%7!==0)cells+='<div class="cal-cell other-month">'+after+'</div>',after++;
   grid.innerHTML=cells;
   var evList=document.getElementById('calEventList');
   var evMonth=DATA.propostas.filter(function(p){var d=new Date(p.data+'T00:00:00');return d.getFullYear()===calYear&&d.getMonth()===calMonth;});
-  evList.innerHTML=evMonth.length?evMonth.map(function(e){return '<div class="list-item"><div class="list-icon" style="background:rgba(99,102,241,.12)">📅</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+e.evento+'</div><div style="font-size:12px;color:var(--c-text2)">'+e.espaco+' · '+formatDate(e.data)+'</div></div><span class="badge '+statusBadge(e.status)+'">'+e.status+'</span></div>';}).join(''):'<div class="empty"><div class="empty-icon">📅</div><div class="empty-title">Nenhum evento este mês</div></div>';
+  evList.innerHTML=evMonth.length?evMonth.map(function(e){
+    var cli=DATA.clientes.find(function(c){return c.nome===e.cliente;});
+    return '<div class="list-item cal-list-item"><div class="list-icon" style="background:rgba(0,51,102,.12)">📅</div><div style="flex:1"><div style="font-size:13.5px;font-weight:600">'+e.evento+'</div><div style="font-size:12px;color:var(--c-text2)">'+e.cliente+(cli&&cli.doc?' · CNPJ '+cli.doc:'')+'</div><div style="font-size:11px;color:var(--c-accent);margin-top:2px">🕐 '+(e.hora||'08:00')+' · '+e.espaco+' · '+formatDate(e.data)+'</div></div><span class="badge '+statusBadge(e.status)+'">'+e.status+'</span></div>';
+  }).join(''):'<div class="empty"><div class="empty-icon">📅</div><div class="empty-title">Nenhum evento este mês</div></div>';
 }
 function calPrev(){if(calMonth===0){calMonth=11;calYear--;}else calMonth--;renderCalendario();}
 function calNext(){if(calMonth===11){calMonth=0;calYear++;}else calMonth++;renderCalendario();}
 function calClick(d){
   var evs=DATA.propostas.filter(function(p){var dt=new Date(p.data+'T00:00:00');return dt.getFullYear()===calYear&&dt.getMonth()===calMonth&&dt.getDate()===d;});
-  toast(evs.length?(evs.length+' evento(s) em '+d+'/'+(calMonth+1)+'/'+calYear+': '+evs.map(function(e){return e.evento;}).join(', ')):'Sem eventos em '+d+'/'+(calMonth+1)+'/'+calYear,'info');
+  if(!evs.length){toast('Sem eventos em '+d+'/'+(calMonth+1)+'/'+calYear,'info');return;}
+  var msg=evs.map(function(e){return e.evento+' — '+e.cliente+' às '+(e.hora||'08:00');}).join('\n');
+  toast(evs.length+' evento(s): '+msg,'info');
 }
 
 // ── LIXEIRA ───────────────────────────────────────────────────────
@@ -2475,16 +2638,76 @@ function salvarConfigGeral(){toast('Configurações salvas','success');saveToSto
 function uploadAssetFn(input,tipo){
   if(!input.files||!input.files[0])return;
   var file=input.files[0];
-  if(!file.type.match(/^image\//)){toast('Use imagem PNG ou JPG','error');return;}
+  var ext=(file.name.split('.').pop()||'').toLowerCase();
+  var allowed={
+    timbrado:['jpg','jpeg','png','pdf','doc','docx'],
+    logo:['jpg','jpeg','png'],
+    rodape:['jpg','jpeg','png']
+  };
+  if(!allowed[tipo]||allowed[tipo].indexOf(ext)<0){
+    toast('Formato não permitido para '+tipo,'error');input.value='';return;
+  }
+  if(ext==='pdf'){
+    readPdfAsPreview(file,tipo,input);
+    return;
+  }
+  if(ext==='doc'||ext==='docx'){
+    pendingAssets[tipo]={dataUrl:null,nome:file.name,tipo:tipo,mime:file.type,fileType:'word',rawName:file.name};
+    var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
+    var el=document.getElementById(prevId);
+    if(el)el.innerHTML='<div class="file-preview-doc">📄 '+file.name+'<br/><small>Word — referência para layout</small></div>';
+    updateFileLabel(input.id,file.name);
+    toast('Documento Word carregado. Clique em Salvar.','info');
+    return;
+  }
   var reader=new FileReader();
   reader.onload=function(e){
-    pendingAssets[tipo]={dataUrl:e.target.result,nome:file.name,tipo:tipo};
+    pendingAssets[tipo]={dataUrl:e.target.result,nome:file.name,tipo:tipo,mime:file.type,fileType:'image'};
     var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
     var el=document.getElementById(prevId);
     if(el)el.innerHTML='<img src="'+e.target.result+'" style="width:100%;max-height:120px;object-fit:contain;border-radius:8px;border:1px solid var(--c-border)"/>';
-    toast((tipo==='timbrado'?'Timbrado':tipo==='logo'?'Logo':'Rodapé')+' carregado. Clique em Salvar.','info');
+    updateFileLabel(input.id,file.name);
+    toast((tipo==='timbrado'?'Papel timbrado':tipo==='logo'?'Layout timbrado':'Rodapé')+' carregado. Clique em Salvar.','info');
   };
   reader.readAsDataURL(file);
+}
+function readPdfAsPreview(file,tipo,input){
+  var reader=new FileReader();
+  reader.onload=function(){
+    pendingAssets[tipo]={dataUrl:reader.result,nome:file.name,tipo:tipo,mime:'application/pdf',fileType:'pdf'};
+    var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
+    var el=document.getElementById(prevId);
+    if(el)el.innerHTML='<div class="file-preview-doc">📕 '+file.name+'<br/><small>PDF — será usado como fundo na impressão</small></div>';
+    updateFileLabel(input.id,file.name);
+    toast('PDF timbrado carregado. Clique em Salvar.','info');
+  };
+  reader.readAsDataURL(file);
+}
+function updateFileLabel(inputId,name){
+  var wrap=document.querySelector('[data-for="'+inputId+'"] .file-upload-name');
+  if(wrap)wrap.textContent=name;
+}
+function triggerFileInput(id){var el=document.getElementById(id);if(el)el.click();}
+function excluirAsset(tipo){
+  ASSETS[tipo]=null;
+  (ASSETS.historico||[]).forEach(function(h){if(h.tipo===tipo)h.ativo=false;});
+  pendingAssets[tipo]=null;
+  var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
+  var el=document.getElementById(prevId);if(el)el.innerHTML='';
+  var inputId=tipo==='timbrado'?'uploadTimbrado':tipo==='logo'?'uploadLogo':'uploadRodape';
+  var inp=document.getElementById(inputId);if(inp)inp.value='';
+  updateFileLabel(inputId,'Nenhum arquivo selecionado');
+  saveAssetsLocal();saveToStorage();updateTimbradoList();populateExportTimbradoSelects();
+  toast('Arquivo removido','warn');
+}
+function excluirAssetHistorico(id){
+  var idx=(ASSETS.historico||[]).findIndex(function(h){return h.id===id;});
+  if(idx<0)return;
+  var item=ASSETS.historico[idx];
+  ASSETS.historico.splice(idx,1);
+  if(ASSETS[item.tipo]&&ASSETS[item.tipo].id===id)ASSETS[item.tipo]=null;
+  saveAssetsLocal();saveToStorage();updateTimbradoList();populateExportTimbradoSelects();
+  toast('Item excluído do histórico','warn');
 }
 function salvarAssets(){
   var saved=false;
@@ -2495,6 +2718,8 @@ function salvarAssets(){
       nome:pendingAssets[tipo].nome||tipo,
       tipo:tipo,
       dataUrl:pendingAssets[tipo].dataUrl,
+      mime:pendingAssets[tipo].mime||'',
+      fileType:pendingAssets[tipo].fileType||'image',
       criadoEm:new Date().toISOString(),
       ativo:true
     };
@@ -2523,9 +2748,9 @@ function updateTimbradoList(){
   if(!el)return;
   var t=getActiveAsset('timbrado'),l=getActiveAsset('logo'),r=getActiveAsset('rodape');
   el.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px">'
-    +assetStatusCard('Timbrado (fundo A4)',t)
-    +assetStatusCard('Logo',l)
-    +assetStatusCard('Rodapé',r)
+    +assetStatusCard('Papel Timbrado (fundo A4)',t,'timbrado')
+    +assetStatusCard('Layout Timbrado (cabeçalho)',l,'logo')
+    +assetStatusCard('Rodapé',r,'rodape')
     +'</div>';
   if(histEl){
     var hist=(ASSETS.historico||[]).slice(0,12);
@@ -2534,26 +2759,33 @@ function updateTimbradoList(){
         return '<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--c-surface2);border-radius:8px;border:1px solid var(--c-border);margin-bottom:6px;font-size:12px">'
           +'<div><strong>'+h.nome+'</strong><div style="color:var(--c-text3);font-size:10px">'+h.tipo+' · '+new Date(h.criadoEm).toLocaleString('pt-BR')+'</div></div>'
           +(h.ativo?'<span class="badge badge-green">Ativo</span>':'<button class="btn btn-ghost btn-sm" onclick="ativarAssetHistorico(\''+h.id+'\')">Ativar</button>')
+          +'<button class="btn btn-danger btn-sm btn-icon" title="Excluir" onclick="excluirAssetHistorico(\''+h.id+'\')">🗑️</button>'
           +'</div>';
       }).join(''):'';
   }
   if(t&&document.getElementById('timbradoPreview')&&!pendingAssets.timbrado)
     document.getElementById('timbradoPreview').innerHTML='<img src="'+t.dataUrl+'" style="width:100%;max-height:140px;object-fit:contain;border-radius:8px;border:1px solid var(--c-border)"/>';
 }
-function assetStatusCard(label,asset){
+function assetStatusCard(label,asset,tipoKey){
+  var preview='';
+  if(asset){
+    if(asset.fileType==='image'&&asset.dataUrl)preview='<img src="'+asset.dataUrl+'" style="width:100%;height:60px;object-fit:contain;margin-bottom:6px"/>';
+    else preview='<div class="file-preview-doc" style="margin-bottom:6px;font-size:11px">📄 '+asset.nome+'</div>';
+  }
   return '<div style="padding:12px;background:var(--c-surface2);border-radius:8px;border:1px solid var(--c-border)">'
     +'<div style="font-weight:600;font-size:12px;margin-bottom:6px">'+label+'</div>'
-    +(asset?'<img src="'+asset.dataUrl+'" style="width:100%;height:60px;object-fit:contain;margin-bottom:6px"/><span class="badge badge-green">Ativo</span>'
+    +(asset?preview+'<span class="badge badge-green">Ativo</span> <button class="btn btn-danger btn-sm" style="margin-top:6px" onclick="excluirAsset(\''+tipoKey+'\')">Excluir</button>'
       :'<div style="font-size:11px;color:var(--c-text3)">Não configurado</div>')
     +'</div>';
 }
 function populateExportTimbradoSelects(){
-  var hasTimbrado=!!getActiveAsset('timbrado');
-  ['verPropostaTimbrado','exportEmpresa'].forEach(function(id){
+  var hasTimbrado=!!getActiveAsset('timbrado')||!!getActiveAsset('logo');
+  var html='<option value="">Sem layout institucional</option>'
+    +'<option value="senac"'+(hasTimbrado?' selected':'')+'>Senac Aldeota'+(hasTimbrado?' (timbrado ativo)':'')+'</option>';
+  ['verPropostaTimbrado','exportEmpresa','wizTimbrado'].forEach(function(id){
     var sel=document.getElementById(id);
     if(!sel)return;
-    sel.innerHTML='<option value="">Sem layout institucional</option>'
-      +'<option value="senac"'+(hasTimbrado?' selected':'')+'>Senac Aldeota'+(hasTimbrado?' (timbrado ativo)':'')+'</option>';
+    sel.innerHTML=html;
   });
 }
 function removerTimbrado(){
@@ -2634,7 +2866,7 @@ var wizardStepsData=[
   {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal</label><select id="w_espaco"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--c-text)"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
   {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa</label></div></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os equipamentos necessários:</p><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
   {label:'Alimentação',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os serviços de alimentação:</p><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+')">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
-  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
+  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar PDF com Timbrado</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
 ];
 function resetWizardDraft(){
   wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false};
@@ -2771,6 +3003,12 @@ function renderWizardStep(step){
   if(step<5)setTimeout(function(){restoreWizardStepData(step);},60);
   if(step===5){
     setTimeout(function(){
+      populateExportTimbradoSelects();
+      var wizSel=document.getElementById('wizTimbrado');
+      if(wizSel){
+        var verSel=document.getElementById('verPropostaTimbrado');
+        wizSel.innerHTML=verSel?verSel.innerHTML:wizSel.innerHTML;
+      }
       var d=wizardDraft;
       var num=isEdit?DATA.propostas[editingPropostaIdx].num:nextPropNumPreview();
       if(document.getElementById('rev_num'))document.getElementById('rev_num').textContent=num;
@@ -2847,19 +3085,59 @@ function formatAreaTecnica(p,short){
 }
 function statusBadge(s){var m={Confirmada:'badge-green',Pendente:'badge-amber',Cancelada:'badge-red','Negociação':'badge-blue','Em Execução':'badge-cyan',Aberta:'badge-amber',Concluída:'badge-green',Pendente:'badge-red'};return m[s]||'badge-gray';}
 
+function exportWizardPreviewPDF(){
+  saveWizardStepData(wizardCurrentStep);
+  var draft=wizardDraft;
+  var total=calcProposalTotal(draft);
+  var num=editingPropostaIdx>=0?DATA.propostas[editingPropostaIdx].num:nextPropNumPreview();
+  var p=buildProposalFromDraft(draft,total,'Pendente');
+  p.num=num;
+  var empresa=(document.getElementById('wizTimbrado')||{}).value||'senac';
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var startY=buildPDFHeader(doc,empresa);
+  doc.setFontSize(16);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
+  doc.text('PROPOSTA COMERCIAL Nº '+num,14,startY+8);
+  var bodyRows=[['Evento',p.evento],['Cliente',p.cliente],['Espaço',p.espaco],['Data',formatDate(p.data)+(p.hora?' · '+p.hora:'')],['Valor Total',fmtMoney(total)],['Prazo Pagamento',prazo15(p.data)]];
+  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:bodyRows,styles:{fontSize:10,cellPadding:5},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'}});
+  addPDFPageFooter(doc);
+  doc.save('Proposta_'+num.replace('/','_')+'_preview.pdf');
+  toast('PDF gerado com layout timbrado','success');
+}
+function initFavicon(){
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#003366"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
+  var href='data:image/svg+xml,'+encodeURIComponent(svg);
+  var link=document.getElementById('favicon');
+  if(link)link.href=href;
+  var apple=document.getElementById('apple-touch-icon');
+  if(apple)apple.href=href;
+}
+function initGlobalSearch(){
+  var el=document.getElementById('globalSearch');
+  if(!el)return;
+  el.addEventListener('input',function(){
+    var q=el.value.trim();
+    filterPropostaCardsGlobal(q);
+    if(currentView==='propostas'){
+      var sp=document.getElementById('searchPropostas');
+      if(sp){sp.value=q;filterPropostas();}
+    }
+  });
+}
+
 // ── BOOT ──────────────────────────────────────────────────────────
 window.onload=function(){
+  initFavicon();
   loadFromStorage();
   initFirebaseSync();
   populateOSProp();
   populateExportTimbradoSelects();
+  initGlobalSearch();
   if(restoreSession()){
     toast('Sessão restaurada','info');
   }else{
     setTimeout(function(){var el=document.getElementById('loginUser');if(el)el.focus();},100);
   }
 };
-</script>
-</body>
-</html>
-</user_query>
+</script> </body>
+</html></user_query>
