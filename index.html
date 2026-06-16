@@ -248,6 +248,32 @@ tr:hover td{background:rgba(99,102,241,.04)}
 .profile-hero{background:linear-gradient(135deg,rgba(99,102,241,.15),rgba(34,211,238,.08));border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px;display:flex;align-items:center;gap:20px;margin-bottom:20px}
 .profile-avatar-big{width:72px;height:72px;border-radius:16px;background:linear-gradient(135deg,var(--c-accent),var(--c-pink));display:flex;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:#fff;flex-shrink:0;position:relative;cursor:pointer}
 .profile-avatar-cam{position:absolute;bottom:-4px;right:-4px;width:22px;height:22px;background:var(--c-cyan);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;border:2px solid var(--c-surface)}
+
+/* === Adições v10 === */
+.equip-select-grid.layout-list,.food-select-grid.layout-list{display:flex;flex-direction:column;gap:8px}
+.equip-select-grid.layout-list .equip-select-card,
+.food-select-grid.layout-list .food-select-card{display:flex;flex-direction:row;align-items:center;gap:12px;padding:10px 14px}
+.equip-select-grid.layout-list .equip-select-card img,
+.food-select-grid.layout-list .food-select-card img{width:60px!important;height:60px!important;margin-bottom:0!important}
+.view-toggle{display:inline-flex;background:var(--c-surface3);border-radius:8px;padding:3px;gap:2px;margin-bottom:10px}
+.view-toggle button{border:0;background:transparent;padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;color:var(--c-text2);font-weight:600}
+.view-toggle button.active{background:var(--c-accent);color:#fff}
+.alimt-toggle{display:flex;gap:14px;margin-bottom:14px;align-items:center;padding:12px;background:var(--c-surface2);border-radius:8px;border:1px solid var(--c-border)}
+.alimt-toggle label{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;font-weight:600}
+.tech-note{background:rgba(255,153,0,.10);border:1px solid var(--c-amber);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--c-text);margin-top:10px;line-height:1.45}
+.tech-note strong{color:var(--c-accent)}
+.portfolio-thumb{position:relative;width:120px;height:80px;border-radius:8px;overflow:hidden;border:1px solid var(--c-border);cursor:pointer}
+.portfolio-thumb .x{position:absolute;top:2px;right:2px;background:rgba(0,0,0,.6);color:#fff;border:0;border-radius:50%;width:20px;height:20px;font-size:11px;cursor:pointer;line-height:18px;padding:0}
+.slide-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;z-index:9999}
+.slide-overlay.open{display:flex}
+.slide-overlay img{max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px}
+.slide-overlay .slide-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.15);color:#fff;border:0;font-size:32px;width:48px;height:48px;border-radius:50%;cursor:pointer}
+.slide-overlay .slide-nav.left{left:24px}.slide-overlay .slide-nav.right{right:24px}
+.slide-overlay .slide-close{position:absolute;top:20px;right:24px;background:rgba(255,255,255,.15);color:#fff;border:0;width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer}
+.slide-overlay .slide-count{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);color:#fff;font-size:13px;background:rgba(0,0,0,.5);padding:6px 14px;border-radius:20px}
+.evt-popup-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--c-border);font-size:13px}
+.evt-popup-row strong{color:var(--c-text)}
+
 /* Wizard grid equipamentos */
 .equip-select-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
 .equip-select-card{background:var(--c-surface2);border:2px solid var(--c-border);border-radius:10px;padding:12px;cursor:pointer;transition:all .2s;position:relative}
@@ -590,6 +616,13 @@ tr:hover td{background:rgba(99,102,241,.04)}
   </div>
 </div>
 
+<div class="modal-overlay" id="modalEventoDetalhe">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header"><span class="modal-title" id="eventoDetalheTitle">Detalhes do Evento</span><span class="modal-close" onclick="closeModal('modalEventoDetalhe')">✕</span></div>
+    <div id="eventoDetalheContent" style="max-height:70vh;overflow-y:auto"></div>
+  </div>
+</div>
+
 <!-- MODAL: Auth Gestor -->
 <div class="modal-overlay" id="modalAuth">
   <div class="modal" style="max-width:360px">
@@ -650,10 +683,10 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <div class="nav-item" onclick="goto('cardapio')"><span class="nav-icon">🍽️</span><span class="nav-label">Cardápio</span></div>
       <div class="nav-section">Gestão</div>
       <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon">🔔</span><span class="nav-label">Alertas</span></div>
-      <div class="nav-item" onclick="goto('parecer')"><span class="nav-icon">🔍</span><span class="nav-label">Parecer Técnico</span></div>
+      <div class="nav-item" onclick="requireGestor(function(){goto('parecer');})"><span class="nav-icon">🔍</span><span class="nav-label">Parecer Técnico</span></div>
       <div class="nav-item" onclick="goto('relatorios')"><span class="nav-icon">📊</span><span class="nav-label">Relatórios &amp; BI</span></div>
       <div class="nav-item" onclick="goto('lixeira')"><span class="nav-icon">🗑️</span><span class="nav-label">Lixeira</span></div>
-      <div class="nav-item" onclick="goto('configuracoes')"><span class="nav-icon">⚙️</span><span class="nav-label">Configurações</span></div>
+      <div class="nav-item" onclick="requireGestor(function(){goto('configuracoes');})"><span class="nav-icon">⚙️</span><span class="nav-label">Configurações</span></div>
     </nav>
     <div class="sidebar-footer">
       <div class="nav-item" style="margin:0;padding:8px 10px" onclick="goto('perfil')">
@@ -697,7 +730,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
             <div class="section-sub" id="greetDate">Carregando...</div>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <button class="btn btn-ghost btn-sm" onclick="openExportModal('dashboard')">↓ Exportar</button>
+            <button class="btn btn-ghost btn-sm" onclick="exportDashWithOrientation()">↓ Exportar</button>
             <button class="btn btn-primary" onclick="abrirNovaProposta()">＋ Nova Proposta</button>
           </div>
         </div>
@@ -749,6 +782,10 @@ tr:hover td{background:rgba(99,102,241,.04)}
         <div class="section-header">
           <div><div class="section-title" style="font-size:18px">Propostas Comerciais</div><div class="section-sub">Gerencie todas as propostas e contratos</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div class="btn-group" role="group" style="display:inline-flex;border:1px solid var(--c-border);border-radius:8px;overflow:hidden">
+              <button class="btn btn-ghost btn-sm" id="propViewGridBtn" onclick="setPropostasView('grid')" style="border-radius:0">▦ Grid</button>
+              <button class="btn btn-ghost btn-sm" id="propViewListBtn" onclick="setPropostasView('list')" style="border-radius:0">☰ Lista</button>
+            </div>
             <button class="btn btn-ghost btn-sm" onclick="openExportModal('propostas')">↓ Exportar</button>
             <button class="btn btn-primary" onclick="abrirNovaProposta()">＋ Nova Proposta</button>
           </div>
@@ -764,15 +801,15 @@ tr:hover td{background:rgba(99,102,241,.04)}
             <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
           </select>
         </div>
-        <div class="section-title" style="margin-bottom:12px">Visão em Cards</div>
-        <div class="proposta-cards-grid" id="propostaCardsGrid"></div>
-        <div class="section-title" style="margin-bottom:12px;margin-top:8px">Lista Detalhada</div>
+        <div id="propostasGridWrap"><div class="section-title" style="margin-bottom:12px">Visão em Cards</div>
+        <div class="proposta-cards-grid" id="propostaCardsGrid"></div></div>
+        <div id="propostasListWrap"><div class="section-title" style="margin-bottom:12px;margin-top:8px">Lista Detalhada</div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Nº</th><th>Evento</th><th>Cliente</th><th>Espaço</th><th>Data Evento</th><th>Área Técnica</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
             <tbody id="tbodyPropostas"></tbody>
           </table>
-        </div>
+        </div></div>
       </div>
 
       <!-- ORDENS DE SERVIÇO -->
@@ -907,7 +944,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div style="display:flex;gap:8px;align-items:center">
             <span class="badge badge-red">Acesso Restrito</span>
             <button class="btn btn-ghost btn-sm" onclick="openExportModal('parecer')">📄 Exportar PDF</button>
-            <button class="btn btn-primary btn-sm" onclick="gerarParecerWA('Geral')">📲 WhatsApp</button>
+            
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap">
@@ -939,7 +976,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div style="margin-top:16px"><textarea id="parecerObs" placeholder="Observações adicionais para o parecer técnico..." rows="3" style="width:100%"></textarea></div>
           <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
             <button class="btn btn-primary" onclick="openExportModal('parecer')">📄 Exportar PDF</button>
-            <button class="btn btn-ghost" onclick="gerarParecerWA('Geral')">📲 Enviar por WhatsApp</button>
+            
           </div>
         </div>
       </div>
@@ -950,7 +987,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div><div class="section-title" style="font-size:18px">Relatórios &amp; Business Intelligence</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <select id="relMes" style="width:auto;font-size:13px"><option>Junho 2026</option><option>Maio 2026</option><option>Abril 2026</option></select>
-            <button class="btn btn-ghost btn-sm" onclick="openExportModal('relatorios')">↓ Exportar</button>
+            <button class="btn btn-ghost btn-sm" onclick="exportDashWithOrientation()">↓ Exportar</button>
           </div>
         </div>
         <div class="tabs">
@@ -1011,6 +1048,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
             <div class="settings-nav-item active" onclick="settingsTab(this,'geral')">🏢 Geral</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'timbrado')">📄 Papel Timbrado</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'logos')">🖼️ Logos</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'banco')">💳 Dados Bancários / PIX</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'portfolio')">📷 Portfólio</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'usuarios')">👥 Usuários</div>
           </div>
@@ -1075,6 +1113,14 @@ tr:hover td{background:rgba(99,102,241,.04)}
                 <div style="width:80px;height:80px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px" title="Senac Aldeota">🏫</div>
               </div>
             </div>
+            <div class="settings-pane card" id="cfg-banco">
+              <div class="section-title" style="margin-bottom:8px">💳 Dados Bancários e PIX</div>
+              <div class="section-sub" style="margin-bottom:16px">Esses dados aparecerão na proposta quando marcado.</div>
+              <div class="form-row"><div class="form-group"><label>Banco</label><input id="cfg_banco" value="CAIXA ECONÔMICA FEDERAL"/></div><div class="form-group"><label>Agência</label><input id="cfg_agencia" value="AG 4249 1292"/></div></div>
+              <div class="form-row"><div class="form-group"><label>Conta</label><input id="cfg_conta" value="C/C 000577505558-2"/></div><div class="form-group"><label>CNPJ</label><input id="cfg_cnpj" value="03.648.344/0020-62"/></div></div>
+              <div class="form-group"><label>QR Code PIX (PNG)</label><input type="file" accept="image/png,image/jpeg" onchange="uploadPixQR(this)"/><div id="pixQrPreview" style="margin-top:10px"></div></div>
+              <button class="btn btn-primary" onclick="salvarDadosBanc()">💾 Salvar</button>
+            </div>
             <div class="settings-pane card" id="cfg-portfolio">
               <div class="section-title" style="margin-bottom:8px">Portfólio de Espaços</div>
               <div class="form-group" style="margin-bottom:12px"><label>Espaço</label><select id="portEspaco"></select></div>
@@ -1098,7 +1144,13 @@ tr:hover td{background:rgba(99,102,241,.04)}
                   <div class="form-group"><label>Senha</label><input type="password" id="nu_senha" placeholder="Senha de acesso"/></div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group"><label>Nível de Acesso</label><select id="nu_nivel"><option>Operador</option><option>Técnico</option><option>Supervisor</option></select></div>
+                  <div class="form-group"><label>Nível de Acesso</label><select id="nu_nivel"><option value="Produtor de Eventos">Produtor de Eventos</option><option value="Gestor">Gestor</option></select></div>
+                  <div class="form-group"><label>Telefone</label><input id="nu_tel" placeholder="(85) 99999-9999"/></div>
+                </div>
+                <div class="form-group" style="margin-bottom:12px">
+                  <label>Foto do Perfil</label>
+                  <input type="file" id="nu_foto" accept="image/*" onchange="previewNuFoto(this)"/>
+                  <div id="nu_foto_preview" style="margin-top:8px;display:none"><img id="nu_foto_img" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:2px solid var(--c-border)"/></div>
                 </div>
                 <button class="btn btn-primary" onclick="cadastrarUsuario()">Cadastrar Usuário</button>
               </div>
@@ -1111,11 +1163,13 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <div class="view" id="view-perfil">
         <div class="section-header"><div class="section-title" style="font-size:18px">👤 Meu Perfil</div></div>
         <div class="profile-hero">
-          <div class="profile-avatar-big" id="profileAvatarBig">MO<div class="profile-avatar-cam">📷</div></div>
+          <div class="profile-avatar-big" id="profileAvatarBig" onclick="document.getElementById('prf_foto').click()" title="Clique para alterar a foto">MO<div class="profile-avatar-cam">📷</div></div>
+          <input type="file" id="prf_foto" accept="image/*" style="display:none" onchange="uploadProfilePhoto(this)"/>
           <div>
             <div style="font-size:20px;font-weight:700" id="profileName">Marcio Oliveira</div>
             <div style="margin-top:6px;display:flex;gap:6px;flex-wrap:wrap"><span class="badge badge-blue" id="profileBadge">Gestor</span></div>
             <div style="font-size:12px;color:var(--c-text3);margin-top:8px">Senac Aldeota · Fortaleza-CE</div>
+            <button class="btn btn-ghost btn-sm" style="margin-top:10px" onclick="document.getElementById('prf_foto').click()">📷 Trocar Foto</button>
           </div>
         </div>
         <div class="grid-2">
@@ -1124,16 +1178,16 @@ tr:hover td{background:rgba(99,102,241,.04)}
             <div class="form-group" style="margin-bottom:12px"><label>Nome Completo</label><input id="prf_nome" value="Marcio Oliveira"/></div>
             <div class="form-group" style="margin-bottom:12px"><label>E-mail</label><input id="prf_email" value="marcio.oliveira@senac.ce"/></div>
             <div class="form-group" style="margin-bottom:12px"><label>Telefone</label><input id="prf_tel" value="(85) 99999-9999"/></div>
-            <div class="form-group" style="margin-bottom:16px"><label>Matrícula</label><input value="SENAC-1001" readonly style="opacity:.6"/></div>
-            <button class="btn btn-primary" onclick="toast('Dados atualizados','success')">Salvar Dados</button>
+            <div class="form-group" style="margin-bottom:16px"><label>Matrícula</label><input id="prf_matricula" value="SENAC-1001"/></div>
+            <button class="btn btn-primary" onclick="salvarPerfil()">💾 Salvar Dados</button>
             <button class="btn btn-ghost" style="margin-left:8px" onclick="doLogout()">🚪 Sair do Sistema</button>
           </div>
           <div class="card">
             <div class="section-title" style="margin-bottom:16px">🔒 Segurança</div>
-            <div class="form-group" style="margin-bottom:12px"><label>Senha Atual</label><input type="password" placeholder="••••••••"/></div>
-            <div class="form-group" style="margin-bottom:12px"><label>Nova Senha</label><input type="password" placeholder="••••••••"/></div>
-            <div class="form-group" style="margin-bottom:16px"><label>Confirmar Nova Senha</label><input type="password" placeholder="••••••••"/></div>
-            <button class="btn btn-danger" onclick="toast('Senha atualizada com sucesso','success')">🔒 Atualizar Senha</button>
+            <div class="form-group" style="margin-bottom:12px"><label>Senha Atual</label><input type="password" id="prf_senhaAtual" placeholder="••••••••"/></div>
+            <div class="form-group" style="margin-bottom:12px"><label>Nova Senha</label><input type="password" id="prf_senhaNova" placeholder="••••••••"/></div>
+            <div class="form-group" style="margin-bottom:16px"><label>Confirmar Nova Senha</label><input type="password" id="prf_senhaConf" placeholder="••••••••"/></div>
+            <button class="btn btn-danger" onclick="alterarSenha()">🔒 Atualizar Senha</button>
           </div>
         </div>
       </div>
@@ -1145,13 +1199,14 @@ tr:hover td{background:rgba(99,102,241,.04)}
 // ── CONSTANTS ─────────────────────────────────────────────────────
 const GESTOR_LOGIN = 'marciooliveira';
 const GESTOR_SENHA = 'Deadpool365*';
+const GESTOR_LOGIN_ALIASES = ['marciooliveira','marcio oliveira','márcio oliveira','gestor'];
 let _authCallback = null;
 let currentView = 'dashboard';
 let wizardCurrentStep=1;
 let calYear=2026,calMonth=5;
 let editingIdx={espaco:-1,ti:-1,cardapio:-1};
 let editingPropostaIdx=-1;
-let wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false};
+let wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,infoTecnica:'',temAlimentacao:false,incluirDadosBanc:true,incluirQR:true};
 let exportCtxStr='';
 let exportPropostaIdx=-1;
 let fatChart=null,statusChart=null;
@@ -1167,7 +1222,7 @@ let _firebaseSyncing=false;
 let _firebaseUnsub=null;
 
 // ── DATA ──────────────────────────────────────────────────────────
-let DATA={
+let DATA={portfolio:[],
   propostas:[
     {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
     {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
@@ -1227,6 +1282,38 @@ let DATA={
   ]
 };
 
+// ── ENSURE GESTOR (fix login that was failing after Firebase overwrote senha) ──
+function ensureGestor(){
+  try{
+    if(!DATA.usuarios||!Array.isArray(DATA.usuarios))DATA.usuarios=[];
+    var g=DATA.usuarios.find(function(x){return normalizeLogin(x.login)===normalizeLogin(GESTOR_LOGIN);});
+    if(!g){
+      DATA.usuarios.unshift({login:GESTOR_LOGIN,nome:'Marcio Oliveira',email:'marcio.oliveira@senac.ce',nivel:'Gestor',status:'Ativo',senha:GESTOR_SENHA});
+    }else{
+      g.login=GESTOR_LOGIN;
+      g.nivel='Gestor';
+      g.status='Ativo';
+      if(!g.senha||g.senha.length<4)g.senha=GESTOR_SENHA;
+    }
+  }catch(e){}
+}
+function normalizeLogin(v){
+  return String(v||'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\s._-]+/g,'');
+}
+function isGestorLoginInput(v){
+  var key=normalizeLogin(v);
+  return !key||GESTOR_LOGIN_ALIASES.some(function(alias){return normalizeLogin(alias)===key;});
+}
+function getGestorUser(){
+  ensureGestor();
+  var found=DATA.usuarios.find(function(x){return normalizeLogin(x.login)===normalizeLogin(GESTOR_LOGIN);});
+  if(!found){
+    found={login:GESTOR_LOGIN,nome:'Marcio Oliveira',email:'marcio.oliveira@senac.ce',nivel:'Gestor',status:'Ativo',senha:GESTOR_SENHA};
+    DATA.usuarios.unshift(found);
+  }
+  found.login=GESTOR_LOGIN;found.nivel='Gestor';found.status='Ativo';
+  return found;
+}
 // ── STORAGE ───────────────────────────────────────────────────────
 function loadAssets(){
   try{
@@ -1254,6 +1341,7 @@ function loadFromStorage(){
       if(!p.areaTecnica)p.areaTecnica='interna';
       if(!p.equipamentos)p.equipamentos=[];
     });
+    ensureGestor();
     loadAssets();
     var t=localStorage.getItem('modesk_theme');
     if(t){document.documentElement.setAttribute('data-theme',t);document.getElementById('themeIcon').textContent=t==='light'?'☀️':'🌙';}
@@ -1284,6 +1372,7 @@ function applyFirebaseRemote(remote){
       if(!ASSETS.historico)ASSETS.historico=[];
       saveAssetsLocal();
     }
+    ensureGestor();
     saveToStorageWithoutFirebase();
     if(currentUser){
       renderDashboard();renderPropostas();renderPropostaCards();renderOS();renderClientes();renderEspacos();
@@ -1357,16 +1446,84 @@ function applyUserSession(found){
   document.getElementById('sidebarUserName').textContent=n;
   document.getElementById('sidebarUserRole').textContent=found.nivel+' · Senac Aldeota';
   var initials=n.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
-  document.getElementById('sidebarAvatar').textContent=initials;
-  document.getElementById('topAvatar').textContent=initials;
+  renderAvatarEl('sidebarAvatar',found.foto,initials);
+  renderAvatarEl('topAvatar',found.foto,initials);
   document.getElementById('greetUser').textContent=n.split(' ')[0];
   document.getElementById('profileName').textContent=n;
-  document.getElementById('profileAvatarBig').childNodes[0].textContent=initials;
+  renderProfileBigAvatar(found.foto,initials);
   document.getElementById('profileBadge').textContent=found.nivel;
+  // pre-fill form
+  var pn=document.getElementById('prf_nome');if(pn)pn.value=n;
+  var pe=document.getElementById('prf_email');if(pe)pe.value=found.email||'';
+  var pt=document.getElementById('prf_tel');if(pt)pt.value=found.telefone||'';
   initApp();
 }
+function renderAvatarEl(id,foto,initials){
+  var el=document.getElementById(id);if(!el)return;
+  if(foto){el.innerHTML='';el.style.backgroundImage='url('+foto+')';el.style.backgroundSize='cover';el.style.backgroundPosition='center';}
+  else{el.style.backgroundImage='';el.textContent=initials;}
+}
+function renderProfileBigAvatar(foto,initials){
+  var el=document.getElementById('profileAvatarBig');if(!el)return;
+  if(foto){el.innerHTML='<div class="profile-avatar-cam">📷</div>';el.style.backgroundImage='url('+foto+')';el.style.backgroundSize='cover';el.style.backgroundPosition='center';el.style.color='transparent';}
+  else{el.innerHTML=initials+'<div class="profile-avatar-cam">📷</div>';el.style.backgroundImage='';el.style.color='#fff';}
+}
+function uploadProfilePhoto(input){
+  var f=input.files&&input.files[0];if(!f)return;
+  var r=new FileReader();r.onload=function(e){
+    var dataUrl=e.target.result;
+    if(currentUser){
+      currentUser.foto=dataUrl;
+      var u=DATA.usuarios.find(function(x){return x.login===currentUser.login;});
+      if(u)u.foto=dataUrl;
+      saveToStorage();
+      var initials=currentUser.nome.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
+      renderAvatarEl('sidebarAvatar',dataUrl,initials);
+      renderAvatarEl('topAvatar',dataUrl,initials);
+      renderProfileBigAvatar(dataUrl,initials);
+      renderUsuarios();
+      toast('Foto atualizada','success');
+    }
+  };r.readAsDataURL(f);
+}
+function salvarPerfil(){
+  if(!currentUser){toast('Sessão expirada','error');return;}
+  var nome=document.getElementById('prf_nome').value.trim();
+  var email=document.getElementById('prf_email').value.trim();
+  var tel=document.getElementById('prf_tel').value.trim();
+  if(!nome){toast('Nome obrigatório','error');return;}
+  currentUser.nome=nome;currentUser.email=email;currentUser.telefone=tel;
+  var u=DATA.usuarios.find(function(x){return x.login===currentUser.login;});
+  if(u){u.nome=nome;u.email=email;u.telefone=tel;}
+  saveToStorage();
+  applyUserSession(currentUser);
+  toast('Dados atualizados','success');
+}
+function alterarSenha(){
+  if(!currentUser){toast('Sessão expirada','error');return;}
+  var a=document.getElementById('prf_senhaAtual').value;
+  var n=document.getElementById('prf_senhaNova').value;
+  var c=document.getElementById('prf_senhaConf').value;
+  var u=DATA.usuarios.find(function(x){return x.login===currentUser.login;});
+  if(!u){toast('Usuário não encontrado','error');return;}
+  if(u.senha&&u.senha!==a){toast('Senha atual incorreta','error');return;}
+  if(!n||n.length<4){toast('Nova senha muito curta','error');return;}
+  if(n!==c){toast('Confirmação não confere','error');return;}
+  u.senha=n;saveToStorage();
+  document.getElementById('prf_senhaAtual').value='';
+  document.getElementById('prf_senhaNova').value='';
+  document.getElementById('prf_senhaConf').value='';
+  toast('Senha atualizada com sucesso','success');
+}
+function previewNuFoto(input){
+  var f=input.files&&input.files[0];if(!f)return;
+  var r=new FileReader();r.onload=function(e){
+    document.getElementById('nu_foto_img').src=e.target.result;
+    document.getElementById('nu_foto_preview').style.display='block';
+  };r.readAsDataURL(f);
+}
 function saveSession(user){
-  var payload={login:user.login,nome:user.nome,nivel:user.nivel,email:user.email||'',since:Date.now()};
+  var payload={login:user.login,nome:user.nome,nivel:user.nivel,email:user.email||'',foto:user.foto||'',telefone:user.telefone||'',since:Date.now()};
   try{
     localStorage.setItem('modesk_session',JSON.stringify(payload));
     sessionStorage.setItem('modesk_session',JSON.stringify(payload));
@@ -1399,7 +1556,17 @@ function restoreSession(){
 function doLogin(){
   var u=document.getElementById('loginUser').value.trim();
   var p=document.getElementById('loginPass').value;
-  var found=DATA.usuarios.find(function(x){return x.login===u&&x.senha===p&&x.status==='Ativo';});
+  ensureGestor();
+  if(p===GESTOR_SENHA&&isGestorLoginInput(u)){
+    var gestor=getGestorUser();
+    saveSession(gestor);
+    saveToStorage();
+    applyUserSession(gestor);
+    toast('Bem-vindo, '+gestor.nome.split(' ')[0]+'!','success');
+    return;
+  }
+  var loginKey=normalizeLogin(u);
+  var found=DATA.usuarios.find(function(x){return normalizeLogin(x.login)===loginKey&&x.senha===p&&x.status==='Ativo';});
   if(found){
     saveSession(found);
     applyUserSession(found);
@@ -1565,7 +1732,7 @@ function exportExcel(){
   var ws=XLSX.utils.aoa_to_sheet([headers].concat(data));
   ws['!cols']=headers.map(function(){return {wch:18};});
   XLSX.utils.book_append_sheet(wb,ws,'MoDesk');
-  XLSX.writeFile(wb,'MoDesk_'+exportCtxStr+'_'+Date.now()+'.xlsx');
+  XLSX.writeFile(wb,'Senac_Aldeota_'+exportCtxStr+'_'+Date.now()+'.xlsx');
   toast('Excel exportado!','success');
 }
 function detectImageFormat(dataUrl){
@@ -1643,7 +1810,7 @@ function exportPDF(empresa){
     if(obs){doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(70,70,70);var split=doc.splitTextToSize(obs,pageW-28);doc.text(split,14,Y+10);}
   }
   addPDFPageFooter(doc);
-  doc.save('MoDesk_'+exportCtxStr+'_'+Date.now()+'.pdf');
+  doc.save('Senac_Aldeota_'+exportCtxStr+'_'+Date.now()+'.pdf');
   toast('PDF exportado!','success');
 }
 
@@ -1669,6 +1836,187 @@ function verProposta(idx){
   populateExportTimbradoSelects();
   openModal('modalVerProposta');
 }
+
+// === Layout Senac Aldeota / Fecomércio (PDF v10) ===
+function getCfgDadosBanc(){
+  return {
+    banco:(document.getElementById('cfg_banco')||{}).value||'CAIXA ECONÔMICA FEDERAL',
+    agencia:(document.getElementById('cfg_agencia')||{}).value||'AG 4249 1292',
+    conta:(document.getElementById('cfg_conta')||{}).value||'C/C 000577505558-2',
+    cnpj:(document.getElementById('cfg_cnpj')||{}).value||'03.648.344/0020-62',
+    pixQR:(window.PIX_QR_DATAURL||null)
+  };
+}
+function exportarPropostaSenacPDF(p,empresa){
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var pageW=doc.internal.pageSize.getWidth();
+  var pageH=doc.internal.pageSize.getHeight();
+  var marginX=14;
+  var startY=buildPDFHeader(doc,empresa||'senac');
+  // Data Fortaleza topo direito
+  var hoje=new Date();
+  var meses=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(217,119,6);
+  doc.text('Fortaleza, '+String(hoje.getDate()).padStart(2,'0')+' de '+meses[hoje.getMonth()]+' de '+hoje.getFullYear()+'.',pageW-marginX,startY+4,{align:'right'});
+  // Título proposta
+  doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
+  doc.text('PROPOSTA SENAC ALDEOTA – '+p.num,marginX,startY+12);
+  // Faixa "INFORMAÇÕES DO CLIENTE"
+  doc.setFillColor(0,51,102);
+  doc.rect(pageW/2,startY+8,pageW/2-marginX,6,'F');
+  doc.setTextColor(255,255,255);doc.setFontSize(10);
+  doc.text('INFORMAÇÕES DO CLIENTE',pageW-marginX-2,startY+12.5,{align:'right'});
+  // Bloco cliente
+  var Y=startY+22;
+  doc.setTextColor(30,41,59);doc.setFontSize(10);doc.setFont('helvetica','bold');
+  doc.text('Att: '+(p.cliente||'—'),marginX,Y);Y+=5;
+  doc.text('Evento: '+(p.evento||'—'),marginX,Y);Y+=5;
+  doc.text('Local: '+(p.espaco||'—'),marginX,Y);Y+=5;
+  doc.text('Data: '+formatDate(p.data),marginX,Y);Y+=5;
+  doc.setFont('helvetica','normal');doc.setTextColor(0,51,102);
+  doc.text('Horário: '+(p.hora||'08h00')+(p.ocupacao?' ('+p.ocupacao+')':''),marginX,Y);Y+=8;
+  // Tabela Espaço/Serviço
+  var rows=[];
+  var espObj=DATA.espacos.find(function(e){return e.nome===p.espaco;});
+  if(p.espaco){
+    var vLoc=(espObj&&espObj.valor)?espObj.valor:0;
+    var vTotLoc=vLoc*(p.dias||1);
+    rows.push([
+      {content:(p.espaco||'Espaço')+(p.dias?' — '+p.dias+' dia(s)':'')+(espObj&&espObj.equip?'\n'+espObj.equip:''),styles:{fontStyle:'bold'}},
+      String(p.dias||1),
+      vLoc?fmtMoney(vLoc):'Cessão não onerosa',
+      vTotLoc?fmtMoney(vTotLoc):'Cessão não onerosa'
+    ]);
+  }
+  (p.equipamentos||[]).forEach(function(eq){
+    var v=eq.valor||0;var dias=(p.dias||1);
+    rows.push([eq.nome,String(eq.qtd||1),fmtMoney(v)+(dias>1?'/dia':''),fmtMoney(v*eq.qtd*dias)]);
+  });
+  if(p.alimentacao&&p.alimentacao.length){
+    var pax=parseInt(p.pax)||0;
+    var descCB=p.alimentacao.map(function(f){return f.nome;}).join('\n');
+    var valCB=p.alimentacao.reduce(function(s,f){return s+(f.val||0);},0);
+    rows.push([
+      {content:descCB,styles:{fontSize:8}},
+      String(pax||'—'),
+      fmtMoney(valCB)+'/pax',
+      fmtMoney(valCB*pax)
+    ]);
+  }
+  doc.autoTable({
+    startY:Y,
+    head:[['Espaço / Serviço','Quantidade','Valor','Valor total']],
+    body:rows.length?rows:[['—','—','—','—']],
+    styles:{fontSize:9,cellPadding:3,textColor:[30,41,59],lineColor:[0,51,102],lineWidth:0.1},
+    headStyles:{fillColor:[245,245,245],textColor:[0,51,102],fontStyle:'bold',halign:'center'},
+    columnStyles:{0:{cellWidth:90},1:{halign:'center',cellWidth:25},2:{halign:'right',cellWidth:30},3:{halign:'right',cellWidth:30}},
+    margin:{left:marginX,right:marginX}
+  });
+  Y=doc.lastAutoTable.finalY;
+  // Total
+  var hasOficio=p.tipo==='oficio';
+  var subTotal=p.valor||0;
+  var totalRows=[[{content:'Valor Total',styles:{fontStyle:'bold',halign:'right'}},'','',{content:fmtMoney(subTotal),styles:{fontStyle:'bold',halign:'right'}}]];
+  if(hasOficio){
+    var comDesc=subTotal*0.8;
+    totalRows.push([{content:'Total com desconto – 20% (Ofício FECOMERIO)',styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}},'','',{content:fmtMoney(comDesc),styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}}]);
+  }
+  doc.autoTable({startY:Y,body:totalRows,styles:{fontSize:10,cellPadding:3,lineColor:[0,51,102],lineWidth:0.1},
+    columnStyles:{0:{cellWidth:90},1:{cellWidth:25},2:{cellWidth:30},3:{cellWidth:30}},margin:{left:marginX,right:marginX}});
+  Y=doc.lastAutoTable.finalY+6;
+  // Bloco ORIENTAÇÕES
+  function sectionTitle(label){
+    if(Y>pageH-40){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=40;}
+    doc.setDrawColor(0,51,102);doc.setLineWidth(0.3);doc.line(marginX,Y,pageW-marginX,Y);Y+=1;
+    doc.setFillColor(245,245,245);doc.rect(marginX,Y,pageW-marginX*2,6,'F');
+    doc.setFontSize(10);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
+    doc.text(label,pageW-marginX-2,Y+4.2,{align:'right'});
+    Y+=8;doc.setFont('helvetica','normal');doc.setTextColor(30,41,59);doc.setFontSize(9);
+  }
+  function bullets(arr){
+    arr.forEach(function(t){
+      if(Y>pageH-25){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=40;}
+      var lines=doc.splitTextToSize('• '+t,pageW-marginX*2-4);
+      doc.text(lines,marginX+4,Y);Y+=lines.length*4.2+1;
+    });
+    Y+=2;
+  }
+  sectionTitle('ORIENTAÇÕES');
+  bullets([
+    'Não dispomos de ESTACIONAMENTO.',
+    'Orçamento aprovado, a proposta precisa ser assinada e enviada para nós.',
+    'Não é permitido a entrada de coffee break de fornecedores externos.',
+    'Sinalizar todo material que entrará na unidade, bem como alguma decoração ou montagem de quaisquer outros serviços ou equipamentos.',
+    'Fechando alimentação, por gentileza informar se houver alguma restrição alimentar, com mínimo de 72 horas de antecedência do evento.'
+  ]);
+  if(p.alimentacao&&p.alimentacao.length){
+    sectionTitle('ALIMENTOS');
+    bullets([
+      'Em conformidade com a Resolução RDC nº 216/2004 (ANVISA), é proibido o aproveitamento de sobras de alimentos ou o transporte dos mesmos (DTAs).',
+      'O Senac adota práticas de segurança: capacitação dos colaboradores, controle de tempo/temperatura, higiene pessoal e descarte adequado.',
+      'Comprometimento com a segurança e qualidade dos serviços prestados.'
+    ]);
+  }
+  if(p.infoTecnica){
+    sectionTitle('INFORMAÇÕES TÉCNICAS');
+    var tl=doc.splitTextToSize(p.infoTecnica,pageW-marginX*2-4);
+    if(Y+tl.length*4.5>pageH-25){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=40;}
+    doc.text(tl,marginX+4,Y);Y+=tl.length*4.5+4;
+  }
+  if(p.areaTecnica==='externa'){
+    sectionTitle('RESPONSABILIDADE TÉCNICA');
+    bullets(['A operação técnica será realizada por fornecedor externo contratado pelo cliente. A SUPERVISÃO TÉCNICA será realizada por técnico do Senac Aldeota durante montagem, operação e desmontagem.']);
+  }
+  sectionTitle('MODALIDADE DE PAGAMENTO');
+  bullets([
+    'O investimento poderá ser pago no cartão de crédito, débito ou outra forma acordada previamente.',
+    'O pagamento deve ser realizado: 100% até 15 dias antes do evento.',
+    'Para emissão de NF, é necessário pagamento prévio e envio do comprovante junto aos dados cadastrais e proposta assinada.',
+    'Esta proposta tem prazo de validade de 10 (dez) dias corridos.'
+  ]);
+  if(p.incluirDadosBanc!==false){
+    sectionTitle('DADOS BANCÁRIOS PARA PAGAMENTO');
+    var db=getCfgDadosBanc();
+    doc.setFont('helvetica','bold');doc.text(db.banco,marginX+4,Y);Y+=5;
+    doc.setFont('helvetica','normal');
+    doc.text(db.agencia,marginX+4,Y);Y+=4.5;
+    doc.text(db.conta,marginX+4,Y);Y+=4.5;
+    doc.text('CNPJ: '+db.cnpj,marginX+4,Y);Y+=6;
+    if(p.incluirQR!==false){
+      doc.setFont('helvetica','bold');doc.text('PIX / QR CODE',marginX+4,Y);Y+=4;
+      var qr=db.pixQR;
+      if(qr){
+        try{doc.addImage(qr,'PNG',marginX+4,Y,32,32);}catch(e){}
+        Y+=34;
+      }else{
+        doc.setFont('helvetica','normal');doc.setTextColor(120,120,120);
+        doc.text('(Cadastrar QR Code PIX em Configurações)',marginX+4,Y);Y+=6;
+        doc.setTextColor(30,41,59);
+      }
+    }
+  }
+  // Aprovação
+  if(Y>pageH-50){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=40;}
+  Y+=4;
+  doc.setFillColor(0,51,102);doc.rect(pageW/2,Y,pageW/2-marginX,6,'F');
+  doc.setTextColor(255,255,255);doc.setFontSize(10);doc.setFont('helvetica','bold');
+  doc.text('APROVAÇÃO',pageW-marginX-2,Y+4.2,{align:'right'});
+  Y+=10;doc.setTextColor(30,41,59);doc.setFont('helvetica','normal');doc.setFontSize(9);
+  doc.text('Aprovamos a proposta '+p.num+' e autorizamos a execução do que nela está especificado.',marginX,Y);Y+=8;
+  doc.text('Fortaleza, _______ de _______________ de '+hoje.getFullYear()+'.',pageW/2,Y,{align:'center'});Y+=14;
+  doc.setDrawColor(0,0,0);doc.line(pageW/2-50,Y,pageW/2+50,Y);Y+=4;
+  doc.text('Carimbo e assinatura',pageW/2,Y,{align:'center'});
+  // Assinaturas Senac
+  Y+=14;
+  doc.setFont('helvetica','bold');doc.text('Atenciosamente,',marginX,Y);Y+=6;
+  doc.text('Juliana Bissonho',marginX,Y);doc.setFont('helvetica','italic');doc.setTextColor(100,100,100);doc.text('Gerente do Senac Empresas Escola',marginX+38,Y);Y+=5;
+  doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);doc.text('Semyrames Macedo',marginX,Y);doc.setFont('helvetica','italic');doc.setTextColor(100,100,100);doc.text('Produtora de Eventos',marginX+38,Y);
+  addPDFPageFooter(doc);
+  doc.save('Proposta_Senac_'+(p.num||'').replace('/','_')+'.pdf');
+  toast('PDF Senac/Fecomércio exportado!','success');
+}
+
 function exportPropostaAtual(fmt){
   if(exportPropostaIdx<0)return;
   var timbradoSel=document.getElementById('verPropostaTimbrado').value;
@@ -1678,6 +2026,7 @@ function exportPropostaAtual(fmt){
     var wb=XLSX.utils.book_new();
     var eqList=(p.equipamentos||[]).map(function(e){return e.nome+(e.qtd>1?' x'+e.qtd:'');}).join('; ')||'—';
     var ws=XLSX.utils.aoa_to_sheet([
+      ['SENAC ALDEOTA — Proposta Comercial'],['Fecomércio CE · Sesc · Senac · IPDC'],[''],
       ['Campo','Valor'],['Número',p.num],['Evento',p.evento],['Cliente',p.cliente],['Espaço',p.espaco],
       ['Data',formatDate(p.data)],['Prazo Pagamento',prazo15(p.data)],['Valor',fmtMoney(p.valor)],['Status',p.status],
       ['Área Técnica',p.areaTecnica==='externa'?'Externa':'Interna'],['Formato',p.formatoEvento||'—'],
@@ -1688,6 +2037,9 @@ function exportPropostaAtual(fmt){
     XLSX.writeFile(wb,'Proposta_'+p.num.replace('/','_')+'.xlsx');
     toast('Excel da proposta exportado!','success');
   }else{
+    exportarPropostaSenacPDF(p,empresa);
+    closeModal('modalVerProposta');
+    return;
     var jsPDF=window.jspdf.jsPDF;
     var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
     var pageW=doc.internal.pageSize.getWidth();
@@ -1835,7 +2187,7 @@ function renderPropostas(list){
       +'<td><div style="display:flex;gap:4px">'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Acessar/Exportar Proposta" onclick="verProposta('+idx+')" style="color:var(--c-cyan)">📄</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Editar" onclick="abrirEditProposta('+idx+')">✏️</button>'
-        +'<button class="btn btn-ghost btn-icon btn-sm" title="WhatsApp" onclick="gerarPropostaWA('+idx+')">📲</button>'
+        +''
         +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirProposta('+idx+')">🗑️</button>':'')
       +'</div></td>'
       +'</tr>';
@@ -1897,7 +2249,8 @@ function abrirEditProposta(idx){
     pax:p.pax||'',tipoEvento:p.tipoEvento||'Congresso',propTipo:p.tipo||'normal',
     espaco:p.espaco||'',periodo:p.periodo||'Diária Completa',dias:p.dias||1,
     servicos:p.servicos?p.servicos.slice():[],equipamentos:p.equipamentos?p.equipamentos.slice():[],alimentacao:p.alimentacao?p.alimentacao.slice():[],
-    areaTecnica:p.areaTecnica||'interna',formatoEvento:p.formatoEvento||p.tipoEvento||'Congresso',musicaAoVivo:!!p.musicaAoVivo
+    areaTecnica:p.areaTecnica||'interna',formatoEvento:p.formatoEvento||p.tipoEvento||'Congresso',musicaAoVivo:!!p.musicaAoVivo,
+    infoTecnica:p.infoTecnica||'',temAlimentacao:!!(p.alimentacao&&p.alimentacao.length),incluirDadosBanc:p.incluirDadosBanc!==false,incluirQR:p.incluirQR!==false
   };
   openModal('modalProposta');
 }
@@ -1923,11 +2276,7 @@ function excluirProposta(idx){
   DATA.propostas.splice(idx,1);saveToStorage();renderPropostas();renderLixeira();updateBadges();checkPrazosVencidos();
   toast('Proposta movida para Lixeira','warn');
 }
-function gerarPropostaWA(idx){
-  var p=DATA.propostas[idx];
-  var msg=encodeURIComponent('*Proposta '+p.num+' — MoDesk ALFA v9.0*\n\nEvento: '+p.evento+'\nCliente: '+p.cliente+'\nEspaço: '+p.espaco+'\nData: '+formatDate(p.data)+'\nValor: '+fmtMoney(p.valor)+'\nPrazo de pagamento: '+prazo15(p.data)+'\n\n_Senac Aldeota · (85) 3255-6800_');
-  window.open('https://wa.me/?text='+msg,'_blank');
-}
+function gerarPropostaWA(){toast('WhatsApp removido desta versão','info');}
 
 // ── OS ────────────────────────────────────────────────────────────
 function renderOS(){
@@ -2508,15 +2857,7 @@ function updateParecerEvento(){
   if(p)info.innerHTML='<span style="color:var(--c-accent2)">'+p.evento+'</span> — '+formatDate(p.data)+' · '+p.espaco+' · <span style="color:var(--c-green)">'+fmtMoney(p.valor)+'</span>';
   else info.innerHTML='';
 }
-function gerarParecerWA(){
-  var all=document.querySelectorAll('[id^="chk_"]').length;
-  var done=document.querySelectorAll('[id^="chk_"].checked').length;
-  var pct=all?Math.round((done/all)*100):0;
-  var sel=document.getElementById('parecerEvento');
-  var evName=sel.options[sel.selectedIndex].text;
-  var msg=encodeURIComponent('*Parecer Técnico — MoDesk ALFA v9.0*\n\n'+(evName!=='Selecione o evento...'?'Evento: '+evName+'\n':'')+'Data: '+new Date().toLocaleDateString('pt-BR')+'\n\nProgresso verificação: '+done+'/'+all+' ('+pct+'%)\nStatus: '+(pct===100?'APROVADO':pct>=75?'ATENÇÃO':pct>=50?'PENDENTE':'NÃO APROVADO')+'\n\nObs: '+(document.getElementById('parecerObs').value||'—')+'\n\n_Senac Aldeota · (85) 3255-6800_');
-  window.open('https://wa.me/?text='+msg,'_blank');
-}
+function gerarParecerWA(){toast('WhatsApp removido desta versão','info');}
 
 // ── RELATÓRIOS ────────────────────────────────────────────────────
 function renderRelatorios(){}
@@ -2567,7 +2908,7 @@ function renderCalendario(){
     var isToday=isThisMonth&&today.getDate()===d;
     var dayEvents=eventsByDay[d]||[];
     var hasEv=dayEvents.length>0;
-    var tip=dayEvents.map(function(e){return e.evento+' · '+e.cliente+(e.hora?' · '+e.hora:'');}).join(' | ');
+    var tip=dayEvents.map(function(e){return e.evento+' · '+e.cliente+(e.hora?' · '+e.hora:'')+' · '+e.espaco+' · '+(e.pax?e.pax+' pax · ':'')+fmtMoney(e.valor);}).join('\n');
     cells+='<div class="cal-cell'+(isToday?' today':'')+(hasEv?' has-event':'')+'" onclick="calClick('+d+')" title="'+tip.replace(/"/g,'&quot;')+'">'
       +'<span class="cal-day-num">'+d+'</span>'
       +(hasEv?'<div class="cal-events">'+dayEvents.slice(0,2).map(function(e){
@@ -2590,8 +2931,30 @@ function calNext(){if(calMonth===11){calMonth=0;calYear++;}else calMonth++;rende
 function calClick(d){
   var evs=DATA.propostas.filter(function(p){var dt=new Date(p.data+'T00:00:00');return dt.getFullYear()===calYear&&dt.getMonth()===calMonth&&dt.getDate()===d;});
   if(!evs.length){toast('Sem eventos em '+d+'/'+(calMonth+1)+'/'+calYear,'info');return;}
-  var msg=evs.map(function(e){return e.evento+' — '+e.cliente+' às '+(e.hora||'08:00');}).join('\n');
-  toast(evs.length+' evento(s): '+msg,'info');
+  var titulo='Eventos · '+String(d).padStart(2,'0')+'/'+String(calMonth+1).padStart(2,'0')+'/'+calYear;
+  var html=evs.map(function(e,i){
+    var cli=DATA.clientes.find(function(c){return c.nome===e.cliente;});
+    var eqList=(e.equipamentos||[]).map(function(eq){return eq.nome+(eq.qtd>1?' (x'+eq.qtd+')':'');}).join(', ')||'—';
+    var foodList=(e.alimentacao||[]).map(function(f){return f.nome;}).join(', ')||'—';
+    var idx=DATA.propostas.indexOf(e);
+    return '<div style="background:var(--c-surface2);border-radius:10px;padding:14px;margin-bottom:'+(i<evs.length-1?'12px':'0')+'">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div><strong style="font-size:15px">'+e.evento+'</strong><div style="font-size:12px;color:var(--c-text2)">Proposta '+e.num+'</div></div><span class="badge '+statusBadge(e.status)+'">'+e.status+'</span></div>'
+      +'<div class="evt-popup-row"><span>Cliente</span><strong>'+e.cliente+(cli&&cli.doc?' · '+cli.doc:'')+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Espaço</span><strong>'+e.espaco+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Horário</span><strong>'+(e.hora||'08:00')+' · '+(e.ocupacao||(e.dias||1)+' dia(s)')+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Participantes</span><strong>'+(e.pax||'—')+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Área Técnica</span><strong>'+(e.areaTecnica==='externa'?'Externa (supervisão Senac)':'Interna (Senac Aldeota)')+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Equipamentos</span><strong style="max-width:60%;text-align:right">'+eqList+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Alimentação</span><strong style="max-width:60%;text-align:right">'+foodList+'</strong></div>'
+      +'<div class="evt-popup-row"><span>Valor</span><strong style="color:var(--c-green)">'+fmtMoney(e.valor)+'</strong></div>'
+      +'<div class="evt-popup-row" style="border-bottom:0"><span>Prazo Pagto</span><strong style="color:var(--c-amber)">'+prazo15(e.data)+'</strong></div>'
+      +(e.infoTecnica?'<div style="margin-top:10px;padding:10px;background:rgba(0,51,102,.06);border-radius:6px;font-size:12px"><strong>🔧 Info técnica:</strong><br>'+e.infoTecnica.replace(/\n/g,'<br>')+'</div>':'')
+      +'<div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-primary btn-sm" onclick="closeModal(\'modalEventoDetalhe\');verProposta('+idx+')">📄 Ver Proposta Completa</button></div>'
+      +'</div>';
+  }).join('');
+  document.getElementById('eventoDetalheTitle').textContent=titulo;
+  document.getElementById('eventoDetalheContent').innerHTML=html;
+  openModal('modalEventoDetalhe');
 }
 
 // ── LIXEIRA ───────────────────────────────────────────────────────
@@ -2768,9 +3131,16 @@ function assetStatusCard(label,asset,tipoKey){
     +'</div>';
 }
 function populateExportTimbradoSelects(){
-  var hasTimbrado=!!getActiveAsset('timbrado')||!!getActiveAsset('logo');
+  var t=getActiveAsset('timbrado');
+  var l=getActiveAsset('logo');
+  var label='Senac Aldeota';
+  if(t&&t.nome)label+=' — '+t.nome;
+  else if(l&&l.nome)label+=' — '+l.nome;
   var html='<option value="">Sem layout institucional</option>'
-    +'<option value="senac"'+(hasTimbrado?' selected':'')+'>Senac Aldeota'+(hasTimbrado?' (timbrado ativo)':'')+'</option>';
+    +'<option value="senac"'+((t||l)?' selected':'')+'>'+label+'</option>';
+  (ASSETS.historico||[]).filter(function(h){return h.tipo==='timbrado';}).forEach(function(h){
+    if(!h.ativo)html+='<option value="senac">Histórico: '+h.nome+'</option>';
+  });
   ['verPropostaTimbrado','exportEmpresa','wizTimbrado'].forEach(function(id){
     var sel=document.getElementById(id);
     if(!sel)return;
@@ -2797,16 +3167,17 @@ function adicionarLogo(input){
   }
 }
 function adicionarPortfolio(input){
-  if(input.files&&input.files[0]){
-    var reader=new FileReader();
-    reader.onload=function(e){
-      var div=document.createElement('div');
-      div.style.cssText='width:120px;height:80px;border-radius:8px;overflow:hidden;border:1px solid var(--c-border)';
-      div.innerHTML='<img src="'+e.target.result+'" style="width:100%;height:100%;object-fit:cover"/>';
-      document.getElementById('portfolioGallery').appendChild(div);
-      toast('Foto adicionada ao portfólio','success');
-    };
-    reader.readAsDataURL(input.files[0]);
+  if(!DATA.portfolio)DATA.portfolio=[];
+  if(input.files&&input.files.length){
+    Array.prototype.forEach.call(input.files,function(file){
+      var reader=new FileReader();
+      reader.onload=function(e){
+        DATA.portfolio.push({nome:file.name,dataUrl:e.target.result,criadoEm:new Date().toISOString()});
+        saveToStorage();renderPortfolioGallery();toast('Foto adicionada ao portfólio','success');
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value='';
   }
 }
 function populatePortEspaco(){
@@ -2818,14 +3189,31 @@ function renderUsuarios(){
   var tb=document.getElementById('tbUsuarios');
   if(!tb)return;
   tb.innerHTML=DATA.usuarios.map(function(u,i){
+    var initials=(u.nome||'?').split(' ').map(function(x){return x[0];}).slice(0,2).join('');
+    var av=u.foto
+      ? '<span style="display:inline-block;width:30px;height:30px;border-radius:50%;background:url('+u.foto+') center/cover;vertical-align:middle;margin-right:8px"></span>'
+      : '<span style="display:inline-flex;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--c-accent),var(--c-pink));color:#fff;font-size:11px;font-weight:700;align-items:center;justify-content:center;vertical-align:middle;margin-right:8px">'+initials+'</span>';
     return '<tr>'
-      +'<td style="font-weight:600">'+u.nome+'</td>'
-      +'<td>'+u.email+'</td>'
-      +'<td><span class="badge '+(u.nivel==='Gestor'?'badge-red':u.nivel==='Supervisor'?'badge-amber':'badge-blue')+'">'+u.nivel+'</span></td>'
+      +'<td style="font-weight:600">'+av+u.nome+'</td>'
+      +'<td>'+(u.email||'')+'</td>'
+      +'<td><span class="badge '+(u.nivel==='Gestor'?'badge-red':'badge-blue')+'">'+u.nivel+'</span></td>'
       +'<td><span class="badge '+(u.status==='Ativo'?'badge-green':'badge-gray')+'">'+u.status+'</span></td>'
-      +'<td>'+(u.nivel!=='Gestor'?'<button class="btn btn-ghost btn-sm btn-icon" onclick="toggleUserStatus('+i+')">'+(u.status==='Ativo'?'🔒':'🔓')+'</button><button class="btn btn-danger btn-sm btn-icon" onclick="excluirUser('+i+')">🗑️</button>':'<span style="color:var(--c-text3);font-size:11px">Protegido</span>')+'</td>'
-      +'</tr>';
+      +'<td><button class="btn btn-ghost btn-sm btn-icon" title="Editar" onclick="editarUsuario('+i+')">✏️</button>'
+        +(u.nivel!=='Gestor'?'<button class="btn btn-ghost btn-sm btn-icon" onclick="toggleUserStatus('+i+')">'+(u.status==='Ativo'?'🔒':'🔓')+'</button><button class="btn btn-danger btn-sm btn-icon" onclick="excluirUser('+i+')">🗑️</button>':'<span style="color:var(--c-text3);font-size:11px;margin-left:6px">Protegido</span>')
+      +'</td></tr>';
   }).join('');
+}
+function editarUsuario(idx){
+  var u=DATA.usuarios[idx];if(!u)return;
+  document.getElementById('nu_nome').value=u.nome||'';
+  document.getElementById('nu_login').value=u.login||'';
+  document.getElementById('nu_email').value=u.email||'';
+  document.getElementById('nu_senha').value='';
+  var nt=document.getElementById('nu_tel');if(nt)nt.value=u.telefone||'';
+  document.getElementById('nu_nivel').value=u.nivel||'Produtor de Eventos';
+  if(u.foto){document.getElementById('nu_foto_img').src=u.foto;document.getElementById('nu_foto_preview').style.display='block';}
+  document.getElementById('nu_login').setAttribute('data-edit-idx',idx);
+  toast('Editando '+u.nome+' — altere os campos e clique em Cadastrar para salvar','info');
 }
 function toggleUserStatus(idx){
   DATA.usuarios[idx].status=DATA.usuarios[idx].status==='Ativo'?'Inativo':'Ativo';
@@ -2841,29 +3229,58 @@ function cadastrarUsuario(){
   var email=document.getElementById('nu_email').value.trim();
   var senha=document.getElementById('nu_senha').value;
   var nivel=document.getElementById('nu_nivel').value;
-  if(!nome||!login||!senha){toast('Preencha nome, login e senha','error');return;}
-  if(DATA.usuarios.find(function(u){return u.login===login;})){toast('Login já existe','error');return;}
-  DATA.usuarios.push({login:login,nome:nome,email:email,nivel:nivel,status:'Ativo',senha:senha});
+  var tel=(document.getElementById('nu_tel')||{}).value||'';
+  var foto=document.getElementById('nu_foto_preview').style.display==='block'?document.getElementById('nu_foto_img').src:'';
+  var editIdx=document.getElementById('nu_login').getAttribute('data-edit-idx');
+  if(!nome||!login){toast('Preencha nome e login','error');return;}
+  if(editIdx!==null&&editIdx!==''){
+    var u=DATA.usuarios[+editIdx];
+    u.nome=nome;u.login=login;u.email=email;u.nivel=nivel;u.telefone=tel;
+    if(senha)u.senha=senha;
+    if(foto)u.foto=foto;
+    document.getElementById('nu_login').removeAttribute('data-edit-idx');
+    toast('Usuário '+nome+' atualizado','success');
+  }else{
+    if(!senha){toast('Defina uma senha','error');return;}
+    if(DATA.usuarios.find(function(u){return u.login===login;})){toast('Login já existe','error');return;}
+    DATA.usuarios.push({login:login,nome:nome,email:email,nivel:nivel,status:'Ativo',senha:senha,telefone:tel,foto:foto});
+    toast('Usuário '+nome+' cadastrado! Login: '+login,'success');
+  }
   saveToStorage();renderUsuarios();
   ['nu_nome','nu_login','nu_email','nu_senha'].forEach(function(id){document.getElementById(id).value='';});
-  toast('Usuário '+nome+' cadastrado! Login: '+login,'success');
+  if(document.getElementById('nu_tel'))document.getElementById('nu_tel').value='';
+  document.getElementById('nu_foto_preview').style.display='none';
+  document.getElementById('nu_foto').value='';
 }
+function setPropostasView(mode){
+  var g=document.getElementById('propostasGridWrap');
+  var l=document.getElementById('propostasListWrap');
+  var bg=document.getElementById('propViewGridBtn');
+  var bl=document.getElementById('propViewListBtn');
+  if(mode==='list'){g.style.display='none';l.style.display='block';bl.classList.add('btn-primary');bl.classList.remove('btn-ghost');bg.classList.add('btn-ghost');bg.classList.remove('btn-primary');}
+  else{g.style.display='block';l.style.display='none';bg.classList.add('btn-primary');bg.classList.remove('btn-ghost');bl.classList.add('btn-ghost');bl.classList.remove('btn-primary');}
+  try{localStorage.setItem('modesk_prop_view',mode);}catch(e){}
+}
+(function(){try{var m=localStorage.getItem('modesk_prop_view');if(m)setTimeout(function(){setPropostasView(m);},200);else setTimeout(function(){setPropostasView('grid');},200);}catch(e){}})();
 
 // ── WIZARD ────────────────────────────────────────────────────────
 var wizardStepsData=[
   {label:'Evento',html:function(){return '<div class="form-row"><div class="form-group"><label>Nome do Evento</label><input id="w_evento" placeholder="Ex: Congresso de Tecnologia 2026"/></div><div class="form-group"><label>Cliente</label><select id="w_cliente"><option>Selecione...</option>'+DATA.clientes.map(function(c){return '<option>'+c.nome+'</option>';}).join('')+'</select></div></div><div class="form-row"><div class="form-group"><label>Data do Evento</label><input type="date" id="w_data"/></div><div class="form-group"><label>Horário</label><input type="time" id="w_hora" value="08:00"/></div></div><div class="form-row"><div class="form-group"><label>Nº de Participantes</label><input type="number" id="w_pax" placeholder="100"/></div><div class="form-group"><label>Tipo de Evento</label><select id="w_tipo"><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Festival</option></select></div></div><div class="form-group"><label>Tipo de Proposta</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="normal" checked/> Normal</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="w_propTipo" value="oficio"/> 📋 Ofício FECOMERIO</label></div></div>';}},
   {label:'Locação',html:function(){return '<div class="form-group" style="margin-bottom:14px"><label>Espaço Principal</label><select id="w_espaco"><option>Selecione...</option>'+DATA.espacos.map(function(e){return '<option value="'+e.nome+'">'+e.nome+' — cap.'+e.cap+' pessoas · '+fmtMoney(e.valor)+'/dia</option>';}).join('')+'</select></div><div class="form-row"><div class="form-group"><label>Período</label><select id="w_periodo"><option>Diária Completa</option><option>Meio Período Manhã</option><option>Meio Período Tarde</option><option>Noturno</option></select></div><div class="form-group"><label>Número de Dias</label><input type="number" id="w_dias" value="1" min="1"/></div></div><div class="form-group"><label>Serviços Adicionais</label><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">'+['Limpeza','Segurança','Mestre de Cerimônias','Recepcionistas','Valet'].map(function(s){return '<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:var(--c-text)"><input type="checkbox" class="w_servico"/> '+s+'</label>';}).join('')+'</div></div>';}},
-  {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa</label></div></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os equipamentos necessários:</p><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
-  {label:'Alimentação',html:function(){return '<p style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Selecione os serviços de alimentação:</p><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+')">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
-  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar PDF com Timbrado</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
+  {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-row"><div class="form-group"><label>Responsabilidade</label><div style="display:flex;gap:12px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="interna" checked onchange="toggleAreaTecnicaFields()"/> Interna (Senac)</label><label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="w_areaTec" value="externa" onchange="toggleAreaTecnicaFields()"/> Externa (fornecedor terceiro)</label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><p style="font-size:13px;color:var(--c-text2);margin-bottom:8px">Selecione os equipamentos necessários:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'equip-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'equip-select-grid\',\'list\')">☰ Lista</button></div><div class="equip-select-grid">'+DATA.estoque.map(function(e,i){return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
+  {label:'Alimentação',html:function(){return '<div class="alimt-toggle"><span>O evento terá serviço de alimentação?</span><label><input type="radio" name="w_temAlim" value="sim" onchange="toggleAlimSection(true)"'+(wizardDraft.temAlimentacao?' checked':'')+'/> Sim</label><label><input type="radio" name="w_temAlim" value="nao" onchange="toggleAlimSection(false)"'+(!wizardDraft.temAlimentacao?' checked':'')+'/> Não</label></div><div id="w_alimSection" style="display:'+(wizardDraft.temAlimentacao?'block':'none')+'"><p style="font-size:12px;color:var(--c-text2);margin-bottom:6px">Selecione um ou mais itens (pode haver mais de um tipo de alimentação no evento):</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'food-select-grid\',\'grid\')">▦ Grid</button><button type="button" onclick="setListLayout(this,\'food-select-grid\',\'list\')">☰ Lista</button></div><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+')">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
+  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="background:var(--c-surface2);border-radius:10px;padding:12px;margin-bottom:12px"><div style="font-weight:600;font-size:13px;margin-bottom:8px">💳 Pagamento</div><label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px"><input type="checkbox" id="w_incDB" checked/> Incluir dados bancários na proposta</label><label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="w_incQR" checked/> Incluir QR Code PIX na proposta</label></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar Preview do PDF</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
 ];
 function resetWizardDraft(){
-  wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false};
+  wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,infoTecnica:'',temAlimentacao:false,incluirDadosBanc:true,incluirQR:true};
 }
 function toggleAreaTecnicaFields(){
   var ext=document.querySelector('input[name="w_areaTec"]:checked');
   var el=document.getElementById('w_areaInternaFields');
-  if(el)el.style.display=ext&&ext.value==='externa'?'none':'block';
+  var note=document.getElementById('w_externaNote');
+  var isExt=ext&&ext.value==='externa';
+  if(el)el.style.display=isExt?'none':'block';
+  if(note)note.style.display=isExt?'block':'none';
 }
 function saveWizardStepData(step){
   if(step===1){
@@ -2886,6 +3303,7 @@ function saveWizardStepData(step){
     wizardDraft.areaTecnica=ar?ar.value:'interna';
     wizardDraft.formatoEvento=document.getElementById('w_formato')?document.getElementById('w_formato').value:'Congresso';
     wizardDraft.musicaAoVivo=document.getElementById('w_musica')?document.getElementById('w_musica').checked:false;
+    wizardDraft.infoTecnica=document.getElementById('w_infoTec')?document.getElementById('w_infoTec').value:'';
     wizardDraft.equipamentos=[];
     DATA.estoque.forEach(function(e,i){
       var chk=document.getElementById('equip_chk_'+i);
@@ -2926,6 +3344,7 @@ function restoreWizardStepData(step){
     toggleAreaTecnicaFields();
     if(document.getElementById('w_formato'))document.getElementById('w_formato').value=d.formatoEvento||'Congresso';
     if(document.getElementById('w_musica'))document.getElementById('w_musica').checked=!!d.musicaAoVivo;
+    if(document.getElementById('w_infoTec'))document.getElementById('w_infoTec').value=d.infoTecnica||'';
     d.equipamentos.forEach(function(eq){
       var card=document.getElementById('equip_chk_'+eq.idx);
       if(card){
@@ -2969,6 +3388,9 @@ function buildProposalFromDraft(draft,total,statusOverride){
     servicos:draft.servicos.slice(),equipamentos:draft.equipamentos.slice(),alimentacao:draft.alimentacao.slice(),
     areaTecnica:draft.areaTecnica||'interna',formatoEvento:draft.formatoEvento||draft.tipoEvento||'Congresso',
     musicaAoVivo:!!draft.musicaAoVivo,
+    infoTecnica:draft.infoTecnica||'',
+    incluirDadosBanc:draft.incluirDadosBanc!==false,
+    incluirQR:draft.incluirQR!==false,
     status:statusOverride||'Pendente'
   };
 }
@@ -3019,11 +3441,39 @@ function renderWizardStep(step){
   }
 }
 function nextPropNumPreview(){var y=new Date().getFullYear();var next=((DATA.propSequence&&DATA.propSequence[y])||0)+1;return String(next).padStart(3,'0')+'/'+y;}
+function validateWizardStep(step){
+  var d=wizardDraft;var errs=[];
+  if(step===1){
+    if(!d.evento||d.evento.trim().length<3)errs.push('Nome do evento');
+    if(!d.cliente||d.cliente==='Selecione...')errs.push('Cliente');
+    if(!d.data)errs.push('Data do evento');
+    if(!d.pax)errs.push('Nº de participantes');
+  }else if(step===2){
+    if(!d.espaco||d.espaco==='Selecione...')errs.push('Espaço');
+    if(!d.dias||d.dias<1)errs.push('Número de dias');
+  }else if(step===3){
+    if(d.areaTecnica==='interna'&&(!d.equipamentos||!d.equipamentos.length))errs.push('Selecione ao menos 1 equipamento ou marque área técnica como Externa');
+  }else if(step===4){
+    if(d.temAlimentacao&&(!d.alimentacao||!d.alimentacao.length))errs.push('Selecione ao menos 1 item de alimentação (ou marque "Não")');
+  }
+  return errs;
+}
 function wizardStep(dir){
   var next=wizardCurrentStep+dir;
   if(next<1||next>5)return;
-  if(dir>0)saveWizardStepData(wizardCurrentStep);
+  if(dir>0){
+    saveWizardStepData(wizardCurrentStep);
+    var errs=validateWizardStep(wizardCurrentStep);
+    if(errs.length){
+      alert('⚠️ Preencha corretamente antes de continuar:\n\n• '+errs.join('\n• '));
+      toast('Etapa incompleta: '+errs.join(', '),'error');
+      return;
+    }
+  }
   if(dir>0&&wizardCurrentStep===5){
+    var dbEl=document.getElementById('w_incDB');var qrEl=document.getElementById('w_incQR');
+    if(dbEl)wizardDraft.incluirDadosBanc=dbEl.checked;
+    if(qrEl)wizardDraft.incluirQR=qrEl.checked;
     var draft=wizardDraft;
     var total=calcProposalTotal(draft);
     if(editingPropostaIdx>=0){
@@ -3041,12 +3491,18 @@ function wizardStep(dir){
     var novaProp=buildProposalFromDraft(draft,total,'Pendente');
     novaProp.id='P'+String(DATA.propostas.length+1).padStart(3,'0');
     novaProp.num=num;
+    var goAhead=confirm('Cadastro finalizado!\n\nDeseja gerar o PDF da proposta '+num+' agora?\n(Recomendado antes de fechar)');
     DATA.propostas.push(novaProp);
     var osN=DATA.ordens.length+1;
     DATA.ordens.push({id:'OS'+String(osN).padStart(3,'0'),evento:novaProp.evento,tipo:'TI/AV',resp:'A definir',data:novaProp.data,status:'Aberta',prog:0,prio:'Normal',obs:'Criada automaticamente a partir da proposta '+num});
     saveToStorage();renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
+    if(goAhead){
+      var newIdx=DATA.propostas.length-1;
+      exportPropostaIdx=newIdx;
+      exportarPropostaSenacPDF(novaProp,(document.getElementById('wizTimbrado')||{}).value||'senac');
+    }
     closeModal('modalProposta');
-    toast('🎉 Proposta '+num+' criada com status Pendente! OS gerada automaticamente.','success');
+    toast('🎉 Proposta '+num+' criada! OS gerada automaticamente.','success');
     setTimeout(function(){checkPrazosVencidos();},300);
     resetWizardDraft();initWizard();populateOSProp();
     return;
@@ -3057,6 +3513,117 @@ function populateOSProp(){
   var sel=document.getElementById('os_prop');
   if(!sel)return;
   sel.innerHTML=DATA.propostas.map(function(p){return '<option value="'+p.evento+'">'+p.num+' — '+p.evento+'</option>';}).join('');
+}
+
+
+// === Helpers v10 ===
+
+function uploadPixQR(input){
+  if(!input.files||!input.files[0])return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    window.PIX_QR_DATAURL=e.target.result;
+    try{localStorage.setItem('senac_pix_qr',e.target.result);}catch(err){}
+    var prev=document.getElementById('pixQrPreview');
+    if(prev)prev.innerHTML='<img src="'+e.target.result+'" style="width:140px;height:140px;object-fit:contain;border:1px solid var(--c-border);border-radius:8px"/>';
+    toast('QR Code PIX salvo','success');
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function salvarDadosBanc(){
+  var data={
+    banco:document.getElementById('cfg_banco').value,
+    agencia:document.getElementById('cfg_agencia').value,
+    conta:document.getElementById('cfg_conta').value,
+    cnpj:document.getElementById('cfg_cnpj').value
+  };
+  try{localStorage.setItem('senac_dados_banc',JSON.stringify(data));}catch(e){}
+  toast('Dados bancários salvos','success');
+}
+function loadDadosBancCfg(){
+  try{
+    var qr=localStorage.getItem('senac_pix_qr');
+    if(qr){window.PIX_QR_DATAURL=qr;var prev=document.getElementById('pixQrPreview');if(prev)prev.innerHTML='<img src="'+qr+'" style="width:140px;height:140px;object-fit:contain;border:1px solid var(--c-border);border-radius:8px"/>';}
+    var db=localStorage.getItem('senac_dados_banc');
+    if(db){var o=JSON.parse(db);['banco','agencia','conta','cnpj'].forEach(function(k){var el=document.getElementById('cfg_'+k);if(el&&o[k])el.value=o[k];});}
+  }catch(e){}
+}
+
+function setListLayout(btn,gridClass,layout){
+  var parent=btn.parentElement;
+  parent.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  var grid=document.querySelector('.'+gridClass);
+  if(!grid)return;
+  if(layout==='list')grid.classList.add('layout-list');else grid.classList.remove('layout-list');
+}
+function toggleAlimSection(on){
+  wizardDraft.temAlimentacao=!!on;
+  var sec=document.getElementById('w_alimSection');
+  if(sec)sec.style.display=on?'block':'none';
+  if(!on)wizardDraft.alimentacao=[];
+}
+// Portfólio - slide
+var PORTFOLIO_SLIDE_IDX=0;
+function openPortfolioSlide(idx){
+  if(!DATA.portfolio||!DATA.portfolio.length)return;
+  PORTFOLIO_SLIDE_IDX=idx||0;
+  renderPortfolioSlide();
+  document.getElementById('slideOverlay').classList.add('open');
+}
+function closePortfolioSlide(){document.getElementById('slideOverlay').classList.remove('open');}
+function slidePortfolio(dir){
+  var n=DATA.portfolio.length;if(!n)return;
+  PORTFOLIO_SLIDE_IDX=(PORTFOLIO_SLIDE_IDX+dir+n)%n;
+  renderPortfolioSlide();
+}
+function renderPortfolioSlide(){
+  var img=document.getElementById('slideImage');
+  var cnt=document.getElementById('slideCount');
+  if(img)img.src=DATA.portfolio[PORTFOLIO_SLIDE_IDX].dataUrl||DATA.portfolio[PORTFOLIO_SLIDE_IDX];
+  if(cnt)cnt.textContent=(PORTFOLIO_SLIDE_IDX+1)+' / '+DATA.portfolio.length;
+}
+function removerPortfolio(i){
+  if(!DATA.portfolio)return;
+  DATA.portfolio.splice(i,1);saveToStorage();renderPortfolioGallery();toast('Foto removida','warn');
+}
+function renderPortfolioGallery(){
+  var el=document.getElementById('portfolioGallery');
+  if(!el)return;
+  if(!DATA.portfolio||!DATA.portfolio.length){el.innerHTML='<div style="font-size:12px;color:var(--c-text3)">Nenhuma foto cadastrada</div>';return;}
+  el.innerHTML=DATA.portfolio.map(function(p,i){
+    var url=p.dataUrl||p;
+    return '<div class="portfolio-thumb" onclick="openPortfolioSlide('+i+')"><img src="'+url+'" style="width:100%;height:100%;object-fit:cover"/><button class="x" onclick="event.stopPropagation();removerPortfolio('+i+')">✕</button></div>';
+  }).join('')+'<button class="btn btn-ghost btn-sm" style="align-self:center" onclick="openPortfolioSlide(0)">▶️ Slide</button>';
+}
+// Verificação de gestor por senha
+function requireGestor(callback){
+  if(currentUser&&currentUser.nivel==='Gestor'){callback();return;}
+  _authCallback=callback;openModal('modalAuth');
+}
+// Exportar com escolha de orientação (dashboard/BI)
+function exportDashWithOrientation(){
+  var ori=prompt('Orientação do PDF?\n\nDigite "R" para Retrato (padrão) ou "P" para Paisagem:','R');
+  if(ori===null)return;
+  var orientation=(ori||'').toUpperCase().indexOf('P')===0?'landscape':'portrait';
+  exportCtxStr='dashboard';
+  exportPDFWithOrientation(orientation);
+}
+function exportPDFWithOrientation(orientation){
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:orientation,unit:'mm',format:'a4'});
+  var pageW=doc.internal.pageSize.getWidth();
+  var startY=buildPDFHeader(doc,'senac');
+  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
+  doc.text((exportCtxStr||'Relatório').toUpperCase(),14,startY+6);
+  doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
+  doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR')+' · Orientação: '+(orientation==='landscape'?'Paisagem':'Retrato'),14,startY+12);
+  doc.autoTable({startY:startY+18,head:[['Nº','Evento','Cliente','Data','Espaço','Valor (R$)','Status']],
+    body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),p.espaco,fmtMoney(p.valor),p.status];}),
+    styles:{fontSize:9,cellPadding:3},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
+  addPDFPageFooter(doc);
+  doc.save('Dashboard_Senac_'+orientation+'_'+Date.now()+'.pdf');
+  toast('PDF '+(orientation==='landscape'?'paisagem':'retrato')+' exportado!','success');
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────
@@ -3076,22 +3643,16 @@ function statusBadge(s){var m={Confirmada:'badge-green',Pendente:'badge-amber',C
 
 function exportWizardPreviewPDF(){
   saveWizardStepData(wizardCurrentStep);
+  var dbEl=document.getElementById('w_incDB');var qrEl=document.getElementById('w_incQR');
+  if(dbEl)wizardDraft.incluirDadosBanc=dbEl.checked;
+  if(qrEl)wizardDraft.incluirQR=qrEl.checked;
   var draft=wizardDraft;
   var total=calcProposalTotal(draft);
   var num=editingPropostaIdx>=0?DATA.propostas[editingPropostaIdx].num:nextPropNumPreview();
   var p=buildProposalFromDraft(draft,total,'Pendente');
   p.num=num;
   var empresa=(document.getElementById('wizTimbrado')||{}).value||'senac';
-  var jsPDF=window.jspdf.jsPDF;
-  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-  var startY=buildPDFHeader(doc,empresa);
-  doc.setFontSize(16);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
-  doc.text('PROPOSTA COMERCIAL Nº '+num,14,startY+8);
-  var bodyRows=[['Evento',p.evento],['Cliente',p.cliente],['Espaço',p.espaco],['Data',formatDate(p.data)+(p.hora?' · '+p.hora:'')],['Valor Total',fmtMoney(total)],['Prazo Pagamento',prazo15(p.data)]];
-  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:bodyRows,styles:{fontSize:10,cellPadding:5},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'}});
-  addPDFPageFooter(doc);
-  doc.save('Proposta_'+num.replace('/','_')+'_preview.pdf');
-  toast('PDF gerado com layout timbrado','success');
+  exportarPropostaSenacPDF(p,empresa);
 }
 function initFavicon(){
   var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#003366"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
@@ -3122,6 +3683,8 @@ function initGlobalSearch(){
       populateOSProp();
       populateExportTimbradoSelects();
       initGlobalSearch();
+      loadDadosBancCfg();
+      renderPortfolioGallery();
       if(restoreSession()){
         toast('Sessão restaurada','info');
       }else{
@@ -3129,5 +3692,14 @@ function initGlobalSearch(){
       }
     };
 
-  </script> </body>
+  </script> 
+<div class="slide-overlay" id="slideOverlay">
+  <button class="slide-close" onclick="closePortfolioSlide()">✕</button>
+  <button class="slide-nav left" onclick="slidePortfolio(-1)">‹</button>
+  <img id="slideImage" src="" alt="Portfólio"/>
+  <button class="slide-nav right" onclick="slidePortfolio(1)">›</button>
+  <div class="slide-count" id="slideCount">1 / 1</div>
+</div>
+
+</body>
 </html>
