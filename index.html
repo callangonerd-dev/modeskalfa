@@ -38,23 +38,23 @@ if(window.moDeskOnFirebaseReady)window.moDeskOnFirebaseReady();
     :root{
   --c-bg:#f4f6f9;--c-surface:#ffffff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
   --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
-  --c-accent:#003366;--c-accent2:#004080;--c-accent3:#336699;
+  --c-accent:#004b8e;--c-accent2:#003a70;--c-accent3:#2e6caa;
   --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
   --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;
   --c-sidebar:240px;--c-topbar:72px;--radius:10px;--radius-lg:16px;--shadow:0 4px 24px rgba(0,51,102,0.08);
 }
 [data-theme="dark"]{
-  --c-bg:#0d1117;--c-surface:#141720;--c-surface2:#1a1e2e;--c-surface3:#1f2437;
-  --c-border:rgba(99,113,183,0.18);--c-border2:rgba(99,113,183,0.32);
-  --c-accent:#6366f1;--c-accent2:#818cf8;--c-accent3:#a5b4fc;
-  --c-cyan:#22d3ee;--c-green:#10b981;--c-amber:#f59e0b;--c-red:#ef4444;--c-pink:#ec4899;
+  --c-bg:#0a1626;--c-surface:#0f2038;--c-surface2:#142a48;--c-surface3:#1a3458;
+  --c-border:rgba(255,153,0,0.18);--c-border2:rgba(255,153,0,0.32);
+  --c-accent:#0a4d8c;--c-accent2:#1565b8;--c-accent3:#4d8fd1;
+  --c-cyan:#1976d2;--c-green:#0f9d58;--c-amber:#FF9900;--c-red:#e53935;--c-pink:#d81b60;
   --c-text:#e2e8f0;--c-text2:#94a3b8;--c-text3:#64748b;
   --shadow:0 2px 12px rgba(0,0,0,0.25);
 }
 [data-theme="light"]{
   --c-bg:#f4f6f9;--c-surface:#fff;--c-surface2:#f8fafc;--c-surface3:#eef2f7;
   --c-border:rgba(0,51,102,0.12);--c-border2:rgba(0,51,102,0.22);
-  --c-accent:#003366;--c-accent2:#004080;--c-accent3:#336699;
+  --c-accent:#004b8e;--c-accent2:#003a70;--c-accent3:#2e6caa;
   --c-cyan:#0891b2;--c-green:#059669;--c-amber:#FF9900;--c-red:#dc2626;--c-pink:#db2777;
   --c-text:#1e293b;--c-text2:#475569;--c-text3:#94a3b8;--shadow:0 4px 24px rgba(0,51,102,0.08);
 }
@@ -129,7 +129,7 @@ input[type="checkbox"],input[type="radio"]{width:auto;cursor:pointer}
 .btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .15s;border:1.5px solid transparent}
 .btn-primary{background:var(--c-accent);color:#fff;border-color:var(--c-accent)}
 .btn-primary:hover{background:var(--c-accent2);border-color:var(--c-accent2)}
-.btn-accent{background:var(--c-amber);color:#003366;border-color:var(--c-amber);font-weight:700}
+.btn-accent{background:var(--c-amber);color:#004b8e;border-color:var(--c-amber);font-weight:700}
 .btn-accent:hover{filter:brightness(1.05)}
 .btn-ghost{background:transparent;color:var(--c-text2);border-color:var(--c-border2)}
 .btn-ghost:hover{background:var(--c-surface2);color:var(--c-text)}
@@ -141,9 +141,10 @@ input[type="checkbox"],input[type="radio"]{width:auto;cursor:pointer}
 .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--c-border)}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
 th{padding:10px 14px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--c-text3);background:var(--c-surface2);border-bottom:1px solid var(--c-border)}
-td{padding:11px 14px;border-bottom:1px solid var(--c-border);color:var(--c-text)}
+td{padding:11px 14px;border-bottom:1px solid color-mix(in srgb,var(--c-border) 70%,transparent);color:var(--c-text)}
+tbody tr+tr td{border-top:1px solid color-mix(in srgb,var(--c-border) 50%,transparent)}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(99,102,241,.04)}
+tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.3px}
 .badge::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor}
 .badge-green{background:rgba(16,185,129,.12);color:var(--c-green)}
@@ -316,7 +317,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
 .check-status-btn.ok{background:var(--c-green);border-color:var(--c-green);color:#fff}
 .check-status-btn.fail{background:var(--c-red);border-color:var(--c-red);color:#fff}
 /* Timbrado institucional */
-.timbrado-bar{background:linear-gradient(180deg,#003366 0%,#004080 100%);border-bottom:3px solid var(--c-amber);padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:52px}
+.timbrado-bar{background:linear-gradient(180deg,#004b8e 0%,#003a70 100%);border-bottom:3px solid var(--c-amber);padding:8px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;min-height:52px}
 .timbrado-brands{display:flex;align-items:center;gap:14px;flex-wrap:wrap;font-size:11px;font-weight:700;color:rgba(255,255,255,.92);letter-spacing:.4px}
 .timbrado-brands span{padding:4px 10px;border:1px solid rgba(255,255,255,.25);border-radius:6px;background:rgba(255,255,255,.08)}
 .timbrado-unit{margin-left:auto;font-size:12px;color:rgba(255,255,255,.85);font-weight:600}
@@ -636,6 +637,18 @@ tr:hover td{background:rgba(99,102,241,.04)}
   </div>
 </div>
 
+<!-- MODAL: Detalhe Cardápio -->
+<div class="modal-overlay" id="modalCardapioDetalhe">
+  <div class="modal" style="max-width:760px;padding:0;overflow:hidden">
+    <div class="modal-header" style="padding:14px 18px"><span class="modal-title" id="cardDetalheTitle">Cardápio</span><span class="modal-close" onclick="closeModal('modalCardapioDetalhe')">✕</span></div>
+    <div id="cardDetalheContent" style="max-height:74vh;overflow-y:auto"></div>
+    <div style="display:flex;justify-content:flex-end;gap:10px;padding:14px 18px;border-top:1px solid var(--c-border);background:var(--c-surface2)">
+      <button class="btn btn-ghost" onclick="closeModal('modalCardapioDetalhe')">Fechar</button>
+      <button class="btn btn-primary" onclick="openExportModal('cardapioUnico')">📄 Exportar PDF</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-overlay" id="modalEventoDetalhe">
   <div class="modal" style="max-width:640px">
     <div class="modal-header"><span class="modal-title" id="eventoDetalheTitle">Detalhes do Evento</span><span class="modal-close" onclick="closeModal('modalEventoDetalhe')">✕</span></div>
@@ -665,14 +678,29 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <label>Papel Timbrado</label>
       <select id="exportEmpresa">
         <option value="">Sem layout institucional</option>
-        <option value="senac">Senac Aldeota</option>
+        <option value="senac" selected>Senac Aldeota</option>
+        <option value="custom">Timbrado cadastrado (Configurações › Papel Timbrado)</option>
       </select>
+    </div>
+    <div class="form-group" style="margin-bottom:14px">
+      <label>Logo no cabeçalho (canto superior esquerdo)</label>
+      <select id="exportLogo">
+        <option value="">Padrão (Senac)</option>
+      </select>
+      <div id="exportLogoPreview" style="margin-top:8px"></div>
     </div>
     <div class="form-group" style="margin-bottom:14px">
       <label>Formato</label>
       <div style="display:flex;gap:10px;margin-top:6px">
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportFmt" value="pdf" checked/> PDF</label>
         <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportFmt" value="excel"/> Excel</label>
+      </div>
+    </div>
+    <div class="form-group" id="exportOriWrap" style="margin-bottom:14px">
+      <label>Orientação do PDF</label>
+      <div style="display:flex;gap:10px;margin-top:6px">
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportOri" value="portrait" checked/> 📄 Retrato</label>
+        <label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--c-text)"><input type="radio" name="exportOri" value="landscape"/> 🖼️ Paisagem</label>
       </div>
     </div>
     <div id="exportContext" style="font-size:13px;color:var(--c-text2);padding:10px;background:var(--c-surface2);border-radius:8px;margin-bottom:16px"></div>
@@ -803,8 +831,8 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div><div class="section-title" style="font-size:18px">Propostas Comerciais</div><div class="section-sub">Gerencie todas as propostas e contratos</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <div class="btn-group" role="group" style="display:inline-flex;border:1px solid var(--c-border);border-radius:8px;overflow:hidden">
+                            <button class="btn btn-ghost btn-sm" id="propViewListBtn" onclick="setPropostasView('list')" style="border-radius:0">☰ Lista</button>
               <button class="btn btn-ghost btn-sm" id="propViewGridBtn" onclick="setPropostasView('grid')" style="border-radius:0">▦ Grid</button>
-              <button class="btn btn-ghost btn-sm" id="propViewListBtn" onclick="setPropostasView('list')" style="border-radius:0">☰ Lista</button>
             </div>
             <button class="btn btn-ghost btn-sm" onclick="openExportModal('propostas')">↓ Exportar</button>
             <button class="btn btn-ghost btn-sm" onclick="abrirImportProposta()" title="Importar de PDF, Word ou Excel">📥 Carregar Proposta</button>
@@ -827,7 +855,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
         <div id="propostasListWrap"><div class="section-title" style="margin-bottom:12px;margin-top:8px">Lista Detalhada</div>
         <div class="table-wrap">
           <table>
-            <thead><tr><th>Nº</th><th>Evento</th><th>Cliente</th><th>Espaço</th><th>Data Evento</th><th>Área Técnica</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
+            <thead><tr><th>Nº Proposta</th><th>Evento</th><th>Cliente</th><th>Espaço</th><th>Data</th><th>Hora</th><th>Participantes</th><th>Alimentação</th><th>Área Técnica</th><th>Prazo Pgto</th><th>Valor</th><th>Status</th><th>Tipo</th><th>Ações</th></tr></thead>
             <tbody id="tbodyPropostas"></tbody>
           </table>
         </div></div>
@@ -906,7 +934,14 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <div class="view" id="view-espacos">
         <div class="section-header">
           <div><div class="section-title" style="font-size:18px">Espaços &amp; Salas</div></div>
-          <button class="btn btn-primary" onclick="abrirNovoEspaco()">＋ Novo Espaço</button>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <div style="display:inline-flex;border:1px solid var(--c-border);border-radius:8px;overflow:hidden">
+              <button class="btn btn-ghost btn-sm" id="espViewGridBtn" onclick="setEspacosView('grid')" style="border-radius:0">▦ Grid</button>
+              <button class="btn btn-ghost btn-sm" id="espViewListBtn" onclick="setEspacosView('list')" style="border-radius:0">☰ Lista</button>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('espacos')">↓ Exportar</button>
+            <button class="btn btn-primary" onclick="abrirNovoEspaco()">＋ Novo Espaço</button>
+          </div>
         </div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="espacoFiltros">
           <div class="chip selected" onclick="filtrarEspaco(this,'')">Todos</div>
@@ -915,6 +950,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div class="chip" onclick="filtrarEspaco(this,'Manutenção')">🔧 Manutenção</div>
         </div>
         <div class="grid-3" id="espacoGrid"></div>
+        <div id="espacoList" style="display:none" class="table-wrap"></div>
       </div>
 
       <!-- ESTOQUE TI/AV -->
@@ -936,13 +972,21 @@ tr:hover td{background:rgba(99,102,241,.04)}
       <div class="view" id="view-cardapio">
         <div class="section-header">
           <div><div class="section-title" style="font-size:18px">Cardápios &amp; Alimentação</div></div>
-          <button class="btn btn-primary" onclick="abrirNovoCardapio()">＋ Novo Item</button>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <div style="display:inline-flex;border:1px solid var(--c-border);border-radius:8px;overflow:hidden">
+              <button class="btn btn-ghost btn-sm" id="cardViewGridBtn" onclick="setCardapioView('grid')" style="border-radius:0">▦ Grid</button>
+              <button class="btn btn-ghost btn-sm" id="cardViewListBtn" onclick="setCardapioView('list')" style="border-radius:0">☰ Lista</button>
+            </div>
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('cardapio')">↓ Exportar</button>
+            <button class="btn btn-primary" onclick="abrirNovoCardapio()">＋ Novo Item</button>
+          </div>
         </div>
         <div style="margin-bottom:16px">
           <div style="font-size:13px;color:var(--c-text2);margin-bottom:8px">Seleção Rápida para Proposta:</div>
           <div class="chip-group" id="chipCardapio"></div>
         </div>
         <div class="item-grid" id="cardapioGrid"></div>
+        <div id="cardapioList" style="display:none" class="table-wrap"></div>
         <div style="margin-top:24px">
           <div class="section-title" style="margin-bottom:12px">Pedidos Recentes</div>
           <div class="table-wrap"><table><thead><tr><th>Evento</th><th>Serviço</th><th>Pax</th><th>Valor Total</th><th>Status</th></tr></thead><tbody id="tbodyPedidos"></tbody></table></div>
@@ -1008,7 +1052,7 @@ tr:hover td{background:rgba(99,102,241,.04)}
           <div><div class="section-title" style="font-size:18px">Relatórios &amp; Business Intelligence</div></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <select id="relMes" style="width:auto;font-size:13px"><option>Junho 2026</option><option>Maio 2026</option><option>Abril 2026</option></select>
-            <button class="btn btn-ghost btn-sm" onclick="exportDashWithOrientation()">↓ Exportar</button>
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('relatorios')">↓ Exportar</button>
           </div>
         </div>
         <div class="tabs">
@@ -1228,6 +1272,10 @@ tr:hover td{background:rgba(99,102,241,.04)}
         </div>
       </div>
 
+      <footer class="app-footer" style="margin-top:32px;padding:18px 12px;border-top:1px solid var(--c-border);text-align:center;font-size:12px;color:var(--c-text3);letter-spacing:.3px">
+        Sistema criado por <strong style="color:var(--c-accent2)">Marcio Oliveira</strong> · Senac Aldeota © <span id="footerYear"></span>
+      </footer>
+      <script>document.getElementById('footerYear').textContent=new Date().getFullYear();</script>
     </div>
   </div>
 
@@ -1619,6 +1667,7 @@ function clearSession(){
     localStorage.removeItem('modesk_session');
     sessionStorage.removeItem('modesk_session');
     sessionStorage.removeItem('authed_parecer');
+    sessionStorage.removeItem('authed_configuracoes');
   }catch(e){}
 }
 function restoreSession(){
@@ -1713,14 +1762,14 @@ function goto(view){
     _authCallback=function(){sessionStorage.setItem('authed_parecer','1');gotoUnlocked('parecer');};
     openModal('modalAuth');return;
   }
-  if(view==='configuracoes'){
-    if(!currentUser||currentUser.nivel!=='Gestor'){
-      _authCallback=function(){
-        if(currentUser&&currentUser.nivel==='Gestor')gotoUnlocked('configuracoes');
-        else toast('Acesso restrito ao Gestor','error');
-      };
-      openModal('modalAuth');return;
-    }
+  if(view==='configuracoes'&&!sessionStorage.getItem('authed_configuracoes')){
+    _authCallback=function(){
+      if(currentUser&&currentUser.nivel==='Gestor'){
+        sessionStorage.setItem('authed_configuracoes','1');
+        gotoUnlocked('configuracoes');
+      }else toast('Acesso restrito ao Gestor','error');
+    };
+    openModal('modalAuth');return;
   }
   gotoUnlocked(view);
 }
@@ -1793,17 +1842,45 @@ function checkAuth(){
 }
 
 // ── EXPORT ────────────────────────────────────────────────────────
+var _exportLogoOverride=null;
 function openExportModal(ctx){
   exportCtxStr=ctx;
-  var labels={dashboard:'Dashboard KPIs',propostas:'Lista de Propostas',relatorios:'Relatório BI',parecer:'Parecer Técnico'};
+  var labels={dashboard:'Dashboard KPIs',propostas:'Lista de Propostas',relatorios:'Relatório BI',parecer:'Parecer Técnico',espacos:'Catálogo de Espaços & Salas',cardapio:'Catálogo de Cardápios',cardapioUnico:'Cardápio individual',propostaUnica:'Proposta individual'};
   document.getElementById('exportContext').textContent='Documento: '+(labels[ctx]||ctx);
+  // popular lista de logos (ASSETS.logo + histórico de logos)
+  var sel=document.getElementById('exportLogo');
+  if(sel){
+    var opts=['<option value="">Padrão (Senac institucional)</option>'];
+    var logos=[];
+    if(ASSETS.logo)logos.push(ASSETS.logo);
+    (ASSETS.historico||[]).forEach(function(h){if(h.tipo==='logo'&&(!ASSETS.logo||h.id!==ASSETS.logo.id))logos.push(h);});
+    logos.forEach(function(l,i){opts.push('<option value="'+(l.id||i)+'">'+(l.nome||'Logo '+(i+1))+'</option>');});
+    opts.push('<option value="__none__">Sem logo no cabeçalho</option>');
+    sel.innerHTML=opts.join('');
+    sel.onchange=function(){
+      var v=this.value;var prev=document.getElementById('exportLogoPreview');
+      if(!v){prev.innerHTML='';_exportLogoOverride=null;return;}
+      if(v==='__none__'){prev.innerHTML='<span style="font-size:11px;color:var(--c-text3)">Sem logo</span>';_exportLogoOverride={none:true};return;}
+      var picked=logos.find(function(l,i){return (l.id||i)==v;});
+      if(picked){_exportLogoOverride=picked;prev.innerHTML='<img src="'+picked.dataUrl+'" style="max-height:40px;max-width:120px;border:1px solid var(--c-border);border-radius:4px;padding:4px;background:#fff"/>';}
+    };
+    _exportLogoOverride=null;document.getElementById('exportLogoPreview').innerHTML='';
+  }
   openModal('modalExportar');
 }
 function doExport(){
   var empresa=document.getElementById('exportEmpresa').value;
   var fmt=document.querySelector('input[name="exportFmt"]:checked').value;
+  var oriEl=document.querySelector('input[name="exportOri"]:checked');
+  var orientation=oriEl?oriEl.value:'portrait';
   closeModal('modalExportar');
-  if(fmt==='excel')exportExcel();else exportPDF(empresa);
+  if(fmt==='excel'){exportExcel();return;}
+  if(exportCtxStr==='propostaUnica'){exportPDF(empresa,'portrait');return;}
+  if(exportCtxStr==='espacos'){exportEspacosPDF(empresa,orientation);return;}
+  if(exportCtxStr==='cardapio'){exportCardapioListPDF(empresa,orientation);return;}
+  if(exportCtxStr==='cardapioUnico'){exportCardapioUnicoPDF(empresa,orientation);return;}
+  if(exportCtxStr==='dashboard'||exportCtxStr==='relatorios'){exportPDFWithOrientation(orientation);return;}
+  exportPDF(empresa,orientation);
 }
 function exportExcel(){
   var wb=XLSX.utils.book_new(),data,headers;
@@ -1836,7 +1913,7 @@ function applyPageBranding(doc,empresa){
   var pageH=doc.internal.pageSize.getHeight();
   var useSenac=empresa==='senac'||empresa==='custom';
   var timbrado=useSenac?getActiveAsset('timbrado'):null;
-  var logo=useSenac?getActiveAsset('logo'):null;
+  var logo=useSenac?(_exportLogoOverride&&_exportLogoOverride.none?null:(_exportLogoOverride||getActiveAsset('logo'))):null;
   var rodape=useSenac?getActiveAsset('rodape'):null;
   if(timbrado&&timbrado.dataUrl&&timbrado.fileType!=='pdf'&&timbrado.fileType!=='word'){
     try{doc.addImage(timbrado.dataUrl,detectImageFormat(timbrado.dataUrl),0,0,pageW,pageH,undefined,'FAST');}catch(e){}
@@ -1870,9 +1947,9 @@ function addPDFPageFooter(doc){
     }
   }
 }
-function exportPDF(empresa){
+function exportPDF(empresa,orientation){
   var jsPDF=window.jspdf.jsPDF;
-  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var doc=new jsPDF({orientation:orientation||'portrait',unit:'mm',format:'a4'});
   var pageW=doc.internal.pageSize.getWidth();
   var startY=buildPDFHeader(doc,empresa);
   doc.setFontSize(11);doc.setFont('helvetica','bold');doc.setTextColor(0,51,102);
@@ -1883,11 +1960,11 @@ function exportPDF(empresa){
   if(exportCtxStr==='propostas'){
     doc.autoTable({startY:Y,head:[['Nº','Evento','Cliente','Data','Área Téc.','Prazo Pgto','Valor (R$)','Status']],
       body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),formatAreaTecnica(p,true),prazo15(p.data),fmtMoney(p.valor),p.status];}),
-      styles:{fontSize:8,cellPadding:3},headStyles:{fillColor:[99,102,241],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
+      styles:{fontSize:8,cellPadding:3},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
   }else if(exportCtxStr==='dashboard'||exportCtxStr==='relatorios'){
     doc.autoTable({startY:Y,head:[['Evento','Proposta','Data','Valor (R$)','Status']],
       body:DATA.propostas.map(function(p){return [p.evento,p.num,formatDate(p.data),fmtMoney(p.valor),p.status];}),
-      styles:{fontSize:9,cellPadding:4},headStyles:{fillColor:[99,102,241],textColor:255,fontStyle:'bold'}});
+      styles:{fontSize:9,cellPadding:4},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'}});
   }else if(exportCtxStr==='parecer'){
     doc.setFontSize(12);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
     doc.text('PARECER TÉCNICO — '+new Date().toLocaleDateString('pt-BR'),14,Y);
@@ -1995,8 +2072,8 @@ function exportarPropostaSenacPDF(p,empresa){
     startY:Y,
     head:[['Espaço / Serviço','Quantidade','Valor','Valor total']],
     body:rows.length?rows:[['—','—','—','—']],
-    styles:{fontSize:9,cellPadding:3,textColor:[30,41,59],lineColor:[0,51,102],lineWidth:0.1},
-    headStyles:{fillColor:[245,245,245],textColor:[0,51,102],fontStyle:'bold',halign:'center'},
+    styles:{fontSize:9,cellPadding:3,textColor:[30,41,59],lineColor:[0,75,142],lineWidth:0.1},
+    headStyles:{fillColor:[245,245,245],textColor:[0,75,142],fontStyle:'bold',halign:'center'},
     columnStyles:{0:{cellWidth:90},1:{halign:'center',cellWidth:25},2:{halign:'right',cellWidth:30},3:{halign:'right',cellWidth:30}},
     margin:{left:marginX,right:marginX}
   });
@@ -2009,7 +2086,7 @@ function exportarPropostaSenacPDF(p,empresa){
     var comDesc=subTotal*0.8;
     totalRows.push([{content:'Total com desconto – 20% (Ofício FECOMERIO)',styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}},'','',{content:fmtMoney(comDesc),styles:{fontStyle:'bold',halign:'right',textColor:[219,39,119]}}]);
   }
-  doc.autoTable({startY:Y,body:totalRows,styles:{fontSize:10,cellPadding:3,lineColor:[0,51,102],lineWidth:0.1},
+  doc.autoTable({startY:Y,body:totalRows,styles:{fontSize:10,cellPadding:3,lineColor:[0,75,142],lineWidth:0.1},
     columnStyles:{0:{cellWidth:90},1:{cellWidth:25},2:{cellWidth:30},3:{cellWidth:30}},margin:{left:marginX,right:marginX}});
   Y=doc.lastAutoTable.finalY+6;
   // Bloco ORIENTAÇÕES
@@ -2149,7 +2226,7 @@ function exportPropostaAtual(fmt){
     }
     bodyRows.push(['Valor Total',fmtMoney(p.valor)],['Status',p.status]);
     doc.autoTable({startY:startY+(p.tipo==='oficio'?20:18),head:[['Campo','Informação']],body:bodyRows,
-      styles:{fontSize:10,cellPadding:5,textColor:[30,41,59]},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'},
+      styles:{fontSize:10,cellPadding:5,textColor:[30,41,59]},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
       alternateRowStyles:{fillColor:[248,250,252]},margin:{left:14,right:14}});
     var Y2=doc.lastAutoTable.finalY+12;
     doc.setFontSize(9);doc.setFont('helvetica','normal');doc.setTextColor(80,80,80);
@@ -2253,7 +2330,7 @@ function initChartStatus(filteredList){
 function renderPropostas(list){
   var src=list||DATA.propostas;
   var tb=document.getElementById('tbodyPropostas');
-  if(!src.length){tb.innerHTML='<tr><td colspan="11" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';return;}
+  if(!src.length){tb.innerHTML='<tr><td colspan="14" style="text-align:center;color:var(--c-text3);padding:24px">Nenhuma proposta encontrada</td></tr>';return;}
   tb.innerHTML=src.map(function(p){
     var idx=DATA.propostas.indexOf(p);
     var venc=isPrazoVencido(p);
@@ -2262,12 +2339,18 @@ function renderPropostas(list){
     var areaHtml=p.areaTecnica==='externa'
       ?'<span class="badge badge-gray">Externa</span>'
       :'<span class="badge badge-cyan" title="'+formatAreaTecnica(p)+'">Interna</span><div style="font-size:10px;color:var(--c-text3);margin-top:2px;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+formatAreaTecnica(p,true)+'</div>';
+    var alimArr=Array.isArray(p.alimentacao)?p.alimentacao:[];
+    var alimTxt=alimArr.length?alimArr.map(function(a){return (a&&(a.nome||a.titulo||a.item))||a;}).filter(Boolean).join(', '):'—';
+    var alimCell=alimArr.length?'<span class="badge badge-cyan" title="'+alimTxt.replace(/"/g,'&quot;')+'">'+alimArr.length+' item(ns)</span>':'<span style="color:var(--c-text3)">—</span>';
     return '<tr style="'+(venc?'background:rgba(239,68,68,.05)':'')+'">'
       +'<td><span style="font-weight:700;color:var(--c-accent2)">'+(p.num||p.id)+'</span></td>'
       +'<td>'+p.evento+'</td>'
       +'<td>'+p.cliente+'</td>'
       +'<td><span class="tag">'+p.espaco+'</span></td>'
       +'<td>'+formatDate(p.data)+'</td>'
+      +'<td>'+(p.hora||'—')+'</td>'
+      +'<td style="text-align:center">'+(p.pax||'—')+'</td>'
+      +'<td style="font-size:12px">'+alimCell+'</td>'
       +'<td style="font-size:12px">'+areaHtml+'</td>'
       +'<td style="color:'+(venc?'var(--c-red)':'var(--c-amber)')+';font-size:12px;font-weight:'+(venc?'700':'400')+'">'+prazo15(p.data)+(venc?' ⚠️':'')+'<div style="margin-top:3px">'+deadlineHtml+'</div></td>'
       +'<td style="font-weight:600;color:var(--c-green)">'+fmtMoney(p.valor)+'</td>'
@@ -2314,14 +2397,19 @@ function renderPropostaCards(list){
     var docBtn=p.docUrl?'<a class="btn btn-primary btn-sm" href="'+p.docUrl+'" target="_blank" rel="noopener">Visualizar Documento</a>'
       :'<button class="btn btn-primary btn-sm" onclick="verProposta('+idx+')">Visualizar Documento</button>';
     var confirmBtn=(p.status!=='Confirmada'&&p.status!=='Cancelada')?'<button class="payment-confirm-btn" style="margin-right:6px" onclick="abrirConfirmarPagamento('+idx+')">💵 Confirmar pgto</button>':'';
+    var alimArr=Array.isArray(p.alimentacao)?p.alimentacao:[];
+    var alimTxt=alimArr.length?alimArr.map(function(a){return (a&&(a.nome||a.titulo||a.item))||a;}).filter(Boolean).join(', '):'—';
     return '<article class="proposta-card">'
-      +'<div class="proposta-card-header"><span class="proposta-num">Proposta '+p.num+'</span><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></div>'
+      +'<div class="proposta-card-header"><span class="proposta-num">Proposta '+(p.num||p.id)+'</span><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></div>'
       +'<h3 class="proposta-card-title">'+p.evento+'</h3>'
       +'<div class="proposta-card-client"><strong>'+p.cliente+'</strong>'+(cnpj?'<div class="proposta-cnpj">CNPJ '+cnpj+'</div>':'')+'</div>'
       +'<div class="proposta-card-infra">'
+      +'<div><span>Data</span><strong>'+(p.data?formatDate(p.data):'—')+'</strong></div>'
+      +'<div><span>Hora</span><strong>'+(p.hora||'—')+'</strong></div>'
+      +'<div><span>Participantes</span><strong>'+(p.pax||'—')+'</strong></div>'
       +'<div><span>Espaço</span><strong>'+(p.espaco||'—')+'</strong></div>'
-      +'<div><span>Ocupação</span><strong>'+(p.ocupacao||p.periodo||'—')+'</strong></div>'
-      +'<div><span>Valor Base</span><strong class="proposta-valor">'+fmtMoney(p.valorBase||p.valor)+'</strong></div>'
+      +'<div><span>Valor</span><strong class="proposta-valor">'+fmtMoney(p.valor||p.valorBase)+'</strong></div>'
+      +'<div><span>Alimentação</span><strong title="'+alimTxt.replace(/"/g,'&quot;')+'">'+(alimArr.length?alimArr.length+' item(ns)':'—')+'</strong></div>'
       +'</div>'
       +'<div style="margin-bottom:10px;text-align:center">'+deadlinePill+'</div>'
       +'<div class="proposta-card-footer" style="flex-wrap:wrap;gap:6px;justify-content:flex-end">'+confirmBtn+docBtn+'</div>'
@@ -2475,12 +2563,15 @@ function saveOS(){
 }
 function exportOSpdf(idx){
   var o=DATA.ordens[idx];
+  var ori=prompt('Orientação do PDF?\n\nDigite "R" para Retrato (padrão) ou "P" para Paisagem:','R');
+  if(ori===null)return;
+  var orientation=(ori||'').toUpperCase().indexOf('P')===0?'landscape':'portrait';
   var jsPDF=window.jspdf.jsPDF;
-  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var doc=new jsPDF({orientation:orientation,unit:'mm',format:'a4'});
   var startY=buildPDFHeader(doc,'senac');
   doc.setFontSize(14);doc.setFont('helvetica','bold');doc.setTextColor(30,41,59);
   doc.text('ORDEM DE SERVIÇO '+o.id,14,startY+8);
-  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:[['Evento',o.evento],['Tipo',o.tipo],['Responsável',o.resp],['Data',formatDate(o.data)],['Status',o.status],['Progresso',o.prog+'%'],['Observações',o.obs||'—']],styles:{fontSize:11,cellPadding:6},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'}});
+  doc.autoTable({startY:startY+16,head:[['Campo','Informação']],body:[['Evento',o.evento],['Tipo',o.tipo],['Responsável',o.resp],['Data',formatDate(o.data)],['Status',o.status],['Progresso',o.prog+'%'],['Observações',o.obs||'—']],styles:{fontSize:11,cellPadding:6},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'}});
   addPDFPageFooter(doc);
   doc.save('OS_'+o.id+'.pdf');
   toast('PDF da OS gerado!','success');
@@ -2619,7 +2710,7 @@ function previewEspacoFoto(input){
 function renderEspacos(){
   var src=espacoFiltro?DATA.espacos.filter(function(e){return e.status===espacoFiltro;}):DATA.espacos;
   var g=document.getElementById('espacoGrid');
-  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">🏛️</div><div class="empty-title">Nenhum espaço encontrado</div></div>';return;}
+  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">🏛️</div><div class="empty-title">Nenhum espaço encontrado</div></div>';var lst0=document.getElementById('espacoList');if(lst0)lst0.innerHTML='';return;}
   var defaultIcons=['🏛️','🏟️','💫','🏢','🏢','🌿'];
   g.innerHTML=src.map(function(e){
     var idx=DATA.espacos.indexOf(e);
@@ -2638,6 +2729,13 @@ function renderEspacos(){
       +'<button class="btn btn-primary btn-sm" onclick="toast(\''+e.nome+' reservado\',\'info\')">Reservar</button>'
       +'</div></div></div></div>';
   }).join('');
+  var lst=document.getElementById('espacoList');
+  if(lst){
+    if(!src.length){lst.innerHTML='<div class="empty" style="padding:30px;text-align:center;color:var(--c-text3)">Nenhum espaço encontrado</div>';}
+    else lst.innerHTML='<table><thead><tr><th>Espaço</th><th>Capacidade</th><th>Área</th><th>Equipamentos</th><th>Status</th><th>Valor/dia</th></tr></thead><tbody>'
+      +src.map(function(e){return '<tr><td><strong>'+e.nome+'</strong></td><td>👥 '+e.cap+'</td><td>'+e.area+'</td><td style="max-width:280px">'+e.equip+'</td><td><span class="badge '+(e.status==='Disponível'?'badge-green':e.status==='Reservado'?'badge-amber':'badge-red')+'">'+e.status+'</span></td><td style="color:var(--c-green);font-weight:700">'+fmtMoney(e.valor)+'</td></tr>';}).join('')
+      +'</tbody></table>';
+  }
 }
 function abrirNovoEspaco(){
   editingIdx.espaco=-1;
@@ -2769,20 +2867,27 @@ function renderCardapio(){
     var imgHtml=c.foto
       ?'<img src="'+c.foto+'" style="width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:10px"/>'
       :'<div style="font-size:38px;text-align:center;padding:12px 0;margin-bottom:6px">'+c.icon+'</div>';
-    return '<div class="food-card">'
+    return '<div class="food-card" style="cursor:pointer" onclick="openCardapioDetalhe('+i+')">'
       +imgHtml
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px">'
       +'<div style="font-weight:700;font-size:15px">'+c.nome+'</div>'
-      +'<div style="display:flex;gap:4px;align-items:center"><span class="badge badge-blue">'+c.cat+'</span>'
+      +'<div style="display:flex;gap:4px;align-items:center" onclick="event.stopPropagation()"><span class="badge badge-blue">'+c.cat+'</span>'
       +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="editarCardapio('+i+')" title="Editar">✏️</button><button class="btn btn-ghost btn-icon btn-sm" onclick="excluirCardapio('+i+')" title="Excluir">🗑️</button>':'')
       +'</div></div>'
       +'<div style="font-size:12px;color:var(--c-text2);margin-bottom:6px">📋 '+c.items+'</div>'
       +'<div style="font-size:11px;padding:4px 8px;border-radius:6px;background:rgba(245,158,11,.1);color:var(--c-amber);margin-bottom:12px">⚠️ Alergênicos: '+c.alerg+'</div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center">'
       +'<div style="font-size:18px;font-weight:700;color:var(--c-green)">'+fmtMoney(c.val)+'<span style="font-size:11px;color:var(--c-text3)">/pax</span></div>'
-      +'<button class="btn btn-primary btn-sm" onclick="toast(\''+c.nome+' adicionado à seleção\',\'success\')">+ Selecionar</button>'
+      +'<button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openCardapioDetalhe('+i+')">👁️ Ver detalhes</button>'
       +'</div></div>';
   }).join('');
+  // Lista (tabela)
+  var lst=document.getElementById('cardapioList');
+  if(lst){
+    lst.innerHTML='<table><thead><tr><th>#</th><th>Item</th><th>Categoria</th><th>Composição</th><th>Alergênicos</th><th>Valor /pax</th><th></th></tr></thead><tbody>'
+      +DATA.cardapio.map(function(c,i){return '<tr style="cursor:pointer" onclick="openCardapioDetalhe('+i+')"><td>'+c.icon+'</td><td><strong>'+c.nome+'</strong></td><td><span class="badge badge-blue">'+c.cat+'</span></td><td style="max-width:280px">'+c.items+'</td><td style="color:var(--c-amber)">'+c.alerg+'</td><td style="color:var(--c-green);font-weight:700">'+fmtMoney(c.val)+'</td><td onclick="event.stopPropagation()"><button class="btn btn-ghost btn-sm" onclick="openCardapioDetalhe('+i+')">Ver</button></td></tr>';}).join('')
+      +'</tbody></table>';
+  }
   var chips=document.getElementById('chipCardapio');
   chips.innerHTML=DATA.cardapio.map(function(c){return '<div class="chip" onclick="this.classList.toggle(\'selected\');toast(\''+c.nome+' \'+(this.classList.contains(\'selected\')?\'selecionado\':\'removido\'),\'info\')">'+c.icon+' '+c.nome+'</div>';}).join('');
   var tb=document.getElementById('tbodyPedidos');
@@ -3355,7 +3460,196 @@ function setPropostasView(mode){
   else{g.style.display='block';l.style.display='none';bg.classList.add('btn-primary');bg.classList.remove('btn-ghost');bl.classList.add('btn-ghost');bl.classList.remove('btn-primary');}
   try{localStorage.setItem('modesk_prop_view',mode);}catch(e){}
 }
-(function(){try{var m=localStorage.getItem('modesk_prop_view');if(m)setTimeout(function(){setPropostasView(m);},200);else setTimeout(function(){setPropostasView('grid');},200);}catch(e){}})();
+(function(){try{var m=localStorage.getItem('modesk_prop_view');if(m)setTimeout(function(){setPropostasView(m);},200);else setTimeout(function(){setPropostasView('list');},200);}catch(e){}})();
+
+// ── ESPAÇOS / CARDÁPIO: VIEW TOGGLE ──────────────────────────────
+function _setView(mode,gridId,listId,gBtnId,lBtnId,storeKey){
+  var g=document.getElementById(gridId),l=document.getElementById(listId);
+  var bg=document.getElementById(gBtnId),bl=document.getElementById(lBtnId);
+  if(!g||!l)return;
+  if(mode==='list'){g.style.display='none';l.style.display='block';if(bl){bl.classList.add('btn-primary');bl.classList.remove('btn-ghost');}if(bg){bg.classList.add('btn-ghost');bg.classList.remove('btn-primary');}}
+  else{g.style.display='';l.style.display='none';if(bg){bg.classList.add('btn-primary');bg.classList.remove('btn-ghost');}if(bl){bl.classList.add('btn-ghost');bl.classList.remove('btn-primary');}}
+  try{localStorage.setItem(storeKey,mode);}catch(e){}
+}
+function setEspacosView(mode){_setView(mode,'espacoGrid','espacoList','espViewGridBtn','espViewListBtn','modesk_esp_view');}
+function setCardapioView(mode){_setView(mode,'cardapioGrid','cardapioList','cardViewGridBtn','cardViewListBtn','modesk_card_view');}
+(function(){try{
+  var me=localStorage.getItem('modesk_esp_view')||'grid';
+  var mc=localStorage.getItem('modesk_card_view')||'grid';
+  setTimeout(function(){setEspacosView(me);setCardapioView(mc);},250);
+}catch(e){}})();
+
+// ── CARDÁPIO: DETALHE (visual Senac/Café/Mayú) ───────────────────
+var _currentCardapioIdx=-1;
+var LOGO_SENAC_URL='/__l5e/assets-v1/cc1749e7-5701-4be0-8863-361309c055fd/logo-senac.png';
+var LOGO_CAFE_URL='/__l5e/assets-v1/04031c1a-fc22-43a6-b621-2f6042af1cd3/logo-cafe-senac.png';
+var LOGO_MAYU_URL='/__l5e/assets-v1/6fd2e9fd-1ba7-4332-9adc-465dc0cfcff7/logo-mayu.png';
+function cardapioBrand(c){
+  var cat=(c.cat||'').toLowerCase();
+  var nome=(c.nome||'').toLowerCase();
+  var isCafe=cat.indexOf('coffee')>=0||cat.indexOf('café')>=0||nome.indexOf('coffee')>=0||nome.indexOf('café')>=0||nome.indexOf('brunch')>=0;
+  var isMayu=cat.indexOf('almoço')>=0||cat.indexOf('almoco')>=0||cat.indexOf('jantar')>=0||cat.indexOf('coquetel')>=0||nome.indexOf('almoço')>=0||nome.indexOf('jantar')>=0||nome.indexOf('coquetel')>=0;
+  if(isCafe)return {nome:'Café Senac',logo:LOGO_CAFE_URL,primary:'#5a2d1a',primaryRgb:[90,45,26],secondary:'#c08a5e',bg:'#fdf6ee'};
+  if(isMayu)return {nome:'Restaurante-Escola Mayú',logo:LOGO_MAYU_URL,primary:'#1f3d20',primaryRgb:[31,61,32],secondary:'#f3ead5',bg:'#fbf8f1'};
+  return {nome:'Senac Aldeota',logo:LOGO_SENAC_URL,primary:'#004b8e',primaryRgb:[0,75,142],secondary:'#FF9900',bg:'#f5faff'};
+}
+function openCardapioDetalhe(idx){
+  _currentCardapioIdx=idx;
+  var c=DATA.cardapio[idx];if(!c)return;
+  var b=cardapioBrand(c);
+  document.getElementById('cardDetalheTitle').textContent='🍽️ '+c.nome+' · '+b.nome;
+  var imgHtml=c.foto
+    ?'<img src="'+c.foto+'" style="width:100%;height:240px;object-fit:cover"/>'
+    :'<div style="width:100%;height:240px;background:'+b.bg+';display:flex;align-items:center;justify-content:center;font-size:90px">'+(c.icon||'🍽️')+'</div>';
+  var itens=(c.items||'').split(/[•·,;]+/).map(function(s){return s.trim();}).filter(Boolean);
+  var itensHtml=itens.length?'<ul style="margin:8px 0 0 18px;padding:0">'+itens.map(function(s){return '<li style="margin:4px 0;font-size:13.5px;color:#222">'+s+'</li>';}).join('')+'</ul>':'<div style="color:#666;font-size:13px">Composição não detalhada.</div>';
+  document.getElementById('cardDetalheContent').innerHTML=
+    '<div style="background:'+b.bg+';color:#222">'
+    +'<div style="display:flex;align-items:center;gap:16px;padding:18px 22px;background:'+b.primary+';color:#fff">'
+    +'<img src="'+b.logo+'" alt="" style="height:54px;width:auto;background:#fff;padding:6px;border-radius:8px"/>'
+    +'<div><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;opacity:.85">Cardápio</div>'
+    +'<div style="font-size:22px;font-weight:800;line-height:1.1">'+b.nome+'</div></div>'
+    +'<div style="margin-left:auto;text-align:right"><div style="font-size:11px;opacity:.85;letter-spacing:1px">CATEGORIA</div><div style="font-size:14px;font-weight:700">'+c.cat+'</div></div>'
+    +'</div>'
+    +imgHtml
+    +'<div style="padding:22px 26px">'
+    +'<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid '+b.primary+';padding-bottom:10px;margin-bottom:14px">'
+    +'<div><div style="font-size:11px;letter-spacing:1.5px;color:'+b.primary+';font-weight:700">SERVIÇO</div><div style="font-size:24px;font-weight:800;color:'+b.primary+'">'+c.nome+'</div></div>'
+    +'<div style="text-align:right"><div style="font-size:11px;letter-spacing:1.5px;color:'+b.primary+';font-weight:700">VALOR POR PESSOA</div><div style="font-size:26px;font-weight:800;color:'+b.primary+'">'+fmtMoney(c.val)+'</div></div>'
+    +'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">'
+    +'<div><div style="font-size:12px;letter-spacing:1px;color:'+b.primary+';font-weight:700;margin-bottom:4px">COMPOSIÇÃO DO CARDÁPIO</div>'+itensHtml+'</div>'
+    +'<div>'
+    +'<div style="font-size:12px;letter-spacing:1px;color:'+b.primary+';font-weight:700;margin-bottom:4px">INFORMAÇÕES IMPORTANTES</div>'
+    +'<div style="background:rgba(245,158,11,.12);border-left:3px solid '+b.secondary+';padding:10px 12px;border-radius:6px;font-size:12.5px"><strong>⚠️ Alergênicos:</strong> '+(c.alerg||'Não informado')+'</div>'
+    +'<div style="margin-top:10px;font-size:12px;color:#555;line-height:1.55">Cardápio elaborado pela equipe técnica do Senac Aldeota, em conformidade com a <strong>RDC 216/2004</strong> e boas práticas de manipulação de alimentos. Itens podem sofrer pequenas adaptações conforme sazonalidade.</div>'
+    +'</div></div>'
+    +'<div style="margin-top:18px;padding:12px 14px;background:#fff;border:1px dashed '+b.primary+';border-radius:8px;font-size:12px;color:#444"><strong>Inclui:</strong> louças, talheres, guardanapos, montagem e desmontagem da estação. Serviço a partir de 20 pessoas. Valores válidos por 30 dias.</div>'
+    +'</div>'
+    +'<div style="padding:12px 22px;background:'+b.primary+';color:#fff;text-align:center;font-size:11px;letter-spacing:1px">Senac Aldeota · '+b.nome+' · Sistema criado por Marcio Oliveira</div>'
+    +'</div>';
+  openModal('modalCardapioDetalhe');
+}
+
+// ── EXPORT: ESPAÇOS, CARDÁPIO LISTA, CARDÁPIO ÚNICO ──────────────
+function exportEspacosPDF(empresa,orientation){
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:orientation||'portrait',unit:'mm',format:'a4'});
+  var startY=buildPDFHeader(doc,empresa||'senac');
+  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(0,75,142);
+  doc.text('CATÁLOGO DE ESPAÇOS & SALAS',14,startY+6);
+  doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
+  doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR'),14,startY+12);
+  doc.autoTable({startY:startY+18,
+    head:[['Espaço','Capacidade','Área','Equipamentos','Status','Valor/dia (R$)']],
+    body:DATA.espacos.map(function(e){return [e.nome,e.cap+' pax',e.area,e.equip,e.status,fmtMoney(e.valor)];}),
+    styles:{fontSize:9,cellPadding:3,lineColor:[220,228,240],lineWidth:0.2},
+    headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[245,250,255]}});
+  addPDFPageFooter(doc);
+  doc.save('Senac_Aldeota_espacos_'+Date.now()+'.pdf');
+  toast('PDF de Espaços exportado!','success');
+}
+function exportCardapioListPDF(empresa,orientation){
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:orientation||'portrait',unit:'mm',format:'a4'});
+  var startY=buildPDFHeader(doc,empresa||'senac');
+  doc.setFontSize(13);doc.setFont('helvetica','bold');doc.setTextColor(0,75,142);
+  doc.text('CATÁLOGO DE CARDÁPIOS',14,startY+6);
+  doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
+  doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR'),14,startY+12);
+  doc.autoTable({startY:startY+18,
+    head:[['Item','Categoria','Composição','Alergênicos','Valor/pax (R$)']],
+    body:DATA.cardapio.map(function(c){return [c.nome,c.cat,c.items,c.alerg,fmtMoney(c.val)];}),
+    styles:{fontSize:9,cellPadding:3,lineColor:[220,228,240],lineWidth:0.2},
+    headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},
+    alternateRowStyles:{fillColor:[245,250,255]},
+    columnStyles:{2:{cellWidth:'auto'}}});
+  addPDFPageFooter(doc);
+  doc.save('Senac_Aldeota_cardapios_'+Date.now()+'.pdf');
+  toast('PDF de Cardápios exportado!','success');
+}
+function exportCardapioUnicoPDF(empresa,orientation){
+  if(_currentCardapioIdx<0){toast('Selecione um cardápio','error');return;}
+  var c=DATA.cardapio[_currentCardapioIdx];
+  var b=cardapioBrand(c);
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:orientation||'portrait',unit:'mm',format:'a4'});
+  var pageW=doc.internal.pageSize.getWidth();
+  var pageH=doc.internal.pageSize.getHeight();
+  // faixa colorida da marca (sem timbrado Senac sobre o branding do restaurante)
+  doc.setFillColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.rect(0,0,pageW,34,'F');
+  // logo da marca
+  try{
+    var img=new Image();
+    // fallback usa addImage com URL — jsPDF aceita data URL apenas
+    // por isso desenhamos texto da marca e tentamos addImage via fetch sync
+  }catch(e){}
+  doc.setTextColor(255,255,255);
+  doc.setFontSize(10);doc.setFont('helvetica','normal');
+  doc.text('CARDÁPIO',14,14);
+  doc.setFontSize(18);doc.setFont('helvetica','bold');
+  doc.text(b.nome,14,24);
+  doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.text('Categoria: '+c.cat,pageW-14,14,{align:'right'});
+  doc.text('Senac Aldeota',pageW-14,20,{align:'right'});
+  // corpo
+  doc.setTextColor(34,34,34);
+  doc.setFontSize(22);doc.setFont('helvetica','bold');
+  doc.setTextColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.text(c.nome,14,52);
+  doc.setDrawColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.setLineWidth(0.8);doc.line(14,55,pageW-14,55);
+  doc.setFontSize(11);doc.setFont('helvetica','bold');
+  doc.text('VALOR POR PESSOA',pageW-14,64,{align:'right'});
+  doc.setFontSize(20);
+  doc.text(fmtMoney(c.val),pageW-14,72,{align:'right'});
+  // composição
+  doc.setTextColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.setFontSize(12);doc.setFont('helvetica','bold');
+  doc.text('COMPOSIÇÃO DO CARDÁPIO',14,68);
+  doc.setTextColor(34,34,34);
+  doc.setFont('helvetica','normal');doc.setFontSize(11);
+  var itens=(c.items||'').split(/[•·,;]+/).map(function(s){return s.trim();}).filter(Boolean);
+  var y=76;
+  if(itens.length){
+    itens.forEach(function(it){
+      var lines=doc.splitTextToSize('•  '+it,pageW-90);
+      doc.text(lines,14,y);y+=lines.length*5.5;
+    });
+  }else{
+    var ln=doc.splitTextToSize(c.items||'Composição não detalhada.',pageW-90);
+    doc.text(ln,14,y);y+=ln.length*5.5;
+  }
+  // alergênicos box
+  y+=6;
+  doc.setFillColor(255,247,224);doc.setDrawColor(255,153,0);
+  doc.roundedRect(14,y,pageW-28,18,3,3,'FD');
+  doc.setTextColor(180,90,0);doc.setFont('helvetica','bold');doc.setFontSize(10);
+  doc.text('⚠ ALERGÊNICOS',18,y+7);
+  doc.setTextColor(60,60,60);doc.setFont('helvetica','normal');
+  doc.text(c.alerg||'Não informado',18,y+13);
+  y+=26;
+  // observações
+  doc.setTextColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.setFont('helvetica','bold');doc.setFontSize(11);
+  doc.text('INFORMAÇÕES IMPORTANTES',14,y);y+=6;
+  doc.setTextColor(60,60,60);doc.setFont('helvetica','normal');doc.setFontSize(10);
+  var info='Cardápio elaborado pela equipe técnica do Senac Aldeota em conformidade com a RDC 216/2004. Inclui louças, talheres, guardanapos, montagem e desmontagem da estação. Serviço a partir de 20 pessoas. Valores válidos por 30 dias.';
+  var infoLines=doc.splitTextToSize(info,pageW-28);
+  doc.text(infoLines,14,y);
+  // rodapé
+  doc.setFillColor(b.primaryRgb[0],b.primaryRgb[1],b.primaryRgb[2]);
+  doc.rect(0,pageH-16,pageW,16,'F');
+  doc.setTextColor(255,255,255);doc.setFontSize(9);
+  doc.text('Senac Aldeota · '+b.nome+' · Cardápio gerado em '+new Date().toLocaleDateString('pt-BR'),pageW/2,pageH-9,{align:'center'});
+  doc.setFontSize(7);
+  doc.text('Sistema criado por Marcio Oliveira',pageW/2,pageH-4,{align:'center'});
+  doc.save('Cardapio_'+(c.nome||'item').replace(/[^a-z0-9]+/gi,'_')+'_'+Date.now()+'.pdf');
+  toast('Cardápio exportado!','success');
+}
+
 
 // ── WIZARD ────────────────────────────────────────────────────────
 var wizardStepsData=[
@@ -3721,7 +4015,7 @@ function exportPDFWithOrientation(orientation){
   doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR')+' · Orientação: '+(orientation==='landscape'?'Paisagem':'Retrato'),14,startY+12);
   doc.autoTable({startY:startY+18,head:[['Nº','Evento','Cliente','Data','Espaço','Valor (R$)','Status']],
     body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),p.espaco,fmtMoney(p.valor),p.status];}),
-    styles:{fontSize:9,cellPadding:3},headStyles:{fillColor:[0,51,102],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
+    styles:{fontSize:9,cellPadding:3},headStyles:{fillColor:[0,75,142],textColor:255,fontStyle:'bold'},alternateRowStyles:{fillColor:[248,250,252]}});
   addPDFPageFooter(doc);
   doc.save('Dashboard_Senac_'+orientation+'_'+Date.now()+'.pdf');
   toast('PDF '+(orientation==='landscape'?'paisagem':'retrato')+' exportado!','success');
@@ -3756,7 +4050,7 @@ function exportWizardPreviewPDF(){
   exportarPropostaSenacPDF(p,empresa);
 }
 function initFavicon(){
-  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#003366"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
+  var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#004b8e"/><rect y="28" width="64" height="4" fill="#FF9900"/><text x="32" y="22" text-anchor="middle" fill="#fff" font-family="Segoe UI,sans-serif" font-size="14" font-weight="700">SA</text></svg>';
   var href='data:image/svg+xml,'+encodeURIComponent(svg);
   var link=document.getElementById('favicon');
   if(link)link.href=href;
@@ -3903,33 +4197,45 @@ async function extrairExcel(file){
   return {texto:texto,rows:todasRows};
 }
 function parsePropostaTexto(t){
-  var d={num:'',evento:'',cliente:'',data:'',valor:'',espaco:'',pax:''};
-  var m;
-  // Número (Nº 004/2026 ou Proposta 0151/2026)
-  m=t.match(/(?:N[ºo°]?\.?\s*|Proposta\s+(?:SENAC\s+ALDEOTA[\s–\-]+)?)(\d{2,4}[.\-\/]?\d*\/\d{4})/i);
-  if(m)d.num=m[1].replace('.','/').replace('-','/');
-  // Cliente (Att: X | Cliente: X)
-  m=t.match(/(?:Att\.?:?|Cliente:?)\s*([^\n\r|]{3,80})/i);
-  if(m)d.cliente=m[1].trim().replace(/\s+/g,' ');
-  // Evento
-  m=t.match(/Evento:?\s*([^\n\r|]{3,120})/i);
-  if(m)d.evento=m[1].trim();
-  // Data DD/MM/AAAA
-  m=t.match(/(?:Data(?:\s+do\s+evento)?:?\s*)?(\d{2}\/\d{2}\/\d{4})/i);
-  if(m){var p=m[1].split('/');d.data=p[2]+'-'+p[1]+'-'+p[0];}
-  // Valor R$
-  var vs=t.match(/R\$\s*([\d.]+,\d{2})/g);
-  if(vs&&vs.length){
-    var maior=0;
-    vs.forEach(function(v){var n=parseFloat(v.replace(/R\$\s*/,'').replace(/\./g,'').replace(',','.'));if(n>maior)maior=n;});
-    d.valor=maior;
+  var d={num:'',evento:'',cliente:'',data:'',hora:'',valor:'',espaco:'',pax:'',alimentacao:''};
+  if(!t)return d;
+  var T=t.replace(/\u00A0/g,' ').replace(/[\t]+/g,' ').replace(/ {2,}/g,' ');
+  var STOP='(?:Att\\.?:|Cliente:|Evento:|Local:|Espa[çc]o(?:\\s*\\/\\s*servi[çc]o)?:|Data(?:\\s+do\\s+evento)?:|Hor[áa]rio:|Per[íi]odo:|Participantes:|P[ÚU]BLICO:|PAX:|N[º°]\\s*pessoas:|Valor\\s+Total|Valor:|Total\\s+com|Quantidade|INFORMA[ÇC][ÕO]ES|ORIENTA[ÇC][ÕO]ES|MODALIDADE|DADOS\\s+BANC|APROVA[ÇC]|$)';
+  function grab(label){
+    var re=new RegExp(label+'\\s*([^]+?)(?=\\s*'+STOP+')','i');
+    var m=T.match(re);return m?m[1].trim().replace(/\s+/g,' ').replace(/[\.;:,\-–]+$/,'').trim():'';
   }
-  // Local / Espaço
-  m=t.match(/(?:Local|Espa[çc]o):?\s*([^\n\r|]{3,80})/i);
-  if(m)d.espaco=m[1].trim();
-  // Participantes
-  m=t.match(/(?:Participantes|PAX|N[º°]?\s+pessoas):?\s*(\d{1,5})/i);
+  var m=T.match(/PROPOSTA\s+SENAC[^\d]{0,40}(\d{2,4}(?:[.\-]\d+)?\/\d{2,4})/i)
+       ||T.match(/Proposta\s+n?[º°ºo]?\.?\s*(\d{2,4}(?:[.\-]\d+)?\/\d{2,4})/i)
+       ||T.match(/N[º°ºo]\.?\s*(\d{2,4}(?:[.\-]\d+)?\/\d{2,4})/i);
+  if(m)d.num=m[1];
+  d.cliente=grab('(?:Att\\.?:|Cliente:)');
+  d.evento=grab('Evento:');
+  d.espaco=grab('(?:Local|Espa[çc]o(?:\\s*\\/\\s*servi[çc]o)?):');
+  m=T.match(/Data(?:\s+do\s+evento)?:?\s*(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{2,4})/i)
+   ||T.match(/(\d{1,2})\s*\/\s*(\d{1,2})\s*\/\s*(\d{4})/);
+  if(m){var dd=('0'+m[1]).slice(-2),mm=('0'+m[2]).slice(-2),yy=m[3];if(yy.length===2)yy=(parseInt(yy,10)>=70?'19':'20')+yy;d.data=yy+'-'+mm+'-'+dd;}
+  m=T.match(/Hor[áa]rio:?\s*(\d{1,2})\s*[h:]\s*(\d{2})/i)
+   ||T.match(/(\d{1,2})\s*[h:]\s*(\d{2})\s*(?:às|as)\s*\d/i);
+  if(m)d.hora=('0'+m[1]).slice(-2)+':'+m[2];
+  m=T.match(/Valor\s+Total[^R]{0,40}R\$\s*([\d.]+,\d{2})/i);
+  if(m){d.valor=parseFloat(m[1].replace(/\./g,'').replace(',','.'));}
+  else{
+    var vs=T.match(/R\$\s*([\d.]+,\d{2})/g);
+    if(vs&&vs.length){var maior=0;vs.forEach(function(v){var n=parseFloat(v.replace(/R\$\s*/,'').replace(/\./g,'').replace(',','.'));if(n>maior)maior=n;});d.valor=maior;}
+  }
+  var alimTipos=[];
+  [['Coffee Break Executivo','Coffee Break Executivo'],['Welcome Coffee','Welcome Coffee'],['Coffee Break','Coffee Break'],['Brunch','Brunch'],['Coquetel','Coquetel'],['Almo[çc]o','Almoço'],['Jantar','Jantar'],['Kit Lanche','Kit Lanche'],['Lanche','Lanche'],['Happy Hour','Happy Hour']].forEach(function(p){
+    if(new RegExp(p[0],'i').test(T)&&alimTipos.indexOf(p[1])<0)alimTipos.push(p[1]);
+  });
+  d.alimentacao=alimTipos.length?alimTipos.slice(0,2).join(' + '):'';
+  m=T.match(/(?:Participantes|P[ÚU]BLICO|N[º°]\s*pessoas|PAX)\s*:?\s*(\d{1,4})/i)
+   ||T.match(/(\d{1,4})\s*(?:und\s*\/\s*pax|pax|pessoas|participantes|convidados)/i);
   if(m)d.pax=m[1];
+  else if(d.alimentacao){
+    var blk=T.match(/(?:Coffee Break|Brunch|Coquetel|Almo[çc]o|Jantar|Lanche)[^]{0,1500}?\s(\d{2,4})\s+R\$/i);
+    if(blk)d.pax=blk[1];
+  }
   return d;
 }
 function renderImpPreview(){
@@ -3941,7 +4247,9 @@ function renderImpPreview(){
     +impRow('Cliente','imp_cliente',d.cliente||'')
     +impRow('Espaço','imp_espaco',d.espaco||'')
     +impRow('Data (AAAA-MM-DD)','imp_data',d.data||'',{type:'date'})
+    +impRow('Hora','imp_hora',d.hora||'',{type:'time'})
     +impRow('Participantes','imp_pax',d.pax||'',{type:'number'})
+    +impRow('Alimentação','imp_alim',d.alimentacao||'')
     +impRow('Valor (R$)','imp_valor',d.valor||'',{type:'number',step:'0.01'})
     +'<div class="import-extract-row"><label>Status</label><select id="imp_status"><option>Confirmada</option><option>Pendente</option><option>Negociação</option><option>Cancelada</option></select></div>';
   document.getElementById('impFields').innerHTML=html;
@@ -3980,7 +4288,7 @@ function salvarImportProposta(){
     cliente:cliente,
     espaco:document.getElementById('imp_espaco').value.trim()||'A definir',
     data:data,
-    hora:'08:00',
+    hora:document.getElementById('imp_hora').value||'08:00',
     pax:document.getElementById('imp_pax').value||'',
     valor:parseFloat(document.getElementById('imp_valor').value)||0,
     status:document.getElementById('imp_status').value,
@@ -3989,7 +4297,7 @@ function salvarImportProposta(){
     formatoEvento:'Importado',
     musicaAoVivo:false,
     equipamentos:[],
-    alimentacao:[],
+    alimentacao:(function(){var v=(document.getElementById('imp_alim').value||'').trim();return v?[{nome:v,qtd:parseInt(document.getElementById('imp_pax').value,10)||0}]:[];})(),
     importado:true,
     arqOrigem:_importedData&&_importedData.nomeArq||''
   };
