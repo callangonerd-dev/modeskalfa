@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR" data-theme="light">
 <head>
@@ -505,6 +504,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
     @media(max-width:560px){
       .prop-toolbar .field{min-width:0;flex:1 1 calc(50% - 5px)}
     }
+    .badge{display:none}
   </style> </head> <body> <div class="alert-prazo-vencido" id="alertaPrazoVencido" style="display:none" onclick="goto('propostas')">
   🚨 ATENÇÃO: Existem propostas com prazo de pagamento VENCIDO! Clique para ver →
 </div>
@@ -587,7 +587,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
         </select>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="exportPropostaAtual('pdf')">📄 Exportar PDF</button>
+        <button class="btn btn-primary" onclick="exportPropostaAtual('pdf')">🖨️ Imprimir Proposta</button>
         <button class="btn btn-ghost" onclick="exportPropostaAtual('excel')">📊 Exportar Excel</button>
         <button class="btn btn-ghost" onclick="editarPropostaAtual()">✏️ Editar</button>
       </div>
@@ -744,9 +744,10 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
   <div class="modal">
     <div class="modal-header"><span class="modal-title" id="modalTITitle">💻 Novo Item TI/AV</span><span class="modal-close" onclick="closeModal('modalTI')">✕</span></div>
     <div class="form-row">
-      <div class="form-group"><label>Nome do Equipamento</label><input id="ti_nome" placeholder="Ex: Projetor Epson 4K"/></div>
+      <div class="form-group"><label>Nome do Equipamento <span style="color:var(--c-text3);font-size:11px">(descrição completa, técnica)</span></label><input id="ti_nome" placeholder="Ex: TV TCL 65 polegadas QLED 4K"/></div>
       <div class="form-group"><label>Modelo</label><input id="ti_modelo" placeholder="Ex: EB-PU2010B"/></div>
     </div>
+    <div class="form-group" style="margin-bottom:14px"><label>Título Genérico <span style="color:var(--c-text3);font-size:11px">(o que aparece na proposta para o cliente — ex: "TV 65 pol", "Microfone sem fio")</span></label><input id="ti_generico" placeholder="Ex: TV 65 pol"/></div>
     <div class="form-row">
       <div class="form-group"><label>Categoria</label><select id="ti_cat"><option>TI</option><option>AV</option><option>Câmera</option><option>Projeção</option><option>Áudio</option><option>Rede</option><option>Iluminação</option></select></div>
       <div class="form-group"><label>Número de Série / Patrimônio</label><input id="ti_pat" placeholder="PAT-0001"/></div>
@@ -804,7 +805,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
     <div id="cardDetalheContent" style="max-height:74vh;overflow-y:auto"></div>
     <div style="display:flex;justify-content:flex-end;gap:10px;padding:14px 18px;border-top:1px solid var(--c-border);background:var(--c-surface2)">
       <button class="btn btn-ghost" onclick="closeModal('modalCardapioDetalhe')">Fechar</button>
-      <button class="btn btn-primary" onclick="openExportModal('cardapioUnico')">📄 Exportar PDF</button>
+      <button class="btn btn-primary" onclick="openExportModal('cardapioUnico')">🖨️ Imprimir PDF</button>
     </div>
   </div>
 </div>
@@ -1295,7 +1296,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
           <div><div class="section-title" style="font-size:18px">🔍 Parecer Técnico</div><div class="section-sub">Checklists de viabilidade técnica por evento</div></div>
           <div style="display:flex;gap:8px;align-items:center">
             <span class="badge badge-red">Acesso Restrito</span>
-            <button class="btn btn-ghost btn-sm" onclick="openExportModal('parecer')">📄 Exportar PDF</button>
+            <button class="btn btn-ghost btn-sm" onclick="openExportModal('parecer')">🖨️ Imprimir PDF</button>
             
           </div>
         </div>
@@ -1365,7 +1366,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
           <div id="parecerResumo" style="font-size:13px;color:var(--c-text2)">Preencha os checklists para gerar o parecer técnico.</div>
           <div style="margin-top:16px"><textarea id="parecerObs" placeholder="Observações adicionais para o parecer técnico..." rows="3" style="width:100%"></textarea></div>
           <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-            <button class="btn btn-primary" onclick="openExportModal('parecer')">📄 Exportar PDF</button>
+            <button class="btn btn-primary" onclick="openExportModal('parecer')">🖨️ Imprimir PDF</button>
             
           </div>
         </div>
@@ -1439,6 +1440,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
             <div class="settings-nav-item" onclick="settingsTab(this,'timbrado')"><i data-lucide="file-text"></i> Papel Timbrado</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'logos')"><i data-lucide="image"></i> Logos</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'banco')"><i data-lucide="credit-card"></i> Dados Bancários / PIX</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'assinaturas')"><i data-lucide="pen-tool"></i> Assinaturas</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'portfolio')"><i data-lucide="images"></i> Portfólio</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'usuarios')"><i data-lucide="users-round"></i> Usuários</div>
           </div>
@@ -1521,6 +1523,36 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
                 <div id="pixQrPreview" style="margin-top:10px"></div>
               </div>
               <button class="btn btn-primary" onclick="salvarDadosBanc()">💾 Salvar</button>
+            </div>
+            <div class="settings-pane card" id="cfg-assinaturas">
+              <div class="section-title" style="margin-bottom:8px">✍️ Assinaturas do Documento</div>
+              <div class="section-sub" style="margin-bottom:16px">Cadastre as duas assinaturas que aparecerão na proposta. Na impressão será exibido apenas <strong>nome</strong> e <strong>função/cargo</strong>.</div>
+
+              <div style="background:var(--c-surface2);border-radius:10px;padding:14px;border:1px solid var(--c-border);margin-bottom:14px">
+                <div style="font-weight:700;margin-bottom:10px;color:var(--c-accent2)">1ª Assinatura — Operador(a) / Produtor(a) de Eventos</div>
+                <div class="form-row">
+                  <div class="form-group"><label>Nome</label><input id="sig1_nome" placeholder="Nome completo"/></div>
+                  <div class="form-group"><label>Função / Cargo</label><input id="sig1_funcao" placeholder="Ex: Produtor(a) de Eventos"/></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group"><label>Contato (telefone)</label><input id="sig1_contato" placeholder="(85) 99999-9999"/></div>
+                  <div class="form-group"><label>E-mail</label><input id="sig1_email" placeholder="email@senac.ce"/></div>
+                </div>
+              </div>
+
+              <div style="background:var(--c-surface2);border-radius:10px;padding:14px;border:1px solid var(--c-border);margin-bottom:14px">
+                <div style="font-weight:700;margin-bottom:10px;color:var(--c-accent2)">2ª Assinatura — Gerência do Setor</div>
+                <div class="form-row">
+                  <div class="form-group"><label>Nome</label><input id="sig2_nome" placeholder="Nome completo"/></div>
+                  <div class="form-group"><label>Função / Cargo</label><input id="sig2_funcao" placeholder="Ex: Gerente de Unidade"/></div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group"><label>Contato (telefone)</label><input id="sig2_contato" placeholder="(85) 99999-9999"/></div>
+                  <div class="form-group"><label>E-mail</label><input id="sig2_email" placeholder="email@senac.ce"/></div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary" onclick="salvarAssinaturas()">💾 Salvar Assinaturas</button>
             </div>
             <div class="settings-pane card" id="cfg-portfolio">
               <div class="section-title" style="margin-bottom:8px">Portfólio de Espaços</div>
@@ -2394,7 +2426,7 @@ function exportPDF(empresa,orientation){
     if(obs){doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(70,70,70);var split=doc.splitTextToSize(obs,pageW-28);doc.text(split,14,Y+10);}
   }
   addPDFPageFooter(doc);
-  doc.save('Senac_Aldeota_'+exportCtxStr+'_'+Date.now()+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('PDF exportado!','success');
 }
 
@@ -2495,7 +2527,7 @@ function exportarPropostaSenacPDF(p,empresa){
 
   // ---------- Faixa: INFORMAÇÕES DO CLIENTE ----------
   bandeira('INFORMAÇÕES DO CLIENTE');
-
+Y += 10;
   // Bloco cliente: rótulo em negrito + valor normal
   function linhaCliente(rotulo,valor){
     if(!valor)return;
@@ -2589,6 +2621,7 @@ function exportarPropostaSenacPDF(p,empresa){
 
   // ---------- ORIENTAÇÕES ----------
   bandeira('ORIENTAÇÕES');
+Y += 10;
   bullets([
     'Orçamento aprovado, a proposta precisa ser assinada e enviada para nós.',
     'Não é permitido a entrada de coffe break de fornecedores externos.',
@@ -2599,6 +2632,7 @@ function exportarPropostaSenacPDF(p,empresa){
   // ---------- ALIMENTOS ----------
   if(p.alimentacao&&p.alimentacao.length){
     bandeira('ALIMENTOS');
+Y += 10;
     bullets([
       'Em conformidade com a legislação sanitária vigente, a Resolução da Diretoria Colegiada (RDC) nº 216/2004 da Agência Nacional da Vigilância Sanitária (ANVISA), informamos que é expressamente proibido o aproveitamento de sobras de alimentos ou ainda o transporte dos mesmos. Essas medidas visam garantir a segurança alimentar e a qualidade dos serviços prestados aos nossos clientes, prevenindo riscos de contaminação e a ocorrência de doenças transmitidas por alimentos (DTAs).',
       'Em observância as normas estabelecidas em legislação vigente, o SENAC adota as seguintes medidas de segurança: Capacitação contínua dos colaboradores em boas práticas de manipulação de alimentos e higiene pessoal; Controle rigoroso do tempo e temperatura de preparo, armazenamento e exposição dos alimentos; Descarte adequado dos alimentos não consumidos durante o período de exposição;',
@@ -2608,17 +2642,20 @@ function exportarPropostaSenacPDF(p,empresa){
 
   if(p.infoTecnica){
     bandeira('INFORMAÇÕES TÉCNICAS');
+Y += 10;
     var tl=doc.splitTextToSize(p.infoTecnica,contentW-4);
     if(Y+tl.length*4.5>pageH-SENAC_LAYOUT.marginBottom-2){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=SENAC_LAYOUT.marginTop;}
     doc.text(tl,marginX+4,Y);Y+=tl.length*4.5+4;
   }
   if(p.areaTecnica==='externa'){
     bandeira('RESPONSABILIDADE TÉCNICA');
+Y += 10
     bullets(['A operação técnica será realizada por fornecedor externo contratado pelo cliente. A SUPERVISÃO TÉCNICA será realizada por técnico do Senac Aldeota durante montagem, operação e desmontagem.']);
   }
 
   // ---------- MODALIDADE DE PAGAMENTO ----------
   bandeira('MODALIDADE DE PAGAMENTO');
+Y += 10;
   bullets([
     'O investimento para realização das ações descritas na tabela acima poderá ser pago no cartão de crédito, débito ou outra forma de pagamento acordada de forma prévia',
     {text:'O pagamento deve ser realizado da seguinte forma: 100% até 15 dias antes do evento.',highlight:true},
@@ -2629,6 +2666,7 @@ function exportarPropostaSenacPDF(p,empresa){
   // ---------- DADOS BANCÁRIOS ----------
   if(p.incluirDadosBanc!==false){
     bandeira('DADOS BANCÁRIOS PARA PAGAMENTO');
+Y += 10;
     var db=getCfgDadosBanc();
     doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(30,30,30);
     doc.text(db.banco,marginX,Y);Y+=4.6;
@@ -2654,22 +2692,29 @@ function exportarPropostaSenacPDF(p,empresa){
     }
   }
 
-  // ---------- Atenciosamente / Assinaturas Senac ----------
-  if(Y>pageH-SENAC_LAYOUT.marginBottom-30){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=SENAC_LAYOUT.marginTop;}
+  // ---------- Atenciosamente / Assinaturas configuráveis ----------
+  if(Y>pageH-SENAC_LAYOUT.marginBottom-40){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=SENAC_LAYOUT.marginTop;}
   Y+=2;
   doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(30,30,30);
-  doc.text('Atenciosamente,',marginX,Y);Y+=8;
-  doc.setFont('helvetica','bold');doc.text('Raquel Cajé',marginX,Y);Y+=4.6;
+  doc.text('Atenciosamente,',marginX,Y);Y+=10;
+  var _asg=getAssinaturasCfg();
+  // 1) Operador / Produtor(a) de Eventos — apenas nome + função (sem linha de assinatura)
+  doc.setFont('helvetica','bold');doc.setTextColor(30,30,30);
+  doc.text(_asg.sig1.nome||'—',marginX,Y);Y+=4.6;
   doc.setFont('helvetica','italic');doc.setTextColor(80,80,80);
-  doc.text('Gerente de Unidade Senac Aldeota',marginX,Y);Y+=5.4;
-  doc.setFont('helvetica','bold');doc.setTextColor(30,30,30);doc.text('Ricardo Matheus',marginX,Y);Y+=4.6;
+  doc.text(_asg.sig1.funcao||'Operador(a) / Produtor(a) de Eventos',marginX,Y);Y+=9;
+  // 2) Gerência do Setor — apenas nome + função
+  doc.setFont('helvetica','bold');doc.setTextColor(30,30,30);
+  doc.text(_asg.sig2.nome||'—',marginX,Y);Y+=4.6;
   doc.setFont('helvetica','italic');doc.setTextColor(80,80,80);
-  doc.text('Coordenador Corporativo',marginX,Y);Y+=8;
+  doc.text(_asg.sig2.funcao||'Gerência do Setor',marginX,Y);Y+=8;
   doc.setFont('helvetica','normal');doc.setTextColor(30,30,30);
 
   // ---------- APROVAÇÃO ----------
   if(Y>pageH-SENAC_LAYOUT.marginBottom-50){doc.addPage();buildPDFHeader(doc,empresa||'senac');Y=SENAC_LAYOUT.marginTop;}
   bandeira('APROVAÇÃO');
+
+  Y += 10;
   doc.setFontSize(10);doc.setFont('helvetica','normal');doc.setTextColor(30,30,30);
   var aprov1='Aprovamos a proposta '+p.num+' e autorizamos a execução do que nela está especificado.';
   doc.text(aprov1,pageW/2,Y,{align:'center'});Y+=6;
@@ -2679,8 +2724,11 @@ function exportarPropostaSenacPDF(p,empresa){
   doc.text('Carimbo e assinatura',pageW/2,Y,{align:'center'});
 
   addPDFPageFooter(doc);
-  doc.save('Proposta_Senac_'+(p.num||'').replace('/','_')+'.pdf');
-  toast('PDF Senac/Fecomércio exportado!','success');
+  try{doc.autoPrint();}catch(_e){}
+  var _blobUrl=doc.output('bloburl');
+  var _w=window.open(_blobUrl,'_blank');
+  if(!_w){location.href=_blobUrl;}
+  toast('Abrindo diálogo de impressão…','success');
 }
 
 function exportPropostaAtual(fmt){
@@ -2741,7 +2789,7 @@ function exportPropostaAtual(fmt){
       doc.text('Senac Aldeota — Comercial de Eventos',120,Y2+27);
     }
     addPDFPageFooter(doc);
-    doc.save('Proposta_'+p.num.replace('/','_')+'.pdf');
+    try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
     toast('PDF da proposta exportado com timbrado!','success');
   }
   closeModal('modalVerProposta');
@@ -2863,7 +2911,7 @@ function renderPropostas(list){
       +'<td data-label="Status"><span class="badge '+statusBadge(p.status)+'">'+p.status+'</span></td>'
       +'<td data-label="Tipo">'+(p.tipo==='oficio'?'<span class="oficio-badge">Ofício FECOMÉRCIO</span>':'<span class="tag">Normal</span>')+'</td>'
       +'<td data-label="Ações"><div style="display:flex;gap:4px;flex-wrap:wrap">'
-        +'<button class="btn btn-ghost btn-icon btn-sm" title="Acessar/Exportar Proposta" onclick="verProposta('+idx+')" style="color:var(--c-cyan)">📄</button>'
+        +'<button class="btn btn-ghost btn-icon btn-sm" title="Imprimir Proposta" onclick="verProposta('+idx+')" style="color:var(--c-cyan)">🖨️</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Editar" onclick="abrirEditProposta('+idx+')">✏️</button>'
         +(p.status!=='Confirmada'&&p.status!=='Cancelada'?'<button class="btn btn-icon btn-sm btn-confirm-pgto" title="Confirmar pagamento" onclick="abrirConfirmarPagamento('+idx+')">💵</button>':'')
         +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirProposta('+idx+')">🗑️</button>':'')
@@ -3170,7 +3218,7 @@ function renderOS(){
       +'<td><div style="display:flex;gap:4px">'
         +'<button class="btn btn-ghost btn-icon btn-sm" onclick="abrirEditOS('+i+')" title="Editar">✏️</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" onclick="abrirEnviarOS('+i+')" title="Enviar por e-mail (Outlook)">📧</button>'
-        +'<button class="btn btn-ghost btn-icon btn-sm" onclick="exportOSpdf('+i+')" title="PDF">📄</button>'
+        +'<button class="btn btn-ghost btn-icon btn-sm" onclick="exportOSpdf('+i+')" title="Imprimir">🖨️</button>'
         +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" onclick="excluirOS('+i+')" title="Excluir">🗑️</button>':'')
       +'</div></td>'
       +'</tr>';
@@ -3398,7 +3446,7 @@ function exportOSpdf(idx){
     ['Observações',o.obs||'—']
   ],y);
   addPDFPageFooter(doc);
-  doc.save('OS_'+o.id+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('PDF da OS gerado!','success');
 }
 
@@ -3697,7 +3745,7 @@ function renderEstoque(){
 function abrirNovoTI(){
   editingIdx.ti=-1;
   document.getElementById('modalTITitle').textContent='💻 Novo Item TI/AV';
-  ['ti_nome','ti_modelo','ti_pat','ti_icon'].forEach(function(id){document.getElementById(id).value='';});
+  ['ti_nome','ti_modelo','ti_pat','ti_icon','ti_generico'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
   document.getElementById('ti_qtd').value=1;document.getElementById('ti_valor').value='';document.getElementById('ti_cat').value='TI';document.getElementById('ti_status').value='Operacional';
   document.getElementById('ti_foto_preview').style.display='none';
   openModal('modalTI');
@@ -3709,6 +3757,7 @@ function editarTI(idx){
   document.getElementById('ti_nome').value=e.nome;document.getElementById('ti_modelo').value=e.modelo||'';
   document.getElementById('ti_qtd').value=e.qtd;document.getElementById('ti_valor').value=e.valor||0;document.getElementById('ti_cat').value=e.cat;
   document.getElementById('ti_icon').value=e.icon;document.getElementById('ti_pat').value=e.pat||'';
+  var gEl=document.getElementById('ti_generico');if(gEl)gEl.value=e.generico||'';
   document.getElementById('ti_status').value=e.status;
   if(e.foto){document.getElementById('ti_foto_preview').style.display='block';document.getElementById('ti_foto_img').src=e.foto;}
   else document.getElementById('ti_foto_preview').style.display='none';
@@ -3721,7 +3770,8 @@ function saveTI(){
   var fotoInput=document.getElementById('ti_foto');
   var fotoSrc=editingIdx.ti>=0?DATA.estoque[editingIdx.ti].foto:null;
   if(fotoInput.files&&fotoInput.files[0])fotoSrc=document.getElementById('ti_foto_img').src||fotoSrc;
-  var obj={nome:nome,modelo:document.getElementById('ti_modelo').value,cat:document.getElementById('ti_cat').value,qtd:qtd,disponivel:qtd,icon:document.getElementById('ti_icon').value||'📦',status:document.getElementById('ti_status').value,pat:document.getElementById('ti_pat').value,foto:fotoSrc,valor:parseFloat(document.getElementById('ti_valor').value)||0};
+  var generico=(document.getElementById('ti_generico')||{}).value||'';
+  var obj={nome:nome,generico:generico,modelo:document.getElementById('ti_modelo').value,cat:document.getElementById('ti_cat').value,qtd:qtd,disponivel:qtd,icon:document.getElementById('ti_icon').value||'📦',status:document.getElementById('ti_status').value,pat:document.getElementById('ti_pat').value,foto:fotoSrc,valor:parseFloat(document.getElementById('ti_valor').value)||0};
   if(editingIdx.ti>=0){obj.disponivel=DATA.estoque[editingIdx.ti].disponivel;DATA.estoque[editingIdx.ti]=obj;toast('Item atualizado','success');}
   else{DATA.estoque.push(obj);toast('Item cadastrado','success');}
   saveToStorage();renderEstoque();
@@ -4752,7 +4802,7 @@ function exportEspacosPDF(empresa,orientation){
     headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},
     alternateRowStyles:{fillColor:[245,250,255]},margin:senacMargins(doc)});
   addPDFPageFooter(doc);
-  doc.save('Senac_Aldeota_espacos_'+Date.now()+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('PDF de Espaços exportado!','success');
 }
 function exportCardapioListPDF(empresa,orientation){
@@ -4771,7 +4821,7 @@ function exportCardapioListPDF(empresa,orientation){
     alternateRowStyles:{fillColor:[245,250,255]},
     columnStyles:{2:{cellWidth:'auto'}},margin:senacMargins(doc)});
   addPDFPageFooter(doc);
-  doc.save('Senac_Aldeota_cardapios_'+Date.now()+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('PDF de Cardápios exportado!','success');
 }
 function exportCardapioUnicoPDF(empresa,orientation){
@@ -4851,7 +4901,7 @@ function exportCardapioUnicoPDF(empresa,orientation){
   doc.text('Senac Aldeota · '+b.nome+' · Cardápio gerado em '+new Date().toLocaleDateString('pt-BR'),pageW/2,pageH-9,{align:'center'});
   doc.setFontSize(7);
   doc.text('Sistema criado por Marcio Oliveira',pageW/2,pageH-4,{align:'center'});
-  doc.save('Cardapio_'+(c.nome||'item').replace(/[^a-z0-9]+/gi,'_')+'_'+Date.now()+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('Cardápio exportado!','success');
 }
 
@@ -4870,7 +4920,8 @@ var wizardStepsData=[
       +'<div class="form-group"><label>Observações</label><textarea id="w_oficioObs" rows="2" placeholder="Justificativa, condições especiais..."></textarea></div>'
       +'<label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--c-text2);margin-top:6px"><input type="checkbox" id="w_oficioSalvar" checked/> Salvar este ofício na biblioteca para reutilização</label>'
       +'<div style="margin-top:10px;padding:10px 12px;border-radius:8px;background:rgba(245,158,11,.10);border:1px solid rgba(245,158,11,.35);font-size:12px;color:var(--c-text)"><strong style="color:var(--c-amber)">⚠️ Atenção:</strong> O <strong>Pacote de Serviço de Bebidas</strong> (taxa de rolha, pacotes alcoólicos e não-alcoólicos) <u>não recebe desconto do ofício Fecomércio</u>. Mesmo inserido na proposta, seu valor é mantido <strong>integral</strong>. O desconto será aplicado somente sobre os demais itens (locação, equipamentos e alimentação não-bebida).</div>'
-      +'</div>';
+      +'</div>'
+      +'<div class="form-group" style="margin-top:14px"><label>🅿️ Direito a Estacionamento?</label><div style="display:flex;gap:18px;margin-top:6px"><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="radio" name="w_estac" value="sim"/> Sim, com estacionamento incluso</label><label style="display:flex;align-items:center;gap:6px;font-size:13px;cursor:pointer"><input type="radio" name="w_estac" value="nao"/> Não</label></div><div style="font-size:11px;color:var(--c-text3);margin-top:4px">Informação aparecerá na proposta enviada ao cliente.</div></div>';
   }},
   {label:'Locação',html:function(){
     var ativos=ativosServAdic();
@@ -4895,9 +4946,14 @@ var wizardStepsData=[
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:8px;flex-wrap:wrap"><label style="margin:0">Serviços Adicionais <span style="font-size:11px;color:var(--c-text3);font-weight:400">(seleção exclusiva pelo catálogo)</span></label>'+btnCad+'</div>'
       +'<div id="w_servicosAdicGrid">'+servHtml+'</div>';
   }},
-  {label:'TI/AV',html:function(){return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-group" style="margin-bottom:6px"><label style="font-size:12px;font-weight:700;color:var(--c-text2);text-transform:uppercase;letter-spacing:.4px">Responsabilidade Técnica</label><div class="tec-team-grid"><label class="tec-team-card" data-val="interna"><input type="radio" name="w_areaTec" value="interna" checked onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🏛️</div><div class="tec-team-title">Interna (Senac)</div><div class="tec-team-desc">Equipe técnica do Senac Aldeota executa toda a operação.</div></label><label class="tec-team-card" data-val="externa"><input type="radio" name="w_areaTec" value="externa" onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🏗️</div><div class="tec-team-title">Externa</div><div class="tec-team-desc">Fornecedor contratado pelo cliente, com supervisão Senac.</div></label><label class="tec-team-card" data-val="mista"><input type="radio" name="w_areaTec" value="mista" onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🤝</div><div class="tec-team-title">Equipe Mista</div><div class="tec-team-desc">Operação compartilhada entre Senac e fornecedor externo.</div></label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div id="w_mistaNote" class="tech-note" style="display:none;background:rgba(8,145,178,.08);border-color:var(--c-cyan)">🤝 <strong>Equipe Mista:</strong> a operação será executada em conjunto entre a equipe técnica do Senac Aldeota e o fornecedor externo contratado pelo cliente. Definir no campo abaixo a divisão de responsabilidades (operação, equipamentos compartilhados, montagem/desmontagem).</div><div id="w_montagemBlock" style="display:none;margin-top:14px;padding:12px;background:var(--c-surface3);border-radius:8px;border:1px solid var(--c-border)"><div style="font-size:12px;font-weight:700;color:var(--c-accent2);margin-bottom:8px">🔧 Montagem & Desmontagem (equipe externa/mista)</div><div class="form-row"><div class="form-group"><label style="font-size:12px">Data da Montagem</label><input type="date" id="w_montagemData"/></div><div class="form-group"><label style="font-size:12px">Hora da Montagem</label><input type="time" id="w_montagemHora"/></div></div><div class="form-row"><div class="form-group"><label style="font-size:12px">Data da Desmontagem</label><input type="date" id="w_desmontagemData"/></div><div class="form-group"><label style="font-size:12px">Hora da Desmontagem</label><input type="time" id="w_desmontagemHora"/></div></div><div class="form-group"><label style="font-size:12px">Responsável da equipe externa / fornecedor</label><input type="text" id="w_externoResp" placeholder="Nome do contato responsável pelo fornecedor"/></div></div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px"><p style="font-size:13px;color:var(--c-text2);margin:0">Selecione os equipamentos necessários:</p><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'ti\')">＋ Novo equipamento</button></div>'+renderEquipInclNotice()+'<div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'equip-select-grid\',\'grid\')">⊞ Grid</button><button type="button" onclick="setListLayout(this,\'equip-select-grid\',\'list\')">☰ Lista</button></div><div class="equip-select-grid">'+wizFilteredEstoque().map(function(e,_i){var i=e._origIdx;return '<div class="equip-select-card" onclick="toggleEquipCard(this,'+i+')">'+(e.foto?'<img src="'+e.foto+'" style="width:100%;height:80px;object-fit:contain;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+e.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+e.nome+'</div><div style="font-size:11px;color:var(--c-text3)">Modelo: '+(e.modelo||'—')+'</div><div style="font-size:12px;font-weight:700;color:var(--c-green);margin-top:4px">+'+fmtMoney(e.valor||0)+'/un/dia</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">'+e.disponivel+' disponível(is)</div><div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" max="'+e.disponivel+'" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="equip_qtd" id="equip_qtd_'+i+'"/></div><input type="checkbox" style="display:none" class="equip_chk" id="equip_chk_'+i+'"/></div>';}).join('')+'</div>';}},
+   {label:'TI/AV',html:function(){
+     var _espSel3=(DATA.espacos||[]).find(function(e){return e.nome===wizardDraft.espaco;});
+     var _spaceFree=!!(_espSel3&&_espSel3.temEquipAcoplado);
+     var _freeNote=_spaceFree?'<div style="margin-bottom:10px;padding:10px 12px;border-radius:8px;background:rgba(16,185,129,.10);border:1px solid rgba(16,185,129,.35);font-size:12px;color:var(--c-text)"><strong style="color:var(--c-green)">✅ Espaço com equipamentos alocados:</strong> os equipamentos selecionados abaixo são <u>cortesia</u> e <strong>não somam valor</strong> à proposta. Os preços de catálogo aparecem apenas como referência.</div>':'';
+     return '<div class="card-sm" style="margin-bottom:14px"><div class="section-title" style="font-size:13px;margin-bottom:10px">🔧 Área Técnica</div><div class="form-group" style="margin-bottom:6px"><label style="font-size:12px;font-weight:700;color:var(--c-text2);text-transform:uppercase;letter-spacing:.4px">Responsabilidade Técnica</label><div class="tec-team-grid"><label class="tec-team-card" data-val="interna"><input type="radio" name="w_areaTec" value="interna" checked onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🏛️</div><div class="tec-team-title">Interna (Senac)</div><div class="tec-team-desc">Equipe técnica do Senac Aldeota executa toda a operação.</div></label><label class="tec-team-card" data-val="externa"><input type="radio" name="w_areaTec" value="externa" onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🏗️</div><div class="tec-team-title">Externa</div><div class="tec-team-desc">Fornecedor contratado pelo cliente, com supervisão Senac.</div></label><label class="tec-team-card" data-val="mista"><input type="radio" name="w_areaTec" value="mista" onchange="updateTecTeamSel();toggleAreaTecnicaFields()"/><div class="tec-team-ico">🤝</div><div class="tec-team-title">Equipe Mista</div><div class="tec-team-desc">Operação compartilhada entre Senac e fornecedor externo.</div></label></div></div><div id="w_externaNote" class="tech-note" style="display:none">⚠️ <strong>Responsabilidade Externa:</strong> O fornecedor contratado pelo cliente executará a operação técnica. A <strong>supervisão será realizada por técnico do Senac Aldeota</strong>, que acompanhará a montagem, operação e desmontagem para garantir conformidade com as normas internas. O técnico Senac deve ser informado com no mínimo 72h de antecedência.</div><div id="w_mistaNote" class="tech-note" style="display:none;background:rgba(8,145,178,.08);border-color:var(--c-cyan)">🤝 <strong>Equipe Mista:</strong> a operação será executada em conjunto entre a equipe técnica do Senac Aldeota e o fornecedor externo contratado pelo cliente. Definir no campo abaixo a divisão de responsabilidades (operação, equipamentos compartilhados, montagem/desmontagem).</div><div id="w_montagemBlock" style="display:none;margin-top:14px;padding:12px;background:var(--c-surface3);border-radius:8px;border:1px solid var(--c-border)"><div style="font-size:12px;font-weight:700;color:var(--c-accent2);margin-bottom:8px">🔧 Montagem & Desmontagem (equipe externa/mista)</div><div class="form-row"><div class="form-group"><label style="font-size:12px">Data da Montagem</label><input type="date" id="w_montagemData"/></div><div class="form-group"><label style="font-size:12px">Hora da Montagem</label><input type="time" id="w_montagemHora"/></div></div><div class="form-row"><div class="form-group"><label style="font-size:12px">Data da Desmontagem</label><input type="date" id="w_desmontagemData"/></div><div class="form-group"><label style="font-size:12px">Hora da Desmontagem</label><input type="time" id="w_desmontagemHora"/></div></div><div class="form-group"><label style="font-size:12px">Responsável da equipe externa / fornecedor</label><input type="text" id="w_externoResp" placeholder="Nome do contato responsável pelo fornecedor"/></div></div><div class="form-group" style="margin-top:14px"><label>Informações técnicas para o técnico (operação, montagem, equipamentos extras, observações)</label><textarea id="w_infoTec" rows="3" placeholder="Ex.: Mesa de som operada por 1 técnico. Iluminação cênica. Início às 18h com passagem de som às 16h..."></textarea></div></div><div id="w_areaInternaFields"><div class="form-row"><div class="form-group"><label>Formato do Evento</label><select id="w_formato"><option>Palestra</option><option>Congresso</option><option>Workshop</option><option>Seminário</option><option>Conferência</option><option>Show/Música</option></select></div><div class="form-group" style="justify-content:flex-end"><label style="display:flex;align-items:center;gap:8px;margin-top:22px;font-size:13px"><input type="checkbox" id="w_musica"/> Música ao vivo</label></div></div></div></div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px"><p style="font-size:13px;color:var(--c-text2);margin:0">Equipamentos (opcional) — selecione apenas se necessário:</p></div>'+_freeNote+'<div class="equip-select-grid">'+GENERIC_EQUIP.map(function(g){var preco=genericoPrice(g);var real=genericoRealName(g);var precoTag=preco>0?'<div style="font-size:11px;color:'+(_spaceFree?'var(--c-text3)':'var(--c-green)')+';font-weight:600;margin-top:2px">'+(_spaceFree?'<s>'+fmtMoney(preco)+'</s> · cortesia':fmtMoney(preco)+'/dia')+'</div>':'<div style="font-size:10px;color:var(--c-text3);margin-top:2px">sem item cadastrado</div>';return '<div class="equip-select-card" onclick="toggleGenericEquip(this,\''+g.key+'\')"><div style="font-size:28px;text-align:center;padding:10px 0">'+g.icon+'</div><div style="font-weight:600;font-size:13px;margin-bottom:2px">'+g.nome+'</div><div style="font-size:10px;color:var(--c-text3);margin-bottom:2px" title="'+real+'">'+(real!==g.nome?real:'')+'</div>'+precoTag+'<div style="margin-top:8px;display:flex;align-items:center;gap:6px"><label style="font-size:11px;color:var(--c-text3)">Qtd:</label><input type="number" value="1" min="1" style="width:55px;padding:3px 7px;font-size:12px" onclick="event.stopPropagation()" class="gen_qtd" id="gen_qtd_'+g.key+'"/></div><input type="checkbox" style="display:none" class="gen_chk" id="gen_chk_'+g.key+'"/></div>';}).join('')+'<div class="equip-select-card" id="gen_card_suporte" onclick="toggleSuporteCard(this)"><div style=\'font-size:28px;text-align:center;padding:10px 0\'>🛠️</div><div style=\'font-weight:600;font-size:13px;margin-bottom:4px\'>Suporte técnico</div><div style=\'font-size:11px;color:var(--c-text3);margin-bottom:6px\'>Valor adicional</div><div style=\'margin-top:6px;display:flex;align-items:center;gap:6px\' onclick=\'event.stopPropagation()\'><label style=\'font-size:11px;color:var(--c-text3)\'>R$</label><input type=\'number\' value=\'\' min=\'0\' step=\'0.01\' placeholder=\'0,00\' style=\'width:90px;padding:3px 7px;font-size:12px\' id=\'gen_valor_suporte\'/></div><input type=\'checkbox\' style=\'display:none\' id=\'gen_chk_suporte\'/></div>'+'</div>';
+   }},
   {label:'Alimentação',html:function(){return '<div class="alimt-toggle"><span>O evento terá serviço de alimentação?</span><label><input type="radio" name="w_temAlim" value="sim" onchange="toggleAlimSection(true)"'+(wizardDraft.temAlimentacao?' checked':'')+'/> Sim</label><label><input type="radio" name="w_temAlim" value="nao" onchange="toggleAlimSection(false)"'+(!wizardDraft.temAlimentacao?' checked':'')+'/> Não</label></div><div id="w_alimSection" style="display:'+(wizardDraft.temAlimentacao?'block':'none')+'"><div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button type="button" class="btn btn-ghost btn-sm" style="padding:3px 10px;font-size:11px" onclick="wizSubModal(\'cardapio\')">＋ Novo item de alimentação</button></div><p style="font-size:12px;color:var(--c-text2);margin-bottom:6px">Selecione um ou mais itens. Para itens servidos várias vezes no dia (ex: coffee de manhã e tarde), informe o nº de vezes:</p><div class="view-toggle"><button type="button" class="active" onclick="setListLayout(this,\'food-select-grid\',\'grid\')">⊞ Grid</button><button type="button" onclick="setListLayout(this,\'food-select-grid\',\'list\')">☰ Lista</button></div><div class="food-select-grid">'+DATA.cardapio.map(function(c,i){return '<div class="food-select-card" onclick="toggleFoodCard(this,'+i+',event)">'+(c.foto?'<img src="'+c.foto+'" style="width:100%;height:80px;object-fit:cover;border-radius:6px;margin-bottom:8px"/>'  :'<div style="font-size:28px;text-align:center;padding:10px 0">'+c.icon+'</div>')+'<div style="font-weight:600;font-size:12px;margin-bottom:4px">'+c.nome+'</div><div style="font-size:11px;color:var(--c-text3)">'+c.cat+'</div><div style="font-size:13px;font-weight:700;color:var(--c-green);margin-top:6px">'+fmtMoney(c.val)+'/pax</div><div style="font-size:10px;color:var(--c-amber);margin-top:4px">⚠️ '+c.alerg+'</div><div class="food-vezes-row" onclick="event.stopPropagation()"><label>Vezes/dia:</label><input type="number" min="1" max="10" value="1" id="food_vezes_'+i+'"/><span style="font-size:10px;color:var(--c-text3)">(manhã/tarde…)</span></div><input type="checkbox" style="display:none" class="food_chk" id="food_chk_'+i+'"/></div>';}).join('')+'</div><div style="margin-top:14px;padding:10px 14px;border-radius:8px;background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2)"><div style="font-size:11px;font-weight:700;color:var(--c-amber)">⚠️ RDC 216/2004</div><div style="font-size:11px;color:var(--c-text2);margin-top:2px">Cliente será informado sobre alergênicos conforme legislação vigente.</div></div>';}},
-  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="background:var(--c-surface2);border-radius:10px;padding:12px;margin-bottom:12px"><div style="font-weight:600;font-size:13px;margin-bottom:8px">💳 Pagamento</div><label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px"><input type="checkbox" id="w_incDB" checked/> Incluir dados bancários na proposta</label><label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="w_incQR" checked/> Incluir QR Code PIX na proposta</label></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">📄 Gerar Preview do PDF</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
+  {label:'Revisão',html:function(){return '<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div class="section-title" style="margin-bottom:12px">📋 Resumo da Proposta</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px"><div><span style="color:var(--c-text3)">Nº Proposta:</span> <strong id="rev_num">—</strong></div><div><span style="color:var(--c-text3)">Evento:</span> <strong id="rev_evento">—</strong></div><div><span style="color:var(--c-text3)">Cliente:</span> <strong id="rev_cliente">—</strong></div><div><span style="color:var(--c-text3)">Data:</span> <strong id="rev_data">—</strong></div><div><span style="color:var(--c-text3)">Espaço:</span> <strong id="rev_espaco">—</strong></div><div><span style="color:var(--c-text3)">Prazo pgto:</span> <strong id="rev_prazo" style="color:var(--c-amber)">—</strong></div><div><span style="color:var(--c-text3)">Tipo:</span> <strong id="rev_tipo">—</strong></div><div><span style="color:var(--c-text3)">Área Téc.:</span> <strong id="rev_area">—</strong></div></div></div><div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Locação de Espaço</span><span id="rev_vloc">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px;color:var(--c-text2)">Equipamentos TI/AV</span><span id="rev_vav">—</span></div><div style="display:flex;justify-content:space-between;margin-bottom:12px"><span style="font-size:13px;color:var(--c-text2)">Alimentação</span><span id="rev_vfood">—</span></div><div style="display:flex;justify-content:space-between;padding-top:12px;border-top:1px solid var(--c-border)"><span style="font-size:15px;font-weight:700">TOTAL</span><span style="font-size:18px;font-weight:800;color:var(--c-green)" id="rev_total">—</span></div></div><div class="form-group" style="margin-bottom:12px"><label>Papel Timbrado / Layout de Impressão</label><select id="wizTimbrado"><option value="">Sem layout institucional</option><option value="senac" selected>Senac Aldeota (timbrado)</option></select></div><div style="background:var(--c-surface2);border-radius:10px;padding:12px;margin-bottom:12px"><div style="font-weight:600;font-size:13px;margin-bottom:8px">💳 Pagamento</div><label style="display:flex;align-items:center;gap:8px;font-size:13px;margin-bottom:6px"><input type="checkbox" id="w_incDB" checked/> Incluir dados bancários na proposta</label><label style="display:flex;align-items:center;gap:8px;font-size:13px"><input type="checkbox" id="w_incQR" checked/> Incluir QR Code PIX na proposta</label></div><div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px"><button type="button" class="btn btn-primary btn-sm" onclick="exportWizardPreviewPDF()">🖨️ Imprimir Preview</button></div><div style="padding:10px 14px;border-radius:8px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.25);font-size:12px;color:var(--c-text2)">⚠️ Prazo para devolutiva e pagamento: <strong style="color:var(--c-amber)">15 dias antes do evento</strong>. Ao confirmar, uma OS será gerada automaticamente.</div>';}}
 ];
 function resetWizardDraft(){
   wizardDraft={evento:'',cliente:'',data:'',hora:'08:00',pax:'',tipoEvento:'Congresso',propTipo:'normal',espaco:'',periodo:'Diária Completa',dias:1,servicos:[],equipamentos:[],alimentacao:[],areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,infoTecnica:'',temAlimentacao:false,incluirDadosBanc:true,incluirQR:true};
@@ -4950,6 +5006,8 @@ function saveWizardStepData(step){
     }else{
       wizardDraft.oficio=null;
     }
+    var _estac=document.querySelector('input[name="w_estac"]:checked');
+    wizardDraft.estacionamento=_estac?(_estac.value==='sim'):null;
   }else if(step===2){
     wizardDraft.espaco=document.getElementById('w_espaco')?document.getElementById('w_espaco').value:'';
     wizardDraft.periodo=document.getElementById('w_periodo')?document.getElementById('w_periodo').value:'Diária Completa';
@@ -4982,13 +5040,20 @@ function saveWizardStepData(step){
     wizardDraft.horarioMontagem=(wizardDraft.montagemData?wizardDraft.montagemData+' ':'')+(wizardDraft.montagemHora||'');
     wizardDraft.horarioDesmontagem=(wizardDraft.desmontagemData?wizardDraft.desmontagemData+' ':'')+(wizardDraft.desmontagemHora||'');
     wizardDraft.equipamentos=[];
-    DATA.estoque.forEach(function(e,i){
-      var chk=document.getElementById('equip_chk_'+i);
+    var _espSelSv=(DATA.espacos||[]).find(function(e){return e.nome===wizardDraft.espaco;});
+    var _spaceFreeSv=!!(_espSelSv&&_espSelSv.temEquipAcoplado);
+    GENERIC_EQUIP.forEach(function(g){
+      var chk=document.getElementById('gen_chk_'+g.key);
       if(chk&&chk.checked){
-        var qtd=parseInt(document.getElementById('equip_qtd_'+i).value)||1;
-        wizardDraft.equipamentos.push({idx:i,nome:e.nome,qtd:qtd,valor:e.valor||0});
+        var qtd=parseInt((document.getElementById('gen_qtd_'+g.key)||{}).value)||1;
+        var preco=_spaceFreeSv?0:genericoPrice(g);
+        wizardDraft.equipamentos.push({key:g.key,nome:g.nome,nomeReal:genericoRealName(g),qtd:qtd,valor:preco,cortesia:_spaceFreeSv});
       }
     });
+    var _supChk=document.getElementById('gen_chk_suporte');
+    var _supVal=document.getElementById('gen_valor_suporte');
+    wizardDraft.suporteTecnico=!!(_supChk&&_supChk.checked);
+    wizardDraft.valorSuporte=wizardDraft.suporteTecnico?(parseFloat((_supVal&&_supVal.value)||0)||0):0;
   }else if(step===4){
     wizardDraft.alimentacao=[];
     DATA.cardapio.forEach(function(c,i){
@@ -5025,6 +5090,10 @@ function restoreWizardStepData(step){
         if(info)info.innerHTML='📎 '+of.arquivoNome;
       }
     }
+    if(d.estacionamento!=null){
+      var _est=document.querySelector('input[name="w_estac"][value="'+(d.estacionamento?'sim':'nao')+'"]');
+      if(_est)_est.checked=true;
+    }
   }else if(step===2){
     if(document.getElementById('w_espaco'))document.getElementById('w_espaco').value=d.espaco||'Selecione...';
     if(document.getElementById('w_periodo'))document.getElementById('w_periodo').value=d.periodo||'Diária Completa';
@@ -5047,15 +5116,22 @@ function restoreWizardStepData(step){
     _s('w_montagemData',d.montagemData);_s('w_montagemHora',d.montagemHora);
     _s('w_desmontagemData',d.desmontagemData);_s('w_desmontagemHora',d.desmontagemHora);
     _s('w_externoResp',d.externoResp);
-    d.equipamentos.forEach(function(eq){
-      var card=document.getElementById('equip_chk_'+eq.idx);
+    (d.equipamentos||[]).forEach(function(eq){
+      var key=eq.key||(GENERIC_EQUIP.find(function(g){return g.nome===eq.nome;})||{}).key;
+      if(!key)return;
+      var card=document.getElementById('gen_chk_'+key);
       if(card){
         card.checked=true;
         card.parentElement.classList.add('selected');
-        var qtdEl=document.getElementById('equip_qtd_'+eq.idx);
+        var qtdEl=document.getElementById('gen_qtd_'+key);
         if(qtdEl)qtdEl.value=eq.qtd;
       }
     });
+    if(d.suporteTecnico){
+      var sc=document.getElementById('gen_chk_suporte');var scCard=document.getElementById('gen_card_suporte');
+      if(sc){sc.checked=true;if(scCard)scCard.classList.add('selected');}
+      var sv=document.getElementById('gen_valor_suporte');if(sv&&d.valorSuporte)sv.value=d.valorSuporte;
+    }
   }else if(step===4){
     d.alimentacao.forEach(function(f){
       var chk=document.getElementById('food_chk_'+f.idx);
@@ -5164,6 +5240,7 @@ function buildProposalFromDraft(draft,total,statusOverride){
     incluirDadosBanc:draft.incluirDadosBanc!==false,
     incluirQR:draft.incluirQR!==false,
     oficio:draft.propTipo==='oficio'&&draft.oficio?Object.assign({},draft.oficio):null,
+    estacionamento:draft.estacionamento===true,
     status:statusOverride||'Pendente',
     origem:'manual',
     updatedAt:nowIso
@@ -5291,6 +5368,25 @@ function renderWizardStep(step){
   }
 }
 function nextPropNumPreview(){var y=new Date().getFullYear();var next=((DATA.propSequence&&DATA.propSequence[y])||0)+1;return String(next).padStart(3,'0')+'/'+y;}
+var GENERIC_EQUIP=[{key:'projetor',nome:'Projetor',icon:'📽️',aliases:['projetor']},{key:'tv65',nome:'TV 65 pol',icon:'📺',aliases:['tv 65','tv65','65 pol','65"']},{key:'mesa_som',nome:'Mesa de som',icon:'🎚️',aliases:['mesa de som','mesa som']},{key:'microfone',nome:'Microfone sem fio',icon:'🎤',aliases:['microfone','mic']},{key:'caixa_som',nome:'Caixa de som',icon:'🔊',aliases:['caixa de som','caixa som']}];
+// Busca o item real cadastrado em DATA.estoque que corresponde ao título genérico
+function findEstoqueByGenerico(g){
+  var list=(DATA.estoque||[]);
+  // 1) match exato pelo campo "generico"
+  var hit=list.find(function(e){return (e.generico||'').toLowerCase().trim()===g.nome.toLowerCase().trim();});
+  if(hit)return hit;
+  // 2) fallback: nome ou generico contém algum alias
+  var alis=(g.aliases||[g.nome.toLowerCase()]);
+  return list.find(function(e){
+    var n=((e.generico||'')+' '+(e.nome||'')).toLowerCase();
+    return alis.some(function(a){return n.indexOf(a)>=0;});
+  })||null;
+}
+function genericoPrice(g){var it=findEstoqueByGenerico(g);return it?(Number(it.valor)||0):0;}
+function genericoRealName(g){var it=findEstoqueByGenerico(g);return it?(it.nome||g.nome):g.nome;}
+function toggleGenericEquip(card,key){var c=document.getElementById('gen_chk_'+key);if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);}
+function toggleSuporteCard(card){var c=document.getElementById('gen_chk_suporte');if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);}
+function sysNotify(title,msg,items){var ov=document.getElementById('sysNotifyOv');if(ov)ov.remove();ov=document.createElement('div');ov.id='sysNotifyOv';ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';var bx=document.createElement('div');bx.style.cssText='background:var(--c-surface,#fff);color:var(--c-text,#0f172a);max-width:460px;width:100%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;font-family:inherit;';var head='<div style="background:var(--c-amber,#FF9900);color:#fff;padding:14px 18px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">⚠️ '+title+'</div>';var body='<div style="padding:18px"><p style="margin:0 0 10px;font-size:14px;line-height:1.5">'+msg+'</p>';if(items&&items.length){body+='<ul style="margin:8px 0 0;padding-left:20px;font-size:13px;color:var(--c-text2,#475569)">';items.forEach(function(it){body+='<li style="margin:3px 0">'+it+'</li>';});body+='</ul>';}body+='</div>';var foot='<div style="padding:12px 18px;border-top:1px solid var(--c-border,#e2e8f0);display:flex;justify-content:flex-end"><button type="button" id="sysNotifyOk" style="background:var(--c-accent,#005CAB);color:#fff;border:0;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer">Entendi</button></div>';bx.innerHTML=head+body+foot;ov.appendChild(bx);document.body.appendChild(ov);document.getElementById('sysNotifyOk').onclick=function(){ov.remove();};}
 function validateWizardStep(step){
   var d=wizardDraft;var errs=[];
   if(step===1){
@@ -5302,9 +5398,10 @@ function validateWizardStep(step){
     if(!d.espaco||d.espaco==='Selecione...')errs.push('Espaço');
     if(!d.dias||d.dias<1)errs.push('Número de dias');
   }else if(step===3){
-    var _espSel=(espacos||[]).find(function(e){return e.nome===d.espaco;});
+    // FIX: usava `espacos` (undefined) e quebrava a validação — agora usa DATA.espacos
+    var _espSel=(DATA.espacos||[]).find(function(e){return e.nome===d.espaco;});
     var _temAcop=!!(_espSel&&_espSel.temEquipAcoplado&&_espSel.equipAcoplados&&_espSel.equipAcoplados.length);
-    if(!_temAcop && d.areaTecnica==='interna'&&(!d.equipamentos||!d.equipamentos.length))errs.push('Selecione ao menos 1 equipamento ou marque área técnica como Externa');
+    // equipamentos genéricos são opcionais
   }else if(step===4){
     if(d.temAlimentacao&&(!d.alimentacao||!d.alimentacao.length))errs.push('Selecione ao menos 1 item de alimentação (ou marque "Não")');
   }
@@ -5320,7 +5417,7 @@ function wizardStep(dir){
     saveWizardStepData(wizardCurrentStep);
     var errs=validateWizardStep(wizardCurrentStep);
     if(errs.length){
-      alert('⚠️ Preencha corretamente antes de continuar:\n\n• '+errs.join('\n• '));
+      sysNotify('Faltam informações','Você esqueceu de preencher os campos abaixo antes de continuar:',errs);
       toast('Etapa incompleta: '+errs.join(', '),'error');
       return;
     }
@@ -5331,7 +5428,7 @@ function wizardStep(dir){
     for(var st=1;st<=4;st++){
       var stErrs=validateWizardStep(st);
       if(stErrs.length){
-        alert('⚠️ Não é possível confirmar a proposta. A etapa "'+stepLabels[st-1]+'" está incompleta:\n\n• '+stErrs.join('\n• ')+'\n\nVocê será levado de volta a essa etapa.');
+        sysNotify('Etapa incompleta','A etapa "'+stepLabels[st-1]+'" está incompleta. Você será levado de volta a essa etapa.',stErrs);
         toast('Etapa "'+stepLabels[st-1]+'" incompleta — corrija antes de confirmar','error');
         wizardCurrentStep=st;renderWizardStep(st);
         return;
@@ -5468,6 +5565,43 @@ function loadDadosBancCfg(){
   }catch(e){}
 }
 
+// ── ASSINATURAS DO DOCUMENTO ──────────────────────────────────────
+function getAssinaturasCfg(){
+  var def={sig1:{nome:'',funcao:'Operador(a) / Produtor(a) de Eventos',contato:'',email:''},
+           sig2:{nome:'',funcao:'Gerência do Setor',contato:'',email:''}};
+  try{
+    var raw=localStorage.getItem('senac_assinaturas');
+    if(!raw)return def;
+    var o=JSON.parse(raw);
+    return {sig1:Object.assign({},def.sig1,o.sig1||{}),
+            sig2:Object.assign({},def.sig2,o.sig2||{})};
+  }catch(e){return def;}
+}
+function salvarAssinaturas(){
+  var data={
+    sig1:{nome:(document.getElementById('sig1_nome')||{}).value||'',
+          funcao:(document.getElementById('sig1_funcao')||{}).value||'',
+          contato:(document.getElementById('sig1_contato')||{}).value||'',
+          email:(document.getElementById('sig1_email')||{}).value||''},
+    sig2:{nome:(document.getElementById('sig2_nome')||{}).value||'',
+          funcao:(document.getElementById('sig2_funcao')||{}).value||'',
+          contato:(document.getElementById('sig2_contato')||{}).value||'',
+          email:(document.getElementById('sig2_email')||{}).value||''}
+  };
+  try{localStorage.setItem('senac_assinaturas',JSON.stringify(data));}catch(e){}
+  toast('Assinaturas salvas','success');
+}
+function loadAssinaturasCfg(){
+  var a=getAssinaturasCfg();
+  ['sig1','sig2'].forEach(function(k){
+    ['nome','funcao','contato','email'].forEach(function(f){
+      var el=document.getElementById(k+'_'+f);
+      if(el&&a[k][f])el.value=a[k][f];
+    });
+  });
+}
+
+
 function setListLayout(btn,gridClass,layout){
   var parent=btn.parentElement;
   parent.querySelectorAll('button').forEach(function(b){b.classList.remove('active');});
@@ -5541,7 +5675,7 @@ function exportPDFWithOrientation(orientation){
     body:DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,formatDate(p.data),p.espaco,fmtMoney(p.valor),p.status];}),
     theme:'grid',styles:{fontSize:9,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold',lineColor:[0,92,171],lineWidth:0.2},alternateRowStyles:{fillColor:[248,250,252]},margin:senacMargins(doc)});
   addPDFPageFooter(doc);
-  doc.save('Dashboard_Senac_'+orientation+'_'+Date.now()+'.pdf');
+  try{doc.autoPrint();}catch(_e){}var _bu=doc.output('bloburl');var _pw=window.open(_bu,'_blank');if(!_pw){location.href=_bu;}try{toast('Abrindo diálogo de impressão…','success');}catch(_e){}
   toast('PDF '+(orientation==='landscape'?'paisagem':'retrato')+' exportado!','success');
 }
 
@@ -5606,6 +5740,7 @@ function initGlobalSearch(){
       populateExportTimbradoSelects();
       initGlobalSearch();
       loadDadosBancCfg();
+      loadAssinaturasCfg();
       renderPortfolioGallery();
       try{if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}catch(e){}
       if(restoreSession()){
