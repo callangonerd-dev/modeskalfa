@@ -2013,21 +2013,35 @@ function renderProfileBigAvatar(foto,initials){
 }
 function uploadProfilePhoto(input){
   var f=input.files&&input.files[0];if(!f)return;
-  var r=new FileReader();r.onload=function(e){
-    var dataUrl=e.target.result;
-    if(currentUser){
-      currentUser.foto=dataUrl;
+  if(!currentUser){toast('Sessão expirada','error');return;}
+  var initials=currentUser.nome.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
+  // Preview local imediato (Base64 só na tela; NÃO é persistido)
+  var r=new FileReader();
+  r.onload=function(e){
+    renderAvatarEl('sidebarAvatar',e.target.result,initials);
+    renderAvatarEl('topAvatar',e.target.result,initials);
+    renderProfileBigAvatar(e.target.result,initials);
+  };
+  r.readAsDataURL(f);
+  toast('Enviando foto ao Drive...','info');
+  (window.uploadAutomatico?window.uploadAutomatico(f):Promise.reject(new Error('uploadAutomatico indisponível')))
+    .then(function(info){
+      var url=info && info.url;
+      if(!url){throw new Error('Apps Script não retornou URL pública');}
+      currentUser.foto=url;
       var u=DATA.usuarios.find(function(x){return x.login===currentUser.login;});
-      if(u)u.foto=dataUrl;
+      if(u)u.foto=url;
       saveToStorage();
-      var initials=currentUser.nome.split(' ').map(function(x){return x[0];}).slice(0,2).join('');
-      renderAvatarEl('sidebarAvatar',dataUrl,initials);
-      renderAvatarEl('topAvatar',dataUrl,initials);
-      renderProfileBigAvatar(dataUrl,initials);
+      renderAvatarEl('sidebarAvatar',url,initials);
+      renderAvatarEl('topAvatar',url,initials);
+      renderProfileBigAvatar(url,initials);
       renderUsuarios();
-      toast('Foto atualizada','success');
-    }
-  };r.readAsDataURL(f);
+      toast('Foto atualizada no Drive','success');
+    })
+    .catch(function(err){
+      console.warn(err);
+      toast('Falha ao enviar foto: '+((err&&err.message)||err),'error');
+    });
 }
 function salvarPerfil(){
   if(!currentUser){toast('Sessão expirada','error');return;}
@@ -3486,14 +3500,31 @@ function clienteAvatarHtml(c,size){
   return '<div style="width:'+size+'px;height:'+size+'px;border-radius:10px;background:rgba(99,102,241,.15);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:var(--c-accent2);flex-shrink:0">'+c.nome.substring(0,2).toUpperCase()+'</div>';
 }
 function previewClienteLogo(input){
-  if(input.files&&input.files[0]){
-    var reader=new FileReader();
-    reader.onload=function(e){
-      document.getElementById('cli_logo_preview').style.display='block';
-      document.getElementById('cli_logo_img').src=e.target.result;
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
+  if(!input.files||!input.files[0])return;
+  var file=input.files[0];
+  var prev=document.getElementById('cli_logo_preview');
+  var img=document.getElementById('cli_logo_img');
+  // Preview local imediato
+  var reader=new FileReader();
+  reader.onload=function(e){
+    if(prev)prev.style.display='block';
+    if(img)img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+  // Envia ao Drive e troca o src pela URL pública (que é o que será persistido)
+  toast('Enviando logo ao Drive...','info');
+  (window.uploadAutomatico?window.uploadAutomatico(file):Promise.reject(new Error('uploadAutomatico indisponível')))
+    .then(function(info){
+      var url=info && info.url;
+      if(!url){throw new Error('Apps Script não retornou URL pública');}
+      if(img)img.src=url;
+      if(img)img.dataset.driveUrl=url;
+      toast('Logo enviado ao Drive','success');
+    })
+    .catch(function(err){
+      console.warn(err);
+      toast('Falha ao enviar logo: '+((err&&err.message)||err),'error');
+    });
 }
 function abrirNovoCliente(){
   document.getElementById('modalClienteTitle').textContent='👤 Cadastrar Cliente';
@@ -4596,7 +4627,7 @@ function excluirAssetHistorico(id){
 }
 // === Upload automático para Google Apps Script (Drive) ===
 // Evita salvar Base64 no Firestore (limite de 1MB/doc).
-const GAS_UPLOAD_URL = "https://script.google.com/macros/s/AKfycby857B3QaFXPZoGARwR4A4JYqwi6W5JFrAXrxfoiRarTq-pKptAFr8a54ZlaSNxVJ0ZMA/exec";
+const GAS_UPLOAD_URL = "https://script.google.com/macros/s/AKfycbyThYBJgwlITrPeJUPtaEabrPEEGXu2LbmgRtk1rtR5U9-rpI5PhlftfAEpgSFo_Ilp/exec";
 function uploadAutomatico(file){
   return new Promise(function(resolve,reject){
     if(!file){reject(new Error('Arquivo inválido'));return;}
@@ -4605,14 +4636,30 @@ function uploadAutomatico(file){
     reader.onload=function(e){
       var base64=String(e.target.result).split(',')[1];
       var payload=JSON.stringify({data:base64,filename:file.name,mimetype:file.type||'application/octet-stream'});
-      // text/plain evita preflight CORS (Apps Script não responde OPTIONS)
-      fetch(GAS_UPLOAD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:payload})
-        .then(function(r){return r.text();})
-        .then(function(txt){
-          var info;try{info=JSON.parse(txt);}catch(_){info={raw:txt};}
-          resolve({ok:true,url:info.url||info.fileUrl||info.link||null,id:info.id||info.fileId||null,nome:file.name,mime:file.type,tamanho:file.size,enviadoEm:new Date().toISOString(),raw:info});
+      // text/plain + mode:'cors' evita preflight CORS (Apps Script não responde OPTIONS)
+      fetch(GAS_UPLOAD_URL,{method:'POST',mode:'cors',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:payload})
+        .then(function(r){
+          if(!r.ok){console.error('[uploadAutomatico] HTTP',r.status,r.statusText,'endpoint:',GAS_UPLOAD_URL);}
+          return r.text().then(function(txt){return {status:r.status,ok:r.ok,txt:txt};});
         })
-        .catch(function(err){reject(err);});
+        .then(function(resp){
+          var info;try{info=JSON.parse(resp.txt);}catch(_){info={raw:resp.txt};}
+          // Apps Script retorna { status: "Sucesso", url: "..." }
+          var publicUrl=info.url||info.fileUrl||info.link||null;
+          if(info.status && String(info.status).toLowerCase()!=='sucesso' && !publicUrl){
+            console.error('[uploadAutomatico] Apps Script retornou erro:',info);
+            return reject(new Error(info.message||info.error||'Apps Script: '+resp.txt));
+          }
+          resolve({ok:true,url:publicUrl,id:info.id||info.fileId||null,nome:file.name,mime:file.type,tamanho:file.size,enviadoEm:new Date().toISOString(),raw:info});
+        })
+        .catch(function(err){
+          // Diagnóstico detalhado para 'Failed to fetch'
+          console.error('[uploadAutomatico] Falha de rede:',err && err.message,'\nEndpoint:',GAS_UPLOAD_URL,'\nVerifique: 1) URL acessível no navegador 2) Deploy do Apps Script como "Qualquer pessoa" 3) Conexão de internet');
+          fetch(GAS_UPLOAD_URL,{method:'GET',mode:'cors'})
+            .then(function(r){console.error('[uploadAutomatico] Diagnóstico GET status:',r.status,r.statusText);})
+            .catch(function(e2){console.error('[uploadAutomatico] Endpoint inacessível mesmo via GET:',e2 && e2.message);});
+          reject(err);
+        });
     };
     reader.readAsDataURL(file);
   });
@@ -5661,15 +5708,32 @@ function populateOSProp(){
 
 function uploadPixQR(input){
   if(!input.files||!input.files[0])return;
+  var file=input.files[0];
+  var prev=document.getElementById('pixQrPreview');
+  // Preview local imediato
   var reader=new FileReader();
   reader.onload=function(e){
-    window.PIX_QR_DATAURL=e.target.result;
-    try{localStorage.setItem('senac_pix_qr',e.target.result);}catch(err){}
-    var prev=document.getElementById('pixQrPreview');
     if(prev)prev.innerHTML='<img src="'+e.target.result+'" style="width:140px;height:140px;object-fit:contain;border:1px solid var(--c-border);border-radius:8px"/>';
-    toast('QR Code PIX salvo','success');
   };
-  reader.readAsDataURL(input.files[0]);
+  reader.readAsDataURL(file);
+  toast('Enviando QR Code ao Drive...','info');
+  (window.uploadAutomatico?window.uploadAutomatico(file):Promise.reject(new Error('uploadAutomatico indisponível')))
+    .then(function(info){
+      var url=info && info.url;
+      if(!url){throw new Error('Apps Script não retornou URL pública');}
+      window.PIX_QR_URL=url;
+      window.PIX_QR_DATAURL=url; // mantém compatibilidade com código que lê PIX_QR_DATAURL
+      try{
+        localStorage.setItem('senac_pix_qr',url);
+        if(typeof DATA==='object'){DATA.pixQrUrl=url;saveToStorage&&saveToStorage();}
+      }catch(err){}
+      if(prev)prev.innerHTML='<img src="'+url+'" style="width:140px;height:140px;object-fit:contain;border:1px solid var(--c-border);border-radius:8px"/>';
+      toast('QR Code PIX enviado ao Drive','success');
+    })
+    .catch(function(err){
+      console.warn(err);
+      toast('Falha ao enviar QR Code: '+((err&&err.message)||err),'error');
+    });
 }
 function salvarDadosBanc(){
   var data={
@@ -6605,6 +6669,18 @@ async function carregarDriveBox(){
     +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Total de arquivos</span><strong>'+(r.totalFiles||0)+'</strong></div>'
     +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Espaço ocupado pelos uploads</span><strong>'+fmtBytes(r.totalBytes||0)+'</strong></div>';
   if(r.folderId)html+='<div style="margin-top:10px"><a href="https://drive.google.com/drive/folders/'+r.folderId+'" target="_blank" class="btn btn-ghost btn-sm">📂 Abrir pasta no Drive</a></div>';
+  html+='<div style="margin-top:10px"><button class="btn btn-ghost btn-sm" onclick="testarConexaoDrive()">🔄 Testar conexão com Drive</button></div>';
+  // Bloco de Backup (Firestore -> Drive)
+  html+='<div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--c-border)">'
+    +'<div style="font-weight:700;font-size:13px;margin-bottom:8px">💾 Backup dos dados (Firestore → Drive)</div>'
+    +'<div style="font-size:12px;color:var(--c-text2);margin-bottom:10px">Salva um snapshot JSON de todos os módulos (propostas, clientes, espaços, cardápio, OS, assets…) na mesma pasta do Drive. Firestore continua sendo a fonte em tempo real.</div>'
+    +'<div id="backupStatus" style="font-size:12px;color:var(--c-text3);margin-bottom:8px">'+(localStorage.getItem("modesk_drive_backup_ts")?"Último backup: "+new Date(localStorage.getItem("modesk_drive_backup_ts")).toLocaleString("pt-BR"):"Nenhum backup feito ainda")+'</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'
+    +'<button class="btn btn-primary btn-sm" onclick="backupDriveAgora()">💾 Fazer backup agora</button>'
+    +'<button class="btn btn-ghost btn-sm" onclick="rodarVerificacaoBackupManual()">▶ Rodar verificação de backup agora</button>'
+    +'<label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--c-text2);cursor:pointer"><input type="checkbox" id="backupAutoChk" '+(localStorage.getItem("modesk_drive_backup_auto")==="1"?"checked":"")+' onchange="toggleBackupAuto(this.checked)"/> Backup automático diário</label>'
+    +'</div>'
+    +'</div>';
   if(r.driveQuotaLimit){
     var pct=(r.driveQuotaUsed/r.driveQuotaLimit)*100;
     var color=pct<70?'var(--c-green)':pct<90?'var(--c-amber)':'var(--c-red)';
@@ -6640,6 +6716,86 @@ window.limparBase64Local=function(){
     toast&&toast('Base64 antigo removido. Recarregando…','success');
     setTimeout(function(){location.reload();},800);
   }catch(e){alert('Erro: '+e.message);}
+};
+
+// === Backup completo (Firestore + Assets) -> Drive via Apps Script ===
+window.backupDriveAgora=async function(silent){
+  var status=document.getElementById('backupStatus');
+  var setStatus=function(msg,color){if(status){status.innerHTML=msg;status.style.color=color||'var(--c-text3)';}};
+  try{
+    if(!silent)setStatus('⏳ Gerando snapshot…');
+    var snapshot={
+      versao:'modesk_v10',
+      geradoEm:new Date().toISOString(),
+      data:(typeof DATA!=='undefined'?DATA:null),
+      assets:(typeof ASSETS!=='undefined'?ASSETS:null)
+    };
+    var json=JSON.stringify(snapshot);
+    var stamp=new Date().toISOString().replace(/[:.]/g,'-').slice(0,19);
+    var filename='modesk-backup-'+stamp+'.json';
+    var blob=new Blob([json],{type:'application/json'});
+    blob.name=filename;
+    if(!silent)setStatus('⏳ Enviando '+(json.length/1024).toFixed(1)+' KB para o Drive…');
+    // Reusa uploadAutomatico (POST text/plain c/ base64 -> Apps Script)
+    var file=new File([blob],filename,{type:'application/json'});
+    var res=await uploadAutomatico(file);
+    var ts=new Date().toISOString();
+    localStorage.setItem('modesk_drive_backup_ts',ts);
+    var link=res&&res.url?' <a href="'+res.url+'" target="_blank" style="color:var(--c-accent)">abrir</a>':'';
+    setStatus('✅ Backup concluído: '+new Date(ts).toLocaleString('pt-BR')+link,'var(--c-green)');
+    if(typeof toast==='function'&&!silent)toast('Backup enviado ao Drive','success');
+    return true;
+  }catch(e){
+    setStatus('⚠ Falha no backup: '+(e&&e.message||e),'var(--c-red)');
+    if(typeof toast==='function'&&!silent)toast('Backup falhou: '+(e&&e.message||e),'warn');
+    return false;
+  }
+};
+
+window.toggleBackupAuto=function(on){
+  localStorage.setItem('modesk_drive_backup_auto',on?'1':'0');
+  if(typeof toast==='function')toast(on?'Backup automático ativado':'Backup automático desativado','info');
+  if(on)agendarBackupAuto();
+};
+
+function agendarBackupAuto(){
+  if(localStorage.getItem('modesk_drive_backup_auto')!=='1')return;
+  var last=parseInt(localStorage.getItem('modesk_drive_backup_ts_ms')||'0',10);
+  var now=Date.now();
+  var DAY=24*60*60*1000;
+  if(!last||(now-last)>=DAY){
+    backupDriveAgora(true).then(function(ok){
+      if(ok)localStorage.setItem('modesk_drive_backup_ts_ms',String(Date.now()));
+    });
+  }
+}
+// Roda 30s após o load e a cada hora depois disso
+setTimeout(agendarBackupAuto,30000);
+setInterval(agendarBackupAuto,60*60*1000);
+
+// === Testador de conexão específico do Google Drive ===
+window.testarConexaoDrive=async function(){
+  if(typeof toast==='function')toast('Testando conexão com o Drive…','info');
+  var r=await medirDrive();
+  if(r.erro){
+    if(typeof toast==='function')toast('Falha na conexão com Drive: '+r.erro,'warn');
+    else alert('Falha na conexão com Drive: '+r.erro);
+    return;
+  }
+  var msg='Conexão OK. Pasta: '+(r.folderName||'—')+' • Arquivos: '+(r.totalFiles||0);
+  if(typeof toast==='function')toast(msg,'success');
+  else alert(msg);
+};
+
+// === Ativador manual da verificação de backup automático ===
+window.rodarVerificacaoBackupManual=function(){
+  if(localStorage.getItem('modesk_drive_backup_auto')!=='1'){
+    if(typeof toast==='function')toast('Ative o backup automático primeiro (checkbox).','warn');
+    else alert('Ative o backup automático primeiro (checkbox).');
+    return;
+  }
+  if(typeof toast==='function')toast('Verificando backup automático agora…','info');
+  agendarBackupAuto();
 };
 
 // Hook na navegação de settings para mostrar Armazenamento somente p/ gestor
