@@ -924,7 +924,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <div class="nav-item" onclick="goto('alertas')"><span class="nav-icon" id="sidebarBellIcon"><i data-lucide="bell-ring"></i></span><span class="nav-label">Alertas</span></div>
       <div class="nav-item" onclick="requireGestor(function(){goto('parecer');})"><span class="nav-icon"><i data-lucide="clipboard-check"></i></span><span class="nav-label">Parecer Técnico</span></div>
       <div class="nav-item" onclick="goto('relatorios')"><span class="nav-icon"><i data-lucide="bar-chart-3"></i></span><span class="nav-label">Relatórios &amp; BI</span></div>
-      <div class="nav-item" onclick="goto('lixeira')"><span class="nav-icon"><i data-lucide="trash-2"></i></span><span class="nav-label">Lixeira</span></div>
+      <div class="nav-item" onclick="goto('lixeira')"><span class="nav-icon"><i data-lucide="trash-2"></i></span><span class="nav-label">Cancelados / Excluídos</span></div>
       <div class="nav-item" onclick="requireGestor(function(){goto('configuracoes');})"><span class="nav-icon"><i data-lucide="settings"></i></span><span class="nav-label">Configurações</span></div>
     </nav>
     <div class="sidebar-footer">
@@ -1425,7 +1425,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <!-- LIXEIRA -->
       <div class="view" id="view-lixeira">
         <div class="section-header">
-          <div><div class="section-title" style="font-size:18px">🗑️ Lixeira</div><div class="section-sub">Registros removidos — exclusão permanente requer autenticação</div></div>
+          <div><div class="section-title" style="font-size:18px">🗑️ Cancelados &amp; Excluídos</div><div class="section-sub">Eventos cancelados pela empresa e registros removidos por cadastro errado</div></div>
           <button class="btn btn-danger btn-sm" onclick="limparLixeira()">🔒 Limpar Tudo</button>
         </div>
         <div id="lixeiraContent"></div>
@@ -1443,6 +1443,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
             <div class="settings-nav-item" onclick="settingsTab(this,'assinaturas')"><i data-lucide="pen-tool"></i> Assinaturas</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'portfolio')"><i data-lucide="images"></i> Portfólio</div>
             <div class="settings-nav-item" onclick="settingsTab(this,'usuarios')"><i data-lucide="users-round"></i> Usuários</div>
+            <div class="settings-nav-item" onclick="settingsTab(this,'conexao')"><i data-lucide="plug-zap"></i> Conexão Apps Script</div>
           </div>
           <div>
             <div class="settings-pane active card" id="cfg-geral">
@@ -1591,6 +1592,26 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
                 </div>
                 <button class="btn btn-primary" onclick="cadastrarUsuario()">Cadastrar Usuário</button>
               </div>
+            </div>
+            <div class="settings-pane card" id="cfg-conexao">
+              <div class="section-title" style="margin-bottom:6px">🔌 Conexão com Google Apps Script</div>
+              <div class="section-sub" style="margin-bottom:16px">Teste a comunicação com o backend de upload (Drive).</div>
+              <div style="background:var(--c-surface2);border:1px solid var(--c-border);border-radius:10px;padding:14px;margin-bottom:14px">
+                <div style="font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--c-text3);margin-bottom:6px">Endpoint</div>
+                <code id="gasEndpointLabel" style="display:block;word-break:break-all;font-size:12px;color:var(--c-text)"></code>
+              </div>
+              <div class="form-group" style="margin-bottom:12px">
+                <label>Payload JSON (para POST de teste)</label>
+                <textarea id="gasPayloadInput" rows="4" style="width:100%;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;padding:10px;border-radius:8px;border:1px solid var(--c-border);resize:vertical">{
+  "source": "configuracoes-conexao",
+  "acao": "ping"
+}</textarea>
+              </div>
+              <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:14px">
+                <button class="btn btn-primary" onclick="testarConexaoAppsScript('GET')">Testar conexão (GET)</button>
+                <button class="btn btn-ghost" onclick="testarConexaoAppsScript('POST')">Enviar payload (POST)</button>
+              </div>
+              <div id="gasTestResult" style="display:none;border-radius:10px;padding:14px;border:1px solid"></div>
             </div>
           </div>
         </div>
@@ -1787,6 +1808,7 @@ let DATA={portfolio:[],oficios:[],
     {nome:'Climatização Extra',cat:'Infraestrutura',valor:600,unidade:'diária',status:'Ativo',resp:'Equipe técnica Senac',desc:'Aluguel de ventiladores industriais ou ar-condicionado portátil para reforço.',obs:'Indicado para áreas externas ou eventos com >150 pax.',icon:'❄️',createdAt:'2026-01-10T09:00:00.000Z',updatedAt:'2026-01-10T09:00:00.000Z'},
   ],
   lixeira:[],
+  cancelados:[],
   propSequence:{2026:5},
   usuarios:[
     {login:'marciooliveira',nome:'Marcio Oliveira',email:'marcio.oliveira@senac.ce',nivel:'Gestor',status:'Ativo',senha:GESTOR_SENHA},
@@ -2152,7 +2174,7 @@ function checkPrazosVencidos(){
 var titles={dashboard:'Dashboard',propostas:'Propostas Comerciais',ordens:'Cadastro de Ofício FECOMÉRCIO',
   calendario:'Calendário de Eventos',clientes:'Clientes',espacos:'Espaços & Salas',
   estoque:'Estoque TI/AV',cardapio:'Cardápios',servicosAdic:'Serviços Adicionais',alertas:'Central de Alertas',
-  parecer:'Parecer Técnico',relatorios:'Relatórios & BI',lixeira:'Lixeira',
+  parecer:'Parecer Técnico',relatorios:'Relatórios & BI',lixeira:'Cancelados / Excluídos',
   configuracoes:'Configurações',perfil:'Meu Perfil'};
 
 function goto(view){
@@ -2914,7 +2936,8 @@ function renderPropostas(list){
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Imprimir Proposta" onclick="verProposta('+idx+')" style="color:var(--c-cyan)">🖨️</button>'
         +'<button class="btn btn-ghost btn-icon btn-sm" title="Editar" onclick="abrirEditProposta('+idx+')">✏️</button>'
         +(p.status!=='Confirmada'&&p.status!=='Cancelada'?'<button class="btn btn-icon btn-sm btn-confirm-pgto" title="Confirmar pagamento" onclick="abrirConfirmarPagamento('+idx+')">💵</button>':'')
-        +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir" onclick="excluirProposta('+idx+')">🗑️</button>':'')
+        +(p.status!=='Cancelada'?'<button class="btn btn-ghost btn-icon btn-sm" title="Cancelar evento" style="color:var(--c-red)" onclick="abrirCancelarProposta('+idx+')">❌</button>':'')
+        +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-ghost btn-icon btn-sm" title="Excluir (cadastro errado)" onclick="excluirProposta('+idx+')">🗑️</button>':'')
       +'</div></td>'
       +'</tr>';
   }).join('');
@@ -3998,27 +4021,39 @@ function renderAlertas(){
     var pd=prazo15Date(p.data);
     var diasAtraso=Math.max(1,Math.floor((Date.now()-pd.getTime())/86400000));
     return {
+      id:p.id,num:p.num,vencida:true,
       titulo:'Prazo VENCIDO: '+p.num+' — '+p.evento,
       desc:'Vencimento em '+prazo15(p.data)+' · '+diasAtraso+' dia(s) em atraso · Cliente: '+p.cliente,
-      prio:'Alta prioridade',cat:'Financeiro'
+      prio:'Alta prioridade',cat:'Financeiro',cls:'alert-red'
     };
+  });
+  // Propostas pendentes (não vencidas) também listadas, para resolver
+  DATA.propostas.filter(function(p){return p.status==='Pendente'&&!isPrazoVencido(p);}).forEach(function(p){
+    alertas.push({
+      id:p.id,num:p.num,vencida:false,
+      titulo:'Proposta pendente: '+(p.num||p.id)+' — '+p.evento,
+      desc:'Cliente: '+p.cliente+' · Data: '+formatDate(p.data)+' · Aguardando ação',
+      prio:'Acompanhar',cat:'Propostas',cls:'alert-amber'
+    });
   });
   if(alertas.length===0){
     el.innerHTML='<div class="alert-empty">'+ALERT_ICONS.check
-      +'<div style="font-weight:700;font-size:15px;color:var(--c-text)">Nenhum prazo de proposta vencido</div>'
-      +'<div style="font-size:12.5px">Tudo em dia. Você verá aqui propostas com prazo de pagamento vencido.</div>'
+      +'<div style="font-weight:700;font-size:15px;color:var(--c-text)">Nenhum alerta pendente</div>'
+      +'<div style="font-size:12.5px">Tudo em dia. Propostas vencidas ou pendentes aparecerão aqui.</div>'
       +'</div>';
     return;
   }
   el.innerHTML=alertas.map(function(a,i){
-    return '<div class="alert-item alert-red" style="animation-delay:'+(i*60)+'ms">'
+    var hint=a.vencida?'→ Abrir proposta vencida':'→ Ver proposta e resolver';
+    return '<div class="alert-item '+(a.cls||'alert-red')+'" style="animation-delay:'+(i*60)+'ms;cursor:pointer" onclick="abrirPropostaPorId(\''+a.id+'\','+(a.vencida?'true':'false')+')" title="Clique para abrir a proposta">'
       +'<div class="alert-icon-wrap">'+ALERT_ICONS.alarm+'</div>'
       +'<div style="flex:1;color:var(--c-text)"><div style="font-weight:700;font-size:14px">'+a.titulo+'</div>'
       +'<div style="font-size:12px;color:var(--c-text2);margin-top:4px">'+a.desc+'</div>'
-      +'<div style="margin-top:8px"><span class="badge badge-red">'+a.prio+'</span><span class="badge badge-gray" style="margin-left:6px">'+a.cat+'</span></div>'
+      +'<div style="margin-top:8px"><span class="badge badge-red">'+a.prio+'</span><span class="badge badge-gray" style="margin-left:6px">'+a.cat+'</span><span style="margin-left:8px;font-size:11px;color:var(--c-accent)">'+hint+'</span></div>'
       +'</div></div>';
   }).join('');
 }
+
 
 // ── PARECER TÉCNICO ───────────────────────────────────────────────
 var parecerChecks={
@@ -4412,8 +4447,44 @@ function calClick(d){calSelectDay(d);} // compat
 // ── LIXEIRA ───────────────────────────────────────────────────────
 function renderLixeira(){
   var el=document.getElementById('lixeiraContent');
-  if(!DATA.lixeira||!DATA.lixeira.length){el.innerHTML='<div class="empty"><div class="empty-icon">🗑️</div><div class="empty-title">Lixeira vazia</div><div class="empty-sub">Registros excluídos aparecerão aqui</div></div>';return;}
-  el.innerHTML=DATA.lixeira.map(function(item,i){return '<div class="trash-item"><div><div style="font-weight:600;font-size:13.5px">'+item.tipo+': '+(item.item.nome||item.item.evento||item.item.id||'Item')+'</div><div style="font-size:12px;color:var(--c-text3)">Excluído em '+item.data+'</div></div><div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm" onclick="restaurarItem('+i+')">↩ Restaurar</button><button class="btn btn-danger btn-sm" onclick="excluirPermanente('+i+')">🗑️ Excluir</button></div></div>';}).join('');
+  if(!el)return;
+  var cancelados=DATA.cancelados||[];
+  var lixo=DATA.lixeira||[];
+  var html='';
+  // Seção Cancelados
+  html+='<div class="card" style="margin-bottom:14px"><div class="section-header"><div><div class="section-title" style="font-size:15px">❌ Eventos cancelados</div><div class="section-sub">Eventos corretamente cadastrados que foram cancelados pela empresa, com motivo registrado.</div></div></div>';
+  if(!cancelados.length){
+    html+='<div style="padding:14px;color:var(--c-text3);font-size:13px;text-align:center">Nenhum evento cancelado.</div>';
+  }else{
+    html+=cancelados.map(function(c,i){
+      var p=c.item||{};var canc=p.cancelamento||{};
+      return '<div class="trash-item" style="border-left:3px solid var(--c-red)"><div style="flex:1"><div style="font-weight:600;font-size:13.5px">'+(p.num||p.id||'—')+' — '+(p.evento||'')+'</div>'
+        +'<div style="font-size:12px;color:var(--c-text2)">Cliente: '+(p.cliente||'—')+' · Data evento: '+(p.data?formatDate(p.data):'—')+'</div>'
+        +'<div style="font-size:12px;color:var(--c-red);margin-top:4px"><strong>Motivo:</strong> '+(canc.motivo||'—')+(canc.obs?' — '+canc.obs:'')+'</div>'
+        +'<div style="font-size:11px;color:var(--c-text3);margin-top:2px">Cancelado em '+c.data+(canc.por?' por '+canc.por:'')+'</div></div>'
+        +'<div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm" onclick="restaurarCancelado('+i+')">↩ Reabrir</button>'
+        +(currentUser&&currentUser.nivel==='Gestor'?'<button class="btn btn-danger btn-sm" onclick="DATA.cancelados.splice('+i+',1);saveToStorage();renderLixeira();toast(\'Removido\',\'warn\');">🗑️ Excluir</button>':'')
+        +'</div></div>';
+    }).join('');
+  }
+  html+='</div>';
+  // Seção Excluídos (cadastro errado)
+  html+='<div class="card"><div class="section-header"><div><div class="section-title" style="font-size:15px">🗑️ Excluídos (cadastro errado)</div><div class="section-sub">Registros removidos por erro de cadastro — exclusão permanente requer autenticação.</div></div></div>';
+  if(!lixo.length){
+    html+='<div style="padding:14px;color:var(--c-text3);font-size:13px;text-align:center">Lixeira vazia.</div>';
+  }else{
+    html+=lixo.map(function(item,i){return '<div class="trash-item"><div><div style="font-weight:600;font-size:13.5px">'+item.tipo+': '+(item.item.nome||item.item.evento||item.item.id||'Item')+'</div><div style="font-size:12px;color:var(--c-text3)">Excluído em '+item.data+'</div></div><div style="display:flex;gap:8px"><button class="btn btn-ghost btn-sm" onclick="restaurarItem('+i+')">↩ Restaurar</button><button class="btn btn-danger btn-sm" onclick="excluirPermanente('+i+')">🗑️ Excluir</button></div></div>';}).join('');
+  }
+  html+='</div>';
+  el.innerHTML=html;
+}
+function restaurarCancelado(i){
+  var c=(DATA.cancelados||[])[i];if(!c)return;
+  var p=c.item;p.status='Pendente';delete p.cancelamento;
+  var existing=DATA.propostas.findIndex(function(x){return x.id===p.id;});
+  if(existing<0)DATA.propostas.push(p);
+  DATA.cancelados.splice(i,1);saveToStorage();renderPropostas();renderLixeira();renderAlertas();updateBadges();
+  toast('Evento reaberto como Pendente','success');
 }
 function restaurarItem(idx){
   var item=DATA.lixeira[idx];
@@ -4464,28 +4535,38 @@ function uploadAssetFn(input,tipo){
     toast('Documento Word carregado. Clique em Salvar.','info');
     return;
   }
-  var reader=new FileReader();
-  reader.onload=function(e){
-    pendingAssets[tipo]={dataUrl:e.target.result,nome:file.name,tipo:tipo,mime:file.type,fileType:'image'};
-    var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
-    var el=document.getElementById(prevId);
-    if(el)el.innerHTML='<img src="'+e.target.result+'" style="width:100%;max-height:120px;object-fit:contain;border-radius:8px;border:1px solid var(--c-border)"/>';
-    updateFileLabel(input.id,file.name);
-    toast((tipo==='timbrado'?'Papel timbrado':tipo==='logo'?'Layout timbrado':'Rodapé')+' carregado. Clique em Salvar.','info');
-  };
-  reader.readAsDataURL(file);
+  pendingAssets[tipo]={dataUrl:null,nome:file.name,tipo:tipo,mime:file.type,fileType:'image',uploading:true};
+  var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
+  var el=document.getElementById(prevId);
+  if(el)el.innerHTML='<div class="file-preview-doc">⏳ Enviando '+file.name+'…</div>';
+  updateFileLabel(input.id,file.name);
+  uploadAutomatico(file).then(function(info){
+    pendingAssets[tipo]={dataUrl:null,url:info.url,fileId:info.id,nome:file.name,tipo:tipo,mime:file.type,fileType:'image'};
+    if(el && info.url){
+      el.innerHTML='<img src="'+info.url+'" style="width:100%;max-height:120px;object-fit:contain;border-radius:8px;border:1px solid var(--c-border)"/>';
+    } else if(el){
+      el.innerHTML='<div class="file-preview-doc">🖼️ '+file.name+'<br/><small>Enviado para o Drive</small></div>';
+    }
+    toast((tipo==='timbrado'?'Papel timbrado':tipo==='logo'?'Layout timbrado':'Rodapé')+' enviado. Clique em Salvar.','info');
+  }).catch(function(err){
+    console.warn(err);
+    toast('Falha no upload: '+(err && err.message || err),'error');
+    if(el)el.innerHTML='';
+  });
 }
 function readPdfAsPreview(file,tipo,input){
-  var reader=new FileReader();
-  reader.onload=function(){
-    pendingAssets[tipo]={dataUrl:reader.result,nome:file.name,tipo:tipo,mime:'application/pdf',fileType:'pdf'};
-    var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
-    var el=document.getElementById(prevId);
-    if(el)el.innerHTML='<div class="file-preview-doc">📕 '+file.name+'<br/><small>PDF — será usado como fundo na impressão</small></div>';
-    updateFileLabel(input.id,file.name);
-    toast('PDF timbrado carregado. Clique em Salvar.','info');
-  };
-  reader.readAsDataURL(file);
+  var prevId=tipo==='timbrado'?'timbradoPreview':tipo==='logo'?'logoPreview':'rodapePreview';
+  var el=document.getElementById(prevId);
+  if(el)el.innerHTML='<div class="file-preview-doc">⏳ Enviando '+file.name+'…</div>';
+  updateFileLabel(input.id,file.name);
+  uploadAutomatico(file).then(function(info){
+    pendingAssets[tipo]={dataUrl:null,url:info.url,fileId:info.id,nome:file.name,tipo:tipo,mime:'application/pdf',fileType:'pdf'};
+    if(el)el.innerHTML='<div class="file-preview-doc">📕 '+file.name+'<br/><small>PDF enviado ao Drive</small></div>';
+    toast('PDF timbrado enviado. Clique em Salvar.','info');
+  }).catch(function(err){
+    toast('Falha no upload do PDF: '+(err && err.message || err),'error');
+    if(el)el.innerHTML='';
+  });
 }
 function updateFileLabel(inputId,name){
   var wrap=document.querySelector('[data-for="'+inputId+'"] .file-upload-name');
@@ -4513,6 +4594,31 @@ function excluirAssetHistorico(id){
   saveAssetsLocal();saveToStorage();updateTimbradoList();populateExportTimbradoSelects();
   toast('Item excluído do histórico','warn');
 }
+// === Upload automático para Google Apps Script (Drive) ===
+// Evita salvar Base64 no Firestore (limite de 1MB/doc).
+const GAS_UPLOAD_URL = "https://script.google.com/macros/s/AKfycby857B3QaFXPZoGARwR4A4JYqwi6W5JFrAXrxfoiRarTq-pKptAFr8a54ZlaSNxVJ0ZMA/exec";
+function uploadAutomatico(file){
+  return new Promise(function(resolve,reject){
+    if(!file){reject(new Error('Arquivo inválido'));return;}
+    var reader=new FileReader();
+    reader.onerror=function(){reject(new Error('Falha ao ler o arquivo'));};
+    reader.onload=function(e){
+      var base64=String(e.target.result).split(',')[1];
+      var payload=JSON.stringify({data:base64,filename:file.name,mimetype:file.type||'application/octet-stream'});
+      // text/plain evita preflight CORS (Apps Script não responde OPTIONS)
+      fetch(GAS_UPLOAD_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:payload})
+        .then(function(r){return r.text();})
+        .then(function(txt){
+          var info;try{info=JSON.parse(txt);}catch(_){info={raw:txt};}
+          resolve({ok:true,url:info.url||info.fileUrl||info.link||null,id:info.id||info.fileId||null,nome:file.name,mime:file.type,tamanho:file.size,enviadoEm:new Date().toISOString(),raw:info});
+        })
+        .catch(function(err){reject(err);});
+    };
+    reader.readAsDataURL(file);
+  });
+}
+window.uploadAutomatico=uploadAutomatico;
+
 function salvarAssets(){
   var saved=false;
   ['timbrado','logo','rodape'].forEach(function(tipo){
@@ -4521,7 +4627,9 @@ function salvarAssets(){
       id:tipo.charAt(0).toUpperCase()+Date.now(),
       nome:pendingAssets[tipo].nome||tipo,
       tipo:tipo,
-      dataUrl:pendingAssets[tipo].dataUrl,
+      dataUrl:null,
+      url:pendingAssets[tipo].url||null,
+      fileId:pendingAssets[tipo].fileId||null,
       mime:pendingAssets[tipo].mime||'',
       fileType:pendingAssets[tipo].fileType||'image',
       criadoEm:new Date().toISOString(),
@@ -4622,12 +4730,13 @@ function adicionarPortfolio(input){
   if(!DATA.portfolio)DATA.portfolio=[];
   if(input.files&&input.files.length){
     Array.prototype.forEach.call(input.files,function(file){
-      var reader=new FileReader();
-      reader.onload=function(e){
-        DATA.portfolio.push({nome:file.name,dataUrl:e.target.result,criadoEm:new Date().toISOString()});
-        saveToStorage();renderPortfolioGallery();toast('Foto adicionada ao portfólio','success');
-      };
-      reader.readAsDataURL(file);
+      uploadAutomatico(file).then(function(info){
+        DATA.portfolio.push({nome:file.name,url:info.url||null,fileId:info.id||null,mime:file.type,criadoEm:new Date().toISOString()});
+        saveToStorage();renderPortfolioGallery();
+        toast('Foto enviada ao Drive e adicionada ao portfólio','success');
+      }).catch(function(err){
+        toast('Falha ao enviar '+file.name+': '+(err && err.message || err),'error');
+      });
     });
     input.value='';
   }
@@ -5251,7 +5360,9 @@ function toggleSadCard(card,idx){
   card.classList.toggle('selected');
   var chk=document.getElementById('sad_chk_'+idx);
   if(chk)chk.checked=card.classList.contains('selected');
+  flashSelection(card,'Serviço',chk&&chk.checked);
 }
+
 function toggleOficioBlock(){
   var blk=document.getElementById('w_oficioBlock');
   if(!blk)return;
@@ -5313,13 +5424,16 @@ function toggleEquipCard(card,idx){
   card.classList.toggle('selected');
   var chk=document.getElementById('equip_chk_'+idx);
   if(chk)chk.checked=card.classList.contains('selected');
+  flashSelection(card,'Equipamento',chk&&chk.checked);
 }
 function toggleFoodCard(card,idx,ev){
   if(ev&&ev.target&&(ev.target.tagName==='INPUT'||ev.target.closest('.food-vezes-row')))return;
   card.classList.toggle('selected');
   var chk=document.getElementById('food_chk_'+idx);
   if(chk)chk.checked=card.classList.contains('selected');
+  flashSelection(card,'Item de alimentação',chk&&chk.checked);
 }
+
 function initWizard(){wizardCurrentStep=1;renderWizardStep(1);}
 function renderWizardStep(step){
   document.getElementById('wizardContent').innerHTML='<div>'+wizardStepsData[step-1].html()+'</div>';
@@ -5384,8 +5498,9 @@ function findEstoqueByGenerico(g){
 }
 function genericoPrice(g){var it=findEstoqueByGenerico(g);return it?(Number(it.valor)||0):0;}
 function genericoRealName(g){var it=findEstoqueByGenerico(g);return it?(it.nome||g.nome):g.nome;}
-function toggleGenericEquip(card,key){var c=document.getElementById('gen_chk_'+key);if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);}
-function toggleSuporteCard(card){var c=document.getElementById('gen_chk_suporte');if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);}
+function toggleGenericEquip(card,key){var c=document.getElementById('gen_chk_'+key);if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);flashSelection(card,'Equipamento',c.checked);}
+function toggleSuporteCard(card){var c=document.getElementById('gen_chk_suporte');if(!c)return;c.checked=!c.checked;card.classList.toggle('selected',c.checked);flashSelection(card,'Suporte técnico',c.checked);}
+
 function sysNotify(title,msg,items){var ov=document.getElementById('sysNotifyOv');if(ov)ov.remove();ov=document.createElement('div');ov.id='sysNotifyOv';ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';var bx=document.createElement('div');bx.style.cssText='background:var(--c-surface,#fff);color:var(--c-text,#0f172a);max-width:460px;width:100%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;font-family:inherit;';var head='<div style="background:var(--c-amber,#FF9900);color:#fff;padding:14px 18px;font-weight:700;font-size:15px;display:flex;align-items:center;gap:8px">⚠️ '+title+'</div>';var body='<div style="padding:18px"><p style="margin:0 0 10px;font-size:14px;line-height:1.5">'+msg+'</p>';if(items&&items.length){body+='<ul style="margin:8px 0 0;padding-left:20px;font-size:13px;color:var(--c-text2,#475569)">';items.forEach(function(it){body+='<li style="margin:3px 0">'+it+'</li>';});body+='</ul>';}body+='</div>';var foot='<div style="padding:12px 18px;border-top:1px solid var(--c-border,#e2e8f0);display:flex;justify-content:flex-end"><button type="button" id="sysNotifyOk" style="background:var(--c-accent,#005CAB);color:#fff;border:0;border-radius:8px;padding:8px 18px;font-weight:600;cursor:pointer">Entendi</button></div>';bx.innerHTML=head+body+foot;ov.appendChild(bx);document.body.appendChild(ov);document.getElementById('sysNotifyOk').onclick=function(){ov.remove();};}
 function validateWizardStep(step){
   var d=wizardDraft;var errs=[];
@@ -5444,12 +5559,17 @@ function wizardStep(dir){
       var updated=buildProposalFromDraft(draft,total,p.status);
       updated.id=p.id;updated.num=p.num;updated.origem=p.origem||updated.origem;updated.createdAt=p.createdAt||updated.createdAt;updated.importado=!!p.importado;updated.arqOrigem=p.arqOrigem||'';
       DATA.propostas[editingPropostaIdx]=updated;
-      saveToStorage();renderPropostas();renderDashboard();updateBadges();checkPrazosVencidos();
-      closeModal('modalProposta');
-      toast('Proposta '+p.num+' atualizada! Exporte o PDF para gerar nova versão.','success');
-      clearWizardDraftSnapshot();editingPropostaIdx=-1;resetWizardDraft();initWizard();populateOSProp();
+      saveToStorage();renderPropostas();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
+      toast('Proposta '+p.num+' atualizada!','success');
+      confirmSavePrint(p.num,updated,function(close){
+        if(close){
+          closeModal('modalProposta');
+          clearWizardDraftSnapshot();editingPropostaIdx=-1;resetWizardDraft();initWizard();populateOSProp();
+        }
+      },true);
       return;
     }
+
     var num=nextPropNum();
     var novaProp=buildProposalFromDraft(draft,total,'Pendente');
     novaProp.id='P'+String(DATA.propostas.length+1).padStart(3,'0');
@@ -5457,11 +5577,16 @@ function wizardStep(dir){
     novaProp.createdAt=new Date().toISOString();
     DATA.propostas.push(novaProp);
     saveToStorage();
-    closeModal('modalProposta');
     renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
-    toast('🎉 Proposta '+num+' salva! A OS será gerada automaticamente após a aprovação ou pagamento.','success');
+    toast('🎉 Proposta '+num+' salva e adicionada à lista de propostas/eventos!','success');
     setTimeout(function(){checkPrazosVencidos();},300);
-    clearWizardDraftSnapshot();resetWizardDraft();initWizard();populateOSProp();
+    // Pergunta sobre impressão antes de fechar a tela
+    confirmSavePrint(num,novaProp,function(close){
+      if(close){
+        closeModal('modalProposta');
+        clearWizardDraftSnapshot();resetWizardDraft();initWizard();populateOSProp();
+      }
+    });
     return;
   }
   wizardCurrentStep=next;renderWizardStep(next);
@@ -5615,6 +5740,23 @@ function toggleAlimSection(on){
   var sec=document.getElementById('w_alimSection');
   if(sec)sec.style.display=on?'block':'none';
   if(!on)wizardDraft.alimentacao=[];
+  // Aviso de auditório quando há alimentação
+  var warn=document.getElementById('w_auditAlimWarn');
+  if(!warn&&on){
+    var host=sec;
+    if(host){
+      warn=document.createElement('div');
+      warn.id='w_auditAlimWarn';
+      warn.style.cssText='margin-bottom:12px;padding:12px 14px;border-radius:8px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.35);font-size:12.5px;color:var(--c-text);line-height:1.5';
+      warn.innerHTML='<strong style="color:var(--c-red)">🚫 Atenção — Auditório Senac Aldeota:</strong> identificamos que este evento terá <strong>serviço de alimentação</strong>. Lembramos que <u>é proibido o consumo de alimentos e bebidas nas dependências internas do auditório</u>. O serviço de coffee-break / coquetel / almoço deverá ser servido em área externa (foyer, hall ou espaço de apoio).';
+      host.insertBefore(warn,host.firstChild);
+    }
+  }
+  if(warn){
+    var esp=(wizardDraft.espaco||'').toLowerCase();
+    var isAud=esp.indexOf('auditório')>=0||esp.indexOf('auditorio')>=0;
+    warn.style.display=(on&&isAud)?'block':'none';
+  }
 }
 // Portfólio - slide
 var PORTFOLIO_SLIDE_IDX=0;
@@ -5633,7 +5775,7 @@ function slidePortfolio(dir){
 function renderPortfolioSlide(){
   var img=document.getElementById('slideImage');
   var cnt=document.getElementById('slideCount');
-  if(img)img.src=DATA.portfolio[PORTFOLIO_SLIDE_IDX].dataUrl||DATA.portfolio[PORTFOLIO_SLIDE_IDX];
+  if(img)img.src=DATA.portfolio[PORTFOLIO_SLIDE_IDX].url||DATA.portfolio[PORTFOLIO_SLIDE_IDX].dataUrl||DATA.portfolio[PORTFOLIO_SLIDE_IDX];
   if(cnt)cnt.textContent=(PORTFOLIO_SLIDE_IDX+1)+' / '+DATA.portfolio.length;
 }
 function removerPortfolio(i){
@@ -5645,7 +5787,7 @@ function renderPortfolioGallery(){
   if(!el)return;
   if(!DATA.portfolio||!DATA.portfolio.length){el.innerHTML='<div style="font-size:12px;color:var(--c-text3)">Nenhuma foto cadastrada</div>';return;}
   el.innerHTML=DATA.portfolio.map(function(p,i){
-    var url=p.dataUrl||p;
+    var url=p.url||p.dataUrl||p;
     return '<div class="portfolio-thumb" onclick="openPortfolioSlide('+i+')"><img src="'+url+'" style="width:100%;height:100%;object-fit:cover"/><button class="x" onclick="event.stopPropagation();removerPortfolio('+i+')">✕</button></div>';
   }).join('')+'<button class="btn btn-ghost btn-sm" style="align-self:center" onclick="openPortfolioSlide(0)">▶ Slide</button>';
 }
@@ -6138,7 +6280,401 @@ function limparFiltrosPropostas(){
 try{applyPropColVisibility();}catch(e){}
 document.addEventListener('DOMContentLoaded',function(){try{applyPropColVisibility();}catch(e){}});
 
-  </script> 
+
+// ─── EXTENSÕES: salvar+imprimir, cancelar, alertas clicáveis, armazenamento ───
+(function injectExtStyles(){
+  if(document.getElementById('ext-styles'))return;
+  var st=document.createElement('style');st.id='ext-styles';
+  st.textContent=''
+    +'.food-select-card.selected::after,.equip-select-card.selected::after{content:"✓";position:absolute;top:-10px;right:-10px;width:28px;height:28px;border-radius:50%;background:var(--c-green);color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(16,185,129,.45);animation:popIn .25s ease-out;z-index:3}'
+    +'.equip-select-card.selected::after{background:var(--c-accent)}'
+    +'.food-select-card.selected,.equip-select-card.selected{transform:translateY(-2px);box-shadow:0 6px 18px rgba(99,102,241,.18)}'
+    +'.food-select-card.selected{box-shadow:0 6px 18px rgba(16,185,129,.20)}'
+    +'@keyframes popIn{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}'
+    +'@keyframes selPulse{0%{box-shadow:0 0 0 0 rgba(99,102,241,.45)}100%{box-shadow:0 0 0 12px rgba(99,102,241,0)}}'
+    +'.card-flash{animation:selPulse .55s ease-out}'
+    +'.sel-balloon{position:fixed;left:50%;top:24px;transform:translateX(-50%);background:var(--c-surface,#1e293b);color:var(--c-text,#fff);border:1px solid var(--c-border);border-radius:14px;padding:10px 18px;font-size:13px;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.35);z-index:100000;display:flex;align-items:center;gap:8px;animation:popIn .2s ease-out}'
+    +'.sel-balloon::after{content:"";position:absolute;bottom:-7px;left:50%;transform:translateX(-50%) rotate(45deg);width:14px;height:14px;background:inherit;border-right:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}'
+    +'.sp-balloon{position:absolute;top:-58px;left:50%;transform:translateX(-50%);background:var(--c-amber);color:#1a1a1a;padding:10px 16px;border-radius:12px;font-size:12.5px;font-weight:600;max-width:420px;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.25)}'
+    +'.sp-balloon::after{content:"";position:absolute;bottom:-8px;left:50%;transform:translateX(-50%) rotate(45deg);width:14px;height:14px;background:var(--c-amber)}'
+    +'.sp-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px}'
+    +'.sp-actions .btn{justify-content:center;padding:12px 14px;font-size:14px;font-weight:700}';
+  document.head.appendChild(st);
+})();
+
+function flashSelection(card,label,on){
+  try{
+    card.classList.remove('card-flash');void card.offsetWidth;card.classList.add('card-flash');
+    var old=document.querySelector('.sel-balloon');if(old)old.remove();
+    var b=document.createElement('div');b.className='sel-balloon';
+    b.innerHTML=(on?'<span style="color:var(--c-green);font-size:16px">✓</span> ':'<span style="color:var(--c-red);font-size:16px">✕</span> ')
+      +'<span>'+label+(on?' adicionado à proposta':' removido')+'</span>';
+    document.body.appendChild(b);
+    setTimeout(function(){b.style.opacity='0';b.style.transition='opacity .25s';},1400);
+    setTimeout(function(){b.remove();},1700);
+  }catch(e){}
+}
+
+function confirmSavePrint(num,prop,cb,isEdit){
+  var ov=document.getElementById('modalSavePrint');
+  if(ov)ov.remove();
+  ov=document.createElement('div');
+  ov.className='modal-overlay';ov.id='modalSavePrint';
+  ov.innerHTML='<div class="modal" style="max-width:480px;position:relative;overflow:visible">'
+    +'<div class="sp-balloon">💡 Imprima/salve o PDF antes de fechar a tela — ele abrirá em nova aba e não atrapalha o cadastro.</div>'
+    +'<div class="modal-header" style="margin-top:6px"><span class="modal-title">✅ Proposta '+(isEdit?'atualizada':'salva')+'</span></div>'
+    +'<div style="padding:6px 2px 14px;font-size:14px;color:var(--c-text);text-align:center">'
+    +'<p id="sp_msg" style="margin:0 0 8px"></p>'
+    +'<p style="margin:0 0 4px;font-size:13px;color:var(--c-text2)">Já imprimiu / salvou o arquivo PDF desta proposta?</p>'
+    +'<div style="margin:14px 0"><button class="btn btn-primary" id="sp_print" style="padding:10px 18px">🖨️ Imprimir agora (nova aba)</button></div>'
+    +'<div class="sp-actions">'
+    +'<button class="btn btn-success" id="sp_yes">✅ Sim — fechar tela</button>'
+    +'<button class="btn btn-ghost" id="sp_no">↩️ Não — manter aberta</button>'
+    +'</div></div></div>';
+  document.body.appendChild(ov);
+  document.getElementById('sp_msg').innerHTML='Proposta <strong>'+num+'</strong> '
+    +(isEdit?'foi atualizada':'foi salva e inserida')+' na lista de propostas/eventos.';
+  ov.classList.add('open');ov.style.display='flex';
+  document.getElementById('sp_yes').onclick=function(){ov.classList.remove('open');ov.style.display='none';cb&&cb(true);};
+  document.getElementById('sp_no').onclick=function(){ov.classList.remove('open');ov.style.display='none';cb&&cb(false);};
+  document.getElementById('sp_print').onclick=function(){
+    try{
+      var idx=DATA.propostas.indexOf(prop);
+      if(idx<0)idx=DATA.propostas.findIndex(function(x){return x.num===num;});
+      if(idx>=0&&typeof verProposta==='function'){
+        verProposta(idx);
+        setTimeout(function(){
+          try{
+            // tenta abrir em nova aba ao invés de substituir a tela atual
+            var w=window.open('','_blank');
+            window._pdfTargetWin=w;
+            exportPropostaAtual('pdf');
+          }catch(e){try{exportPropostaAtual('pdf');}catch(_){}}
+        },400);
+      }
+    }catch(e){}
+  };
+}
+
+
+// ─── CANCELAR EVENTO COM MOTIVO ───
+function abrirCancelarProposta(idx){
+  var p=DATA.propostas[idx];if(!p)return;
+  var ov=document.getElementById('modalCancelarProp');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.className='modal-overlay';ov.id='modalCancelarProp';
+    ov.innerHTML='<div class="modal" style="max-width:520px">'
+      +'<div class="modal-header"><span class="modal-title">❌ Cancelar evento</span><span class="modal-close" onclick="document.getElementById(\'modalCancelarProp\').style.display=\'none\'">✕</span></div>'
+      +'<div id="cp_info" style="font-size:13px;color:var(--c-text2);margin-bottom:10px"></div>'
+      +'<div class="form-group" style="margin-bottom:10px"><label>Motivo do cancelamento <span style="color:var(--c-red)">*</span></label>'
+      +'<select id="cp_motivo"><option value="">Selecione...</option>'
+      +'<option>Cliente desistiu do evento</option>'
+      +'<option>Mudança de data sem nova disponibilidade</option>'
+      +'<option>Problemas financeiros do cliente</option>'
+      +'<option>Conflito de agenda do Senac</option>'
+      +'<option>Outro (descrever abaixo)</option></select></div>'
+      +'<div class="form-group" style="margin-bottom:14px"><label>Detalhes / observação</label>'
+      +'<textarea id="cp_obs" rows="4" placeholder="Descreva o motivo específico relatado pela empresa..."></textarea></div>'
+      +'<div style="display:flex;justify-content:flex-end;gap:10px">'
+      +'<button class="btn btn-ghost" onclick="document.getElementById(\'modalCancelarProp\').style.display=\'none\'">Voltar</button>'
+      +'<button class="btn btn-danger" id="cp_ok">Confirmar cancelamento</button>'
+      +'</div></div>';
+    document.body.appendChild(ov);
+  }
+  document.getElementById('cp_info').innerHTML='Proposta <strong>'+(p.num||p.id)+'</strong> — '+p.evento+' ('+p.cliente+')';
+  document.getElementById('cp_motivo').value='';
+  document.getElementById('cp_obs').value='';
+  ov.style.display='flex';ov.classList.add('open');
+  document.getElementById('cp_ok').onclick=function(){
+    var m=document.getElementById('cp_motivo').value;
+    var o=document.getElementById('cp_obs').value.trim();
+    if(!m){toast('Selecione o motivo do cancelamento','error');return;}
+    if(m==='Outro (descrever abaixo)'&&!o){toast('Descreva o motivo específico','error');return;}
+    p.status='Cancelada';
+    p.cancelamento={motivo:m,obs:o,data:new Date().toISOString(),por:(currentUser&&currentUser.nome)||'—'};
+    if(!DATA.cancelados)DATA.cancelados=[];
+    DATA.cancelados.push({item:JSON.parse(JSON.stringify(p)),data:new Date().toLocaleDateString('pt-BR')});
+    saveToStorage();renderPropostas();renderLixeira();updateBadges();renderAlertas();
+    ov.style.display='none';
+    toast('Evento cancelado e enviado para Cancelados','warn');
+  };
+}
+
+// ─── ALERTA PROPOSTA PENDENTE/VENCIDA: ir direto à proposta ───
+function abrirPropostaPorId(propId,vencida){
+  goto('propostas');
+  setTimeout(function(){
+    var idx=DATA.propostas.findIndex(function(p){return p.id===propId||p.num===propId;});
+    if(idx<0){toast('Proposta não encontrada','error');return;}
+    if(vencida){
+      // acesso DIRETO à proposta vencida — abre visualização
+      try{verProposta(idx);}catch(e){abrirAcoesProposta(idx);}
+    }else{
+      abrirAcoesProposta(idx);
+    }
+  },150);
+}
+
+function abrirAcoesProposta(idx){
+  var p=DATA.propostas[idx];if(!p)return;
+  var ov=document.getElementById('modalAcoesProp');
+  if(!ov){
+    ov=document.createElement('div');
+    ov.className='modal-overlay';ov.id='modalAcoesProp';
+    ov.innerHTML='<div class="modal" style="max-width:520px">'
+      +'<div class="modal-header"><span class="modal-title">⚡ Ações da proposta pendente</span><span class="modal-close" onclick="document.getElementById(\'modalAcoesProp\').style.display=\'none\'">✕</span></div>'
+      +'<div id="ap_info" style="font-size:13px;color:var(--c-text);margin-bottom:14px;padding:10px;background:var(--c-surface2);border-radius:8px"></div>'
+      +'<div style="display:flex;flex-direction:column;gap:8px">'
+      +'<button class="btn btn-primary" id="ap_ver">📄 Visualizar / Imprimir proposta</button>'
+      +'<button class="btn btn-ghost" id="ap_edit">✏️ Editar proposta</button>'
+      +'<button class="btn btn-confirm-pgto" id="ap_pgto">💵 Confirmar pagamento</button>'
+      +'<button class="btn btn-danger" id="ap_cancel">❌ Cancelar evento (com motivo)</button>'
+      +'</div></div>';
+    document.body.appendChild(ov);
+  }
+  document.getElementById('ap_info').innerHTML=
+    '<strong>'+(p.num||p.id)+'</strong> — '+p.evento+'<br/>Cliente: '+p.cliente+' · Data: '+formatDate(p.data)+'<br/>Status atual: <span class="badge '+statusBadge(p.status)+'">'+p.status+'</span>';
+  ov.style.display='flex';ov.classList.add('open');
+  var close=function(){ov.style.display='none';};
+  document.getElementById('ap_ver').onclick=function(){close();verProposta(idx);};
+  document.getElementById('ap_edit').onclick=function(){close();abrirEditProposta(idx);};
+  document.getElementById('ap_pgto').onclick=function(){close();abrirConfirmarPagamento(idx);};
+  document.getElementById('ap_cancel').onclick=function(){close();abrirCancelarProposta(idx);};
+}
+
+// ─── ARMAZENAMENTO (visível apenas para Gestor) ───
+function calcStorageUsage(){
+  var used=0;
+  try{
+    for(var k in localStorage){
+      if(Object.prototype.hasOwnProperty.call(localStorage,k)){
+        used+=((localStorage[k]||'').length+k.length)*2; // UTF-16
+      }
+    }
+  }catch(e){}
+  var QUOTA=5*1024*1024;
+  return {used:used,total:QUOTA,free:Math.max(0,QUOTA-used),pct:Math.min(100,(used/QUOTA)*100)};
+}
+function fmtBytes(b){
+  if(b==null||isNaN(b))return '—';
+  if(b<1024)return b+' B';
+  if(b<1024*1024)return (b/1024).toFixed(1)+' KB';
+  if(b<1024*1024*1024)return (b/1024/1024).toFixed(2)+' MB';
+  return (b/1024/1024/1024).toFixed(2)+' GB';
+}
+
+// === Mede tamanho do documento Firestore (modesk/alfa_v9) ===
+async function medirFirestore(){
+  try{
+    if(!window.moDeskFirebasePull)return {erro:'Firestore não inicializado'};
+    var data=await window.moDeskFirebasePull();
+    if(!data)return {erro:'Documento vazio ou inacessível'};
+    var json=JSON.stringify(data);
+    var bytes=new Blob([json]).size;
+    var LIMITE=1048576; // 1 MiB por doc
+    var campos=Object.keys(data).map(function(k){
+      return {campo:k, bytes:new Blob([JSON.stringify(data[k])]).size};
+    }).sort(function(a,b){return b.bytes-a.bytes;});
+    return {bytes:bytes,limite:LIMITE,pct:(bytes/LIMITE)*100,campos:campos.slice(0,10)};
+  }catch(e){return {erro:String(e&&e.message||e)};}
+}
+
+// === Mede uso no Google Drive (via Apps Script) ===
+// Requer que o Apps Script responda a GET ?action=stats com JSON:
+//   { totalFiles, totalBytes, folderName, folderId, driveQuotaUsed, driveQuotaLimit }
+async function medirDrive(){
+  try{
+    if(!window.GAS_UPLOAD_URL&&typeof GAS_UPLOAD_URL==='undefined')return {erro:'GAS_UPLOAD_URL não definido'};
+    var url=(typeof GAS_UPLOAD_URL!=='undefined'?GAS_UPLOAD_URL:window.GAS_UPLOAD_URL)+'?action=stats';
+    var r=await fetch(url,{method:'GET'});
+    var txt=await r.text();
+    var info;try{info=JSON.parse(txt);}catch(_){return {erro:'Resposta inválida do Apps Script. Adicione o handler doGet (ver instruções).',raw:txt.slice(0,200)};}
+    if(info.error)return {erro:info.error};
+    return info;
+  }catch(e){return {erro:String(e&&e.message||e)};}
+}
+
+function renderStorageInfo(){
+  var el=document.getElementById('cfg-armazenamento-body');if(!el)return;
+  if(!(currentUser&&currentUser.nivel==='Gestor')){
+    el.innerHTML='<div style="padding:18px;text-align:center;color:var(--c-text3)">🔒 Visível apenas para o Gestor.</div>';return;
+  }
+  var s=calcStorageUsage();
+  var color=s.pct<70?'var(--c-green)':s.pct<90?'var(--c-amber)':'var(--c-red)';
+  var breakdown=[];
+  try{
+    breakdown.push(['Propostas',JSON.stringify(DATA.propostas||[]).length*2]);
+    breakdown.push(['Clientes',JSON.stringify(DATA.clientes||[]).length*2]);
+    breakdown.push(['Espaços',JSON.stringify(DATA.espacos||[]).length*2]);
+    breakdown.push(['Estoque TI/AV',JSON.stringify(DATA.estoque||[]).length*2]);
+    breakdown.push(['Cardápio',JSON.stringify(DATA.cardapio||[]).length*2]);
+    breakdown.push(['Ordens de Serviço',JSON.stringify(DATA.ordens||[]).length*2]);
+    breakdown.push(['Lixeira',JSON.stringify(DATA.lixeira||[]).length*2]);
+    breakdown.push(['Cancelados',JSON.stringify(DATA.cancelados||[]).length*2]);
+    breakdown.push(['Portfólio / imagens',JSON.stringify(DATA.portfolio||[]).length*2]);
+    breakdown.push(['Timbrado / logos',JSON.stringify(DATA.assets||{}).length*2]);
+  }catch(e){}
+
+  el.innerHTML=
+    // Abas
+    '<div style="display:flex;gap:6px;margin-bottom:14px;border-bottom:1px solid var(--c-border)">'
+    +'<button class="armaz-tab" data-tab="local" style="padding:8px 14px;background:none;border:none;border-bottom:2px solid var(--c-accent);font-weight:600;color:var(--c-accent);cursor:pointer">💻 Local</button>'
+    +'<button class="armaz-tab" data-tab="firestore" style="padding:8px 14px;background:none;border:none;border-bottom:2px solid transparent;color:var(--c-text2);cursor:pointer">🔥 Firestore</button>'
+    +'<button class="armaz-tab" data-tab="drive" style="padding:8px 14px;background:none;border:none;border-bottom:2px solid transparent;color:var(--c-text2);cursor:pointer">📁 Google Drive</button>'
+    +'</div>'
+    // Painel LOCAL
+    +'<div id="armazPane-local" class="armaz-pane">'
+    +'<div style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Quanto espaço o sistema está ocupando no armazenamento local do navegador.</div>'
+    +'<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px">'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Usado</span><strong>'+fmtBytes(s.used)+'</strong></div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Disponível (estimado)</span><strong>'+fmtBytes(s.free)+'</strong></div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Total (cota navegador ~5 MB)</span><strong>'+fmtBytes(s.total)+'</strong></div>'
+    +'<div style="height:14px;background:var(--c-surface3);border-radius:7px;overflow:hidden;margin-top:8px"><div style="width:'+s.pct.toFixed(1)+'%;height:100%;background:'+color+';transition:width .4s"></div></div>'
+    +'<div style="font-size:12px;color:var(--c-text3);margin-top:6px">'+s.pct.toFixed(1)+'% utilizado</div>'
+    +'</div>'
+    +'<div style="background:var(--c-surface2);border-radius:10px;padding:16px;margin-bottom:14px">'
+    +'<div style="font-weight:700;font-size:13px;margin-bottom:10px">Detalhamento por módulo</div>'
+    +'<table style="width:100%;font-size:12.5px"><tbody>'
+    +breakdown.map(function(r){return '<tr><td style="padding:4px 0;color:var(--c-text2)">'+r[0]+'</td><td style="text-align:right;font-weight:600">'+fmtBytes(r[1])+'</td></tr>';}).join('')
+    +'</tbody></table>'
+    +'</div>'
+    +'<button class="btn btn-danger" onclick="limparBase64Local()">🧹 Limpar Base64 antigo do localStorage</button>'
+    +'</div>'
+    // Painel FIRESTORE
+    +'<div id="armazPane-firestore" class="armaz-pane" style="display:none">'
+    +'<div style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Tamanho do documento <code>modesk/alfa_v9</code> no Firestore. Limite por documento: <strong>1 MiB</strong>.</div>'
+    +'<div id="firestoreBox" style="background:var(--c-surface2);border-radius:10px;padding:16px;text-align:center;color:var(--c-text3)">Carregando…</div>'
+    +'</div>'
+    // Painel DRIVE
+    +'<div id="armazPane-drive" class="armaz-pane" style="display:none">'
+    +'<div style="font-size:13px;color:var(--c-text2);margin-bottom:14px">Arquivos enviados ao Google Drive via Apps Script (timbrado, logos, portfólio).</div>'
+    +'<div id="driveBox" style="background:var(--c-surface2);border-radius:10px;padding:16px;text-align:center;color:var(--c-text3)">Carregando…</div>'
+    +'</div>';
+
+  // Tabs
+  el.querySelectorAll('.armaz-tab').forEach(function(btn){
+    btn.onclick=function(){
+      el.querySelectorAll('.armaz-tab').forEach(function(b){b.style.borderBottomColor='transparent';b.style.color='var(--c-text2)';b.style.fontWeight='400';});
+      btn.style.borderBottomColor='var(--c-accent)';btn.style.color='var(--c-accent)';btn.style.fontWeight='600';
+      el.querySelectorAll('.armaz-pane').forEach(function(p){p.style.display='none';});
+      var pane=document.getElementById('armazPane-'+btn.dataset.tab);
+      if(pane)pane.style.display='block';
+      if(btn.dataset.tab==='firestore')carregarFirestoreBox();
+      if(btn.dataset.tab==='drive')carregarDriveBox();
+    };
+  });
+}
+
+async function carregarFirestoreBox(){
+  var box=document.getElementById('firestoreBox');if(!box)return;
+  box.innerHTML='⏳ Lendo documento do Firestore…';
+  var r=await medirFirestore();
+  if(r.erro){box.innerHTML='<div style="color:var(--c-red)">⚠ '+r.erro+'</div>';return;}
+  var color=r.pct<70?'var(--c-green)':r.pct<90?'var(--c-amber)':'var(--c-red)';
+  box.style.textAlign='left';box.style.color='';
+  box.innerHTML=
+    '<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Tamanho do documento</span><strong>'+fmtBytes(r.bytes)+'</strong></div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Limite por documento</span><strong>'+fmtBytes(r.limite)+'</strong></div>'
+    +'<div style="height:14px;background:var(--c-surface3);border-radius:7px;overflow:hidden;margin-top:8px"><div style="width:'+r.pct.toFixed(1)+'%;height:100%;background:'+color+';transition:width .4s"></div></div>'
+    +'<div style="font-size:12px;color:var(--c-text3);margin-top:6px">'+r.pct.toFixed(2)+'% do limite</div>'
+    +'<div style="font-weight:700;font-size:13px;margin:16px 0 8px">Top 10 maiores campos</div>'
+    +'<table style="width:100%;font-size:12.5px"><tbody>'
+    +r.campos.map(function(c){return '<tr><td style="padding:4px 0;color:var(--c-text2)">'+c.campo+'</td><td style="text-align:right;font-weight:600">'+fmtBytes(c.bytes)+'</td></tr>';}).join('')
+    +'</tbody></table>'
+    +'<div style="font-size:11px;color:var(--c-text3);margin-top:10px">Para uso agregado de leituras/escritas: <a href="https://console.firebase.google.com/project/modesk-alfa/firestore/usage" target="_blank" style="color:var(--c-accent)">Console Firebase → Uso</a></div>';
+}
+
+async function carregarDriveBox(){
+  var box=document.getElementById('driveBox');if(!box)return;
+  box.innerHTML='⏳ Consultando Apps Script…';
+  var r=await medirDrive();
+  if(r.erro){
+    box.style.textAlign='left';box.style.color='';
+    box.innerHTML='<div style="color:var(--c-amber);margin-bottom:10px">⚠ '+r.erro+'</div>'
+      +'<details style="margin-top:10px"><summary style="cursor:pointer;font-weight:600;font-size:13px">📋 Adicionar handler no seu Apps Script (clique)</summary>'
+      +'<div style="font-size:12px;color:var(--c-text2);margin-top:8px">Cole esta função no seu projeto Apps Script (mesma pasta usada nos uploads), salve e publique uma nova versão do Web App:</div>'
+      +'<pre style="background:#0f172a;color:#e2e8f0;padding:12px;border-radius:8px;font-size:11px;overflow:auto;margin-top:8px;line-height:1.5">function doGet(e){\n  var action=(e&&e.parameter&&e.parameter.action)||"";\n  if(action==="stats"){\n    // ⚠ Ajuste o nome/ID da pasta usada nos uploads\n    var FOLDER_NAME="ModeskUploads";\n    var folders=DriveApp.getFoldersByName(FOLDER_NAME);\n    var folder=folders.hasNext()?folders.next():DriveApp.getRootFolder();\n    var totalFiles=0,totalBytes=0;\n    var it=folder.getFiles();\n    while(it.hasNext()){var f=it.next();totalFiles++;totalBytes+=f.getSize();}\n    var quotaLimit=null,quotaUsed=null;\n    try{\n      var about=Drive.About.get({fields:"storageQuota"});\n      quotaLimit=Number(about.storageQuota.limit||0);\n      quotaUsed=Number(about.storageQuota.usage||0);\n    }catch(_){}\n    return ContentService.createTextOutput(JSON.stringify({\n      folderName:folder.getName(),folderId:folder.getId(),\n      totalFiles:totalFiles,totalBytes:totalBytes,\n      driveQuotaUsed:quotaUsed,driveQuotaLimit:quotaLimit\n    })).setMimeType(ContentService.MimeType.JSON);\n  }\n  return ContentService.createTextOutput(JSON.stringify({ok:true}))\n    .setMimeType(ContentService.MimeType.JSON);\n}</pre>'
+      +'<div style="font-size:11px;color:var(--c-text3);margin-top:8px">Para usar <code>Drive.About.get</code>, ative o serviço avançado "Drive API" no editor do Apps Script (Serviços → +). Depois: Publicar → Implantar novamente como Web App.</div>'
+      +'</details>';
+    if(r.raw)box.innerHTML+='<details style="margin-top:8px"><summary style="cursor:pointer;font-size:11px;color:var(--c-text3)">Resposta bruta</summary><pre style="font-size:10px;background:var(--c-surface3);padding:8px;border-radius:6px;overflow:auto">'+r.raw.replace(/</g,'&lt;')+'</pre></details>';
+    return;
+  }
+  box.style.textAlign='left';box.style.color='';
+  var html='<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Pasta no Drive</span><strong>'+(r.folderName||'—')+'</strong></div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Total de arquivos</span><strong>'+(r.totalFiles||0)+'</strong></div>'
+    +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Espaço ocupado pelos uploads</span><strong>'+fmtBytes(r.totalBytes||0)+'</strong></div>';
+  if(r.folderId)html+='<div style="margin-top:10px"><a href="https://drive.google.com/drive/folders/'+r.folderId+'" target="_blank" class="btn btn-ghost btn-sm">📂 Abrir pasta no Drive</a></div>';
+  if(r.driveQuotaLimit){
+    var pct=(r.driveQuotaUsed/r.driveQuotaLimit)*100;
+    var color=pct<70?'var(--c-green)':pct<90?'var(--c-amber)':'var(--c-red)';
+    html+='<div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--c-border)">'
+      +'<div style="font-weight:700;font-size:13px;margin-bottom:8px">Cota da conta Google Drive</div>'
+      +'<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px"><span>Usado / Total</span><strong>'+fmtBytes(r.driveQuotaUsed)+' / '+fmtBytes(r.driveQuotaLimit)+'</strong></div>'
+      +'<div style="height:14px;background:var(--c-surface3);border-radius:7px;overflow:hidden"><div style="width:'+pct.toFixed(1)+'%;height:100%;background:'+color+'"></div></div>'
+      +'<div style="font-size:12px;color:var(--c-text3);margin-top:6px">'+pct.toFixed(1)+'% da conta</div>'
+      +'</div>';
+  }else{
+    html+='<div style="font-size:11px;color:var(--c-text3);margin-top:10px">💡 Para exibir a cota total da conta Google, ative o serviço avançado "Drive API" no Apps Script.</div>';
+  }
+  box.innerHTML=html;
+}
+
+// Limpa Base64 antigo deixado em localStorage por uploads anteriores ao patch
+window.limparBase64Local=function(){
+  if(!confirm('Remover Base64 antigo do localStorage? (não afeta Drive nem Firestore)'))return;
+  try{
+    var A=JSON.parse(localStorage.getItem('modesk_assets')||'{}');
+    ['timbrado','logo','rodape'].forEach(function(t){if(A[t])A[t].dataUrl=null;});
+    (A.historico||[]).forEach(function(h){h.dataUrl=null;});
+    localStorage.setItem('modesk_assets',JSON.stringify(A));
+    Object.keys(localStorage).filter(function(k){return k.indexOf('modesk')===0;}).forEach(function(k){
+      try{
+        var v=JSON.parse(localStorage.getItem(k));
+        if(v&&v.portfolio&&Array.isArray(v.portfolio)){
+          v.portfolio.forEach(function(p){if(p&&p.dataUrl)p.dataUrl=null;});
+          localStorage.setItem(k,JSON.stringify(v));
+        }
+      }catch(e){}
+    });
+    toast&&toast('Base64 antigo removido. Recarregando…','success');
+    setTimeout(function(){location.reload();},800);
+  }catch(e){alert('Erro: '+e.message);}
+};
+
+// Hook na navegação de settings para mostrar Armazenamento somente p/ gestor
+(function(){
+  var orig=window.settingsTab;
+  window.settingsTab=function(el,id){
+    orig&&orig(el,id);
+    if(id==='armazenamento')renderStorageInfo();
+  };
+})();
+
+// Injetar nav-item "Armazenamento" e painel se gestor
+function ensureStorageSettings(){
+  if(!(currentUser&&currentUser.nivel==='Gestor'))return;
+  var nav=document.querySelector('#view-configuracoes .settings-nav');
+  if(nav&&!document.getElementById('settNavArmaz')){
+    var d=document.createElement('div');
+    d.className='settings-nav-item';d.id='settNavArmaz';
+    d.setAttribute('onclick',"settingsTab(this,'armazenamento')");
+    d.innerHTML='<i data-lucide="hard-drive"></i> Armazenamento';
+    nav.appendChild(d);
+  }
+  var paneWrap=document.querySelector('#view-configuracoes .settings-layout > div:last-child');
+  if(paneWrap&&!document.getElementById('cfg-armazenamento')){
+    var p=document.createElement('div');
+    p.className='settings-pane card';p.id='cfg-armazenamento';
+    p.innerHTML='<div class="section-title" style="margin-bottom:8px">💾 Armazenamento</div><div id="cfg-armazenamento-body"></div>';
+    paneWrap.appendChild(p);
+  }
+  if(window.lucide&&lucide.createIcons)try{lucide.createIcons();}catch(e){}
+}
+document.addEventListener("DOMContentLoaded",function(){setTimeout(ensureStorageSettings,400);});
+</script>
+
+
 <div class="slide-overlay" id="slideOverlay">
   <button class="slide-close" onclick="closePortfolioSlide()">✕</button>
   <button class="slide-nav left" onclick="slidePortfolio(-1)">‹</button>
@@ -6147,5 +6683,72 @@ document.addEventListener('DOMContentLoaded',function(){try{applyPropColVisibili
   <div class="slide-count" id="slideCount">1 / 1</div>
 </div>
 
+<script>
+(function(){
+  function el(id){return document.getElementById(id);}
+  function setEndpointLabel(){
+    var lbl=el('gasEndpointLabel');
+    if(lbl && typeof GAS_UPLOAD_URL!=='undefined') lbl.textContent=GAS_UPLOAD_URL;
+  }
+  // Atualiza o label sempre que a aba Conexão for aberta
+  var origSettingsTab=window.settingsTab;
+  window.settingsTab=function(elNav,id){
+    if(typeof origSettingsTab==='function') origSettingsTab(elNav,id);
+    if(id==='conexao') setEndpointLabel();
+  };
+  document.addEventListener('DOMContentLoaded',setEndpointLabel);
+
+  function showRes(kind,title,body){
+    var box=el('gasTestResult'); if(!box) return;
+    var bg=kind==='ok'?'#ecfdf5':'#fef2f2';
+    var bd=kind==='ok'?'#a7f3d0':'#fecaca';
+    var fg=kind==='ok'?'#047857':'#b91c1c';
+    box.style.display='block';
+    box.style.background=bg; box.style.borderColor=bd; box.style.color=fg;
+    var text=typeof body==='string'?body:JSON.stringify(body,null,2);
+    box.innerHTML='<div style="font-weight:600;font-size:13px;margin-bottom:8px"></div>'+
+      '<pre style="margin:0;background:#0f172a;color:#e2e8f0;padding:10px;border-radius:6px;font-size:12px;max-height:320px;overflow:auto;white-space:pre-wrap;word-break:break-word"></pre>';
+    box.firstChild.textContent=title;
+    box.lastChild.textContent=text;
+  }
+
+  async function parseResp(r){
+    var raw=await r.text();
+    var data=raw;
+    try{data=raw?JSON.parse(raw):null;}catch(_){ }
+    return {ok:r.ok,status:r.status,data:data,raw:raw};
+  }
+
+  window.testarConexaoAppsScript=async function(method){
+    if(typeof GAS_UPLOAD_URL==='undefined'){
+      showRes('err','GAS_UPLOAD_URL não definido','Verifique se o script principal carregou.');
+      return;
+    }
+    setEndpointLabel();
+    showRes('ok',(method==='GET'?'Conectando...':'Enviando...'),'');
+    try{
+      var resp;
+      if(method==='GET'){
+        resp=await fetch(GAS_UPLOAD_URL,{method:'GET',mode:'cors',redirect:'follow'});
+      }else{
+        var payload;
+        try{payload=JSON.parse(el('gasPayloadInput').value||'{}');}
+        catch(e){showRes('err','JSON inválido no payload',e.message);return;}
+        resp=await fetch(GAS_UPLOAD_URL,{
+          method:'POST',mode:'cors',redirect:'follow',
+          headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify(payload)
+        });
+      }
+      var r=await parseResp(resp);
+      showRes(r.ok?'ok':'err',
+        (r.ok?'✓ ':'✗ ')+method+' — status HTTP '+r.status,
+        r.data!==null && r.data!==undefined ? r.data : r.raw);
+    }catch(e){
+      showRes('err','Falha na conexão (fetch)',(e && e.message)||String(e));
+    }
+  };
+})();
+</script>
 </body>
 </html>
