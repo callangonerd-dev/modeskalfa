@@ -505,7 +505,22 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       .prop-toolbar .field{min-width:0;flex:1 1 calc(50% - 5px)}
     }
     .badge{display:none}
-  </style> </head> <body> <div class="alert-prazo-vencido" id="alertaPrazoVencido" style="display:none" onclick="goto('propostas')">
+  
+/* === Customizações MODESK ALFA === */
+.logo-mark{display:none !important;}
+@keyframes ltBlink{0%,49%{opacity:1}50%,100%{opacity:.15}}
+.logo-text{display:flex;flex-direction:column;line-height:1.05;font-weight:800;letter-spacing:.5px;font-size:18px}
+.logo-text .lt-row{display:inline-flex;align-items:baseline;gap:2px}
+.lt-mo{color:#ef4444;font-weight:900;animation:ltBlink 1s steps(2,end) infinite;text-transform:uppercase}
+.lt-desk{color:var(--c-text);font-weight:800;text-transform:lowercase}
+.lt-alfa{color:#005CAB;font-weight:900;margin-left:6px;text-transform:uppercase}
+.os-period-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:6px 0 14px;padding:10px 12px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:10px}
+.os-period-bar label{font-size:12px;color:var(--c-text2);font-weight:600}
+.os-period-bar select,.os-period-bar input{padding:6px 10px;border-radius:8px;border:1px solid var(--c-border);background:var(--c-surface);color:var(--c-text);font-size:12px}
+.alert-modesk{background:linear-gradient(90deg,rgba(239,68,68,.12),rgba(245,158,11,.12));border:1px solid rgba(239,68,68,.45);color:var(--c-text);padding:12px 14px;border-radius:10px;font-size:13px;display:flex;gap:10px;align-items:flex-start}
+.alert-modesk .ai{font-size:18px;line-height:1.2}
+
+</style> </head> <body> <div class="alert-prazo-vencido" id="alertaPrazoVencido" style="display:none" onclick="goto('propostas')">
   🚨 ATENÇÃO: Existem propostas com prazo de pagamento VENCIDO! Clique para ver →
 </div>
 
@@ -699,6 +714,12 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
     <div class="form-row">
       <div class="form-group"><label>Nome do Espaço</label><input id="esp_nome" placeholder="Ex: Auditório C"/></div>
       <div class="form-group"><label>Capacidade (pessoas)</label><input type="number" id="esp_cap" placeholder="100"/></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Unidade <span style="color:var(--c-red)">*</span></label>
+        <select id="esp_unidade"><option value="">Selecione a unidade...</option></select>
+        <div style="font-size:11px;color:var(--c-text3);margin-top:4px">As unidades vêm do cadastro em <strong>Configurações → Unidades Senac</strong>. <a href="javascript:void(0)" onclick="goto('configuracoes')" style="color:var(--c-accent)">Cadastrar nova unidade</a>.</div>
+      </div>
     </div>
     <div class="form-row">
       <div class="form-group"><label>Área</label><input id="esp_area" placeholder="Ex: 210 m²"/></div>
@@ -906,7 +927,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="logo-mark">MD</div>
-      <div class="logo-text">MoDesk ALFA<span class="logo-sub">SENAC ALDEOTA</span></div>
+      <div class="logo-text"><span class="lt-row"><span class="lt-mo">mo</span><span class="lt-desk">desk</span><span class="lt-alfa">ALFA</span></span><span class="logo-sub">EVENTOS SENAC ALDEOTA</span></div>
     </div>
     <nav class="sidebar-nav">
       <div class="nav-section">Operações</div>
@@ -1097,6 +1118,45 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
             <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-green)" id="osConcluida">0</div><div style="font-size:12px;color:var(--c-text2)">Concluídas</div></div>
             <div class="card-sm" style="text-align:center"><div style="font-size:22px;font-weight:700;color:var(--c-red)" id="osPendente">0</div><div style="font-size:12px;color:var(--c-text2)">Pendentes</div></div>
           </div>
+          <div class="prop-toolbar">
+            <div class="prop-toolbar-search">
+              <div class="search-bar" style="max-width:none"><span style="color:var(--c-text3)">🔍</span><input id="searchOS" placeholder="Buscar por OS, evento, responsável ou tipo..." oninput="renderOS()"/></div>
+            </div>
+            <div class="prop-toolbar-filters">
+              <label class="field">
+                <span class="field-label">Status</span>
+                <select id="filterStatusOS" onchange="renderOS()"><option value="">Todos</option><option>Aberta</option><option>Em Execução</option><option>Concluída</option><option>Pendente</option></select>
+              </label>
+              <label class="field">
+                <span class="field-label">Mês</span>
+                <select id="filterMesOS" onchange="renderOS()">
+                  <option value="">Todos</option>
+                  <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+                  <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+                  <option value="6">Julho</option><option value="7">Agosto</option><option value="8">Setembro</option>
+                  <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+                </select>
+              </label>
+              <label class="field">
+                <span class="field-label">Agrupar por</span>
+                <select id="filterPeriodOS" onchange="onPeriodChangeOS()">
+                  <option value="">Todos os períodos</option>
+                  <option value="day">Dia</option>
+                  <option value="week">Semana</option>
+                  <option value="month">Mês</option>
+                  <option value="year">Ano</option>
+                </select>
+              </label>
+              <label class="field" id="fieldDataRefOS" style="display:none">
+                <span class="field-label">Data de referência</span>
+                <input type="date" id="filterDataRefOS" onchange="renderOS()"/>
+              </label>
+            </div>
+            <div class="prop-toolbar-actions">
+              <button type="button" class="btn btn-ghost btn-sm" onclick="limparFiltrosOS()" title="Limpar todos os filtros">↺ Limpar</button>
+              <span id="osPeriodoCount" style="font-size:12px;color:var(--c-text3);margin-left:8px"></span>
+            </div>
+          </div>
           <div id="osTableView">
             <div class="table-wrap">
               <table>
@@ -1186,8 +1246,12 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
       <!-- ESPAÇOS -->
       <div class="view" id="view-espacos">
         <div class="section-header">
-          <div><div class="section-title" style="font-size:18px">Espaços &amp; Salas</div></div>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <div>
+            <div class="section-title" style="font-size:18px" id="espTitulo">Espaços &amp; Salas</div>
+            <div style="font-size:12px;color:var(--c-text2)" id="espSubtitulo">Selecione uma unidade para ver as salas cadastradas</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap" id="espActions">
+            <button class="btn btn-ghost btn-sm" id="espVoltarUnidadesBtn" onclick="voltarUnidadesEspacos()" style="display:none">← Unidades</button>
             <div style="display:inline-flex;border:1px solid var(--c-border);border-radius:8px;overflow:hidden">
               <button class="btn btn-ghost btn-sm" id="espViewGridBtn" onclick="setEspacosView('grid')" style="border-radius:0">⊞ Grid</button>
               <button class="btn btn-ghost btn-sm" id="espViewListBtn" onclick="setEspacosView('list')" style="border-radius:0">☰ Lista</button>
@@ -1196,12 +1260,13 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
             <button class="btn btn-primary" onclick="abrirNovoEspaco()">＋ Novo Espaço</button>
           </div>
         </div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px" id="espacoFiltros">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;display:none" id="espacoFiltros">
           <div class="chip selected" onclick="filtrarEspaco(this,'')">Todos</div>
           <div class="chip" onclick="filtrarEspaco(this,'Disponível')">✅ Disponível</div>
           <div class="chip" onclick="filtrarEspaco(this,'Reservado')">📅 Reservado</div>
           <div class="chip" onclick="filtrarEspaco(this,'Manutenção')">🔧 Manutenção</div>
         </div>
+        <div class="grid-3" id="unidadesGrid"></div>
         <div class="grid-3" id="espacoGrid"></div>
         <div id="espacoList" style="display:none" class="table-wrap"></div>
       </div>
@@ -1304,6 +1369,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
           <div class="form-group" style="min-width:200px;margin-bottom:0"><label>Evento / Proposta</label><select id="parecerEvento" onchange="updateParecerEvento()"><option>Selecione o evento...</option></select></div>
           <div id="parecerEventoInfo" style="font-size:12px;color:var(--c-text2)"></div>
         </div>
+        <div id="parecerDiretoriaAlerta" style="display:none;margin-bottom:16px"></div>
         <div id="parecerResumoAlerta" style="display:none;margin-bottom:16px"></div>
 
         <!-- Lista de eventos confirmados — semana a semana -->
@@ -1741,6 +1807,7 @@ let DATA={portfolio:[],oficios:[],
     {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',pax:18,valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:'07.299.392/0001-77',equipamentos:[],docUrl:''},
     {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',pax:180,valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:'03.281.227/0001-00',equipamentos:[],docUrl:''},
     {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',hora:'08:30',pax:120,valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,ocupacao:'08h',valorBase:1300,equipamentos:[]},
+    {id:'PMAYU',num:'MAYU/2026',evento:'Aula Show do Mayu Brasileiro',cliente:'Mayu Brasileiro Produções',espaco:'Terraço',data:'2026-07-30',hora:'20:00',pax:200,valor:15000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Aula Show',musicaAoVivo:true,ocupacao:'06h',valorBase:6000,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],recorrenteMensal:true,docUrl:''},
     {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',hora:'10:00',pax:500,valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,ocupacao:'08h',valorBase:5500,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
   ],
   ordens:[
@@ -1760,15 +1827,22 @@ let DATA={portfolio:[],oficios:[],
     {nome:'AME-CE',doc:'07.140.900/0001-02',email:'eventos@ame-ce.org.br',tel:'(85) 3099-7000',resp:'Dr. Carlos',seg:'Saúde',eventos:6,logo:null},
   ],
   espacos:[
-    {nome:'Auditório A',cap:174,area:'420 m²',equip:'Projetor, Microfones, Caixas Electro-Voice, Mesas Behringer',status:'Disponível',valor:1300,foto:null,temEquipAcoplado:true,equipAcoplados:[{nome:'Projetor',qtd:1,desc:''},{nome:'Microfone bastão sem fio Sennheiser',qtd:3,desc:''},{nome:'Microfone gooseneck Kadosh',qtd:1,desc:''},{nome:'Headset Shure',qtd:1,desc:''},{nome:'Caixa de som Electro-Voice',qtd:4,desc:''},{nome:'Mesa de som Behringer 8 canais',qtd:1,desc:''},{nome:'Mesa de som Behringer 16 canais',qtd:1,desc:''}],equipIncl:['Projetor','Microfone bastão sem fio Sennheiser','Microfone gooseneck Kadosh','Headset Shure','Caixa de som Electro-Voice','Mesa de som Behringer 8 canais','Mesa de som Behringer 16 canais']},
-    {nome:'Cozinha Experience Chef Mayú',cap:60,area:'180 m²',equip:'Cozinha profissional, Ilha gastronômica',status:'Disponível',valor:1768,foto:null},
-    {nome:'Lab Google',cap:30,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:300,foto:null},
-    {nome:'Lab Multiuso',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:400,foto:null},
-    {nome:'Auditório B',cap:100,area:'210 m²',equip:'Projetor Full HD, Som Estéreo',status:'Reservado',valor:2800,foto:null},
-    {nome:'Salão Principal Mayú',cap:350,area:'680 m²',equip:'Sistema de Áudio Distribuído, Palco Modular',status:'Disponível',valor:7200,foto:null},
-    {nome:'Sala Multiuso 1',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:850,foto:null},
-    {nome:'Sala Multiuso 2',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Manutenção',valor:850,foto:null},
-    {nome:'Área Externa',cap:500,area:'1200 m²',equip:'Infraestrutura Elétrica, Pontos de Água',status:'Disponível',valor:5500,foto:null},
+    {unidade:'Senac Aldeota',nome:'Cozinha Experience Chef Mayú',ocup:'04h',cap:8,area:'180 m²',equip:'Cozinha profissional · Cardápio definido pelo Chef',status:'Disponível',valor:1768,foto:null,obs:'Valor para até 08 pessoas sem bebida, cardápio definido pelo Chef'},
+    {unidade:'Senac Aldeota',nome:'Gastrolab (sem instrutor)',ocup:'04h',cap:15,area:'—',equip:'Equipamentos básicos de gastronomia',status:'Disponível',valor:500,foto:null,obs:'Sem instrutor com uso de equipamentos básicos'},
+    {unidade:'Senac Aldeota',nome:'Gastrolab (com instrutor)',ocup:'04h',cap:15,area:'—',equip:'Equipamentos básicos de gastronomia + Instrutor',status:'Disponível',valor:550,foto:null,obs:'Com instrutor e uso de equipamentos básicos'},
+    {unidade:'Senac Aldeota',nome:'Auditório — 08h',ocup:'08h',cap:174,area:'420 m²',equip:'Projetor, Microfones, Caixas Electro-Voice, Mesas Behringer',status:'Disponível',valor:1300,foto:null,obs:'Capacidade para 174 pessoas',temEquipAcoplado:true,equipAcoplados:[{nome:'Projetor',qtd:1,desc:''},{nome:'Microfone bastão sem fio Sennheiser',qtd:3,desc:''},{nome:'Microfone gooseneck Kadosh',qtd:1,desc:''},{nome:'Headset Shure',qtd:1,desc:''},{nome:'Caixa de som Electro-Voice',qtd:4,desc:''},{nome:'Mesa de som Behringer 8 canais',qtd:1,desc:''},{nome:'Mesa de som Behringer 16 canais',qtd:1,desc:''}],equipIncl:['Projetor','Microfone bastão sem fio Sennheiser','Microfone gooseneck Kadosh','Headset Shure','Caixa de som Electro-Voice','Mesa de som Behringer 8 canais','Mesa de som Behringer 16 canais']},
+    {unidade:'Senac Aldeota',nome:'Auditório — 04h',ocup:'04h',cap:174,area:'420 m²',equip:'Projetor, Microfones, Caixas Electro-Voice, Mesas Behringer',status:'Disponível',valor:700,foto:null,obs:'Capacidade para 174 pessoas'},
+    {unidade:'Senac Aldeota',nome:'Lab Conhecimento (1, 2, 3 e 4) — 08h',ocup:'08h',cap:15,area:'—',equip:'Sala de aula equipada',status:'Disponível',valor:400,foto:null,obs:'Capacidade para até 15 pessoas (valor por sala)'},
+    {unidade:'Senac Aldeota',nome:'Lab Conhecimento (1, 2, 3 e 4) — 04h',ocup:'04h',cap:15,area:'—',equip:'Sala de aula equipada',status:'Disponível',valor:200,foto:null,obs:'Capacidade para até 15 pessoas (valor por sala)'},
+    {unidade:'Senac Aldeota',nome:'Lab Multiuso (5 e 6) — 08h',ocup:'08h',cap:30,area:'—',equip:'Lab multiuso equipado',status:'Disponível',valor:800,foto:null,obs:'Capacidade para até 30 pessoas (valor por sala)'},
+    {unidade:'Senac Aldeota',nome:'Lab Multiuso (5 e 6) — 04h',ocup:'04h',cap:30,area:'—',equip:'Lab multiuso equipado',status:'Disponível',valor:400,foto:null,obs:'Capacidade para até 30 pessoas (valor por sala)'},
+    {unidade:'Senac Aldeota',nome:'Lab Google — 08h',ocup:'08h',cap:20,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:600,foto:null,obs:'Capacidade para até 20 pessoas'},
+    {unidade:'Senac Aldeota',nome:'Lab Google — 04h',ocup:'04h',cap:20,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:300,foto:null,obs:'Capacidade para até 20 pessoas'},
+    {unidade:'Senac Aldeota',nome:'Auditório B',cap:100,area:'210 m²',equip:'Projetor Full HD, Som Estéreo',status:'Reservado',valor:2800,foto:null},
+    {unidade:'Senac Aldeota',nome:'Salão Principal Mayú',cap:350,area:'680 m²',equip:'Sistema de Áudio Distribuído, Palco Modular',status:'Disponível',valor:7200,foto:null},
+    {unidade:'Senac Aldeota',nome:'Sala Multiuso 1',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Disponível',valor:850,foto:null},
+    {unidade:'Senac Aldeota',nome:'Sala Multiuso 2',cap:40,area:'65 m²',equip:'TV 65", Videoconferência',status:'Manutenção',valor:850,foto:null},
+    {unidade:'Senac Aldeota',nome:'Área Externa',cap:500,area:'1200 m²',equip:'Infraestrutura Elétrica, Pontos de Água',status:'Disponível',valor:5500,foto:null},
   ],
   estoque:[
     {nome:'Câmera Sony PXW-Z280',modelo:'PXW-Z280',cat:'Câmera',qtd:3,disponivel:2,icon:'📷',status:'Operacional',pat:'PAT-001',foto:null,valor:350},
@@ -1865,6 +1939,54 @@ function loadAssets(){
 function saveAssetsLocal(){
   try{localStorage.setItem('modesk_assets',JSON.stringify(ASSETS));}catch(e){toast('Erro ao salvar assets localmente','warn');}
 }
+function fixEspacosAldeota(){
+  try{
+    if(!DATA||!Array.isArray(DATA.espacos))return false;
+    var dirty=false;
+    DATA.espacos.forEach(function(e){
+      if((e.unidade||'').trim().toLowerCase()==='aldeota'){ e.unidade='Senac Aldeota'; dirty=true; }
+    });
+    var planilha=[
+      {unidade:'Senac Aldeota',nome:'Cozinha Experience Chef Mayú',ocup:'04h',cap:8,area:'180 m²',equip:'Cozinha profissional · Cardápio definido pelo Chef',status:'Disponível',valor:1768,foto:null,obs:'Valor para até 08 pessoas sem bebida, cardápio definido pelo Chef'},
+      {unidade:'Senac Aldeota',nome:'Gastrolab (sem instrutor)',ocup:'04h',cap:15,area:'—',equip:'Equipamentos básicos de gastronomia',status:'Disponível',valor:500,foto:null,obs:'Sem instrutor com uso de equipamentos básicos'},
+      {unidade:'Senac Aldeota',nome:'Gastrolab (com instrutor)',ocup:'04h',cap:15,area:'—',equip:'Equipamentos básicos de gastronomia + Instrutor',status:'Disponível',valor:550,foto:null,obs:'Com instrutor e uso de equipamentos básicos'},
+      {unidade:'Senac Aldeota',nome:'Auditório — 08h',ocup:'08h',cap:174,area:'420 m²',equip:'Projetor, Microfones, Caixas Electro-Voice, Mesas Behringer',status:'Disponível',valor:1300,foto:null,obs:'Capacidade para 174 pessoas'},
+      {unidade:'Senac Aldeota',nome:'Auditório — 04h',ocup:'04h',cap:174,area:'420 m²',equip:'Projetor, Microfones, Caixas Electro-Voice, Mesas Behringer',status:'Disponível',valor:700,foto:null,obs:'Capacidade para 174 pessoas'},
+      {unidade:'Senac Aldeota',nome:'Lab Conhecimento (1, 2, 3 e 4) — 08h',ocup:'08h',cap:15,area:'—',equip:'Sala de aula equipada',status:'Disponível',valor:400,foto:null,obs:'Capacidade para até 15 pessoas (valor por sala)'},
+      {unidade:'Senac Aldeota',nome:'Lab Conhecimento (1, 2, 3 e 4) — 04h',ocup:'04h',cap:15,area:'—',equip:'Sala de aula equipada',status:'Disponível',valor:200,foto:null,obs:'Capacidade para até 15 pessoas (valor por sala)'},
+      {unidade:'Senac Aldeota',nome:'Lab Multiuso (5 e 6) — 08h',ocup:'08h',cap:30,area:'—',equip:'Lab multiuso equipado',status:'Disponível',valor:800,foto:null,obs:'Capacidade para até 30 pessoas (valor por sala)'},
+      {unidade:'Senac Aldeota',nome:'Lab Multiuso (5 e 6) — 04h',ocup:'04h',cap:30,area:'—',equip:'Lab multiuso equipado',status:'Disponível',valor:400,foto:null,obs:'Capacidade para até 30 pessoas (valor por sala)'},
+      {unidade:'Senac Aldeota',nome:'Lab Google — 08h',ocup:'08h',cap:20,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:600,foto:null,obs:'Capacidade para até 20 pessoas'},
+      {unidade:'Senac Aldeota',nome:'Lab Google — 04h',ocup:'04h',cap:20,area:'45 m²',equip:'TV 65", Videoconferência, Wi-Fi',status:'Disponível',valor:300,foto:null,obs:'Capacidade para até 20 pessoas'}
+    ];
+    var legadosRemover=[
+      'Cozinha Experience Chef Mayú — Pacote 04h','Gastrolab — 04h (sem instrutor)','Gastrolab — 04h (com instrutor)',
+      'Auditório — Diária 08h','Auditório — Meia diária 04h',
+      'Lab Conhecimento 1 — 08h','Lab Conhecimento 1 — 04h','Lab Conhecimento 2 — 08h','Lab Conhecimento 2 — 04h',
+      'Lab Conhecimento 3 — 08h','Lab Conhecimento 3 — 04h','Lab Conhecimento 4 — 08h','Lab Conhecimento 4 — 04h',
+      'Lab Multiuso 5 — 08h','Lab Multiuso 5 — 04h','Lab Multiuso 6 — 08h','Lab Multiuso 6 — 04h',
+      'Auditório A','Lab Google','Lab Multiuso'
+    ].map(function(n){return n.toLowerCase();});
+    var before=DATA.espacos.length;
+    DATA.espacos=DATA.espacos.filter(function(e){
+      return !(e && (e.unidade||'')==='Senac Aldeota' && legadosRemover.indexOf((e.nome||'').toLowerCase())>=0);
+    });
+    if(DATA.espacos.length!==before)dirty=true;
+    DATA.espacos.forEach(function(e){
+      if((e.unidade||'')==='Senac Aldeota' && (e.nome||'').toLowerCase()==='cozinha experience chef mayú' && !e.ocup){
+        e.ocup='04h';e.cap=8;e.valor=1768;e.area='180 m²';
+        e.equip='Cozinha profissional · Cardápio definido pelo Chef';
+        e.obs='Valor para até 08 pessoas sem bebida, cardápio definido pelo Chef';
+        dirty=true;
+      }
+    });
+    planilha.forEach(function(p){
+      var ex=DATA.espacos.some(function(e){return (e.nome||'').toLowerCase()===p.nome.toLowerCase() && (e.unidade||'')===p.unidade;});
+      if(!ex){ DATA.espacos.push(p); dirty=true; }
+    });
+    return dirty;
+  }catch(e){console.error('fixEspacosAldeota',e);return false;}
+}
 function loadFromStorage(){
   try{
     var s=localStorage.getItem('modesk_v10')||localStorage.getItem('modesk_v9');
@@ -1882,6 +2004,7 @@ function loadFromStorage(){
     });
     if(!DATA.oficios)DATA.oficios=[];
     if(!DATA.servicosAdicionais)DATA.servicosAdicionais=[];
+    if(fixEspacosAldeota()){ try{localStorage.setItem('modesk_v10',JSON.stringify(DATA));}catch(e){} }
     ensureGestor();
     loadAssets();
     var t=localStorage.getItem('modesk_theme');
@@ -1914,6 +2037,7 @@ function applyFirebaseRemote(remote){
       if(!ASSETS.historico)ASSETS.historico=[];
       saveAssetsLocal();
     }
+    fixEspacosAldeota();
     ensureGestor();
     saveToStorageWithoutFirebase();
     if(currentUser){
@@ -2361,6 +2485,9 @@ function exportExcel(){
   if(exportCtxStr==='propostas'){
     headers=['Nº','Evento','Cliente','Espaço','Data','Área Técnica','Prazo Pgto','Valor','Status','Tipo'];
     data=DATA.propostas.map(function(p){return [p.num,p.evento,p.cliente,p.espaco,formatDate(p.data),formatAreaTecnica(p),prazo15(p.data),p.valor,p.status,p.tipo==='oficio'?'Ofício FECOMÉRCIO':'Normal'];});
+  }else if(exportCtxStr==='espacos'){
+    headers=['Espaço','Unidade','Capacidade','Área','Equipamentos','Status','Valor/dia (R$)'];
+    data=DATA.espacos.map(function(e){return [e.nome,e.unidade||'',e.cap,e.area,e.equip,e.status,e.valor];});
   }else{
     headers=['Evento','Proposta','Data','Valor','Status'];
     data=DATA.propostas.map(function(p){return [p.evento,p.num,formatDate(p.data),p.valor,p.status];});
@@ -3238,9 +3365,89 @@ function abrirEnviarOS(idx){
   window.location.href=url;
   toast('Abrindo Outlook para envio da OS '+o.id+'...','info');
 }
+
+// === Alertas operacionais MoDesk ALFA ===
+function _evIsTerraco(esp){esp=(esp||'').toLowerCase();return esp.indexOf('terra')>=0||esp.indexOf('mayú')>=0||esp.indexOf('mayu')>=0;}
+function _evIsAuditorio(esp){return (esp||'').toLowerCase().indexOf('audit')>=0;}
+function _evHora(p){var h=(p.hora||'00:00').split(':');return parseInt(h[0],10)||0;}
+function _evPeriodo(p){var h=_evHora(p);if(h<12)return 'manha';if(h<18)return 'tarde';return 'noite';}
+function _evAddDays(d,n){var dt=new Date(d+'T00:00:00');dt.setDate(dt.getDate()+n);return dt.toISOString().substring(0,10);}
+function showModeskAlert(titulo,msg,onOk){
+  var html='<div class="alert-modesk"><div class="ai">⚠️</div><div><div style="font-weight:700;margin-bottom:4px">'+titulo+'</div><div>'+msg+'</div></div></div>';
+  try{toast(titulo+' — '+msg,'warning');}catch(e){}
+  var ok=window.confirm('⚠️ '+titulo+'\n\n'+msg+'\n\nDeseja prosseguir mesmo assim?');
+  if(ok&&typeof onOk==='function')onOk();
+  return ok;
+}
+function checkAlertasEvento(p){
+  if(!p||!p.data)return true;
+  var per=_evPeriodo(p);
+  var outras=(DATA.propostas||[]).filter(function(x){return x.id!==p.id;});
+  // (1) Terraço noite (montagem interna) -> manhã seguinte Auditório
+  if(per==='manha'&&_evIsAuditorio(p.espaco)){
+    var prevDay=_evAddDays(p.data,-1);
+    var conflito=outras.find(function(x){return x.data===prevDay&&_evIsTerraco(x.espaco)&&_evPeriodo(x)==='noite'&&(x.areaTecnica||'')==='interna';});
+    if(conflito){
+      if(!showModeskAlert('Confirmação do Técnico — Equipamentos Alocados',
+        'Há evento no <b>Terraço</b> na noite de '+prevDay+' ("'+conflito.evento+'") com <b>montagem interna</b>. O novo evento no <b>Auditório</b> na manhã seguinte reutilizará equipamentos alocados. Confirme com o técnico responsável antes de prosseguir.'))return false;
+    }
+  }
+  // (2) Mesmo dia manhã + noite -> alerta de disponibilidade do técnico
+  if(per==='noite'){
+    var manha=outras.find(function(x){return x.data===p.data&&_evPeriodo(x)==='manha';});
+    if(manha){
+      if(!showModeskAlert('Período de Disponibilização do Técnico',
+        'Já existe evento pela manhã em '+p.data+' ("'+manha.evento+'"). Cadastrar novo evento à noite no mesmo dia pode exceder o período de disponibilização do técnico.'))return false;
+    }
+  }
+  if(per==='manha'){
+    var noite=outras.find(function(x){return x.data===p.data&&_evPeriodo(x)==='noite';});
+    if(noite){
+      if(!showModeskAlert('Período de Disponibilização do Técnico',
+        'Já existe evento à noite em '+p.data+' ("'+noite.evento+'"). A inclusão de evento na manhã do mesmo dia pode exceder o período de disponibilização do técnico.'))return false;
+    }
+  }
+  return true;
+}
+function checkAlertasPosSave(p){
+  if(!p)return;
+  // (3) Mayu Brasileiro -> Mobcity para equipe técnica
+  if((p.evento||'').toLowerCase().indexOf('mayu')>=0){
+    try{toast('🚖 Solicitar Mobcity para retorno da equipe técnica interna — evento Mayu Brasileiro em horário noturno.','warning');}catch(e){}
+    setTimeout(function(){alert('🚖 ALERTA — Mobcity\n\nSolicitar Mobcity para a equipe técnica interna retornar para casa após o evento "'+p.evento+'" devido ao horário de ocorrência.');},150);
+  }
+}
+
 function renderOS(){
   var tb=document.getElementById('tbodyOS');
-  tb.innerHTML=DATA.ordens.map(function(o,i){
+  var q=((document.getElementById('searchOS')||{}).value||'').toLowerCase();
+  var st=(document.getElementById('filterStatusOS')||{}).value||'';
+  var mesSel=(document.getElementById('filterMesOS')||{}).value;
+  var per=(document.getElementById('filterPeriodOS')||{}).value||'';
+  var ref=(document.getElementById('filterDataRefOS')||{}).value||'';
+  var lista=(DATA.ordens||[]).filter(function(o){
+    var match=!q||((o.id||'')+(o.evento||'')+(o.resp||'')+(o.tipo||'')+(o.propostaNum||'')).toLowerCase().indexOf(q)>=0;
+    if(!match)return false;
+    if(st&&o.status!==st)return false;
+    if(mesSel!==''&&mesSel!=null&&o.data){
+      if(new Date(o.data+'T00:00:00').getMonth()!==parseInt(mesSel))return false;
+    }
+    if(per&&ref&&o.data){
+      var d=new Date(o.data+'T00:00:00'),rd=new Date(ref+'T00:00:00');
+      if(per==='day'&&o.data!==ref)return false;
+      if(per==='month'&&(d.getMonth()!==rd.getMonth()||d.getFullYear()!==rd.getFullYear()))return false;
+      if(per==='year'&&d.getFullYear()!==rd.getFullYear())return false;
+      if(per==='week'){
+        var start=new Date(rd);start.setDate(rd.getDate()-rd.getDay());start.setHours(0,0,0,0);
+        var end=new Date(start);end.setDate(start.getDate()+7);
+        if(!(d>=start&&d<end))return false;
+      }
+    }
+    return true;
+  });
+  var cnt=document.getElementById('osPeriodoCount');
+  if(cnt)cnt.textContent=lista.length+' OS no período';
+  tb.innerHTML=lista.map(function(o,i){
     var prioBadge=o.prio==='Urgente'?'badge-red':o.prio==='Alta'?'badge-amber':'badge-gray';
     var enviada=o.enviadaEm?'<span title="Enviada em '+formatDate(o.enviadaEm.split('T')[0])+'" style="color:var(--c-green);font-size:11px;margin-left:6px">✉ enviada</span>':'';
     return '<tr>'
@@ -3261,10 +3468,10 @@ function renderOS(){
       +'</tr>';
   }).join('');
   renderOSKanban();
-  var ab=DATA.ordens.filter(function(o){return o.status==='Aberta';}).length;
-  var ex=DATA.ordens.filter(function(o){return o.status==='Em Execução';}).length;
-  var co=DATA.ordens.filter(function(o){return o.status==='Concluída';}).length;
-  var pe=DATA.ordens.filter(function(o){return o.status==='Pendente';}).length;
+  var ab=lista.filter(function(o){return o.status==='Aberta';}).length;
+  var ex=lista.filter(function(o){return o.status==='Em Execução';}).length;
+  var co=lista.filter(function(o){return o.status==='Concluída';}).length;
+  var pe=lista.filter(function(o){return o.status==='Pendente';}).length;
   document.getElementById('osAberta').textContent=ab;
   document.getElementById('osExec').textContent=ex;
   document.getElementById('osConcluida').textContent=co;
@@ -3637,9 +3844,58 @@ function previewEspacoFoto(input){
   }
 }
 function renderEspacos(){
-  var src=espacoFiltro?DATA.espacos.filter(function(e){return e.status===espacoFiltro;}):DATA.espacos;
+  var unidades=(typeof window.getUnidadesSenac==='function')?window.getUnidadesSenac():[];
+  var uniGrid=document.getElementById('unidadesGrid');
   var g=document.getElementById('espacoGrid');
-  if(!src.length){g.innerHTML='<div class="empty"><div class="empty-icon">🏛️</div><div class="empty-title">Nenhum espaço encontrado</div></div>';var lst0=document.getElementById('espacoList');if(lst0)lst0.innerHTML='';return;}
+  var lst=document.getElementById('espacoList');
+  var filtros=document.getElementById('espacoFiltros');
+  var voltar=document.getElementById('espVoltarUnidadesBtn');
+  var titulo=document.getElementById('espTitulo');
+  var sub=document.getElementById('espSubtitulo');
+
+  // VIEW 1: lista de unidades
+  if(!window.espacoUnidadeSel){
+    if(uniGrid){uniGrid.style.display='';}
+    if(g)g.style.display='none';
+    if(lst)lst.style.display='none';
+    if(filtros)filtros.style.display='none';
+    if(voltar)voltar.style.display='none';
+    if(titulo)titulo.textContent='Espaços & Salas';
+    if(sub)sub.textContent='Selecione uma unidade para ver as salas cadastradas';
+    if(!uniGrid)return;
+    if(!unidades.length){
+      uniGrid.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">📍</div><div class="empty-title">Nenhuma unidade cadastrada</div><div style="margin-top:8px;font-size:13px;color:var(--c-text2)">Cadastre as unidades em <strong>Configurações → Unidades Senac</strong> antes de criar espaços.</div><button class="btn btn-primary" style="margin-top:14px" onclick="goto(\'configuracoes\')">Ir para Configurações</button></div>';
+      return;
+    }
+    uniGrid.innerHTML=unidades.map(function(u){
+      var count=(DATA.espacos||[]).filter(function(e){return (e.unidade||'')===u.nome;}).length;
+      var img=u.foto
+        ?'<img src="'+u.foto+'" style="width:100%;height:150px;object-fit:cover"/>'
+        :'<div style="width:100%;height:150px;background:var(--c-surface2);display:flex;align-items:center;justify-content:center;font-size:48px">🏢</div>';
+      var safe=String(u.nome).replace(/'/g,"\\'");
+      return '<div class="space-card" style="cursor:pointer" onclick="abrirUnidadeEspacos(\''+safe+'\')">'
+        +img
+        +'<div class="space-card-body">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><div style="font-weight:700;font-size:15px">'+u.nome+'</div><span class="badge badge-green">'+count+' sala'+(count===1?'':'s')+'</span></div>'
+        +'<div style="font-size:12px;color:var(--c-text2);margin-bottom:12px">📍 '+(u.endereco||'—')+'</div>'
+        +'<div style="display:flex;justify-content:flex-end;padding-top:10px;border-top:1px solid var(--c-border)">'
+        +'<button class="btn btn-primary btn-sm">Ver salas →</button>'
+        +'</div></div></div>';
+    }).join('');
+    return;
+  }
+
+  // VIEW 2: salas da unidade selecionada
+  if(uniGrid){uniGrid.style.display='none';uniGrid.innerHTML='';}
+  if(filtros)filtros.style.display='flex';
+  if(voltar)voltar.style.display='inline-flex';
+  if(titulo)titulo.textContent='Salas — '+window.espacoUnidadeSel;
+  var uniObj=unidades.find(function(u){return u.nome===window.espacoUnidadeSel;});
+  if(sub)sub.textContent=uniObj?('📍 '+(uniObj.endereco||'')):'';
+  var base=(DATA.espacos||[]).filter(function(e){return (e.unidade||'')===window.espacoUnidadeSel;});
+  var src=espacoFiltro?base.filter(function(e){return e.status===espacoFiltro;}):base;
+  if(g)g.style.display='';
+  if(!src.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏛️</div><div class="empty-title">Nenhuma sala cadastrada nesta unidade</div><button class="btn btn-primary" style="margin-top:14px" onclick="abrirNovoEspaco()">＋ Cadastrar primeira sala</button></div>';if(lst)lst.innerHTML='';return;}
   var defaultIcons=['🏛️','🏟️','💫','🏢','🏢','🌿'];
   g.innerHTML=src.map(function(e){
     var idx=DATA.espacos.indexOf(e);
@@ -3658,7 +3914,6 @@ function renderEspacos(){
       +'<button class="btn btn-primary btn-sm" onclick="toast(\''+e.nome+' reservado\',\'info\')">Reservar</button>'
       +'</div></div></div></div>';
   }).join('');
-  var lst=document.getElementById('espacoList');
   if(lst){
     if(!src.length){lst.innerHTML='<div class="empty" style="padding:30px;text-align:center;color:var(--c-text3)">Nenhum espaço encontrado</div>';}
     else lst.innerHTML='<table><thead><tr><th>Espaço</th><th>Capacidade</th><th>Área</th><th>Equipamentos</th><th>Status</th><th>Valor/dia</th></tr></thead><tbody>'
@@ -3666,11 +3921,32 @@ function renderEspacos(){
       +'</tbody></table>';
   }
 }
+function abrirUnidadeEspacos(nomeUnidade){
+  window.espacoUnidadeSel=nomeUnidade;
+  espacoFiltro='';
+  var chips=document.querySelectorAll('#espacoFiltros .chip');chips.forEach(function(c,i){c.classList.toggle('selected',i===0);});
+  renderEspacos();
+}
+function voltarUnidadesEspacos(){
+  window.espacoUnidadeSel=null;
+  renderEspacos();
+}
+function popularSelectUnidades(selecionada){
+  var sel=document.getElementById('esp_unidade');if(!sel)return;
+  var unidades=(typeof window.getUnidadesSenac==='function')?window.getUnidadesSenac():[];
+  var atual=selecionada||sel.value||'';
+  sel.innerHTML='<option value="">Selecione a unidade...</option>'
+    +unidades.map(function(u){return '<option value="'+String(u.nome).replace(/"/g,'&quot;')+'"'+(u.nome===atual?' selected':'')+'>'+u.nome+'</option>';}).join('');
+  if(!unidades.length){
+    sel.innerHTML='<option value="">⚠ Cadastre uma unidade primeiro em Configurações</option>';
+  }
+}
 function abrirNovoEspaco(){
   editingIdx.espaco=-1;
   document.getElementById('modalEspacoTitle').textContent='🏛️ Novo Espaço';
   ['esp_nome','esp_cap','esp_area','esp_valor','esp_equip'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('esp_status').value='Disponível';
+  popularSelectUnidades(window.espacoUnidadeSel||'');
   document.getElementById('esp_foto_preview').style.display='none';
   var r=document.querySelector('input[name="esp_temAcoplado"][value="nao"]');if(r)r.checked=true;
   fillEspacoAcoplados([]);
@@ -3687,6 +3963,7 @@ function editarEspaco(idx){
   document.getElementById('esp_valor').value=e.valor;
   document.getElementById('esp_equip').value=e.equip||'';
   document.getElementById('esp_status').value=e.status;
+  popularSelectUnidades(e.unidade||'');
   if(e.foto){document.getElementById('esp_foto_preview').style.display='block';document.getElementById('esp_foto_img').src=e.foto;}
   else document.getElementById('esp_foto_preview').style.display='none';
   var acop=e.equipAcoplados||((e.equipIncl||[]).map(function(n){return {nome:n,qtd:1,desc:''};}));
@@ -3707,7 +3984,9 @@ function saveEspaco(){
   var equipAcoplados=temAcop?readEspacoAcoplados():[];
   if(temAcop&&!equipAcoplados.length){toast('Informe ao menos um equipamento acoplado ou marque "Não"','error');return;}
   var equipIncl=equipAcoplados.map(function(x){return x.nome;});
-  var obj={nome:nome,cap:parseInt(document.getElementById('esp_cap').value)||0,area:document.getElementById('esp_area').value,valor:parseFloat(document.getElementById('esp_valor').value)||0,equip:document.getElementById('esp_equip').value,status:document.getElementById('esp_status').value,foto:fotoSrc,temEquipAcoplado:temAcop,equipAcoplados:equipAcoplados,equipIncl:equipIncl};
+  var unidade=(document.getElementById('esp_unidade')||{}).value||'';
+  if(!unidade){toast('Informe a unidade do espaço','error');return;}
+  var obj={nome:nome,unidade:unidade,cap:parseInt(document.getElementById('esp_cap').value)||0,area:document.getElementById('esp_area').value,valor:parseFloat(document.getElementById('esp_valor').value)||0,equip:document.getElementById('esp_equip').value,status:document.getElementById('esp_status').value,foto:fotoSrc,temEquipAcoplado:temAcop,equipAcoplados:equipAcoplados,equipIncl:equipIncl};
   if(editingIdx.espaco>=0){DATA.espacos[editingIdx.espaco]=obj;toast('Espaço atualizado','success');}
   else{DATA.espacos.push(obj);toast('Espaço cadastrado','success');}
   saveToStorage();renderEspacos();
@@ -4359,6 +4638,15 @@ function updateParecerEvento(){
   var info=document.getElementById('parecerEventoInfo');
   if(p)info.innerHTML='<span style="color:var(--c-accent2)">'+p.evento+'</span> — '+formatDate(p.data)+' · '+p.espaco+' · <span style="color:var(--c-green)">'+fmtMoney(p.valor)+'</span>';
   else info.innerHTML='';
+  var box=document.getElementById('parecerDiretoriaAlerta');
+  if(box){
+    if(p&&p.tipo==='oficio'){
+      box.style.display='block';
+      box.innerHTML='<div class="alert-modesk"><div class="ai">🏛️</div><div><div style="font-weight:700;margin-bottom:4px">Evento Interno com Ofício FECOMÉRCIO</div><div>Este evento terá participação de <b>Diretoria e Conselheiros</b>. Reforce protocolo institucional, pauta, recepção VIP e cobertura técnica no parecer.</div></div></div>';
+    } else {
+      box.style.display='none';box.innerHTML='';
+    }
+  }
 }
 function gerarParecerWA(){toast('WhatsApp removido desta versão','info');}
 
@@ -4952,8 +5240,8 @@ function exportEspacosPDF(empresa,orientation){
   doc.setFontSize(8);doc.setFont('helvetica','normal');doc.setTextColor(100,116,139);
   doc.text('Gerado em: '+new Date().toLocaleDateString('pt-BR'),14,startY+12);
   doc.autoTable({startY:startY+18,
-    head:[['Espaço','Capacidade','Área','Equipamentos','Status','Valor/dia (R$)']],
-    body:DATA.espacos.map(function(e){return [e.nome,e.cap+' pax',e.area,e.equip,e.status,fmtMoney(e.valor)];}),
+    head:[['Espaço','Unidade','Capacidade','Área','Equipamentos','Status','Valor/dia (R$)']],
+    body:DATA.espacos.map(function(e){return [e.nome,e.unidade||'—',e.cap+' pax',e.area,e.equip,e.status,fmtMoney(e.valor)];}),
     theme:'grid',styles:{fontSize:9,cellPadding:3,lineColor:[0,92,171],lineWidth:0.2},
     headStyles:{fillColor:[0,92,171],textColor:255,fontStyle:'bold'},
     alternateRowStyles:{fillColor:[245,250,255]},margin:senacMargins(doc)});
@@ -5605,7 +5893,9 @@ function wizardStep(dir){
       var p=DATA.propostas[editingPropostaIdx];
       var updated=buildProposalFromDraft(draft,total,p.status);
       updated.id=p.id;updated.num=p.num;updated.origem=p.origem||updated.origem;updated.createdAt=p.createdAt||updated.createdAt;updated.importado=!!p.importado;updated.arqOrigem=p.arqOrigem||'';
+      if(!checkAlertasEvento(updated)){return;}
       DATA.propostas[editingPropostaIdx]=updated;
+      checkAlertasPosSave(updated);
       saveToStorage();renderPropostas();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
       toast('Proposta '+p.num+' atualizada!','success');
       confirmSavePrint(p.num,updated,function(close){
@@ -5622,7 +5912,9 @@ function wizardStep(dir){
     novaProp.id='P'+String(DATA.propostas.length+1).padStart(3,'0');
     novaProp.num=num;
     novaProp.createdAt=new Date().toISOString();
+    if(!checkAlertasEvento(novaProp)){return;}
     DATA.propostas.push(novaProp);
+    checkAlertasPosSave(novaProp);
     saveToStorage();
     renderPropostas();renderOS();renderDashboard();updateBadges();checkPrazosVencidos();renderAlertas();
     toast('🎉 Proposta '+num+' salva e adicionada à lista de propostas/eventos!','success');
@@ -6340,6 +6632,21 @@ function limparFiltrosPropostas(){
   var f=document.getElementById('fieldDataRef');if(f)f.style.display='none';
   filterPropostas();
 }
+function onPeriodChangeOS(){
+  var per=document.getElementById('filterPeriodOS');
+  var field=document.getElementById('fieldDataRefOS');
+  var inp=document.getElementById('filterDataRefOS');
+  if(field)field.style.display=per&&per.value?'flex':'none';
+  if(inp&&!inp.value)inp.value=new Date().toISOString().slice(0,10);
+  renderOS();
+}
+function limparFiltrosOS(){
+  ['searchOS','filterStatusOS','filterMesOS','filterPeriodOS','filterDataRefOS'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.value='';
+  });
+  var f=document.getElementById('fieldDataRefOS');if(f)f.style.display='none';
+  renderOS();
+}
 // Inicializa visibilidade salva
 try{applyPropColVisibility();}catch(e){}
 document.addEventListener('DOMContentLoaded',function(){try{applyPropColVisibility();}catch(e){}});
@@ -6904,6 +7211,211 @@ document.addEventListener("DOMContentLoaded",function(){setTimeout(ensureStorage
       showRes('err','Falha na conexão (fetch)',(e && e.message)||String(e));
     }
   };
+})();
+</script>
+
+<script>
+/* ───── Unidades Senac (cadastro com endereço e foto) + Alertas push para Técnico ───── */
+(function(){
+  var LS_UNI='unidadesSenac_v1';
+  var LS_NOTIF='technicoNotifFired_v1';
+
+  function loadUnis(){try{return JSON.parse(localStorage.getItem(LS_UNI)||'[]');}catch(e){return [];}}
+  function saveUnis(arr){localStorage.setItem(LS_UNI,JSON.stringify(arr));}
+  window.getUnidadesSenac=function(){return loadUnis();};
+  function loadFired(){try{return JSON.parse(localStorage.getItem(LS_NOTIF)||'{}');}catch(e){return {};}}
+  function markFired(k){var f=loadFired();f[k]=1;localStorage.setItem(LS_NOTIF,JSON.stringify(f));}
+
+  function ymd(d){var y=d.getFullYear(),m=String(d.getMonth()+1).padStart(2,'0'),da=String(d.getDate()).padStart(2,'0');return y+'-'+m+'-'+da;}
+
+  /* ── Aba "Unidades Senac" em Configurações ── */
+  function ensureUnidadesTab(){
+    var nav=document.querySelector('#view-configuracoes .settings-nav');
+    var paneWrap=document.querySelector('#view-configuracoes .settings-layout > div:last-child');
+    if(!nav||!paneWrap) return false;
+    if(document.getElementById('cfg-unidadesSenac')) return true;
+    var item=document.createElement('div');
+    item.className='settings-nav-item';
+    item.innerHTML='<i data-lucide="map-pin"></i> Unidades Senac';
+    item.onclick=function(){ if(window.settingsTab)settingsTab(item,'unidadesSenac'); renderUnidadesSenac(); };
+    nav.appendChild(item);
+    var pane=document.createElement('div');
+    pane.className='settings-pane card';
+    pane.id='cfg-unidadesSenac';
+    pane.innerHTML=
+      '<div class="section-title" style="margin-bottom:8px">📍 Unidades Senac</div>'
+      +'<div class="section-sub" style="margin-bottom:16px">Cadastre as unidades com endereço e foto.</div>'
+      +'<div class="form-row">'
+      +'  <div class="form-group"><label>Nome da Unidade *</label><input id="uniSenac_nome" placeholder="Ex: Senac Aldeota"/></div>'
+      +'  <div class="form-group"><label>Endereço *</label><input id="uniSenac_end" placeholder="Rua, número, bairro, cidade-UF"/></div>'
+      +'</div>'
+      +'<div class="form-group" style="margin-bottom:12px"><label>Foto da Unidade</label>'
+      +'  <input type="file" id="uniSenac_foto" accept="image/*"/>'
+      +'  <div id="uniSenac_fotoPrev" style="margin-top:8px"></div>'
+      +'</div>'
+      +'<div style="display:flex;gap:8px;margin-bottom:18px">'
+      +'  <button class="btn btn-primary" id="uniSenac_salvar">✓ Salvar Unidade</button>'
+      +'  <button class="btn btn-ghost" id="uniSenac_limpar">Limpar</button>'
+      +'</div>'
+      +'<div class="section-title" style="font-size:14px;margin-bottom:8px">Unidades cadastradas</div>'
+      +'<div id="uniSenac_list"></div>';
+    paneWrap.appendChild(pane);
+
+    var fileInput=pane.querySelector('#uniSenac_foto');
+    var prev=pane.querySelector('#uniSenac_fotoPrev');
+    var editingId=null, fotoData=null;
+
+    fileInput.addEventListener('change',function(){
+      var f=fileInput.files&&fileInput.files[0]; if(!f) return;
+      var r=new FileReader();
+      r.onload=function(){fotoData=r.result;prev.innerHTML='<img src="'+fotoData+'" style="max-width:200px;max-height:140px;border-radius:8px;border:1px solid var(--c-border)"/>';};
+      r.readAsDataURL(f);
+    });
+
+    function limpar(){
+      editingId=null; fotoData=null;
+      pane.querySelector('#uniSenac_nome').value='';
+      pane.querySelector('#uniSenac_end').value='';
+      fileInput.value=''; prev.innerHTML='';
+      pane.querySelector('#uniSenac_salvar').textContent='✓ Salvar Unidade';
+    }
+    pane.querySelector('#uniSenac_limpar').onclick=limpar;
+
+    pane.querySelector('#uniSenac_salvar').onclick=function(){
+      var nome=pane.querySelector('#uniSenac_nome').value.trim();
+      var end=pane.querySelector('#uniSenac_end').value.trim();
+      if(!nome||!end){ if(window.toast)toast('Preencha nome e endereço','warn'); return; }
+      var arr=loadUnis();
+      if(editingId){
+        var ix=arr.findIndex(function(u){return u.id===editingId;});
+        if(ix>=0){ arr[ix].nome=nome; arr[ix].endereco=end; if(fotoData)arr[ix].foto=fotoData; }
+      }else{
+        arr.push({id:'u_'+Date.now(),nome:nome,endereco:end,foto:fotoData||null});
+      }
+      saveUnis(arr); limpar(); renderUnidadesSenac();
+      if(window.toast)toast('Unidade salva','success');
+      if(window.renderEspacos)try{renderEspacos();}catch(e){}
+    };
+
+    window.renderUnidadesSenac=function(){
+      var list=pane.querySelector('#uniSenac_list');
+      var arr=loadUnis();
+      if(arr.length===0){ list.innerHTML='<div style="color:var(--c-text2);font-size:13px;padding:12px;border:1.5px dashed var(--c-border2);border-radius:10px;text-align:center">Nenhuma unidade cadastrada ainda.</div>'; return; }
+      list.innerHTML=arr.map(function(u){
+        var img=u.foto?'<img src="'+u.foto+'" style="width:84px;height:64px;object-fit:cover;border-radius:8px;border:1px solid var(--c-border)"/>':'<div style="width:84px;height:64px;border-radius:8px;background:var(--c-surface2);display:flex;align-items:center;justify-content:center;color:var(--c-text3);font-size:11px">sem foto</div>';
+        return '<div style="display:flex;gap:12px;align-items:center;padding:10px;border:1px solid var(--c-border);border-radius:10px;margin-bottom:8px">'
+          +img
+          +'<div style="flex:1"><div style="font-weight:700">'+u.nome+'</div><div style="font-size:12px;color:var(--c-text2)">'+u.endereco+'</div></div>'
+          +'<button class="btn btn-ghost btn-sm" data-edit="'+u.id+'">✎ Editar</button>'
+          +'<button class="btn btn-ghost btn-sm" data-del="'+u.id+'" style="color:var(--c-red)">🗑️</button>'
+          +'</div>';
+      }).join('');
+      list.querySelectorAll('[data-edit]').forEach(function(b){b.onclick=function(){
+        var u=loadUnis().find(function(x){return x.id===b.dataset.edit;}); if(!u)return;
+        editingId=u.id; fotoData=u.foto||null;
+        pane.querySelector('#uniSenac_nome').value=u.nome;
+        pane.querySelector('#uniSenac_end').value=u.endereco;
+        prev.innerHTML=u.foto?'<img src="'+u.foto+'" style="max-width:200px;max-height:140px;border-radius:8px;border:1px solid var(--c-border)"/>':'';
+        pane.querySelector('#uniSenac_salvar').textContent='✓ Atualizar Unidade';
+      };});
+      list.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(){
+        if(!confirm('Excluir esta unidade?'))return;
+        saveUnis(loadUnis().filter(function(x){return x.id!==b.dataset.del;}));
+        renderUnidadesSenac();
+        if(window.renderEspacos)try{renderEspacos();}catch(e){}
+      };});
+    };
+
+    if(window.lucide&&lucide.createIcons)try{lucide.createIcons();}catch(e){}
+    return true;
+  }
+
+  /* ── Alertas push: "tem evento amanhã" (18h+ véspera) e "tem evento hoje" (manhã) ── */
+  function getEventos(){
+    try{
+      var arr=(window.DATA&&DATA.propostas)?DATA.propostas:[];
+      return arr.filter(function(p){return p&&p.data;});
+    }catch(e){return [];}
+  }
+  function ensurePermission(){
+    if(!('Notification' in window)) return;
+    if(Notification.permission==='default'){
+      try{Notification.requestPermission();}catch(e){}
+    }
+  }
+  function notify(title,body){
+    if(!('Notification' in window)||Notification.permission!=='granted') return;
+    try{ new Notification(title,{body:body,icon:'/favicon.ico',tag:title+'|'+body}); }catch(e){}
+  }
+  function checkAlerts(){
+    if(!('Notification' in window)||Notification.permission!=='granted') return;
+    var now=new Date();
+    var hoje=ymd(now);
+    var amanhaD=new Date(now); amanhaD.setDate(amanhaD.getDate()+1);
+    var amanha=ymd(amanhaD);
+    var hour=now.getHours();
+    var fired=loadFired();
+    getEventos().forEach(function(p){
+      var titulo=p.evento||p.titulo||(p.num||'Evento');
+      var hora=p.hora?(' às '+p.hora):'';
+      if(p.data===amanha && hour>=18){
+        var k='tomorrow:'+(p.id||p.num||titulo)+':'+hoje;
+        if(!fired[k]){ notify('Tem evento amanhã','📅 '+titulo+hora); markFired(k); }
+      }
+      if(p.data===hoje && hour>=6 && hour<12){
+        var k2='today:'+(p.id||p.num||titulo)+':'+hoje;
+        if(!fired[k2]){ notify('Tem evento hoje','📅 '+titulo+hora); markFired(k2); }
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    setTimeout(ensureUnidadesTab,700);
+    setTimeout(ensurePermission,1500);
+    setTimeout(checkAlerts,4000);
+    setInterval(checkAlerts, 5*60*1000);
+  });
+})();
+</script>
+</body>
+</html>
+<script>
+/* ───── Seed: Unidades Senac + Espaços de Aldeota (Planilha Valores) ───── */
+(function(){
+  function run(){
+    try{
+      var LS_UNI='unidadesSenac_v1';
+      var arr=[];try{arr=JSON.parse(localStorage.getItem(LS_UNI)||'[]');}catch(e){arr=[];}
+      var seed=[
+        {nome:'Senac Aldeota',endereco:'Av. Desembargador Moreira, 1301 - Aldeota, Fortaleza - CE (Portão de Serviço/TI: Rua Tibúrcio Cavalcante, 1750 - Aldeota)'},
+        {nome:'Senac Centro',endereco:'Av. Tristão Gonçalves, 1245 - Centro, Fortaleza - CE'},
+        {nome:'Sede Fecomércio',endereco:'Rua Dr. José Perdigão, 277 - Centro, Fortaleza - CE'},
+        {nome:'Senac Panorama',endereco:'Rua Boris, 90 - Centro, Fortaleza - CE'},
+        {nome:'Senac Riomar',endereco:'R. Des. Lauro Nogueira, 1500 — Shopping RioMar Fortaleza · Piso L2 - Papicu, Fortaleza - CE'},
+        {nome:'Café Comércio',endereco:'Av. Tristão Gonçalves, 1245 (Anexo ao Senac Centro) - Centro, Fortaleza - CE'},
+        {nome:'Café Pinacoteca',endereco:'Praça do Ferreira (Complexo da Pinacoteca do Ceará) - Centro, Fortaleza - CE'},
+        {nome:'Senac Viçosa do Ceará — Restaurante Escola',endereco:'Av. Lamartine Nogueira, s/n - Centro, Viçosa do Ceará - CE'}
+      ];
+      var changed=false;
+      seed.forEach(function(s){
+        var has=arr.some(function(u){return (u.nome||'').toLowerCase()===s.nome.toLowerCase();});
+        if(!has){ arr.push({id:'u_seed_'+Math.random().toString(36).slice(2,8),nome:s.nome,endereco:s.endereco,foto:null}); changed=true; }
+      });
+      if(changed) localStorage.setItem(LS_UNI,JSON.stringify(arr));
+
+      /* Migração: renomeia unidade dos espaços de "Aldeota" → "Senac Aldeota" e
+         insere/corrige os espaços tabelados da planilha Valores_Espaços_Senac_Aldeota.xlsx */
+      try{
+        if(typeof DATA!=='undefined' && Array.isArray(DATA.espacos) && typeof fixEspacosAldeota==='function'){
+          if(fixEspacosAldeota()){ try{saveToStorage();}catch(e){} }
+        }
+      }catch(e){console.error('fixEspacosAldeota (seed)',e);}
+      try{if(window.renderEspacos)renderEspacos();}catch(e){}
+      try{if(window.renderUnidadesSenac)renderUnidadesSenac();}catch(e){}
+    }catch(e){console.error('seed unidades/espacos',e);}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(run,900);});
+  else setTimeout(run,900);
 })();
 </script>
 </body>
