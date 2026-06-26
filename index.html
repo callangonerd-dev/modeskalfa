@@ -1738,7 +1738,36 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
     </div>
     <div class="modal-footer">
       <button class="btn btn-ghost" onclick="closeModal('modalConfirmarPgto')">Cancelar</button>
-      <button class="btn btn-primary" onclick="confirmarPagamentoSalvar()">✅ Confirmar Pagamento</button>
+      <button class="btn btn-primary" onclick="confirmarPagamentoSalvar()" style="background:var(--c-green);border-color:var(--c-green)">✅ Confirmar Pagamento</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ALERTA PARECER TÉCNICO — REMONTAGEM -->
+<div class="modal-overlay" id="modalAlertaRemontagem">
+  <div class="modal" style="max-width:520px;border:2px solid #dc2626;box-shadow:0 10px 40px rgba(220,38,38,.35)">
+    <div class="modal-header" style="background:linear-gradient(135deg,#fef2f2,#fee2e2);border-bottom:2px solid #dc2626">
+      <div class="modal-title" style="color:#991b1b;font-weight:800">🚨 Enviar alerta ao Parecer Técnico</div>
+      <button class="modal-close" onclick="closeModal('modalAlertaRemontagem')" style="color:#991b1b">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="padding:14px;border-radius:10px;background:linear-gradient(135deg,#fef2f2,#fee2e2);border:2px solid #dc2626;color:#7f1d1d;margin-bottom:14px;animation:impactoPulse 1.6s ease-in-out infinite">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <div style="font-size:30px;line-height:1">⚙️</div>
+          <div style="flex:1">
+            <div style="font-weight:800;font-size:15px;margin-bottom:6px;color:#991b1b">Impacto Técnico — Remontagem de Equipamentos</div>
+            <div id="alertaRemontagemInfo" style="font-size:13px;line-height:1.5"></div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:0">
+        <label style="color:#991b1b;font-weight:700">Mensagem ao Parecer Técnico</label>
+        <textarea id="alertaRemontagemMsg" rows="3" style="border:1px solid #dc2626"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modalAlertaRemontagem')" style="border-color:#dc2626;color:#991b1b">Fechar</button>
+      <button class="btn btn-primary" onclick="enviarAlertaRemontagem()" style="background:#dc2626;border-color:#dc2626;color:#fff">🚨 Enviar alerta ao Parecer Técnico</button>
     </div>
   </div>
 </div>
@@ -4577,7 +4606,7 @@ function renderParecerEventos(){
   // Garantir estilos (banner/row destacados de Diretoria/Presidência)
   if(!document.getElementById('impactoPulseStyle')){
     var _stP=document.createElement('style');_stP.id='impactoPulseStyle';
-    _stP.textContent='@keyframes impactoPulse{0%,100%{box-shadow:0 6px 18px rgba(217,119,6,.18)}50%{box-shadow:0 6px 24px rgba(217,119,6,.45)}}@keyframes oficioPulse{0%,100%{box-shadow:0 0 0 0 rgba(236,72,153,.6)}50%{box-shadow:0 0 0 8px rgba(236,72,153,0)}}.row-oficio>td{background:linear-gradient(90deg,rgba(236,72,153,.12),rgba(236,72,153,.02) 70%) !important}.row-oficio>td:first-child{border-left:4px solid #ec4899}.oficio-badge-strong{display:inline-flex;align-items:center;gap:4px;background:#ec4899;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.3px;margin-left:6px;animation:oficioPulse 1.6s ease-in-out infinite;cursor:help}.oficio-banner{margin:10px 0 14px;padding:14px 16px;border:2px solid #ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);border-radius:10px;color:#831843;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;animation:oficioPulse 2s ease-in-out infinite;font-weight:600}.oficio-banner:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(236,72,153,.35)}';
+    _stP.textContent='@keyframes impactoPulse{0%,100%{box-shadow:0 6px 18px rgba(217,119,6,.18)}50%{box-shadow:0 6px 24px rgba(217,119,6,.45)}}@keyframes oficioPulse{0%,100%{box-shadow:0 0 0 0 rgba(236,72,153,.6)}50%{box-shadow:0 0 0 8px rgba(236,72,153,0)}}.row-oficio>td{background:linear-gradient(90deg,rgba(236,72,153,.12),rgba(236,72,153,.02) 70%) !important}.row-oficio>td:first-child{border-left:4px solid #ec4899}.oficio-badge-strong{display:inline-flex;align-items:center;gap:4px;background:#ec4899;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.3px;margin-left:6px;animation:oficioPulse 1.6s ease-in-out infinite;cursor:help}.oficio-banner{margin:10px 0 14px;padding:14px 16px;border:2px solid #ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);border-radius:10px;color:#831843;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;animation:oficioPulse 2s ease-in-out infinite;font-weight:600}.oficio-banner:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(236,72,153,.35)}@keyframes impactoTecPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.6)}50%{box-shadow:0 0 0 8px rgba(220,38,38,0)}}.row-impacto-tec>td{background:linear-gradient(90deg,rgba(220,38,38,.12),rgba(220,38,38,.02) 70%) !important}.row-impacto-tec>td:first-child{border-left:4px solid #dc2626}.impacto-tec-badge{display:inline-flex;align-items:center;gap:4px;background:#dc2626;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.3px;margin-left:6px;animation:impactoTecPulse 1.6s ease-in-out infinite;cursor:help}.impacto-tec-banner{margin:10px 0 14px;padding:14px 16px;border:2px solid #dc2626;background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:10px;color:#7f1d1d;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;animation:impactoTecPulse 2s ease-in-out infinite;font-weight:600}.impacto-tec-banner:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(220,38,38,.35)}';
     document.head.appendChild(_stP);
   }
   // remove banner antigo
@@ -4619,8 +4648,12 @@ function renderParecerEventos(){
     if(ct.email)contatoLinhas.push('<div style="font-size:11px"><a href="mailto:'+ct.email+'" style="color:var(--c-accent2);text-decoration:none">✉ '+ct.email+'</a></div>');
     if(!contatoLinhas.length)contatoLinhas.push('<div style="font-size:11px;color:var(--c-text3)">Sem contato cadastrado</div>');
     var isOf=p.tipo==='oficio';
-    return '<tr'+(isOf?' class="row-oficio" data-oficio="1"':'')+'>'
-      +'<td><strong>'+p.evento+'</strong>'+(isOf?' <span class="oficio-badge-strong" title="Clique para ver detalhes — presença de Diretoria/Presidência" onclick="abrirDetalhesOficio(\''+p.id+'\')">🏛️ DIRETORIA/PRESIDÊNCIA</span>':'')+'<div style="font-size:11px;color:var(--c-text3)">#'+(p.num||p.id)+'</div></td>'
+    var _avisosEv=(DATA.avisosTecnicos||[]).filter(function(a){return a&&a.eventoNovo&&a.eventoNovo.id===p.id&&(a.tipo==='impacto-remontagem'||a.tipo==='impacto-remontagem-pagamento');});
+    var isImpTec=_avisosEv.length>0;
+    var _rowCls=[];if(isOf)_rowCls.push('row-oficio');if(isImpTec)_rowCls.push('row-impacto-tec');
+    var _rowAttr=_rowCls.length?' class="'+_rowCls.join(' ')+'"'+(isOf?' data-oficio="1"':'')+(isImpTec?' data-impacto-tec="1"':''):'';
+    return '<tr'+_rowAttr+'>'
+      +'<td><strong>'+p.evento+'</strong>'+(isOf?' <span class="oficio-badge-strong" title="Clique para ver detalhes — presença de Diretoria/Presidência" onclick="abrirDetalhesOficio(\''+p.id+'\')">🏛️ DIRETORIA/PRESIDÊNCIA</span>':'')+(isImpTec?' <span class="impacto-tec-badge" title="Alerta de impacto técnico — remontagem de equipamentos" onclick="abrirDetalhesImpactoTec(\''+p.id+'\')">⚙️ IMPACTO TÉCNICO</span>':'')+'<div style="font-size:11px;color:var(--c-text3)">#'+(p.num||p.id)+'</div></td>'
       +'<td><strong>'+p.cliente+'</strong>'+contatoLinhas.join('')+'</td>'
       +'<td>'+p.espaco+'</td>'
       +'<td>'+fmtBR(d)+'<div style="font-size:11px;color:var(--c-text3)">'+fmtDiaSemana(d)+'</div></td>'
@@ -4653,10 +4686,26 @@ function renderParecerEventos(){
     bn.setAttribute('role','button');bn.setAttribute('tabindex','0');
     bn.onclick=function(){abrirDetalhesOficio(null);};
     bn.innerHTML='<div style="font-size:26px;line-height:1">🏛️</div>'
-      +'<div style="flex:1"><div style="font-size:14px;font-weight:800;color:#9d174d">ATENÇÃO — '+oficios.length+' evento(s) com presença de DIRETORIA / PRESIDÊNCIA</div>'
-      +'<div style="font-size:12px;margin-top:2px;color:#831843">Ofício FECOMÉRCIO · prioridade máxima · <u>clique para ver detalhes</u></div></div>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:800;color:#991b1b">ATENÇÃO — '+oficios.length+' evento(s) com presença de DIRETORIA / PRESIDÊNCIA</div>'
+      +'<div style="font-size:12px;margin-top:2px;color:#7f1d1d">Ofício FECOMÉRCIO · prioridade máxima · <u>clique para ver detalhes</u></div></div>'
       +'<div style="font-size:12px;font-weight:700;background:#ec4899;color:#fff;padding:6px 12px;border-radius:20px">Ver detalhes →</div>';
     if(resumo&&resumo.parentNode)resumo.parentNode.insertBefore(bn,resumo.nextSibling);
+  }
+  var impactos=eventos.filter(function(e){return (DATA.avisosTecnicos||[]).some(function(a){return a&&a.eventoNovo&&a.eventoNovo.id===e.id&&(a.tipo==='impacto-remontagem'||a.tipo==='impacto-remontagem-pagamento');});});
+  var _oldImp=document.getElementById('parecerImpactoTecBanner');if(_oldImp)_oldImp.remove();
+  if(impactos.length>0){
+    msgs.push('⚙️ '+impactos.length+' evento(s) com ALERTA de IMPACTO TÉCNICO — remontagem de equipamentos sem turno de folga.');
+    var bni=document.createElement('div');
+    bni.id='parecerImpactoTecBanner';
+    bni.className='impacto-tec-banner';
+    bni.setAttribute('role','button');bni.setAttribute('tabindex','0');
+    bni.onclick=function(){abrirDetalhesImpactoTec(null);};
+    bni.innerHTML='<div style="font-size:26px;line-height:1">⚙️</div>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:800;color:#991b1b">ATENÇÃO — '+impactos.length+' evento(s) com IMPACTO TÉCNICO (remontagem)</div>'
+      +'<div style="font-size:12px;margin-top:2px;color:#7f1d1d">Equipe técnica sem turno de folga · <u>clique para ver detalhes</u></div></div>'
+      +'<div style="font-size:12px;font-weight:700;background:#dc2626;color:#fff;padding:6px 12px;border-radius:20px">Ver detalhes →</div>';
+    var anchor=document.getElementById('parecerOficioBanner')||resumo;
+    if(anchor&&anchor.parentNode)anchor.parentNode.insertBefore(bni,anchor.nextSibling);
   }
   if(externas>0)msgs.push('⚠️ '+externas+' evento(s) com área técnica externa — alinhar logística com fornecedor.');
   if(semContato>0)msgs.push('📵 '+semContato+' cliente(s) sem contato cadastrado — atualizar cadastro para dúvidas técnicas.');
@@ -4680,11 +4729,11 @@ function abrirDetalhesOficio(eventId){
   var rows=ofs.map(function(p){
     var ct=(typeof clienteContato==='function')?clienteContato(p.cliente):{};
     var fmt=p.data?p.data.split('-').reverse().join('/'):'—';
-    return '<div style="border:1px solid #fbcfe8;background:#fff;border-left:4px solid #ec4899;border-radius:8px;padding:12px 14px;margin-bottom:10px">'
+    return '<div style="border:1px solid #fecaca;background:#fff;border-left:4px solid #dc2626;border-radius:8px;padding:12px 14px;margin-bottom:10px">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">'
-        +'<div><div style="font-weight:800;color:#831843;font-size:14px">'+p.evento+'</div>'
+        +'<div><div style="font-weight:800;color:#7f1d1d;font-size:14px">'+p.evento+'</div>'
         +'<div style="font-size:12px;color:#6b7280;margin-top:2px">#'+(p.num||p.id)+' · '+p.cliente+'</div></div>'
-        +'<span style="background:#ec4899;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">🏛️ DIRETORIA/PRESIDÊNCIA</span>'
+        +'<span style="background:#dc2626;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">🏛️ DIRETORIA/PRESIDÊNCIA</span>'
       +'</div>'
       +'<div style="margin-top:8px;font-size:12px;color:#374151;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px">'
         +'<div>📅 <b>'+fmt+'</b></div>'
@@ -4696,17 +4745,55 @@ function abrirDetalhesOficio(eventId){
     +'</div>';
   }).join('');
   ov.innerHTML='<div style="background:#fff;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)">'
-    +'<div style="background:linear-gradient(135deg,#ec4899,#be185d);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between">'
+    +'<div style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between">'
       +'<div><div style="font-weight:800;font-size:16px">🏛️ Eventos com Diretoria / Presidência</div>'
       +'<div style="font-size:12px;opacity:.9;margin-top:2px">'+ofs.length+' evento(s) com Ofício FECOMÉRCIO — prioridade máxima</div></div>'
       +'<button type="button" onclick="document.getElementById(\'oficioDetailOv\').remove()" style="background:rgba(255,255,255,.2);border:0;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px">✕</button>'
     +'</div>'
-    +'<div style="padding:18px;overflow:auto;background:#fdf2f8">'+rows+'</div>'
+    +'<div style="padding:18px;overflow:auto;background:#fef2f2">'+rows+'</div>'
     +'<div style="padding:12px 18px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;background:#fff"><button type="button" onclick="document.getElementById(\'oficioDetailOv\').remove()" style="background:#ec4899;color:#fff;border:0;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer">Entendi</button></div>'
   +'</div>';
   ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
   document.body.appendChild(ov);
 }
+
+function abrirDetalhesImpactoTec(eventId){
+  var avisos=(DATA.avisosTecnicos||[]).filter(function(a){return a&&(a.tipo==='impacto-remontagem'||a.tipo==='impacto-remontagem-pagamento');});
+  if(eventId){avisos=avisos.filter(function(a){return a.eventoNovo&&a.eventoNovo.id===eventId;});}
+  if(!avisos.length){try{toast('Nenhum alerta de impacto técnico encontrado.','info');}catch(e){}return;}
+  var old=document.getElementById('impTecDetailOv');if(old)old.remove();
+  var ov=document.createElement('div');ov.id='impTecDetailOv';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px';
+  var rows=avisos.map(function(a){
+    var n=a.eventoNovo||{};var ant=a.eventoAnterior||{};
+    var fmt=function(d){return d?d.split('-').reverse().join('/'):'—';};
+    return '<div style="border:1px solid #fecaca;background:#fff;border-left:4px solid #dc2626;border-radius:8px;padding:12px 14px;margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:800;color:#7f1d1d;font-size:14px">'+(n.evento||'Evento')+'</div>'
+        +'<div style="font-size:12px;color:#6b7280;margin-top:2px">#'+(n.num||n.id||'')+' · '+(n.espaco||'—')+'</div></div>'
+        +'<span style="background:#dc2626;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">⚙️ IMPACTO TÉCNICO</span>'
+      +'</div>'
+      +'<div style="margin-top:8px;font-size:12px;color:#374151;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:6px">'
+        +'<div>📅 Novo: <b>'+fmt(n.data)+' '+(n.hora||'')+'</b></div>'
+        +'<div>🌙 Anterior: <b>'+fmt(ant.data)+' '+(ant.hora||'')+'</b></div>'
+        +'<div>📍 '+(ant.espaco||'—')+'</div>'
+      +'</div>'
+      +(a.mensagem?'<div style="margin-top:8px;font-size:12px;color:#7f1d1d;border-top:1px dashed #fecaca;padding-top:6px"><b>Mensagem:</b> '+a.mensagem+'</div>':'')
+    +'</div>';
+  }).join('');
+  ov.innerHTML='<div style="background:#fff;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)">'
+    +'<div style="background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between">'
+      +'<div><div style="font-weight:800;font-size:16px">⚙️ Alertas de Impacto Técnico — Remontagem</div>'
+      +'<div style="font-size:12px;opacity:.9;margin-top:2px">'+avisos.length+' alerta(s) registrado(s) para o Parecer Técnico</div></div>'
+      +'<button type="button" onclick="document.getElementById(\'impTecDetailOv\').remove()" style="background:rgba(255,255,255,.2);border:0;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px">✕</button>'
+    +'</div>'
+    +'<div style="padding:18px;overflow:auto;background:#fef2f2">'+rows+'</div>'
+    +'<div style="padding:12px 18px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;background:#fff"><button type="button" onclick="document.getElementById(\'impTecDetailOv\').remove()" style="background:#dc2626;color:#fff;border:0;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer">Entendi</button></div>'
+  +'</div>';
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+  document.body.appendChild(ov);
+}
+
 
 
 
@@ -6409,6 +6496,44 @@ function confirmarPagamentoSalvar(){
   saveToStorage();renderPropostas();renderPropostaCards();updateBadges();checkPrazosVencidos();renderOS();
   closeModal('modalConfirmarPgto');
   toast('Pagamento confirmado · OS '+(os?os.id:'')+' gerada automaticamente','success');
+  try{
+    var _noiteAnt=_detectarImpactoRemontagem(p);
+    if(_noiteAnt){_abrirAlertaRemontagem(p,_noiteAnt);}
+  }catch(e){console.warn('alerta remontagem:',e);}
+}
+
+// ── ALERTA AO PARECER TÉCNICO — REMONTAGEM ──
+var _alertaRemontagemCtx=null;
+function _abrirAlertaRemontagem(p,noiteAnt){
+  _alertaRemontagemCtx={p:p,noiteAnt:noiteAnt};
+  var info='Proposta <b>'+_escHtml(p.num||'')+'</b> — <b>'+_escHtml(p.evento||'')+'</b><br>'
+    +'Evento à <b>noite</b> em <b>'+noiteAnt.data+'</b> (<i>'+_escHtml(noiteAnt.evento||'sem nome')+'</i> · '+_escHtml(noiteAnt.espaco||'—')+').<br>'
+    +'Novo evento na <b>manhã</b> de <b>'+p.data+'</b> exige <b>remontagem</b> sem turno de folga para a equipe técnica.';
+  var msg='Pagamento confirmado da proposta '+(p.num||'')+' ("'+(p.evento||'')+'"). '
+    +'Há impacto técnico de remontagem: evento à noite em '+noiteAnt.data+' seguido de evento na manhã de '+p.data+'. '
+    +'Favor revisar o Parecer Técnico e providenciar a remontagem dos equipamentos.';
+  var infoEl=document.getElementById('alertaRemontagemInfo');if(infoEl)infoEl.innerHTML=info;
+  var msgEl=document.getElementById('alertaRemontagemMsg');if(msgEl)msgEl.value=msg;
+  openModal('modalAlertaRemontagem');
+}
+function enviarAlertaRemontagem(){
+  var ctx=_alertaRemontagemCtx;if(!ctx){closeModal('modalAlertaRemontagem');return;}
+  var p=ctx.p,noiteAnt=ctx.noiteAnt;
+  var msgEl=document.getElementById('alertaRemontagemMsg');
+  var mensagem=msgEl?msgEl.value.trim():'';
+  if(!mensagem){alert('Informe a mensagem do alerta');return;}
+  _registrarAvisoTecnico({
+    titulo:'🚨 Pagamento confirmado — Impacto na Remontagem',
+    tipo:'impacto-remontagem-pagamento',
+    severidade:'alta',
+    eventoNovo:{id:p.id||'',num:p.num||'',evento:p.evento||'',data:p.data,hora:p.hora||'',espaco:p.espaco||''},
+    eventoAnterior:{id:noiteAnt.id||'',num:noiteAnt.num||'',evento:noiteAnt.evento||'',data:noiteAnt.data,hora:noiteAnt.hora||'',espaco:noiteAnt.espaco||''},
+    mensagem:mensagem
+  });
+  try{saveToStorage();}catch(e){}
+  closeModal('modalAlertaRemontagem');
+  toast('🚨 Alerta enviado ao Parecer Técnico','warning');
+  _alertaRemontagemCtx=null;
 }
 
 // ── IMPORTAÇÃO DE PROPOSTAS (PDF/Word/Excel) ──────────────────────
