@@ -15,7 +15,7 @@
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import{getFirestore,doc,setDoc,onSnapshot,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import{getAnalytics}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-const firebaseConfig={apiKey:"AIzaSyCdJ2elGKhjjc7SMnEzcvpX1Yw6SA-grJ8",authDomain:"modesk-alfa.firebaseapp.com",projectId:"modesk-alfa",storageBucket:"modesk-alfa.firebasestorage.app",messagingSenderId:"499970336809",appId:"1:499970336809:web:e60f8bc4c5df09c4499438",measurementId:"G-66T8PP8KFN"};
+const firebaseConfig={apiKey:"",authDomain:"modesk-alfa.firebaseapp.com",projectId:"modesk-alfa",storageBucket:"modesk-alfa.firebasestorage.app",messagingSenderId:"499970336809",appId:"1:499970336809:web:e60f8bc4c5df09c4499438",measurementId:"G-66T8PP8KFN"};
 const app=initializeApp(firebaseConfig);
 try{getAnalytics(app);}catch(e){}
 const db=getFirestore(app);
@@ -3340,17 +3340,100 @@ function showModeskAlert(titulo,msg,onOk){
   if(ok&&typeof onOk==='function')onOk();
   return ok;
 }
+function _registrarAvisoTecnico(aviso){
+  if(!DATA.avisosTecnicos)DATA.avisosTecnicos=[];
+  aviso.id='AT'+Date.now();
+  aviso.createdAt=new Date().toISOString();
+  aviso.lido=false;
+  DATA.avisosTecnicos.unshift(aviso);
+  try{saveToStorage();}catch(e){}
+  try{toast('📣 Aviso registrado na Área Técnica: '+aviso.titulo,'warning');}catch(e){}
+}
+function _detectarImpactoRemontagem(p){
+  if(!p||!p.data)return null;
+  if(_evPeriodo(p)!=='manha')return null;
+  var prevDay=_evAddDays(p.data,-1);
+  var outras=(DATA.propostas||[]).filter(function(x){return x.id!==p.id;});
+  return outras.find(function(x){return x.data===prevDay&&_evPeriodo(x)==='noite';})||null;
+}
+function _renderImpactoAlertStep1(noiteAnt,forceRedo){
+  var host=document.getElementById('wizardContent');
+  if(!host)return;
+  var existing=document.getElementById('impactoAlertBox');
+  if(existing)existing.remove();
+  var box=document.createElement('div');
+  box.id='impactoAlertBox';
+  box.setAttribute('role','alert');
+  box.style.cssText='margin:0 0 16px;padding:16px 18px;border:2px solid #d97706;background:linear-gradient(135deg,#fff7ed,#fef3c7);border-radius:10px;box-shadow:0 6px 18px rgba(217,119,6,.18);color:#7c2d12;animation:impactoPulse 1.6s ease-in-out infinite';
+  var dataNova=(document.getElementById('w_data')&&document.getElementById('w_data').value)||'';
+  box.innerHTML='<div style="display:flex;align-items:flex-start;gap:12px">'
+    +'<div style="font-size:30px;line-height:1">⚙️</div>'
+    +'<div style="flex:1">'
+      +'<div style="font-weight:800;font-size:15px;margin-bottom:4px;color:#9a3412">Impacto Técnico — Remontagem de Equipamentos</div>'
+      +'<div style="font-size:13px;line-height:1.5">Há evento à <b>noite</b> em <b>'+noiteAnt.data+'</b> (<i>'+(noiteAnt.evento||'sem nome')+'</i> · '+(noiteAnt.espaco||'—')+').<br>O novo evento na <b>manhã</b> de <b>'+dataNova+'</b> exige que a equipe técnica local tenha <b>um turno de diferença</b> para remontagem dos equipamentos.</div>'
+      +(forceRedo?'<div style="margin-top:8px;font-size:12px;color:#9a3412;font-weight:700">⚠️ Você optou por NÃO prosseguir. Informe uma nova DATA ou HORÁRIO acima e clique novamente em Próximo.</div>':'')
+      +'<div style="margin-top:12px;font-weight:700;font-size:13px">É obrigatório responder para continuar — deseja prosseguir mesmo assim?</div>'
+      +'<div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap">'
+        +'<button type="button" class="btn btn-primary" onclick="_decidirImpacto(true)" style="background:#16a34a;border-color:#16a34a">✅ Sim, prosseguir</button>'
+        +'<button type="button" class="btn btn-ghost" onclick="_decidirImpacto(false)" style="border-color:#dc2626;color:#dc2626">❌ Não — informar nova data/turno</button>'
+      +'</div>'
+    +'</div></div>';
+  if(!document.getElementById('impactoPulseStyle')){
+    var st=document.createElement('style');st.id='impactoPulseStyle';
+    st.textContent='@keyframes impactoPulse{0%,100%{box-shadow:0 6px 18px rgba(217,119,6,.18)}50%{box-shadow:0 6px 24px rgba(217,119,6,.45)}}@keyframes oficioPulse{0%,100%{box-shadow:0 0 0 0 rgba(236,72,153,.6)}50%{box-shadow:0 0 0 8px rgba(236,72,153,0)}}.row-oficio{background:linear-gradient(90deg,rgba(236,72,153,.10),transparent 60%) !important;border-left:4px solid #ec4899}.oficio-badge-strong{display:inline-flex;align-items:center;gap:4px;background:#ec4899;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.3px;margin-left:6px;animation:oficioPulse 1.6s ease-in-out infinite;cursor:help}.oficio-banner{margin:10px 0 12px;padding:14px 16px;border:2px solid #ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);border-radius:10px;color:#831843;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;animation:oficioPulse 2s ease-in-out infinite}.oficio-banner:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(236,72,153,.25)}';
+    document.head.appendChild(st);
+  }
+  host.insertBefore(box,host.firstChild);
+  try{box.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}
+}
+function _decidirImpacto(sim){
+  wizardDraft._impactoDecidido=sim?'sim':'nao';
+  var box=document.getElementById('impactoAlertBox');if(box)box.remove();
+  if(sim){
+    try{toast('Impacto técnico confirmado — um aviso será enviado à Área Técnica ao salvar.','success');}catch(e){}
+    wizardStep(1);
+  }else{
+    try{toast('Informe uma nova DATA ou HORÁRIO e clique em Próximo novamente.','warning');}catch(e){}
+    var dEl=document.getElementById('w_data');var hEl=document.getElementById('w_hora');
+    if(dEl)dEl.focus();
+    var clear=function(){wizardDraft._impactoDecidido=null;};
+    if(dEl)dEl.addEventListener('change',clear,{once:true});
+    if(hEl)hEl.addEventListener('change',clear,{once:true});
+    var noite=_detectarImpactoRemontagem({id:editingPropostaIdx>=0?DATA.propostas[editingPropostaIdx].id:'__novo',data:wizardDraft.data,hora:wizardDraft.hora||'08:00'});
+    if(noite)_renderImpactoAlertStep1(noite,true);
+  }
+}
 function checkAlertasEvento(p){
   if(!p||!p.data)return true;
   var per=_evPeriodo(p);
   var outras=(DATA.propostas||[]).filter(function(x){return x.id!==p.id;});
-  // (1) Terraço noite (montagem interna) -> manhã seguinte Auditório
+  // (0) GERAL: evento à noite + novo evento na manhã seguinte = impacto técnico (remontagem)
+  // A confirmação acontece de forma INLINE na etapa 1 do wizard (não usa window.confirm).
+  if(per==='manha'){
+    var noiteAnt=_detectarImpactoRemontagem(p);
+    if(noiteAnt){
+      var dec=p._impactoDecidido||(typeof wizardDraft!=='undefined'&&wizardDraft?wizardDraft._impactoDecidido:null);
+      if(dec!=='sim'){
+        try{toast('⚠️ Responda ao alerta de impacto técnico na etapa "Evento" antes de salvar.','warning');}catch(e){}
+        if(typeof wizardCurrentStep!=='undefined'){wizardCurrentStep=1;try{renderWizardStep(1);}catch(e){}setTimeout(function(){_renderImpactoAlertStep1(noiteAnt,dec==='nao');},120);}
+        return false;
+      }
+      _registrarAvisoTecnico({
+        titulo:'Impacto técnico — remontagem sem turno de folga',
+        tipo:'impacto-remontagem',
+        eventoNovo:{id:p.id||'',num:p.num||'',evento:p.evento||'',data:p.data,hora:p.hora||'',espaco:p.espaco||''},
+        eventoAnterior:{id:noiteAnt.id||'',num:noiteAnt.num||'',evento:noiteAnt.evento||'',data:noiteAnt.data,hora:noiteAnt.hora||'',espaco:noiteAnt.espaco||''},
+        mensagem:'Evento à noite em '+noiteAnt.data+' seguido de evento na manhã de '+p.data+'. Equipe técnica precisa de remontagem sem turno de folga.'
+      });
+    }
+  }
+  // (1) Terraço noite (montagem interna) -> manha seguinte Auditorio
   if(per==='manha'&&_evIsAuditorio(p.espaco)){
-    var prevDay=_evAddDays(p.data,-1);
-    var conflito=outras.find(function(x){return x.data===prevDay&&_evIsTerraco(x.espaco)&&_evPeriodo(x)==='noite'&&(x.areaTecnica||'')==='interna';});
+    var prevDay2=_evAddDays(p.data,-1);
+    var conflito=outras.find(function(x){return x.data===prevDay2&&_evIsTerraco(x.espaco)&&_evPeriodo(x)==='noite'&&(x.areaTecnica||'')==='interna';});
     if(conflito){
       if(!showModeskAlert('Confirmação do Técnico — Equipamentos Alocados',
-        'Há evento no <b>Terraço</b> na noite de '+prevDay+' ("'+conflito.evento+'") com <b>montagem interna</b>. O novo evento no <b>Auditório</b> na manhã seguinte reutilizará equipamentos alocados. Confirme com o técnico responsável antes de prosseguir.'))return false;
+        'Há evento no <b>Terraço</b> na noite de '+prevDay2+' ("'+conflito.evento+'") com <b>montagem interna</b>. O novo evento no <b>Auditório</b> na manhã seguinte reutilizará equipamentos alocados. Confirme com o técnico responsável antes de prosseguir.'))return false;
     }
   }
   // (2) Mesmo dia manhã + noite -> alerta de disponibilidade do técnico
@@ -4491,6 +4574,14 @@ function renderParecerEventos(){
     var d=new Date(p.data+'T00:00:00');
     return d>=ini&&d<=fim;
   }).sort(function(a,b){return (a.data+(a.hora||'')).localeCompare(b.data+(b.hora||''));});
+  // Garantir estilos (banner/row destacados de Diretoria/Presidência)
+  if(!document.getElementById('impactoPulseStyle')){
+    var _stP=document.createElement('style');_stP.id='impactoPulseStyle';
+    _stP.textContent='@keyframes impactoPulse{0%,100%{box-shadow:0 6px 18px rgba(217,119,6,.18)}50%{box-shadow:0 6px 24px rgba(217,119,6,.45)}}@keyframes oficioPulse{0%,100%{box-shadow:0 0 0 0 rgba(236,72,153,.6)}50%{box-shadow:0 0 0 8px rgba(236,72,153,0)}}.row-oficio>td{background:linear-gradient(90deg,rgba(236,72,153,.12),rgba(236,72,153,.02) 70%) !important}.row-oficio>td:first-child{border-left:4px solid #ec4899}.oficio-badge-strong{display:inline-flex;align-items:center;gap:4px;background:#ec4899;color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.3px;margin-left:6px;animation:oficioPulse 1.6s ease-in-out infinite;cursor:help}.oficio-banner{margin:10px 0 14px;padding:14px 16px;border:2px solid #ec4899;background:linear-gradient(135deg,#fdf2f8,#fce7f3);border-radius:10px;color:#831843;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s ease,box-shadow .15s ease;animation:oficioPulse 2s ease-in-out infinite;font-weight:600}.oficio-banner:hover{transform:translateY(-1px);box-shadow:0 8px 22px rgba(236,72,153,.35)}';
+    document.head.appendChild(_stP);
+  }
+  // remove banner antigo
+  var _oldBn=document.getElementById('parecerOficioBanner');if(_oldBn)_oldBn.remove();
   if(!eventos.length){
     var labelPeriodo=r.tipo==='dia'?'neste dia':r.tipo==='mes'?'neste mês':'nesta semana';
     tbody.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--c-text3);padding:24px">Nenhum evento confirmado '+labelPeriodo+'.</td></tr>';
@@ -4527,8 +4618,9 @@ function renderParecerEventos(){
     }
     if(ct.email)contatoLinhas.push('<div style="font-size:11px"><a href="mailto:'+ct.email+'" style="color:var(--c-accent2);text-decoration:none">✉ '+ct.email+'</a></div>');
     if(!contatoLinhas.length)contatoLinhas.push('<div style="font-size:11px;color:var(--c-text3)">Sem contato cadastrado</div>');
-    return '<tr>'
-      +'<td><strong>'+p.evento+'</strong><div style="font-size:11px;color:var(--c-text3)">#'+(p.num||p.id)+'</div></td>'
+    var isOf=p.tipo==='oficio';
+    return '<tr'+(isOf?' class="row-oficio" data-oficio="1"':'')+'>'
+      +'<td><strong>'+p.evento+'</strong>'+(isOf?' <span class="oficio-badge-strong" title="Clique para ver detalhes — presença de Diretoria/Presidência" onclick="abrirDetalhesOficio(\''+p.id+'\')">🏛️ DIRETORIA/PRESIDÊNCIA</span>':'')+'<div style="font-size:11px;color:var(--c-text3)">#'+(p.num||p.id)+'</div></td>'
       +'<td><strong>'+p.cliente+'</strong>'+contatoLinhas.join('')+'</td>'
       +'<td>'+p.espaco+'</td>'
       +'<td>'+fmtBR(d)+'<div style="font-size:11px;color:var(--c-text3)">'+fmtDiaSemana(d)+'</div></td>'
@@ -4551,6 +4643,21 @@ function renderParecerEventos(){
   var msgs=[];
   if(conferidos===total)msgs.push('✅ Todos os eventos do período já passaram pela conferência técnica.');
   else msgs.push('🔍 '+(total-conferidos)+' evento(s) aguardam conferência de equipamentos e montagem.');
+  var oficios=eventos.filter(function(e){return e.tipo==='oficio';});
+  if(oficios.length>0){
+    msgs.push('🏛️ '+oficios.length+' evento(s) com OFÍCIO FECOMÉRCIO — presença de Diretoria/Presidência, prioridade máxima.');
+    // Banner clicável acima da tabela
+    var bn=document.createElement('div');
+    bn.id='parecerOficioBanner';
+    bn.className='oficio-banner';
+    bn.setAttribute('role','button');bn.setAttribute('tabindex','0');
+    bn.onclick=function(){abrirDetalhesOficio(null);};
+    bn.innerHTML='<div style="font-size:26px;line-height:1">🏛️</div>'
+      +'<div style="flex:1"><div style="font-size:14px;font-weight:800;color:#9d174d">ATENÇÃO — '+oficios.length+' evento(s) com presença de DIRETORIA / PRESIDÊNCIA</div>'
+      +'<div style="font-size:12px;margin-top:2px;color:#831843">Ofício FECOMÉRCIO · prioridade máxima · <u>clique para ver detalhes</u></div></div>'
+      +'<div style="font-size:12px;font-weight:700;background:#ec4899;color:#fff;padding:6px 12px;border-radius:20px">Ver detalhes →</div>';
+    if(resumo&&resumo.parentNode)resumo.parentNode.insertBefore(bn,resumo.nextSibling);
+  }
   if(externas>0)msgs.push('⚠️ '+externas+' evento(s) com área técnica externa — alinhar logística com fornecedor.');
   if(semContato>0)msgs.push('📵 '+semContato+' cliente(s) sem contato cadastrado — atualizar cadastro para dúvidas técnicas.');
   var conflitos={};
@@ -4562,6 +4669,46 @@ function renderParecerEventos(){
   insight.style.display='block';
   insight.innerHTML='<strong>Interpretação:</strong> '+msgs.join(' · ');
 }
+
+function abrirDetalhesOficio(eventId){
+  var ofs=(DATA.propostas||[]).filter(function(p){return p.tipo==='oficio'&&p.status==='Confirmada';});
+  if(eventId){var only=ofs.filter(function(p){return p.id===eventId;});if(only.length)ofs=only;}
+  if(!ofs.length){try{toast('Nenhum evento de ofício encontrado.','info');}catch(e){}return;}
+  var old=document.getElementById('oficioDetailOv');if(old)old.remove();
+  var ov=document.createElement('div');ov.id='oficioDetailOv';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px';
+  var rows=ofs.map(function(p){
+    var ct=(typeof clienteContato==='function')?clienteContato(p.cliente):{};
+    var fmt=p.data?p.data.split('-').reverse().join('/'):'—';
+    return '<div style="border:1px solid #fbcfe8;background:#fff;border-left:4px solid #ec4899;border-radius:8px;padding:12px 14px;margin-bottom:10px">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap">'
+        +'<div><div style="font-weight:800;color:#831843;font-size:14px">'+p.evento+'</div>'
+        +'<div style="font-size:12px;color:#6b7280;margin-top:2px">#'+(p.num||p.id)+' · '+p.cliente+'</div></div>'
+        +'<span style="background:#ec4899;color:#fff;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700">🏛️ DIRETORIA/PRESIDÊNCIA</span>'
+      +'</div>'
+      +'<div style="margin-top:8px;font-size:12px;color:#374151;display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px">'
+        +'<div>📅 <b>'+fmt+'</b></div>'
+        +'<div>⏰ '+(p.hora||'—')+'</div>'
+        +'<div>📍 '+(p.espaco||'—')+'</div>'
+        +'<div>👥 '+(p.pax||'—')+' pax</div>'
+      +'</div>'
+      +(ct.resp||ct.tel||ct.email?'<div style="margin-top:8px;font-size:12px;color:#475569;border-top:1px dashed #e5e7eb;padding-top:6px">'+(ct.resp?'👤 '+ct.resp+' · ':'')+(ct.tel?'📞 '+ct.tel+' · ':'')+(ct.email?'✉ '+ct.email:'')+'</div>':'')
+    +'</div>';
+  }).join('');
+  ov.innerHTML='<div style="background:#fff;max-width:640px;width:100%;max-height:88vh;display:flex;flex-direction:column;border-radius:14px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)">'
+    +'<div style="background:linear-gradient(135deg,#ec4899,#be185d);color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between">'
+      +'<div><div style="font-weight:800;font-size:16px">🏛️ Eventos com Diretoria / Presidência</div>'
+      +'<div style="font-size:12px;opacity:.9;margin-top:2px">'+ofs.length+' evento(s) com Ofício FECOMÉRCIO — prioridade máxima</div></div>'
+      +'<button type="button" onclick="document.getElementById(\'oficioDetailOv\').remove()" style="background:rgba(255,255,255,.2);border:0;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px">✕</button>'
+    +'</div>'
+    +'<div style="padding:18px;overflow:auto;background:#fdf2f8">'+rows+'</div>'
+    +'<div style="padding:12px 18px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;background:#fff"><button type="button" onclick="document.getElementById(\'oficioDetailOv\').remove()" style="background:#ec4899;color:#fff;border:0;border-radius:8px;padding:8px 18px;font-weight:700;cursor:pointer">Entendi</button></div>'
+  +'</div>';
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.remove();});
+  document.body.appendChild(ov);
+}
+
+
 
 function toggleCheck2(section,idx,el){
   el.classList.toggle('checked');
@@ -5834,6 +5981,19 @@ function wizardStep(dir){
       return;
     }
   }
+  // 🚧 Etapa 1 → bloqueia avanço se houver impacto técnico (noite-anterior + manhã) sem decisão
+  if(dir>0&&wizardCurrentStep===1){
+    var _pImp={id:editingPropostaIdx>=0?DATA.propostas[editingPropostaIdx].id:'__novo',data:wizardDraft.data,hora:wizardDraft.hora||'08:00'};
+    var _noiteImp=_detectarImpactoRemontagem(_pImp);
+    if(_noiteImp){
+      if(wizardDraft._impactoDecidido!=='sim'){
+        _renderImpactoAlertStep1(_noiteImp,wizardDraft._impactoDecidido==='nao');
+        return;
+      }
+    }else if(wizardDraft._impactoDecidido){
+      delete wizardDraft._impactoDecidido;
+    }
+  }
   if(dir>0&&wizardCurrentStep===5){
     // ✅ Confirmar Proposta: revalidar TODAS as etapas antes de salvar
     var stepLabels=['Evento','Locação','TI/AV','Alimentação'];
@@ -5855,6 +6015,7 @@ function wizardStep(dir){
       var p=DATA.propostas[editingPropostaIdx];
       var updated=buildProposalFromDraft(draft,total,p.status);
       updated.id=p.id;updated.num=p.num;updated.origem=p.origem||updated.origem;updated.createdAt=p.createdAt||updated.createdAt;updated.importado=!!p.importado;updated.arqOrigem=p.arqOrigem||'';
+      updated._impactoDecidido=wizardDraft._impactoDecidido||null;
       if(!checkAlertasEvento(updated)){return;}
       DATA.propostas[editingPropostaIdx]=updated;
       checkAlertasPosSave(updated);
@@ -5874,6 +6035,7 @@ function wizardStep(dir){
     novaProp.id='P'+String(DATA.propostas.length+1).padStart(3,'0');
     novaProp.num=num;
     novaProp.createdAt=new Date().toISOString();
+    novaProp._impactoDecidido=wizardDraft._impactoDecidido||null;
     if(!checkAlertasEvento(novaProp)){return;}
     DATA.propostas.push(novaProp);
     checkAlertasPosSave(novaProp);
@@ -7339,6 +7501,324 @@ document.addEventListener("DOMContentLoaded",function(){setTimeout(ensureStorage
     setInterval(checkAlerts, 5*60*1000);
   });
 })();
+</script>
+
+<script>
+/* MODESK OMEGA PATCHES — embedded */
+/* MODESK OMEGA — Patches de UI/UX e IA
+ * - Popup nativo
+ * - Validação rígida do chamado
+ * - Conflito de escala Noite -> Manhã
+ * - Pipeline OCR via AI Hub (Cloud Run) + fallback local
+ * - Parecer Técnico piscante quando há Diretoria
+ * - Bypass de confirm() para gestor
+ * - Botão "Para Compra" do inventário
+ */
+(function () {
+  "use strict";
+
+  // ====== Config ==========================================================
+  var AI_HUB_ENDPOINT =
+    "https://ais-pre-h6667srqoumpisnqqnbgdb-372189901411.us-east5.run.app";
+
+  // ====== Helpers =========================================================
+  function $(id) { return document.getElementById(id); }
+  function escapeHTML(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+    });
+  }
+  function safeToast(msg) {
+    if (typeof window.toast === "function") window.toast(msg);
+    else console.log("[MODESK]", msg);
+  }
+  function ensureContainer() {
+    var el = $("custom-alert-container");
+    if (!el) {
+      el = document.createElement("div");
+      el.id = "custom-alert-container";
+      el.style.display = "none";
+      document.body.appendChild(el);
+    }
+    return el;
+  }
+
+  // ====== CSS =============================================================
+  var css = document.createElement("style");
+  css.textContent = [
+    ".alert-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;z-index:99999;}",
+    ".alert-popup-box{background:var(--bg1,#fff);border:2px solid var(--line-2,#cbd5e1);border-top:4px solid var(--warn,#f59e0b);padding:20px;border-radius:var(--radius,10px);max-width:440px;width:calc(100% - 32px);box-shadow:var(--shadow,0 10px 40px rgba(0,0,0,.25));text-align:center;font-family:inherit;}",
+    ".alert-popup-box h3{font-family:'Sora',sans-serif;color:var(--fg,#0f172a);margin:0 0 10px;font-size:16px;}",
+    ".alert-popup-box p{font-size:13.5px;color:var(--fg-mut,#475569);margin:0 0 18px;line-height:1.5;}",
+    ".alert-popup-box .row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}",
+    "@keyframes pulseAlerta{0%,100%{border-color:var(--line-2,#cbd5e1);box-shadow:0 0 0 rgba(255,93,107,0);background:var(--bg2,#fff);}50%{border-color:var(--err,#ff5d6b);box-shadow:0 0 14px rgba(255,93,107,.35);background:rgba(255,93,107,.08);}}",
+    ".parecer-alerta-piscante{animation:pulseAlerta 1.5s infinite !important;color:#ff5d6b !important;font-weight:600;}",
+    ".modesk-processing{opacity:.7;pointer-events:none;}",
+  ].join("\n");
+  document.head.appendChild(css);
+
+  // ====== Popup nativo ====================================================
+  function exibirAvisoNativoSite(titulo, mensagem, onConfirm) {
+    var container = ensureContainer();
+    var hasConfirm = typeof onConfirm === "function";
+    container.innerHTML =
+      '<div class="alert-popup-overlay"><div class="alert-popup-box">' +
+      "<h3>⚠️ " + escapeHTML(titulo) + "</h3><p>" + escapeHTML(mensagem) + "</p>" +
+      '<div class="row">' +
+      (hasConfirm
+        ? '<button class="btn sm" id="alert-btn-cancel">Cancelar</button><button class="btn primary sm" id="alert-btn-ok">Prosseguir</button>'
+        : '<button class="btn primary sm" id="alert-btn-close">Entendido</button>') +
+      "</div></div></div>";
+    container.style.display = "block";
+    if (hasConfirm) {
+      $("alert-btn-ok").onclick = function () { container.style.display = "none"; onConfirm(); };
+      $("alert-btn-cancel").onclick = function () { container.style.display = "none"; };
+    } else {
+      $("alert-btn-close").onclick = function () { container.style.display = "none"; };
+    }
+  }
+  window.exibirAvisoNativoSite = exibirAvisoNativoSite;
+
+  // ====== AI Hub (Cloud Run) + Fallback Local =============================
+  async function executarChamadaIA(routePath, variaveis) {
+    try {
+      var response = await fetch(AI_HUB_ENDPOINT + "/api/v1/run/" + routePath, {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ variables: variaveis }),
+      });
+      if (!response.ok) throw new Error("Erro operacional no Hub: HTTP " + response.status);
+      var data = await response.json();
+      return data.response;
+    } catch (error) {
+      console.error("❌ Falha na conexão com o AI API Hub:", error);
+      safeToast("⚠️ IA Hub indisponível — usando parser local de contingência.");
+      return executarParserContingenciaLocal(variaveis);
+    }
+  }
+  window.executarChamadaIA = executarChamadaIA;
+
+  function executarParserContingenciaLocal(variaveis) {
+    var txt = variaveis.texto_documento || "";
+    var nome = txt.match(/NOME:\s*([A-Za-zÀ-ÿ\s]+)/i);
+    var reg = txt.match(/(REGISTRO|PATRIMONIO):\s*([0-9A-Za-z\-\.]+)/i);
+    var diretoria = /DIRETORIA|CONSELHEIRO|PRESIDENT[EÊ]/i.test(txt);
+    return {
+      tipoDocumento: /HABILITACAO|CNH/i.test(txt)
+        ? "CNH"
+        : /PATRIMONIO|BAIXA/i.test(txt)
+        ? "Baixa de Patrimônio"
+        : "Documento Geral",
+      tipoAtivo: "Documento",
+      nomeCompleto: nome ? nome[1].trim() : "Pendente de Edição",
+      solicitanteNome: nome ? nome[1].trim() : "",
+      numeroRegistro: reg ? reg[2].trim() : "Não Localizado",
+      dataNascimento: "",
+      entidadeUnidade: "Processado via Contingência Local",
+      dadosConteudo: txt.slice(0, 600),
+      enderecoExtraido: "Processado localmente por indisponibilidade do barramento.",
+      presencaDiretoria: diretoria,
+    };
+  }
+  window.executarParserContingenciaLocal = executarParserContingenciaLocal;
+
+  // ====== OCR -> Autofill =================================================
+  async function processarReconhecimentoEmMassa(textoBruto, opts) {
+    opts = opts || {};
+    if (!textoBruto || !String(textoBruto).trim()) return null;
+    var btn = opts.button ? $(opts.button) : null;
+    if (btn) { btn.classList.add("modesk-processing"); btn.disabled = true; }
+    safeToast("⏳ Mentor IA processando documento em escala...");
+
+    var dados = await executarChamadaIA("document-ocr", { texto_documento: textoBruto });
+
+    if (btn) { btn.classList.remove("modesk-processing"); btn.disabled = false; }
+    if (!dados) return null;
+
+    function fill(ids, value) {
+      if (!value) return;
+      for (var i = 0; i < ids.length; i++) {
+        var el = $(ids[i]);
+        if (el && !el.value) {
+          el.value = value;
+          el.dispatchEvent(new Event("input", { bubbles: true }));
+          el.dispatchEvent(new Event("change", { bubbles: true }));
+          break;
+        }
+      }
+    }
+
+    fill(["mch-tt"], "Ajuste Automatizado: " + (dados.tipoDocumento || dados.tipoAtivo || "Documento"));
+    fill(["mch-sol", "formNome"], dados.nomeCompleto || dados.solicitanteNome);
+    fill(["formRegistro", "mch-tag"], dados.numeroRegistro);
+    fill(["formTipo"], dados.tipoDocumento || dados.tipoAtivo);
+    fill(["formNascimento"], dados.dataNascimento);
+
+    var desc = $("mch-desc");
+    if (desc && !desc.value) {
+      desc.value =
+        "Dados validados pelo Mentor do Hub:\n" +
+        "- Registro/Patrimônio: " + (dados.numeroRegistro || "—") + "\n" +
+        "- Unidade/Origem: " + (dados.entidadeUnidade || dados.enderecoExtraido || "—") + "\n" +
+        "- Solicitante: " + (dados.solicitanteNome || dados.nomeCompleto || "—") + "\n" +
+        "- Conteúdo: " + (dados.dadosConteudo || "—");
+    }
+
+    // Inserção automática em Laudos para baixa/patrimônio
+    var tipo = String(dados.tipoDocumento || "").toLowerCase();
+    if ((tipo.indexOf("patrimonio") >= 0 || tipo.indexOf("baixa") >= 0) &&
+        typeof window.state !== "undefined" && Array.isArray(window.state.laudos)) {
+      window.state.laudos.push({
+        id: "LD-" + Date.now().toString(36).toUpperCase(),
+        eq: dados.tipoDocumento + " - Extraído via IA",
+        tag: dados.numeroRegistro,
+        defeito: "Identificado por processamento em lote no Hub",
+        sol: "Encaminhado para avaliação técnica baseada no parecer do Mentor.",
+        ts: Date.now(),
+      });
+      try { localStorage.setItem("modesk_omega_v46", JSON.stringify(window.state)); } catch (e) {}
+      if (typeof window.renderLaudos === "function") window.renderLaudos();
+    }
+
+    if (dados.presencaDiretoria) {
+      var parecer = $("mch-parecer");
+      if (parecer) {
+        parecer.classList.add("parecer-alerta-piscante");
+        parecer.value =
+          "[⚠️ ALERTA DO MENTOR: PRESENÇA CONFIRMADA DA DIRETORIA E CONSELHEIROS. EXIGIDA ATENÇÃO OPERACIONAL MÁXIMA].\n\n" +
+          (parecer.value || "");
+      }
+      exibirAvisoNativoSite(
+        "Presença de Alta Diretoria",
+        "Este documento indica a participação de membros da Diretoria e Conselheiros. O Parecer Técnico foi sinalizado com alerta piscante.",
+      );
+    }
+
+    safeToast("✅ Planilha de controle populada automaticamente!");
+    return dados;
+  }
+  window.processarReconhecimentoEmMassa = processarReconhecimentoEmMassa;
+  // Alias compatível com o nome usado anteriormente
+  window.processarDocumentoIA = processarReconhecimentoEmMassa;
+
+  // ====== Validação rígida do chamado =====================================
+  function validarChamado() {
+    var campos = [
+      ["mch-tt", "Título"], ["mch-sol", "Solicitante"], ["mch-setor", "Setor"],
+      ["mch-andar", "Andar"], ["mch-svc", "Serviço"], ["mch-sla", "Tempo Estimado"],
+      ["mch-tec", "Técnico Responsável"], ["mch-desc", "Descrição Inicial"],
+    ];
+    var faltam = [];
+    campos.forEach(function (c) {
+      var el = $(c[0]); if (!el) return;
+      var v = (el.value || "").trim();
+      if (!v || v === "—") faltam.push(c[1]);
+    });
+    if (faltam.length) {
+      if (typeof window.beep === "function") try { window.beep(440, "square", 0.3); } catch (e) {}
+      exibirAvisoNativoSite("Cadastro Incompleto", "Preenchimento obrigatório ausente: " + faltam.join(", ") + ".");
+      return false;
+    }
+    return true;
+  }
+  window.validarChamado = validarChamado;
+
+  // ====== Conflito Noite -> Manhã =========================================
+  function verificarConflitoTurnos(dataNovo, turnoNovo, onOk) {
+    try {
+      var eventos = (window.state && window.state.eventos) || [];
+      var d = new Date(dataNovo); d.setDate(d.getDate() - 1);
+      var ant = d.toISOString().slice(0, 10);
+      var temNoite = eventos.some(function (ev) { return ev && ev.date === ant && ev.turno === "Noite"; });
+      if (temNoite && turnoNovo === "Manhã") {
+        exibirAvisoNativoSite(
+          "Alerta de Escala Próxima",
+          "Há um evento agendado para o Turno da Noite no dia anterior. Deseja prosseguir com a escala deste novo evento para o Turno da Manhã?",
+          function () { safeToast("📅 Escala mantida pelo Editor."); if (typeof onOk === "function") onOk(); },
+        );
+        return false;
+      }
+    } catch (e) { console.warn("verificarConflitoTurnos:", e); }
+    if (typeof onOk === "function") onOk();
+    return true;
+  }
+  window.verificarConflitoTurnos = verificarConflitoTurnos;
+
+  // ====== Bypass de gestor ================================================
+  function isGestor() {
+    try {
+      var p = window.state && (window.state.perfil || window.state.role ||
+        (window.state.user && window.state.user.role) ||
+        (window.state.auth && window.state.auth.role));
+      return String(p || "").toLowerCase() === "gestor";
+    } catch (e) { return false; }
+  }
+  window.isGestor = isGestor;
+  var _origConfirm = window.confirm;
+  window.confirm = function (msg) {
+    if (isGestor()) return true;
+    return _origConfirm ? _origConfirm.call(window, msg) : true;
+  };
+
+  // ====== Wiring ==========================================================
+  function wire() {
+    var save = $("mch-save");
+    if (save && !save.__modeskWired) {
+      save.__modeskWired = true;
+      save.addEventListener("click", function (e) {
+        if (!validarChamado()) { e.stopImmediatePropagation(); e.preventDefault(); }
+      }, true);
+    }
+
+    var btnCompra = $("inv-tocompra");
+    if (btnCompra && !btnCompra.__modeskWired) {
+      btnCompra.__modeskWired = true;
+      btnCompra.addEventListener("click", function () {
+        try {
+          var st = window.state || (window.state = {});
+          st.compras = st.compras || [];
+          var inv = st.inventario || st.inv || [];
+          var injetados = 0;
+          inv.forEach(function (item) {
+            if (item && item.comp) {
+              st.compras.push({
+                id: "IT" + Date.now().toString(36) + Math.floor(Math.random() * 1000),
+                item: item.equipamento || item.descricao || "Item sem nome",
+                marca: item.marca || "",
+                quantidade: item.quantidade || 1,
+                unidade: item.unidade || "un",
+                status: "Pendente",
+                origemInv: item.id || null,
+                criadoEm: new Date().toISOString(),
+              });
+              injetados++;
+            }
+          });
+          if (injetados) {
+            safeToast("🛒 " + injetados + " item(ns) enviado(s) para a Lista Prévia de Compras.");
+            if (typeof window.render === "function") window.render();
+            if (typeof window.renderCompras === "function") window.renderCompras();
+            if (typeof window.persist === "function") window.persist();
+          } else {
+            exibirAvisoNativoSite("Nenhum item marcado", "Marque o checkbox 'Para Compra' nos itens desejados antes de gerar a lista prévia.");
+          }
+        } catch (e) {
+          console.error(e);
+          exibirAvisoNativoSite("Erro", "Não foi possível gerar a lista prévia: " + e.message);
+        }
+      });
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", wire);
+  } else { wire(); }
+  setInterval(wire, 1500);
+
+  console.log("[MODESK] Patches carregados ✓ (AI Hub:", AI_HUB_ENDPOINT, ")");
+})();
+
 </script>
 </body>
 </html>
