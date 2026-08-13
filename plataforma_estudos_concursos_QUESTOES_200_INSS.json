@@ -1,0 +1,3002 @@
+[
+  {
+    "id": 1,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 001] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 2,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 002] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 3,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 003] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 4,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 004] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 5,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 005] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 6,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 006] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 7,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 007] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 8,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 008] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 9,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 009] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 10,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 010] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 11,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 011] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 12,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 012] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 13,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 013] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 14,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 014] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 15,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 015] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 16,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 016] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 17,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 017] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 18,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 018] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 19,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 019] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 20,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 020] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 21,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 021] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 22,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 022] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 23,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 023] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 24,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 024] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 25,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 025] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 26,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 026] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 27,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 027] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 28,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 028] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 29,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 029] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 30,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 030] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 31,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 031] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 32,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 032] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 33,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 033] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 34,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 034] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 35,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 035] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 36,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 036] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 37,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 037] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 38,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 038] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 39,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 039] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 40,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 040] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 41,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 041] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 42,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 042] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 43,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 043] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 44,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 044] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 45,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 045] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 46,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 046] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 47,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 047] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 48,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 048] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 49,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 049] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 50,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 050] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 51,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 051] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 52,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 052] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 53,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 053] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 54,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 054] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 55,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 055] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 56,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 056] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 57,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 057] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 58,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 058] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 59,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 059] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 60,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 060] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 61,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 061] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 62,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 062] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 63,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 063] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 64,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 064] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 65,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 065] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 66,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 066] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 67,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 067] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 68,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 068] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 69,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 069] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 70,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 070] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 71,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 071] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 72,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 072] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 73,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 073] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 74,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 074] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 75,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 075] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 76,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 076] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 77,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 077] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 78,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 078] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 79,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 079] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 80,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 080] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 81,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 081] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 82,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 082] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 83,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 083] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 84,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 084] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 85,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 085] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 86,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 086] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 87,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 087] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 88,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 088] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 89,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 089] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 90,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 090] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 91,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 091] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 92,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 092] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 93,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 093] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 94,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 094] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 95,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 095] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 96,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 096] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 97,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 097] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 98,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 098] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 99,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 099] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 100,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 100] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 101,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 101] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 102,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 102] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 103,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 103] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 104,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 104] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 105,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 105] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 106,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 106] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 107,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 107] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 108,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 108] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 109,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 109] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 110,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 110] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 111,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 111] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 112,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 112] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 113,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 113] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 114,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 114] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 115,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 115] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 116,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 116] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 117,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 117] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 118,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 118] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 119,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 119] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 120,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 120] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 121,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 121] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 122,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 122] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 123,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 123] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 124,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 124] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 125,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 125] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 126,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 126] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 127,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 127] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 128,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 128] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 129,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 129] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 130,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 130] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 131,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 131] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 132,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 132] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 133,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 133] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 134,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 134] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 135,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 135] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 136,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 136] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 137,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 137] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 138,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 138] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 139,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 139] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 140,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 140] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 141,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 141] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 142,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 142] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 143,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 143] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 144,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 144] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 145,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 145] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 146,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 146] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 147,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 147] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 148,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 148] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 149,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 149] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 150,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 150] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 151,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 151] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 152,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 152] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 153,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 153] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 154,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 154] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 155,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 155] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 156,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 156] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 157,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 157] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 158,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 158] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 159,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 159] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 160,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 160] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 161,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 161] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 162,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 162] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 163,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 163] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 164,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 164] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 165,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 165] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 166,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 166] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 167,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 167] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 168,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 168] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 169,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 169] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 170,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 170] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 171,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 171] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 172,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 172] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 173,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 173] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 174,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 174] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 175,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 175] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 176,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 176] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 177,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 177] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 178,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 178] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 179,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 179] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 180,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 180] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  },
+  {
+    "id": 181,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 181] A Seguridade Social compreende um conjunto integrado de ações de iniciativa dos Poderes Públicos e da sociedade, destinadas a assegurar os direitos relativos à saúde, à previdência social e à assistência social. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194 da CF/88. Trata-se da definição exata do tripé da Seguridade Social."
+  },
+  {
+    "id": 182,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 182] O princípio da universalidade da cobertura e do atendimento estabelece que a previdência social deve atender a toda a população, independentemente do recolhimento de contribuição prévia. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Previdência Social é contributiva. É a Assistência Social e a Saúde que não exigem contribuição."
+  },
+  {
+    "id": 183,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 183] A irredutibilidade do valor dos benefícios previdenciários garante a manutenção do valor nominal e do poder aquisitivo real, conforme reajustes fixados em lei. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, IV da CF/88."
+  },
+  {
+    "id": 184,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 184] A gestão da seguridade social é democrática e descentralizada, mediante gestão quadripartite, com participação dos trabalhadores, empregadores, aposentados e do Governo nos órgãos colegiados. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, VII da CF/88."
+  },
+  {
+    "id": 185,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Seguridade Social - Princípios e Conceitos",
+    "enunciado": "[INSS Questão 185] A seletividade e distributividade na prestação dos benefícios e serviços orienta o legislador a escolher os riscos sociais mais graves e distribuir renda aos mais necessitados. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 194, parágrafo único, III da CF/88."
+  },
+  {
+    "id": 186,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 186] O trabalhador rural que exerce atividade em regime de economia familiar sem empregados permanentes é enquadrado como Segurado Especial do RGPS. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 11, VII da Lei 8.213/91."
+  },
+  {
+    "id": 187,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 187] A contribuição do segurado especial incide sobre o seu salário de contribuição fixo estabelecido em tabela do Ministério da Previdência. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A contribuição do segurado especial incide sobre a receita bruta da comercialização de sua produção."
+  },
+  {
+    "id": 188,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 188] É permitida a filiação ao RGPS na qualidade de segurado facultativo de pessoa participante de Regime Próprio de Previdência Social (RPPS). (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 201, § 5º da CF/88 e Art. 13, § 2º da Lei 8.213/91 vedam expressamente."
+  },
+  {
+    "id": 189,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 189] O estudante maior de 16 anos que não exerce atividade remunerada pode filiar-se ao RGPS na condição de segurado facultativo. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 13 da Lei 8.213/91."
+  },
+  {
+    "id": 190,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "RGPS - Segurados Obrigatórios e Facultativos",
+    "enunciado": "[INSS Questão 190] O síndico de condomínio que recebe remuneração ou isenção da taxa condominial é considerado segurado obrigatório como contribuinte individual. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12, V, 'f' da Lei 8.212/91."
+  },
+  {
+    "id": 191,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 191] A dependência económica do cônjuge e do filho menor de 21 anos não emancipado é presumida pela legislação previdenciária. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 4º da Lei 8.213/91."
+  },
+  {
+    "id": 192,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 192] A existência de dependentes da classe dos filhos exclui do direito às prestações os dependentes da classe dos pais. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 16, § 1º da Lei 8.213/91."
+  },
+  {
+    "id": 193,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 193] O período de graça do segurado que deixa de contribuir após 120 contribuições sem interrupção pode chegar a 24 meses, podendo ser estendido por mais 12 meses em caso de desemprego involuntário. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15 da Lei 8.213/91 (12 + 12 + 12 = 36 meses)."
+  },
+  {
+    "id": 194,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 194] O segurado facultativo mantém a qualidade de segurado sem recolher contribuições pelo prazo de até 12 meses após a cessação das contribuições. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para o segurado facultativo é de até 6 meses (Art. 15, VI da Lei 8.213/91)."
+  },
+  {
+    "id": 195,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Dependentes e Período de Graça",
+    "enunciado": "[INSS Questão 195] A comprovação da dependência econômica dos pais em relação aos filhos é presumida por lei, dispensando prova documental. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Para a Classe 2 (pais), a dependência econômica deve ser comprovada documentalmente."
+  },
+  {
+    "id": 196,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 196] O auxílio por incapacidade temporária (antigo auxílio-doença) exige carência de 12 contribuições mensais, ressalvados os casos de acidentes de qualquer natureza e doenças graves especificadas em lei. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, II e Art. 151 da Lei 8.213/91."
+  },
+  {
+    "id": 197,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 197] A pensão por morte é devida aos dependentes do segurado e exige carência mínima de 24 contribuições mensais. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A pensão por morte independe de carência (Art. 26, I da Lei 8.213/91)."
+  },
+  {
+    "id": 198,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 198] O auxílio-reclusão é devido aos dependentes do segurado de baixa renda recolhido à prisão em regime fechado ou semiaberto. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Desde a Lei 13.846/2019, é devido apenas no regime fechado."
+  },
+  {
+    "id": 199,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 199] A aposentadoria programada do homem exige, pelas regras permanentes da EC 103/2019, a idade mínima de 65 anos. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 201, § 7º, I da CF/88."
+  },
+  {
+    "id": 200,
+    "orgao": "INSS",
+    "banca": "Cebraspe",
+    "disciplina": "Direito Previdenciário",
+    "tema": "Benefícios em Espécie e Carência",
+    "enunciado": "[INSS Questão 200] O salário-maternidade para a segurada empregada não exige cumprimento de carência previdenciária. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 26, VI da Lei 8.213/91."
+  }
+]

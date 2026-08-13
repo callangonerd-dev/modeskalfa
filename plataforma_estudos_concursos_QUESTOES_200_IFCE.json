@@ -1,0 +1,3002 @@
+[
+  {
+    "id": 1,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 001] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 2,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 002] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 3,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 003] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 4,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 004] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 5,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 005] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 6,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 006] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 7,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 007] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 8,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 008] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 9,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 009] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 10,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 010] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 11,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 011] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 12,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 012] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 13,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 013] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 14,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 014] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 15,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 015] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 16,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 016] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 17,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 017] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 18,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 018] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 19,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 019] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 20,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 020] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 21,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 021] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 22,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 022] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 23,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 023] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 24,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 024] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 25,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 025] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 26,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 026] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 27,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 027] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 28,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 028] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 29,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 029] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 30,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 030] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 31,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 031] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 32,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 032] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 33,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 033] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 34,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 034] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 35,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 035] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 36,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 036] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 37,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 037] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 38,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 038] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 39,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 039] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 40,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 040] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 41,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 041] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 42,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 042] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 43,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 043] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 44,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 044] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 45,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 045] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 46,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 046] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 47,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 047] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 48,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 048] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 49,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 049] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 50,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 050] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 51,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 051] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 52,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 052] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 53,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 053] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 54,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 054] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 55,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 055] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 56,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 056] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 57,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 057] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 58,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 058] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 59,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 059] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 60,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 060] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 61,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 061] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 62,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 062] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 63,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 063] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 64,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 064] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 65,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 065] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 66,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 066] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 67,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 067] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 68,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 068] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 69,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 069] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 70,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 070] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 71,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 071] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 72,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 072] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 73,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 073] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 74,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 074] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 75,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 075] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 76,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 076] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 77,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 077] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 78,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 078] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 79,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 079] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 80,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 080] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 81,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 081] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 82,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 082] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 83,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 083] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 84,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 084] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 85,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 085] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 86,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 086] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 87,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 087] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 88,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 088] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 89,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 089] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 90,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 090] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 91,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 091] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 92,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 092] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 93,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 093] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 94,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 094] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 95,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 095] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 96,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 096] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 97,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 097] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 98,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 098] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 99,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 099] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 100,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 100] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 101,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 101] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 102,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 102] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 103,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 103] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 104,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 104] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 105,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 105] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 106,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 106] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 107,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 107] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 108,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 108] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 109,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 109] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 110,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 110] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 111,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 111] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 112,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 112] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 113,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 113] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 114,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 114] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 115,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 115] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 116,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 116] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 117,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 117] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 118,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 118] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 119,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 119] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 120,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 120] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 121,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 121] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 122,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 122] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 123,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 123] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 124,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 124] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 125,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 125] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 126,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 126] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 127,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 127] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 128,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 128] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 129,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 129] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 130,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 130] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 131,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 131] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 132,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 132] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 133,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 133] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 134,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 134] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 135,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 135] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 136,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 136] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 137,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 137] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 138,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 138] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 139,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 139] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 140,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 140] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 141,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 141] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 142,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 142] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 143,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 143] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 144,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 144] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 145,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 145] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 146,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 146] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 147,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 147] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 148,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 148] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 149,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 149] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 150,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 150] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 151,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 151] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 152,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 152] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 153,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 153] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 154,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 154] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 155,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 155] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 156,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 156] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 157,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 157] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 158,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 158] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 159,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 159] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 160,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 160] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 161,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 161] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 162,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 162] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 163,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 163] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 164,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 164] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 165,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 165] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 166,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 166] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 167,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 167] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 168,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 168] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 169,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 169] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 170,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 170] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 171,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 171] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 172,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 172] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 173,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 173] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 174,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 174] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 175,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 175] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 176,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 176] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 177,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 177] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 178,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 178] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 179,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 179] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 180,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 180] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  },
+  {
+    "id": 181,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 181] A investidura em cargo público federal ocorre com a assinatura do termo de posse. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 7º da Lei 8.112/90."
+  },
+  {
+    "id": 182,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 182] A posse em cargo público ocorrerá no prazo de 15 dias contados da publicação do ato de provimento. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O prazo para posse é de 30 dias (Art. 13, § 1º)."
+  },
+  {
+    "id": 183,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 183] É de 15 dias o prazo para o servidor empossado em cargo público entrar em efetivo exercício, contados da data da posse. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 15, § 1º da Lei 8.112/90."
+  },
+  {
+    "id": 184,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 184] Se o candidato nomeado não tomar posse no prazo legal, será exonerado do cargo público. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A nomeação é tornada sem efeito. A exoneração ocorre se tomar posse e não entrar em exercício."
+  },
+  {
+    "id": 185,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Provimento, Posse e Exercício",
+    "enunciado": "[IFCE Questão 185] O estágio probatório do servidor público federal tem duração de 36 meses de efetivo exercício. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Conforme redação constitucional e jurisprudência pacificada do STJ/STF."
+  },
+  {
+    "id": 186,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 186] A exoneração possui natureza disciplinar e punitiva aplicada às faltas leves cometidas pelo servidor público. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exoneração não é punição. A punição para faltas graves é a Demissão e para levez a Advertência."
+  },
+  {
+    "id": 187,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 187] Considera-se abandono de cargo a ausência intencional do servidor ao serviço por mais de 30 dias consecutivos. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 138 da Lei 8.112/90."
+  },
+  {
+    "id": 188,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 188] Entende-se por inassiduidade habitual a falta ao serviço, sem causa justificada, por 60 dias interpolados durante o período de 12 meses. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 139 da Lei 8.112/90."
+  },
+  {
+    "id": 189,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 189] A pena de advertência será aplicada por escrito nos casos de inobservância de dever funcional previsto em lei. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 129 da Lei 8.112/90."
+  },
+  {
+    "id": 190,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 8.112/1990 - Vacância, Regime Disciplinar e Penalidades",
+    "enunciado": "[IFCE Questão 190] A ação disciplinar prescreverá em 5 anos quanto às infrações puníveis com demissão, cassação de aposentadoria e disponibilidade. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 142, I da Lei 8.112/90."
+  },
+  {
+    "id": 191,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 191] A moralidade administrativa não se limita à distinção entre o bem e o mal, devendo ser acrescida da ideia de que o fim é sempre o bem comum. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica III do Decreto 1.171/94."
+  },
+  {
+    "id": 192,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 192] O servidor público pode omitir a verdade se o esclarecimento dos fatos puder trazer prejuízos à imagem da repartição pública. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O servidor jamais pode omitir ou falsear a verdade (Regra Deontológica VIII)."
+  },
+  {
+    "id": 193,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 193] A ausência injustificada do servidor do seu local de trabalho é fator de desmoralização do serviço público, caracterizando conduta antiética. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Regra Deontológica XII do Decreto 1.171/94."
+  },
+  {
+    "id": 194,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 194] É permitido ao servidor aceitar presentes e vantagens financeiras de terceiros desde que mantenha a imparcialidade em suas decisões. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. É vedado aceitar presentes ou comissões de qualquer espécie."
+  },
+  {
+    "id": 195,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Decreto 1.171/1994 - Código de Ética do Servidor Federal",
+    "enunciado": "[IFCE Questão 195] A Comissão de Ética do órgão é encarregada de aplicar aos servidores a pena disciplinar de demissão. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. A Comissão de Ética aplica apenas a penalidade de CENSURA."
+  },
+  {
+    "id": 196,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 196] Os Institutos Federais são instituições de educação superior, básica e profissional, pluricurriculares e multicampi, equiparados às universidades federais. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 11.892/2008."
+  },
+  {
+    "id": 197,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 197] Os Institutos Federais possuem natureza jurídica de autarquia federal, vinculada ao Ministério da Educação. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º da Lei 11.892/2008."
+  },
+  {
+    "id": 198,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 198] Cada Instituto Federal deve garantir o mínimo de 50% de suas vagas para cursos de educação profissional técnica de nível médio. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, I da Lei 11.892/2008."
+  },
+  {
+    "id": 199,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 199] A proporção mínima exigida por lei para oferta de cursos de licenciatura e formação pedagógica nos IFs é de 20% das vagas. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 8º, II da Lei 11.892/2008."
+  },
+  {
+    "id": 200,
+    "orgao": "IFCE",
+    "banca": "Instituto AOCP",
+    "disciplina": "Legislação Federal / Estatuto",
+    "tema": "Lei 11.892/2008 - Rede Federal de Educação Profissional",
+    "enunciado": "[IFCE Questão 200] O Reitor do Instituto Federal é nomeado pelo Presidente da República para um mandato de 4 anos, permitida uma recondução. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 12 da Lei 11.892/2008."
+  }
+]

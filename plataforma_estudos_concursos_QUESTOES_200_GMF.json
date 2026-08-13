@@ -1,0 +1,3002 @@
+[
+  {
+    "id": 1,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 001] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 2,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 002] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 3,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 003] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 4,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 004] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 5,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 005] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 6,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 006] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 7,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 007] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 8,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 008] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 9,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 009] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 10,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 010] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 11,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 011] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 12,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 012] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 13,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 013] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 14,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 014] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 15,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 015] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 16,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 016] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 17,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 017] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 18,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 018] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 19,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 019] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 20,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 020] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #1)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 21,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 021] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 22,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 022] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 23,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 023] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 24,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 024] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 25,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 025] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 26,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 026] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 27,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 027] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 28,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 028] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 29,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 029] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 30,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 030] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 31,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 031] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 32,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 032] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 33,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 033] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 34,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 034] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 35,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 035] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 36,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 036] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 37,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 037] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 38,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 038] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 39,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 039] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 40,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 040] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #2)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 41,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 041] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 42,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 042] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 43,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 043] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 44,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 044] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 45,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 045] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 46,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 046] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 47,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 047] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 48,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 048] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 49,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 049] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 50,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 050] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 51,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 051] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 52,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 052] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 53,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 053] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 54,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 054] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 55,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 055] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 56,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 056] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 57,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 057] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 58,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 058] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 59,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 059] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 60,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 060] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #3)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 61,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 061] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 62,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 062] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 63,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 063] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 64,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 064] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 65,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 065] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 66,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 066] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 67,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 067] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 68,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 068] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 69,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 069] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 70,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 070] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 71,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 071] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 72,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 072] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 73,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 073] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 74,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 074] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 75,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 075] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 76,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 076] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 77,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 077] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 78,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 078] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 79,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 079] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 80,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 080] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #4)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 81,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 081] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 82,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 082] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 83,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 083] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 84,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 084] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 85,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 085] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 86,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 086] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 87,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 087] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 88,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 088] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 89,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 089] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 90,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 090] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 91,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 091] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 92,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 092] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 93,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 093] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 94,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 094] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 95,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 095] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 96,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 096] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 97,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 097] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 98,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 098] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 99,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 099] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 100,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 100] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #5)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 101,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 101] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 102,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 102] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 103,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 103] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 104,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 104] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 105,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 105] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 106,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 106] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 107,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 107] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 108,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 108] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 109,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 109] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 110,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 110] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 111,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 111] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 112,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 112] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 113,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 113] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 114,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 114] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 115,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 115] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 116,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 116] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 117,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 117] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 118,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 118] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 119,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 119] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 120,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 120] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #6)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 121,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 121] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 122,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 122] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 123,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 123] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 124,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 124] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 125,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 125] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 126,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 126] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 127,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 127] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 128,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 128] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 129,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 129] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 130,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 130] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 131,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 131] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 132,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 132] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 133,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 133] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 134,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 134] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 135,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 135] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 136,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 136] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 137,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 137] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 138,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 138] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 139,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 139] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 140,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 140] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #7)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 141,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 141] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 142,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 142] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 143,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 143] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 144,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 144] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 145,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 145] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 146,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 146] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 147,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 147] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 148,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 148] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 149,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 149] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 150,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 150] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 151,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 151] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 152,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 152] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 153,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 153] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 154,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 154] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 155,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 155] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 156,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 156] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 157,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 157] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 158,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 158] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 159,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 159] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 160,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 160] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #8)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 161,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 161] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 162,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 162] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 163,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 163] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 164,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 164] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 165,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 165] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 166,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 166] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 167,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 167] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 168,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 168] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 169,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 169] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 170,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 170] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 171,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 171] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 172,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 172] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 173,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 173] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 174,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 174] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 175,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 175] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 176,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 176] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 177,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 177] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 178,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 178] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 179,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 179] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 180,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 180] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #9)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  },
+  {
+    "id": 181,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 181] A Guarda Municipal é uma instituição de caráter civil, uniformizada e armada, responsável pela proteção municipal preventiva. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 2º da Lei 13.022/2014."
+  },
+  {
+    "id": 182,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 182] O uso progressivo da força é considerado um dos princípios mínimos de atuação das guardas municipais. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 3º, IV da Lei 13.022/2014."
+  },
+  {
+    "id": 183,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 183] O cargo de comandante da Guarda Municipal pode ser provido por qualquer servidor ocupante de cargo comissionado na prefeitura. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Deve ser provido por servidor de carreira do quadro efetivo do órgão."
+  },
+  {
+    "id": 184,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 184] O controle externo do funcionamento da Guarda Municipal é exercido pela Corregedoria do Município. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. O controle externo é exercido pela Ouvidoria; a Corregedoria exerce o controle interno."
+  },
+  {
+    "id": 185,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Estatuto Geral das Guardas Municipais (Lei 13.022/2014)",
+    "enunciado": "[GMF Questão 185] A Guarda Municipal pode exercer a fiscalização de trânsito em vias municipais quando formalmente conveniada ou por atribuição direta. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, VI da Lei 13.022/2014."
+  },
+  {
+    "id": 186,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 186] Não há crime quando o agente pratica o fato em estado de necessidade, legítima defesa, estrito cumprimento do dever legal ou exercício regular de direito. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23 do Código Penal."
+  },
+  {
+    "id": 187,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 187] Considera-se em legítima defesa o agente de segurança pública que repele agressão ou risco de agressão a vítima mantida refém. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 23, parágrafo único do CP (Pacote Anticrime)."
+  },
+  {
+    "id": 188,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 188] O crime de concussão ocorre quando o funcionário público solicita ou recebe vantagem indevida em razão do cargo. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Concussão é EXIGIR (Art. 316). Solicitar ou receber é Corrupção Passiva (Art. 317)."
+  },
+  {
+    "id": 189,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 189] A reparação do dano no crime de peculato culposo, se precede à sentença irrecorrível, extingue a punibilidade do agente. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 312, § 3º do CP."
+  },
+  {
+    "id": 190,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Penal - Excludentes e Crimes Funcionais",
+    "enunciado": "[GMF Questão 190] O crime de prevaricação consiste em retardar ou deixar de praticar ato de ofício para satisfazer interesse ou sentimento pessoal. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 319 do CP."
+  },
+  {
+    "id": 191,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 191] Compete aos órgãos executivos de trânsito dos Municípios fiscalizar e autuar as infrações de circulação, parada e estacionamento nas vias urbanas. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 24 do CTB."
+  },
+  {
+    "id": 192,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 192] Para a configuração dos crimes previstos na Lei de Abuso de Autoridade (Lei 13.869/2019), é exigido o dolo específico de prejudicar outrem ou beneficiar a si mesmo. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 1º, § 1º da Lei 13.869/2019."
+  },
+  {
+    "id": 193,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 193] A divergência na avaliação de fatos e provas por parte do agente de segurança pública configura automaticamente crime de abuso de autoridade. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Art. 1º, § 2º dispõe que a divergência na interpretação de lei ou avaliação de provas não configura abuso."
+  },
+  {
+    "id": 194,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 194] A fiscalização de velocidade por radar eletrônico nas vias municipais é competência exclusiva da Polícia Rodoviária Federal. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Vias municipais são de competência do órgão municipal de trânsito."
+  },
+  {
+    "id": 195,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Código de Trânsito Brasileiro e Abuso de Autoridade",
+    "enunciado": "[GMF Questão 195] A Guarda Municipal não pode realizar a retenção de veículo em flagrante descumprimento das normas do CTB em vias municipais. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Pode atuar mediante competência delegada ou atribuição municipal."
+  },
+  {
+    "id": 196,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 196] As Guardas Municipais estão previstas expressamente no Artigo 144, § 8º da Constituição Federal de 1988. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Dispositivo constitucional da Segurança Pública."
+  },
+  {
+    "id": 197,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 197] A casa é asilo inviolável do indivíduo, ninguém nela podendo penetrar sem consentimento do morador, salvo em caso de flagrante delito ou desastre, ou por determinação judicial durante o dia. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, XI da CF/88."
+  },
+  {
+    "id": 198,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 198] A prisão de qualquer pessoa e o local onde se encontre serão comunicados imediatamente ao juiz competente e à família do preso ou à pessoa por ele indicada. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Certo",
+    "explicacao": "CORRETO. Art. 5º, LXII da CF/88."
+  },
+  {
+    "id": 199,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 199] A Guarda Municipal possui competência constitucional para exercer a atividade de polícia judiciária e investigação criminal. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Polícia judiciária é competência das Polícias Civis e Polícia Federal."
+  },
+  {
+    "id": 200,
+    "orgao": "GMF",
+    "banca": "IDECAN",
+    "disciplina": "Legislação Extravagante / D. Penal",
+    "tema": "Direito Constitucional Aplicado à Segurança Pública",
+    "enunciado": "[GMF Questão 200] É livre a reunião pacífica, sem armas, em locais abertos ao público, independentemente de prévio aviso às autoridades públicas. (Variação/Revisão #10)",
+    "tipo": "Certo/Errado",
+    "opcoes": [
+      "Certo",
+      "Errado"
+    ],
+    "resposta": "Errado",
+    "explicacao": "ERRADO. Exige-se prévio aviso (embora independente de autorização)."
+  }
+]
