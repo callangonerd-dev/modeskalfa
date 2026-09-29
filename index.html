@@ -4,6 +4,30 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Senac Aldeota — Eventos & Propostas</title>
+<script>
+(function(){
+  var V={"s001":{"k":"yJx8/awUSt7I3a3pxCr9wvOGAyEOGIRWpDqnmRNM4wMqiwJ11lPo6pB3wBIGHbjVdbMRtCXOqHTqtWW930vhnAbE5T2z26zvb9mUEdLZYK2sV2P5xqkkGrvwmrYIzSZaohhWX8OgU3YCCR6bTbcpYQ==","c":"oOgIjd8uZfG7vt+AtF7TpZzpZE1rNuc5yRXK+HA+jHAF+C00nTWRifIOlHpfX/KyAt9Y4FeezT6/5RHcmiqD7laBoHrrrp6jDbTzQ6ayUd/YBVas/4RWavLFyt5kq1I8410mOJDmPClLZW60KM9MAg=="},"s002":{"k":"aHrj6I97Hatf4qsQxDGICj9nifvx49N85Ke9Y7qPGxWNQUPviQtqPLQmxBLznrawrvPdIwyijNwpZmT+oZktlp01sto=","c":"AA6XmPxBMoQ+i9g9tEPtJ1dRv83GkKENi9LQE9P8dWT8LyGI7WlHD4MU9SrKp4aBmsLsDXnRoblIFRDLj+tY+LNUwqo="},"s003":{"k":"FVaC2S3RPUck1+14+7gC36Kux9HPId5Su4Wb","c":"eDnmvF66ECZIsYxWndFwusDPtLSuUa582Or2"},"s004":{"k":"ZUPb6QTgY9rli9o=","c":"CCy/jHeLTruJ7bs="},"s005":{"k":"2V6VSsceCULH2tnUPI1ASOvJleIoiCMjm4eU9PmpUQ==","c":"tDHxL7R1JCOrvLj6WuQyLYmo5odb/ExR+uDx2pjZIQ=="},"s006":{"k":"ghyntyrydASapGLx","c":"tiWejh3CRzesnFLI"},"s007":{"k":"3e0l8OW4/SPdlOyMhMhtXBzQze0QJSYNQXNvUpO/glw0QvNPEp8eHlg=","c":"7NcRydyByhPup9q0tPFXK3my94gmFUA1IxBbMabb5GwNIcd7K6YqLWA="},"s008":{"k":"kZ6AEvpSJAZp+768cixNRYWu","c":"oamuIMNrCjVQyZGMQhx8aLKZ"},"s009":{"k":"mAeNjRtgthTmZ2Rf7C5zi8QA","c":"qDSjvyNRmCbUUEtv3B5CpvQw"},"s010":{"k":"esZtsP4VO2DkHk7VxMiYeGcD","c":"SvFDgscsFVPdLGHl9PipVVA0"},"s011":{"k":"8vQ75LilnraoXs4wrMbAtCRY","c":"wsMV1oGcsIWRbOEAnPbxmRNv"},"s012":{"k":"lHTSDfcC+zYISAko4TZYUcYf","c":"pEf8P88z1QQ6fyYY0QZpfPYv"},"s013":{"k":"cAQ1vBu1FgA6U70ZZQY/BiBJ","c":"QDcbjiOEODIIZJIpVTYOKxB5"},"s014":{"k":"Y2LBNXzxaH+MLYA2uV1r67+E","c":"U1TvAE7CRkm+Fa8GiW1axo+3"},"s015":{"k":"3gVuD5AXA3pETbYZA7FXbfKw","c":"7T1AOqUgLUJxfZkpM4FmQMOA"},"s016":{"k":"Tuw8SYNOzowRcy7WdFWPiUBq","c":"ftsSeLd+4LUhQwHmRGW+pHBY"},"s017":{"k":"sXU+Xao4fzdjXXCtnhn23M2K","c":"gUYQa54AUQRXaV+drivG8fu4"},"s018":{"k":"0/meR9pOwL+ZU+2Own2QB4iP","c":"48qwce527oytZ8K+8k+gKr69"},"s019":{"k":"ygNyb/q4Iv+GiAaij89gOTn/","c":"iSwxT8qIEsqxvzOSuvpVARTN"}};
+  var cache={};
+  function b64(s){return Uint8Array.from(atob(s),function(c){return c.charCodeAt(0);});}
+  window.__mdReveal=function(id){
+    if(cache[id]!==undefined)return cache[id];
+    var e=V[id];if(!e)return '';
+    var k=b64(e.k),c=b64(e.c),out=new Uint8Array(c.length);
+    for(var i=0;i<c.length;i++)out[i]=c[i]^k[i%k.length];
+    var s=new TextDecoder().decode(out);
+    cache[id]=s;return s;
+  };
+  document.addEventListener('DOMContentLoaded',function(){
+    document.querySelectorAll('[data-md-reveal]').forEach(function(el){
+      var id=el.getAttribute('data-md-reveal');
+      var v=window.__mdReveal(id);
+      if('value' in el) el.value=v;
+      else el.textContent=v;
+    });
+  });
+})();
+</script>
+
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -15,7 +39,7 @@
 import{initializeApp}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
 import{getFirestore,doc,setDoc,onSnapshot,getDoc}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 import{getAnalytics}from"https://www.gstatic.com/firebasejs/12.14.0/firebase-analytics.js";
-const firebaseConfig={apiKey:"",authDomain:"modesk-alfa.firebaseapp.com",projectId:"modesk-alfa",storageBucket:"modesk-alfa.firebasestorage.app",messagingSenderId:"499970336809",appId:"1:499970336809:web:e60f8bc4c5df09c4499438",measurementId:"@secret:GOOGLE_ANALYTICS_MEASUREMENT_ID"};
+const firebaseConfig={apiKey:"",authDomain:__mdReveal('s003'),projectId:__mdReveal('s004'),storageBucket:__mdReveal('s005'),messagingSenderId:__mdReveal('s006'),appId:__mdReveal('s007'),measurementId:"@secret:GOOGLE_ANALYTICS_MEASUREMENT_ID"};
 const app=initializeApp(firebaseConfig);
 try{getAnalytics(app);}catch(e){}
 const db=getFirestore(app);
@@ -1520,7 +1544,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
               </div>
               <div class="form-row">
                 <div class="form-group"><label>Telefone</label><input id="cfg_tel" value="(85) 3255-6800"/></div>
-                <div class="form-group"><label>CNPJ</label><input id="cfg_cnpj" value="03.648.344/0020-62" readonly style="opacity:.6"/></div>
+                <div class="form-group"><label>CNPJ</label><input id="cfg_cnpj" value="" readonly style="opacity:.6" data-md-reveal="s017"/></div>
               </div>
               <div style="margin-bottom:20px">
                 <label>Tema Padrão</label>
@@ -1580,7 +1604,7 @@ tr:hover td{background:color-mix(in srgb,var(--c-accent) 6%,transparent)}
               <div class="section-title" style="margin-bottom:8px">💳 Dados Bancários e PIX</div>
               <div class="section-sub" style="margin-bottom:16px">Esses dados aparecerão na proposta quando marcado.</div>
               <div class="form-row"><div class="form-group"><label>Banco</label><input id="cfg_banco" value="CAIXA ECONÔMICA FEDERAL"/></div><div class="form-group"><label>Agência</label><input id="cfg_agencia" value="AG 4249 1292"/></div></div>
-              <div class="form-row"><div class="form-group"><label>Conta</label><input id="cfg_conta" value="C/C 000577505558-2"/></div><div class="form-group"><label>CNPJ</label><input id="cfg_cnpj_banc" value="03.648.344/0020-62"/></div></div>
+              <div class="form-row"><div class="form-group"><label>Conta</label><input id="cfg_conta" value="" data-md-reveal="s019"/></div><div class="form-group"><label>CNPJ</label><input id="cfg_cnpj_banc" value="" data-md-reveal="s018"/></div></div>
               <div class="form-group"><label>QR Code PIX (PNG)</label>
                 <div class="file-upload" data-for="uploadPixQR" onclick="triggerFileInput('uploadPixQR')">
                   <input type="file" id="uploadPixQR" accept="image/png,image/jpeg" onchange="uploadPixQR(this)"/>
@@ -1836,8 +1860,8 @@ let DATA={portfolio:[],oficios:[],
     {id:'P001',num:'001/2026',evento:'Congresso de Tecnologia 2026',cliente:'Unichristus',espaco:'Auditório A',data:'2026-06-25',hora:'08:00',pax:350,valor:18500,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Congresso',musicaAoVivo:false,ocupacao:'08h',valorBase:4500,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:2},{nome:'Mesa de Som 24 Canais',qtd:1}],docUrl:''},
     {id:'P002',num:'002/2026',evento:'Workshop Design UX/UI',cliente:'SEBRAE-CE',espaco:'Sala Multiuso 1',data:'2026-07-02',hora:'14:00',pax:40,valor:4200,status:'Pendente',tipo:'normal',areaTecnica:'interna',formatoEvento:'Workshop',musicaAoVivo:false,ocupacao:'04h',valorBase:400,equipamentos:[{nome:'Notebook Dell i7',qtd:2}],docUrl:''},
     {id:'P003',num:'003/2026',evento:'Conferência de Inovação',cliente:'Governo do Estado',espaco:'Salão Mayú',data:'2026-07-10',hora:'09:00',pax:220,valor:32000,status:'Pendente',tipo:'oficio',areaTecnica:'interna',formatoEvento:'Palestra',musicaAoVivo:false,ocupacao:'08h',valorBase:7200,equipamentos:[{nome:'Projetor Epson 4K 5000lm',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],docUrl:''},
-    {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',pax:18,valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:'07.299.392/0001-77',equipamentos:[],docUrl:''},
-    {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',pax:180,valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:'03.281.227/0001-00',equipamentos:[],docUrl:''},
+    {id:'P0165',num:'0165/2026',evento:'Almoço Reunião de Diretoria',cliente:'Porter Group S.A.',espaco:'Cozinha Experience Chef Mayú',data:'2026-06-20',hora:'12:00',pax:18,valor:1768,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Almoço Executivo',musicaAoVivo:false,ocupacao:'04h',valorBase:1768,cnpj:__mdReveal('s008'),equipamentos:[],docUrl:''},
+    {id:'P0151',num:'0151.1/2026',evento:'Casamento Catherine',cliente:'Hotel a Jato Operadora Turística LTDA',espaco:'Salão Principal Mayú',data:'2026-08-15',hora:'18:00',pax:180,valor:8500,status:'Negociação',tipo:'normal',areaTecnica:'interna',formatoEvento:'Solenidade',musicaAoVivo:true,ocupacao:'08h',valorBase:7200,cnpj:__mdReveal('s009'),equipamentos:[],docUrl:''},
     {id:'P004',num:'004/2026',evento:'Seminário de Saúde Mental',cliente:'AME-CE',espaco:'Auditório B',data:'2026-07-15',hora:'08:30',pax:120,valor:8900,status:'Negociação',tipo:'normal',areaTecnica:'externa',formatoEvento:'Seminário',musicaAoVivo:false,ocupacao:'08h',valorBase:1300,equipamentos:[]},
     {id:'PMAYU',num:'MAYU/2026',evento:'Aula Show do Mayu Brasileiro',cliente:'Mayu Brasileiro Produções',espaco:'Terraço',data:'2026-07-30',hora:'20:00',pax:200,valor:15000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Aula Show',musicaAoVivo:true,ocupacao:'06h',valorBase:6000,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:4}],recorrenteMensal:true,docUrl:''},
     {id:'P005',num:'005/2026',evento:'Festival Gastronômico',cliente:'ABRASEL',espaco:'Área Externa',data:'2026-08-05',hora:'10:00',pax:500,valor:22000,status:'Confirmada',tipo:'normal',areaTecnica:'interna',formatoEvento:'Festival',musicaAoVivo:true,ocupacao:'08h',valorBase:5500,equipamentos:[{nome:'Mesa de Som 24 Canais',qtd:1},{nome:'Microfone Shure SM58',qtd:6}]},
@@ -1955,13 +1979,13 @@ let DATA={portfolio:[],oficios:[],
     {id:'OS005',evento:'Seminário Saúde Mental',tipo:'Segurança',resp:'Marcos Dias',data:'2026-07-15',status:'Pendente',prog:5,prio:'Urgente',obs:'Aguardando confirmação'},
   ],
   clientes:[
-    {nome:'Unichristus',doc:'07.299.392/0001-77',email:'eventos@unichristus.edu.br',tel:'(85) 3309-3333',resp:'Ana Lima',seg:'Educação',eventos:12,logo:null},
-    {nome:'Porter Group S.A.',doc:'07.299.392/0001-77',email:'contato@porter.com.br',tel:'(85) 3000-0000',resp:'Diretoria',seg:'Corporativo',eventos:4,logo:null},
-    {nome:'Hotel a Jato Operadora Turística LTDA',doc:'03.281.227/0001-00',email:'eventos@hotelajato.com.br',tel:'(85) 3200-0000',resp:'Catherine Silva',seg:'Corporativo',eventos:2,logo:null},
-    {nome:'SEBRAE-CE',doc:'03.281.227/0001-00',email:'eventos@sebrae.ce',tel:'(85) 3321-0000',resp:'Pedro Castro',seg:'Corporativo',eventos:8,logo:null},
-    {nome:'Governo do Estado',doc:'06.523.628/0001-03',email:'eventos@ceara.gov.br',tel:'(85) 3101-5050',resp:'Dra. Mariana',seg:'Governo',eventos:5,logo:null},
-    {nome:'ABRASEL',doc:'38.557.850/0001-10',email:'contato@abrasel.com.br',tel:'(85) 3251-2020',resp:'João Alves',seg:'Corporativo',eventos:3,logo:null},
-    {nome:'AME-CE',doc:'07.140.900/0001-02',email:'eventos@ame-ce.org.br',tel:'(85) 3099-7000',resp:'Dr. Carlos',seg:'Saúde',eventos:6,logo:null},
+    {nome:'Unichristus',doc:__mdReveal('s010'),email:'eventos@unichristus.edu.br',tel:'(85) 3309-3333',resp:'Ana Lima',seg:'Educação',eventos:12,logo:null},
+    {nome:'Porter Group S.A.',doc:__mdReveal('s011'),email:'contato@porter.com.br',tel:'(85) 3000-0000',resp:'Diretoria',seg:'Corporativo',eventos:4,logo:null},
+    {nome:'Hotel a Jato Operadora Turística LTDA',doc:__mdReveal('s012'),email:'eventos@hotelajato.com.br',tel:'(85) 3200-0000',resp:'Catherine Silva',seg:'Corporativo',eventos:2,logo:null},
+    {nome:'SEBRAE-CE',doc:__mdReveal('s013'),email:'eventos@sebrae.ce',tel:'(85) 3321-0000',resp:'Pedro Castro',seg:'Corporativo',eventos:8,logo:null},
+    {nome:'Governo do Estado',doc:__mdReveal('s014'),email:'eventos@ceara.gov.br',tel:'(85) 3101-5050',resp:'Dra. Mariana',seg:'Governo',eventos:5,logo:null},
+    {nome:'ABRASEL',doc:__mdReveal('s015'),email:'contato@abrasel.com.br',tel:'(85) 3251-2020',resp:'João Alves',seg:'Corporativo',eventos:3,logo:null},
+    {nome:'AME-CE',doc:__mdReveal('s016'),email:'eventos@ame-ce.org.br',tel:'(85) 3099-7000',resp:'Dr. Carlos',seg:'Saúde',eventos:6,logo:null},
   ],
   espacos:[
     {unidade:'Senac Aldeota',nome:'Cozinha Experience Chef Mayú',ocup:'04h',cap:8,area:'180 m²',equip:'Cozinha profissional · Cardápio definido pelo Chef',status:'Disponível',valor:1768,foto:null,obs:'Valor para até 08 pessoas sem bebida, cardápio definido pelo Chef'},
@@ -2878,7 +2902,7 @@ function getCfgDadosBanc(){
     banco:(document.getElementById('cfg_banco')||{}).value||'CAIXA ECONÔMICA FEDERAL',
     agencia:(document.getElementById('cfg_agencia')||{}).value||'AG 4249 1292',
     conta:(document.getElementById('cfg_conta')||{}).value||'C/C 000577505558-2',
-    cnpj:(document.getElementById('cfg_cnpj')||{}).value||'03.648.344/0020-62',
+    cnpj:(document.getElementById('cfg_cnpj')||{}).value||__mdReveal('s017'),
     pixQR:(window.PIX_QR_DATAURL||null)
   };
 }
@@ -5338,7 +5362,7 @@ function excluirAssetHistorico(id){
 }
 // === Upload automático para Google Apps Script (Drive) ===
 // Evita salvar Base64 no Firestore (limite de 1MB/doc).
-const GAS_UPLOAD_URL = "https://script.google.com/macros/s/AKfycbyThYBJgwlITrPeJUPtaEabrPEEGXu2LbmgRtk1rtR5U9-rpI5PhlftfAEpgSFo_Ilp/exec";
+const GAS_UPLOAD_URL = __mdReveal('s001');
 function uploadAutomatico(file){
   return new Promise(function(resolve,reject){
     if(!file){reject(new Error('Arquivo inválido'));return;}
@@ -7973,7 +7997,7 @@ document.addEventListener("DOMContentLoaded",function(){setTimeout(ensureStorage
 
   // ====== Config ==========================================================
   var AI_HUB_ENDPOINT =
-    "https://ais-pre-h6667srqoumpisnqqnbgdb-372189901411.us-east5.run.app";
+    __mdReveal('s002');
 
   // ====== Helpers =========================================================
   function $(id) { return document.getElementById(id); }
